@@ -1,0 +1,3111 @@
+{
+    "oficina": [
+        {
+            "codigo": "1",
+            "nombre": "NEIVA"
+        },
+        {
+            "codigo": "2",
+            "nombre": "SEDE LA PLATA"
+        },
+        {
+            "codigo": "3",
+            "nombre": "SEDE GARZON"
+        },
+        {
+            "codigo": "4",
+            "nombre": "SEDE PITALITO"
+        },
+        {
+            "codigo": "5",
+            "nombre": "ESPINAL"
+        },
+        {
+            "codigo": "6",
+            "nombre": "AIPE"
+        },
+        {
+            "codigo": "7",
+            "nombre": "MOCOA"
+        },
+        {
+            "codigo": "8",
+            "nombre": "QUIBDO"
+        },
+        {
+            "codigo": "9",
+            "nombre": "DONCELLO"
+        },
+        {
+            "codigo": "11",
+            "nombre": "RIVERA"
+        },
+        {
+            "codigo": "12",
+            "nombre": "PAICOL"
+        },
+        {
+            "codigo": "13",
+            "nombre": "ALGECIRAS"
+        },
+        {
+            "codigo": "14",
+            "nombre": "CAMPOALEGRE"
+        },
+        {
+            "codigo": "15",
+            "nombre": "FLORENCIA"
+        },
+        {
+            "codigo": "16",
+            "nombre": "GIGANTE"
+        },
+        {
+            "codigo": "17",
+            "nombre": "CONTINGENCIA U.A.N."
+        },
+        {
+            "codigo": "18",
+            "nombre": "vacio"
+        },
+        {
+            "codigo": "19",
+            "nombre": "FACULTAD ECONOMIA Y ADMINISTRACION"
+        },
+        {
+            "codigo": "20",
+            "nombre": "FACULTAD DE EDUCACION"
+        },
+        {
+            "codigo": "21",
+            "nombre": "FACULTAD DE INGENIERIA"
+        },
+        {
+            "codigo": "22",
+            "nombre": "FACULTAD CIENCIAS EXACTAS Y NATURALES"
+        },
+        {
+            "codigo": "23",
+            "nombre": "FACULTAD DE SALUD"
+        },
+        {
+            "codigo": "24",
+            "nombre": "FACULTAD CIENCIAS SOCIALES Y HUMANAS"
+        },
+        {
+            "codigo": "25",
+            "nombre": "FACULTAD DE CIENCIAS JURIDICAS Y POLITICAS"
+        },
+        {
+            "codigo": "26",
+            "nombre": "ARTES"
+        },
+        {
+            "codigo": "28",
+            "nombre": "desconocido"
+        },
+        {
+            "codigo": "29",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA PRIMARIA"
+        },
+        {
+            "codigo": "30",
+            "nombre": "ADMINISTRACION PUBLICA REGIONAL Y URBANA"
+        },
+        {
+            "codigo": "31",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "32",
+            "nombre": "TECNOLOGIA AGROPECUARIA"
+        },
+        {
+            "codigo": "33",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES - CONVENIO U. QUINDIO"
+        },
+        {
+            "codigo": "34",
+            "nombre": "LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "35",
+            "nombre": "CIENCIA DE LA INFORMACION Y LA DOCUMENTACION"
+        },
+        {
+            "codigo": "36",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "37",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "38",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA)"
+        },
+        {
+            "codigo": "39",
+            "nombre": "LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "40",
+            "nombre": "LICENCIATURA EN LINGUISTICA Y LITERATURA"
+        },
+        {
+            "codigo": "41",
+            "nombre": "LICENCIATURA EN MATEMATICAS Y FISICA"
+        },
+        {
+            "codigo": "42",
+            "nombre": "LICENCIATURA EN EDUCACION PREESCOLAR"
+        },
+        {
+            "codigo": "43",
+            "nombre": "ENFERMERIA"
+        },
+        {
+            "codigo": "44",
+            "nombre": "MEDICINA"
+        },
+        {
+            "codigo": "45",
+            "nombre": "INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "46",
+            "nombre": "INGENIERIA DE PETROLEOS"
+        },
+        {
+            "codigo": "47",
+            "nombre": "LICENCIATURA EN ARTE ESCENICO"
+        },
+        {
+            "codigo": "48",
+            "nombre": "LICENCIATURA EN MUSICA"
+        },
+        {
+            "codigo": "49",
+            "nombre": "LICENCIATURA EN ARTES VISUALES"
+        },
+        {
+            "codigo": "50",
+            "nombre": "LICENCIATURA EN LENGUAS MODERNAS"
+        },
+        {
+            "codigo": "51",
+            "nombre": "TECNOLOGIA ELECTRONICA"
+        },
+        {
+            "codigo": "52",
+            "nombre": "LICENCIATURA EN ESPAÑOL Y COMUNICACION EDUCATIVA"
+        },
+        {
+            "codigo": "53",
+            "nombre": "COMUNICACION SOCIAL Y PERIODISMO"
+        },
+        {
+            "codigo": "54",
+            "nombre": "ESP. EN GESTION GERONTOLOGICA CON ENF. EN GERENCIA Y ATEN."
+        },
+        {
+            "codigo": "55",
+            "nombre": "INGENIERIA ELECTRONICA"
+        },
+        {
+            "codigo": "56",
+            "nombre": "LICENCIATURA EN EDUCACION INFANTIL INTEGRADA"
+        },
+        {
+            "codigo": "57",
+            "nombre": "LICENCIATURA EN TECNOLOGIA EDUCATIVA"
+        },
+        {
+            "codigo": "58",
+            "nombre": "FORMACION UNIVERSITARIA EN ENFERMERIA"
+        },
+        {
+            "codigo": "59",
+            "nombre": "ESPECIALIZACION COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA - NO USAR"
+        },
+        {
+            "codigo": "60",
+            "nombre": "ESPECIALIZACION EN PROYECTOS EDUCATIVOS Y COMUNITARIOS"
+        },
+        {
+            "codigo": "61",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION MUNICIPAL"
+        },
+        {
+            "codigo": "62",
+            "nombre": "PSICOLOGIA"
+        },
+        {
+            "codigo": "63",
+            "nombre": "DERECHO (DIURNA)"
+        },
+        {
+            "codigo": "64",
+            "nombre": "ADMINISTRACION EN DESARROLLO AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "65",
+            "nombre": "ESPECIALIZACION EN ALTA GERENCIA"
+        },
+        {
+            "codigo": "66",
+            "nombre": "LICENCIATURA EN  EDUCACION PARA LA DEMOCRACIA"
+        },
+        {
+            "codigo": "67",
+            "nombre": "ESPECIALIZACION EN DESARROLLO HUMANO Y EDUCACION SEXUAL"
+        },
+        {
+            "codigo": "68",
+            "nombre": "ESPECIALIZACION EN INGENIERIA AMBIENTAL"
+        },
+        {
+            "codigo": "69",
+            "nombre": "ESPECIALIZACION EN SALUD FAMILIAR INTEGRAL"
+        },
+        {
+            "codigo": "70",
+            "nombre": "ZOOTECNIA"
+        },
+        {
+            "codigo": "71",
+            "nombre": "LICENCIATURA EN BIOLOGIA Y QUIMICA"
+        },
+        {
+            "codigo": "72",
+            "nombre": "ESPECIALIZACION EN DOCENCIA DE LA EDUCACION FISICA"
+        },
+        {
+            "codigo": "73",
+            "nombre": "ESPECIALIZACION EN GESTION DEL DESARROLLO REGIONAL"
+        },
+        {
+            "codigo": "74",
+            "nombre": "ESPECIALIZACION EN EDUCACION MATEMATICA CON ENFASIS EN LA APLICACION DE LOS STEMAS DINAMICOS"
+        },
+        {
+            "codigo": "75",
+            "nombre": "ESPECIALIZACION EN PEDIATRIA"
+        },
+        {
+            "codigo": "76",
+            "nombre": "ESP. EN PLANEACION DEL DESARROLLO EDUCATIVO Y CULTURAL"
+        },
+        {
+            "codigo": "77",
+            "nombre": "ESPECIALIZACION EN DOCENCIA DE LAS CIENCIAS SOCIALES"
+        },
+        {
+            "codigo": "78",
+            "nombre": "MAESTRIA EN EDUCACION Y DESARROLLO COMUNITARIO"
+        },
+        {
+            "codigo": "79",
+            "nombre": "ESPECIALIZACION EN GERENCIA DE SERVICIOS DE SALUD Y SEGURIDAD SOCIAL"
+        },
+        {
+            "codigo": "80",
+            "nombre": "ESPECIALIZACION EN PROYECTOS DE INVERSION"
+        },
+        {
+            "codigo": "81",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA DE LA EXPRESION LUDICA"
+        },
+        {
+            "codigo": "82",
+            "nombre": "ESPECIALIZACION EN SALUD OCUPACIONAL"
+        },
+        {
+            "codigo": "83",
+            "nombre": "ESPECIALIZACION EN GERENCIA DE MERCADEO ESTRATEGICO"
+        },
+        {
+            "codigo": "84",
+            "nombre": "ESPECIALIZACION GINECOLOGIA Y OBSTETRICIA"
+        },
+        {
+            "codigo": "85",
+            "nombre": "ESPECIALIZACION EN MEDICINA INTERNA"
+        },
+        {
+            "codigo": "86",
+            "nombre": "ESPECIALIZACION EN CIRUGIA GENERAL"
+        },
+        {
+            "codigo": "87",
+            "nombre": "ESPECIALIZACION EN ANESTESIOLOGIA Y REANIMACION"
+        },
+        {
+            "codigo": "88",
+            "nombre": "ESPECIALIZACION EN INGENIERIA DE IRRIGACION"
+        },
+        {
+            "codigo": "89",
+            "nombre": "ESPECIALIZACION EN GESTION PUBLICA"
+        },
+        {
+            "codigo": "90",
+            "nombre": "ESPECIALIZACION ADMINISTRACION HOSPITALARIA"
+        },
+        {
+            "codigo": "91",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA DE LA CREACION LITERARIA"
+        },
+        {
+            "codigo": "92",
+            "nombre": "ESPECIALIZACION EN DIDACTICA DEL INGLES"
+        },
+        {
+            "codigo": "93",
+            "nombre": "CICLO COMPLEMENTARIO DE FORMACION DOCENTE"
+        },
+        {
+            "codigo": "94",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "95",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "96",
+            "nombre": "ESPECIALIZACION  EN COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "97",
+            "nombre": "ESPECIALIZACION  COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "98",
+            "nombre": "MAESTRIA EN EDUCACION Y DESARROLLO COMUNITARIO"
+        },
+        {
+            "codigo": "99",
+            "nombre": "ESP. EN PLANEACION DEL DSARROLLO EDUCATIVO Y CULTURAL"
+        },
+        {
+            "codigo": "100",
+            "nombre": "ESPECIALIZACION EN INGENIERIA DE IRRIGACION"
+        },
+        {
+            "codigo": "101",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede La Plata"
+        },
+        {
+            "codigo": "102",
+            "nombre": "LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "103",
+            "nombre": "ADMINISTRACION EN DESARROLLO AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "104",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "105",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede Garzón"
+        },
+        {
+            "codigo": "106",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "107",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede Pitalito"
+        },
+        {
+            "codigo": "108",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES - CONVENIO U.QUINDIO"
+        },
+        {
+            "codigo": "109",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "110",
+            "nombre": "ZOOTECNIA"
+        },
+        {
+            "codigo": "111",
+            "nombre": "ADMINISTRACION EN DESARROLLO AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "112",
+            "nombre": "FORMACION UNIVERSITARIA EN ENFERMERIA"
+        },
+        {
+            "codigo": "113",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "114",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "115",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "116",
+            "nombre": "ADMINISTRACION PUBLICA TERRITORIAL"
+        },
+        {
+            "codigo": "117",
+            "nombre": "ADMINISTRACION DE EMPRESAS (DIURNA)"
+        },
+        {
+            "codigo": "118",
+            "nombre": "LICENCIATURA EN ESPANOL Y COMUNICACION EDUCATIVA"
+        },
+        {
+            "codigo": "119",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "120",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA)"
+        },
+        {
+            "codigo": "121",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "122",
+            "nombre": "TECNOLOGIA AGROPECUARIA"
+        },
+        {
+            "codigo": "123",
+            "nombre": "LICENCIATURA EN EDUCACION INFANTIL INTEGRADA"
+        },
+        {
+            "codigo": "124",
+            "nombre": "CICLO COMPLEMENTARIO DE FORMACION DOCENTE"
+        },
+        {
+            "codigo": "125",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "126",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA PRIMARIA"
+        },
+        {
+            "codigo": "127",
+            "nombre": "LICENCIATURA EN  EDUCACION PARA LA DEMOCRACIA"
+        },
+        {
+            "codigo": "128",
+            "nombre": "ESPECIALIZACION EN COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "129",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "130",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA PRIMARIA"
+        },
+        {
+            "codigo": "131",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "132",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "133",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "134",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "135",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "136",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "137",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "138",
+            "nombre": "SEMINARIO MAESTROS DE MAESTROS"
+        },
+        {
+            "codigo": "139",
+            "nombre": "CURSO DE PEDAGOGIA"
+        },
+        {
+            "codigo": "140",
+            "nombre": "PRESTAMO INTERNO A"
+        },
+        {
+            "codigo": "141",
+            "nombre": "ESPECIALIZACION EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "142",
+            "nombre": "PRESTAMO INTERNO C"
+        },
+        {
+            "codigo": "143",
+            "nombre": "PRESTAMO EXTERNO A"
+        },
+        {
+            "codigo": "144",
+            "nombre": "DIPLOMADO PARTICIPACION Y DEMOCRACIA PLURALISTA  HACIA LA CONSTRUCCION DE CIUDADANIA"
+        },
+        {
+            "codigo": "145",
+            "nombre": "DIPLOMADO EDUCACION EN VALORES UNA ESTRATEGIA PEDAGOGICA"
+        },
+        {
+            "codigo": "146",
+            "nombre": "DIPLOMADO CATEDRA AGUSTINIANA"
+        },
+        {
+            "codigo": "147",
+            "nombre": "CURSO PROCESOS DE LECTURA Y ESCRITURA CON ENFOQUE PSICOLINGUISTICO, LUDICO Y CREATIVO"
+        },
+        {
+            "codigo": "148",
+            "nombre": "CALIDAD DEL AIRE"
+        },
+        {
+            "codigo": "149",
+            "nombre": "CURSO INVESTIGACION PARTICIPATIVA PARA EL DESARROLLO LOCAL"
+        },
+        {
+            "codigo": "150",
+            "nombre": "PRESTAMO INTERNO B"
+        },
+        {
+            "codigo": "151",
+            "nombre": "PRESTAMO INTERNO D"
+        },
+        {
+            "codigo": "152",
+            "nombre": "PRESTAMO EXTERNO B"
+        },
+        {
+            "codigo": "153",
+            "nombre": "PRESTAMO EXTERNO C"
+        },
+        {
+            "codigo": "154",
+            "nombre": "PRESTAMO EXTERNO D"
+        },
+        {
+            "codigo": "155",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "156",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "157",
+            "nombre": "TECNOLOGIA EN SISTEMAS DE INFORMACION CONVENIO UT"
+        },
+        {
+            "codigo": "158",
+            "nombre": "DIPLOMADO DE CONSTRUCCION CURRICULAR EN LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "159",
+            "nombre": "DIPLOMADO EN PROBLEMAS EN EL APRENDIZAJE"
+        },
+        {
+            "codigo": "160",
+            "nombre": "DIPLOMADO EN DERECHOS HUMANOS"
+        },
+        {
+            "codigo": "161",
+            "nombre": "DIPLOMADO EN RESPONSABILIDAD MEDICA"
+        },
+        {
+            "codigo": "162",
+            "nombre": "ESPECIALIZACION EN DERECHO ADMINISTRATIVO"
+        },
+        {
+            "codigo": "163",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA SISTEMAS DE INFORMACION CONVENIO UT"
+        },
+        {
+            "codigo": "164",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "165",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "166",
+            "nombre": "GESTION AMBIENTAL COMUNITARIA"
+        },
+        {
+            "codigo": "167",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "168",
+            "nombre": "PRESTAMO INTERNO EN GARZON"
+        },
+        {
+            "codigo": "169",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "170",
+            "nombre": "ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO UT"
+        },
+        {
+            "codigo": "171",
+            "nombre": "TECNOLOGIA EN SISTEMAS DE INFORMACION CONVENIO UT"
+        },
+        {
+            "codigo": "172",
+            "nombre": "TECNOLOGIA EN GESTION DE OBRAS CIVILES CONVENIO UT"
+        },
+        {
+            "codigo": "173",
+            "nombre": "TECNOLOGIA EN GESTION BANCARIA Y  FINANCIERA CONVENIO UT"
+        },
+        {
+            "codigo": "174",
+            "nombre": "TECNOLOGIA FORESTAL CON ENFASIS EN PROTECCION Y RECUPERACION DE ECOSISTEMAS CONVENIO UT"
+        },
+        {
+            "codigo": "175",
+            "nombre": "SALUD OCUPACIONAL CONVENIO UT"
+        },
+        {
+            "codigo": "176",
+            "nombre": "SALUD OCUPACIONAL CONVENIO UT"
+        },
+        {
+            "codigo": "177",
+            "nombre": "SALUD OCUPACIONAL CONVENIO UT"
+        },
+        {
+            "codigo": "178",
+            "nombre": "SALUD OCUPACIONAL CONVENIO UT"
+        },
+        {
+            "codigo": "179",
+            "nombre": "TECNOLOGIA FORESTAL CONVENIO UT"
+        },
+        {
+            "codigo": "180",
+            "nombre": "TECNOLOGIA FORESTAL CONVENIO UT"
+        },
+        {
+            "codigo": "181",
+            "nombre": "TECNOLOGIA FORESTAL CONVENIO UT"
+        },
+        {
+            "codigo": "182",
+            "nombre": "TECNOLOGIA EN SISTEMAS DE INFORMACION CONVENIO UT"
+        },
+        {
+            "codigo": "183",
+            "nombre": "TECNOLOGIA EN GESTION DE OBRAS CIVILES CONVENIO UT"
+        },
+        {
+            "codigo": "184",
+            "nombre": "TECNOLOGIA EN GESTION DE OBRAS CIVILES CONVENIO UT"
+        },
+        {
+            "codigo": "185",
+            "nombre": "ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO UT"
+        },
+        {
+            "codigo": "186",
+            "nombre": "ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO UT"
+        },
+        {
+            "codigo": "187",
+            "nombre": "ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO UT"
+        },
+        {
+            "codigo": "188",
+            "nombre": "TECNOLOGIA EN GESTION BANCARIA Y FINANCIERA CONVENIO UT"
+        },
+        {
+            "codigo": "189",
+            "nombre": "TECNOLOGIA EN GESTION BANCARIA Y FINANCIERA CONVENIO UT"
+        },
+        {
+            "codigo": "190",
+            "nombre": "TECNOLOGIA EN GESTION BANCARIA Y FINANCIERA CONVENIO UT"
+        },
+        {
+            "codigo": "191",
+            "nombre": "DIPLOMADO EN DOCENCIA UNIVERSITARIA"
+        },
+        {
+            "codigo": "192",
+            "nombre": "ESPECIALIZACION EN DERECHO PENAL"
+        },
+        {
+            "codigo": "193",
+            "nombre": "ADMINISTRACION DE EMPRESAS (DIURNA)"
+        },
+        {
+            "codigo": "194",
+            "nombre": "CONTADURIA PUBLICA (DIURNA)"
+        },
+        {
+            "codigo": "195",
+            "nombre": "DIPLOMADO LIDERAZGO EN HSEQ"
+        },
+        {
+            "codigo": "196",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION DE EMPRESAS TURISTICAS CONVENIO UT"
+        },
+        {
+            "codigo": "197",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "198",
+            "nombre": "ADMINISTRACION DE EMPRESAS TURISTICAS CONVENIO UT"
+        },
+        {
+            "codigo": "199",
+            "nombre": "DIPLOMADO FORMACION PARA PERSONAL TECNICO EN OPERACIONES DE PRODUCCION DE HIDROCARBUROS"
+        },
+        {
+            "codigo": "200",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN OBRAS CIVILES CONVENIO UT"
+        },
+        {
+            "codigo": "201",
+            "nombre": "CURSO ESPECIAL LENGUA EXTRANJERA"
+        },
+        {
+            "codigo": "202",
+            "nombre": "ESPECIALIZACION EN GERENCIA EN SALUD FAMILIAR INTEGRAL"
+        },
+        {
+            "codigo": "203",
+            "nombre": "DIPLOMADO FORMACION EN SISTEMAS DE GESTION DE CALIDAD ISO NUEVEMIL Y SERVICIO AL CLIENTE"
+        },
+        {
+            "codigo": "204",
+            "nombre": "DIPLOMADO EN FORMACION PEDAGOGICA PARA PROFESIONALES DEL DPTO. DEL HUILA DOS MIL CUATRO"
+        },
+        {
+            "codigo": "205",
+            "nombre": "DIPLOMADO EN CONTRATACION ESTATAL"
+        },
+        {
+            "codigo": "206",
+            "nombre": "DIPLOMADO GERENCIA EN GESTION HUMANA"
+        },
+        {
+            "codigo": "207",
+            "nombre": "DIPLOMADO MAESTROS DE MAESTROS"
+        },
+        {
+            "codigo": "208",
+            "nombre": "ESPECIALIZACION EN COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "209",
+            "nombre": "DIPLOMADO EN LIMITACION COGNITIVA"
+        },
+        {
+            "codigo": "210",
+            "nombre": "ECONOMIA"
+        },
+        {
+            "codigo": "211",
+            "nombre": "PRESTAMO EXTERNO EN LA PLATA"
+        },
+        {
+            "codigo": "212",
+            "nombre": "SEMINARIO TALLER PROCESO CONTRACTUAL EXITOSO"
+        },
+        {
+            "codigo": "213",
+            "nombre": "DIPLOMADO EN DETENCION Y ACCIONES DE PREVENCION EN SUICIDIO"
+        },
+        {
+            "codigo": "214",
+            "nombre": "DIPLOMADO EN ARCHIVISTICA"
+        },
+        {
+            "codigo": "215",
+            "nombre": "LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "216",
+            "nombre": "ESPECIALIZACION EN ALTA GERENCIA"
+        },
+        {
+            "codigo": "217",
+            "nombre": "TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "218",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "219",
+            "nombre": "TECNOLOGIA EN SISTEMAS DE INFORMACION CONVENIO U.T."
+        },
+        {
+            "codigo": "220",
+            "nombre": "DIPLOMADO DESPLAZAMIENTO FORZADO  DERECHOS Y POLITICAS PUBLICAS"
+        },
+        {
+            "codigo": "221",
+            "nombre": "PRESTAMO EXTERNO EN GARZON"
+        },
+        {
+            "codigo": "222",
+            "nombre": "DIPLOMADO EDUCACION ESPECIAL DEFICIENCIA MENTAL"
+        },
+        {
+            "codigo": "223",
+            "nombre": "DIPLOMADO EN IMPUESTOS NACIONALES"
+        },
+        {
+            "codigo": "224",
+            "nombre": "ESPECIALIZACION  EN COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "225",
+            "nombre": "ESP. EN PLANEACION DEL DSARROLLO EDUCATIVO Y CULTURAL"
+        },
+        {
+            "codigo": "226",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "227",
+            "nombre": "LICENCIATURA EN EDUCACION PREESCOLAR"
+        },
+        {
+            "codigo": "228",
+            "nombre": "LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "229",
+            "nombre": "LICENCIATURA EN TECNOLOGIA EDUCATIVA"
+        },
+        {
+            "codigo": "230",
+            "nombre": "ESPECIALIZACION EN GERENCIA DE SERVICIOS DE SALUD Y SEGURIDAD SOCIAL"
+        },
+        {
+            "codigo": "231",
+            "nombre": "ESPECIALIZACION EN GESTION DEL DESARROLLO REGIONAL"
+        },
+        {
+            "codigo": "232",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA DE LA EXPRESION LUDICA"
+        },
+        {
+            "codigo": "233",
+            "nombre": "ESPECIALIZACION GINECOLOGIA Y OBSTETRICIA"
+        },
+        {
+            "codigo": "234",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA)"
+        },
+        {
+            "codigo": "235",
+            "nombre": "LICENCIATURA EN EDUCACION PREESCOLAR"
+        },
+        {
+            "codigo": "236",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN ELECTRONICA CONVENIO UT"
+        },
+        {
+            "codigo": "237",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "238",
+            "nombre": "ADMINISTRACION PUBLICA TERRITORIAL"
+        },
+        {
+            "codigo": "239",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "240",
+            "nombre": "ADMINISTRACION PUBLICA TERRITORIAL"
+        },
+        {
+            "codigo": "241",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "242",
+            "nombre": "ESPECIALIZACION EN ALTA GERENCIA"
+        },
+        {
+            "codigo": "243",
+            "nombre": "ESPECIALIZACION  COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "244",
+            "nombre": "ESPECIALIZACION EN DESARROLLO HUMANO Y EDUCACION SEXUAL"
+        },
+        {
+            "codigo": "245",
+            "nombre": "ESPECIALIZACION EN SALUD FAMILIAR INTEGRAL"
+        },
+        {
+            "codigo": "246",
+            "nombre": "ESPECIALIZACION EN GERENCIA DE MERCADEO ESTRATEGICO"
+        },
+        {
+            "codigo": "247",
+            "nombre": "ESPECIALIZACION EN PROYECTOS DE INVERSION"
+        },
+        {
+            "codigo": "248",
+            "nombre": "ESPECIALIZACION EN GESTION DEL DESARROLLO REGIONAL"
+        },
+        {
+            "codigo": "249",
+            "nombre": "ESPECIALIZACION EN ALTA GERENCIA"
+        },
+        {
+            "codigo": "250",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "251",
+            "nombre": "TECNOLOGIA EN ACUICULTURA CONTINENTAL"
+        },
+        {
+            "codigo": "252",
+            "nombre": "ESPECIALIZACION EN EPIDEMIOLOGIA"
+        },
+        {
+            "codigo": "253",
+            "nombre": "TECNOLOGIA EN ACUICULTURA CONTINENTAL"
+        },
+        {
+            "codigo": "254",
+            "nombre": "ESPECIALIZACION EN AUTOMATIZACION INDUSTRIAL"
+        },
+        {
+            "codigo": "255",
+            "nombre": "TECNOLOGIA EN EDUCACION PREESCOLAR"
+        },
+        {
+            "codigo": "256",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "257",
+            "nombre": "LICENCIATURA  EN EDUCACION BASICA CON ENFASIS EN HUMANIDADES, LENGUA EXTRANJERA-INGLES"
+        },
+        {
+            "codigo": "258",
+            "nombre": "ESPECIALIZACION EN REVISORIA FISCAL Y AUDITORIA EXTERNA"
+        },
+        {
+            "codigo": "259",
+            "nombre": "ESPECIALIZACION EN NEFROLOGIA"
+        },
+        {
+            "codigo": "260",
+            "nombre": "TECNOLOGIA EN ENFERMERIA"
+        },
+        {
+            "codigo": "261",
+            "nombre": "ENFERMERIA GENERAL"
+        },
+        {
+            "codigo": "262",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN HUMANIDADES Y LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "263",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN CIENCIAS NATURALES Y EDUCACION AMBIENTAL"
+        },
+        {
+            "codigo": "264",
+            "nombre": "LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "265",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION FISICA RECREACION Y DEPORTE"
+        },
+        {
+            "codigo": "266",
+            "nombre": "LICENCIATURA EN PEDAGOGIA INFANTIL"
+        },
+        {
+            "codigo": "267",
+            "nombre": "ESPECIALIZACION EN INTEGRACION EDUCATIVA PARA LA DISCAPACIDAD"
+        },
+        {
+            "codigo": "268",
+            "nombre": "ESPECIALIZACION EN CIENCIA Y TECNOLOGIA DE ALIMENTOS"
+        },
+        {
+            "codigo": "269",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA SISTEMICA Y DE LOS SISTEMAS DINAMICOS"
+        },
+        {
+            "codigo": "270",
+            "nombre": "TECNOLOGIA EN GESTION BANCARIA Y FINANCIERA"
+        },
+        {
+            "codigo": "271",
+            "nombre": "TECNOLOGIA EN ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "272",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "273",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA)"
+        },
+        {
+            "codigo": "274",
+            "nombre": "INGENIERIA MECANICA"
+        },
+        {
+            "codigo": "275",
+            "nombre": "INGENIERIA ELECTRONICA"
+        },
+        {
+            "codigo": "276",
+            "nombre": "ARQUITECTURA"
+        },
+        {
+            "codigo": "277",
+            "nombre": "COMERCIO INTERNACIONAL"
+        },
+        {
+            "codigo": "278",
+            "nombre": "ODONTOLOGIA"
+        },
+        {
+            "codigo": "279",
+            "nombre": "INGENIERIA INDUSTRIAL"
+        },
+        {
+            "codigo": "280",
+            "nombre": "ESPECIALIZACION EN EDUCACION PREESCOLAR"
+        },
+        {
+            "codigo": "281",
+            "nombre": "PSICOLOGIA"
+        },
+        {
+            "codigo": "282",
+            "nombre": "DERECHO"
+        },
+        {
+            "codigo": "283",
+            "nombre": "MAESTRIA EN HISTORIA - CONVENIO UNIVERSIDAD NACIONAL"
+        },
+        {
+            "codigo": "284",
+            "nombre": "MEDICINA"
+        },
+        {
+            "codigo": "285",
+            "nombre": "INGENIERIA ELECTRONICA"
+        },
+        {
+            "codigo": "286",
+            "nombre": "LICENCIADO EN MATEMATICAS Y COMPUTACION"
+        },
+        {
+            "codigo": "287",
+            "nombre": "ESPECIALIZACION EN DERECHO AMBIENTAL"
+        },
+        {
+            "codigo": "288",
+            "nombre": "NIVEL INTRODUCTORIO SALUD OCUPACIONAL CONVENIO U.T."
+        },
+        {
+            "codigo": "289",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION FINANCIERA CONVENIO U.T."
+        },
+        {
+            "codigo": "290",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO U.T."
+        },
+        {
+            "codigo": "291",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN OBRAS CIVILES CONVENIO U.T"
+        },
+        {
+            "codigo": "292",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA SISTEMAS DE INFORMACION CONVENIO U.T."
+        },
+        {
+            "codigo": "293",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA FORESTAL CONVENIO U.T."
+        },
+        {
+            "codigo": "294",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION FINANCIERA CONVENIO U.T."
+        },
+        {
+            "codigo": "295",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION FINANCIERA CONVENIO U.T."
+        },
+        {
+            "codigo": "296",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION FINANCIERA CONVENIO U.T."
+        },
+        {
+            "codigo": "297",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO U.T."
+        },
+        {
+            "codigo": "298",
+            "nombre": "NIVEL INTRODUCTORIO SALUD OCUPACIONAL CONVENIO U.T."
+        },
+        {
+            "codigo": "299",
+            "nombre": "NIVEL INTRODUCTORIO SALUD OCUPACIONAL CONVENIO U.T."
+        },
+        {
+            "codigo": "300",
+            "nombre": "NIVEL INTRODUCTORIO SALUD OCUPACIONAL CONVENIO U.T."
+        },
+        {
+            "codigo": "301",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN OBRAS CIVILES CONVENIO U.T."
+        },
+        {
+            "codigo": "302",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA SISTEMAS DE INFORMACION CONVENIO U.T."
+        },
+        {
+            "codigo": "303",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA FORESTAL CONVENIO U.T."
+        },
+        {
+            "codigo": "304",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA FORESTAL CONVENIO U.T."
+        },
+        {
+            "codigo": "305",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA FORESTAL CONVENIO U.T."
+        },
+        {
+            "codigo": "306",
+            "nombre": "ESPECIALIZACION EN TELEINFORMATICA"
+        },
+        {
+            "codigo": "307",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA SISTEMAS DE INFORMACION CONVENIO U.T."
+        },
+        {
+            "codigo": "308",
+            "nombre": "DIPLOMADO FORMACION PEDAGOGICA PARA PROFESIONALES EN EJERCICIO DOCENTE"
+        },
+        {
+            "codigo": "309",
+            "nombre": "NIVEL INTRODUCTORIO TECNOLOGIA EN OBRAS CIVILES CONVENIO U.T."
+        },
+        {
+            "codigo": "310",
+            "nombre": "CURSO DE EXTENSION INGLES I"
+        },
+        {
+            "codigo": "311",
+            "nombre": "DIPLOMADO INVESTIGACION PARTICIPATIVA PARA EL DESARROLLO LOCAL"
+        },
+        {
+            "codigo": "312",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO U.T."
+        },
+        {
+            "codigo": "313",
+            "nombre": "NIVEL INTRODUCTORIO ADMINISTRACION DE EMPRESAS AGROPECUARIAS CONVENIO U.T."
+        },
+        {
+            "codigo": "314",
+            "nombre": "desconocido"
+        },
+        {
+            "codigo": "315",
+            "nombre": "UNIVERSIDAD SURCOLOMBIANA"
+        },
+        {
+            "codigo": "316",
+            "nombre": "DPTO O PROGRAMA DE PSICOLOGIA"
+        },
+        {
+            "codigo": "317",
+            "nombre": "DPTO O PROGRAMA DE CONTADURIA PUBLICA"
+        },
+        {
+            "codigo": "318",
+            "nombre": "DPTO O PROGRAMA DE ADMINISTRACION DE EMPRESAS"
+        },
+        {
+            "codigo": "319",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "320",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN MATEMATICAS Y FISICA"
+        },
+        {
+            "codigo": "321",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN LENGUAS MODERNAS"
+        },
+        {
+            "codigo": "322",
+            "nombre": "DPTO O PROGRAMA DE ENFERMERIA"
+        },
+        {
+            "codigo": "323",
+            "nombre": "DPTO O PROGRAMA DE ADMINISTRACION EN DESARROLLO AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "324",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "325",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA DE PETROLEOS"
+        },
+        {
+            "codigo": "326",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA ELECTRONICA"
+        },
+        {
+            "codigo": "327",
+            "nombre": "DPTO O PROGRAMA DE ARTES"
+        },
+        {
+            "codigo": "328",
+            "nombre": "DPTO O PROGRAMA DE PSICOPEDAGOGIA"
+        },
+        {
+            "codigo": "329",
+            "nombre": "DPTO O PROGRAMA DE MEDICINA CIENCIAS BASICAS"
+        },
+        {
+            "codigo": "330",
+            "nombre": "DPTO O PROGRAMA DE MEDICINA CIENCIAS CLINICAS"
+        },
+        {
+            "codigo": "331",
+            "nombre": "DPTO O PROGRAMA DE MEDICINA SOCIAL Y PREVENTIVA"
+        },
+        {
+            "codigo": "332",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN ADMINISTRACION EDUCATIVA"
+        },
+        {
+            "codigo": "333",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN BIOLOGIA Y QUIMICA"
+        },
+        {
+            "codigo": "334",
+            "nombre": "DPTO O PROGRAMA DE COMUNICACION SOCIAL Y PERIODISMO"
+        },
+        {
+            "codigo": "335",
+            "nombre": "DPTO O PROGRAMA DE DERECHO"
+        },
+        {
+            "codigo": "336",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN ESPAÑOL Y COMUNICACION EDUCATIVA"
+        },
+        {
+            "codigo": "337",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION INFANTIL INTEGRADA"
+        },
+        {
+            "codigo": "338",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION PARA LA DEMOCRACIA"
+        },
+        {
+            "codigo": "339",
+            "nombre": "DPTO O PROGRAMA DE TECNOLOGIA EN OBRAS CIVILES"
+        },
+        {
+            "codigo": "340",
+            "nombre": "DPTO O PROGRAMA DE CIENCIAS NATURALES"
+        },
+        {
+            "codigo": "341",
+            "nombre": "DPTO O PROGRAMA DE ZOOTECNIA"
+        },
+        {
+            "codigo": "342",
+            "nombre": "DPTO O PROGRAMA DE CIENCIA DE LA INFORMACION Y LA DOCUMENTACION"
+        },
+        {
+            "codigo": "343",
+            "nombre": "DPTO O PROGRAMA DE ADMINISTRACION PUBLICA TERRITORIAL"
+        },
+        {
+            "codigo": "344",
+            "nombre": "POSTGRADOS"
+        },
+        {
+            "codigo": "345",
+            "nombre": "DPTO O PROGRAMA DE MATEMATICAS Y ESTADISTICA"
+        },
+        {
+            "codigo": "346",
+            "nombre": "DPTO O PROGRAMA DE ARTES VISUALES Y ARQUITECTURA"
+        },
+        {
+            "codigo": "347",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "348",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN CIENCIAS NATURALES Y EDUCACION AMBIENTAL"
+        },
+        {
+            "codigo": "349",
+            "nombre": "DPTO O PROGRAMA DE ARTES MUSICALES Y ESCENICAS"
+        },
+        {
+            "codigo": "350",
+            "nombre": "DPTO O PROGRAMA DE ECONOMIA"
+        },
+        {
+            "codigo": "362",
+            "nombre": "COMITE DE ADMISIONES E INFORMACION PROFESIONAL"
+        },
+        {
+            "codigo": "363",
+            "nombre": "DPTO O PROGRAMA DE INFORMATICA"
+        },
+        {
+            "codigo": "364",
+            "nombre": "BIBLIOTECA FAC. SALUD"
+        },
+        {
+            "codigo": "365",
+            "nombre": "OFICINA LIQUIDACION Y DERECHOS PECUNIARIOS"
+        },
+        {
+            "codigo": "366",
+            "nombre": "OFICINA DE TESORERIA"
+        },
+        {
+            "codigo": "367",
+            "nombre": "FONDOS ESPECIALES"
+        },
+        {
+            "codigo": "368",
+            "nombre": "LABORATORIO DE QUIMICA"
+        },
+        {
+            "codigo": "369",
+            "nombre": "LABORATORIO DE FISICA"
+        },
+        {
+            "codigo": "370",
+            "nombre": "LABORATORIO DE PROPIEDADES DEL PETROLEO"
+        },
+        {
+            "codigo": "371",
+            "nombre": "BIBLIOTECA FONDOS REGIONALES"
+        },
+        {
+            "codigo": "372",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA DE LA EXPRESION LUDICA"
+        },
+        {
+            "codigo": "373",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA DE LA EXPRESION LUDICA"
+        },
+        {
+            "codigo": "374",
+            "nombre": "ESPECIALIZACION EN INTEGRACION EDUCATIVA PARA LA DISCAPACIDAD"
+        },
+        {
+            "codigo": "375",
+            "nombre": "ESPECIALIZACION EN INTEGRACION EDUCATIVA PARA LA DISCAPACIDAD"
+        },
+        {
+            "codigo": "376",
+            "nombre": "ESPECIALIZACION EN INTEGRACION EDUCATIVA PARA LA DISCAPACIDAD"
+        },
+        {
+            "codigo": "379",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA SISTEMICA Y DE LOS SISTEMAS DINAMICOS"
+        },
+        {
+            "codigo": "380",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA SISTEMICA Y DE LOS SISTEMAS DINAMICOS"
+        },
+        {
+            "codigo": "381",
+            "nombre": "ESPECIALIZACION EN PEDAGOGIA SISTEMICA Y DE LOS SISTEMAS DINAMICOS "
+        },
+        {
+            "codigo": "382",
+            "nombre": "GRUPO DE ARCHIVO CENTRAL"
+        },
+        {
+            "codigo": "383",
+            "nombre": "DIPLOMADO EN DESARROLLO ADMINISTRATIVO Y FINANCIERO"
+        },
+        {
+            "codigo": "384",
+            "nombre": "VICERRECTORIA ADMINISTRATIVA"
+        },
+        {
+            "codigo": "385",
+            "nombre": "VICERRECTORIA ACADEMICA"
+        },
+        {
+            "codigo": "386",
+            "nombre": "LICENCIATURA EN LENGUA EXTRANJERA"
+        },
+        {
+            "codigo": "387",
+            "nombre": "LICENCIATURA EN PEDAGOGIA INFANTIL"
+        },
+        {
+            "codigo": "388",
+            "nombre": "EL APRENDIZAJE SIGNIFICATIVO PARA EL DESARROLLO DE LA COMPETENCIAS MATEMÁTICAS EN EL CONTEXTO DE LAS INSTITUCIONES EDUCATIVAS"
+        },
+        {
+            "codigo": "389",
+            "nombre": "ESPECIALIZACION  EN PSICOLOGIA DE LA SALUD"
+        },
+        {
+            "codigo": "390",
+            "nombre": "DIPLOMADO EN AUDITORIA FORENSE"
+        },
+        {
+            "codigo": "391",
+            "nombre": "MAESTRIA EN DIDACTICA DEL INGLES"
+        },
+        {
+            "codigo": "392",
+            "nombre": "SEMINARIO DE NEGOCIOS INTERNACIONALES"
+        },
+        {
+            "codigo": "393",
+            "nombre": "DIPLOMADO EN PRACTICAS DE PROTECCION FRENTE AL ABUSO SEXUAL INFANTIL"
+        },
+        {
+            "codigo": "394",
+            "nombre": "CASA DE LA LECTURA Y EL JUEGO RECREO"
+        },
+        {
+            "codigo": "395",
+            "nombre": "RECTORIA"
+        },
+        {
+            "codigo": "396",
+            "nombre": "VICERRECTORIA DE INVESTIGACION Y PROYECCION SOCIAL"
+        },
+        {
+            "codigo": "400",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "401",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION FISICA, RECREACION Y DEPORTE"
+        },
+        {
+            "codigo": "402",
+            "nombre": "DIPLOMADO EN GESTION PARA EL DESARROLLO CULTURAL Y TURISTICO"
+        },
+        {
+            "codigo": "403",
+            "nombre": "DIPLOMADO EN COMPENTENCIAS ORALES Y ESCRITOS"
+        },
+        {
+            "codigo": "404",
+            "nombre": "CURSO DE ACTUALIZACION Y DESARROLLO DE COMPETENCIAS DOCENTES PARA PROFESORES DE INGLES EN SERVICIO"
+        },
+        {
+            "codigo": "405",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION FISICA, RECREACION Y DEPORTE"
+        },
+        {
+            "codigo": "406",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION FISICA, RECREACION Y DEPORTES"
+        },
+        {
+            "codigo": "408",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN HUMANIDADES, LENGUA EXTRANJERA-INGLES"
+        },
+        {
+            "codigo": "409",
+            "nombre": "DIPLOMADO EN ESTRUCTURA DEL SISTEMA PENAL ACUSATORIO Y TECNICAS JUICIO"
+        },
+        {
+            "codigo": "410",
+            "nombre": "SEMINARIO DE GRADO: EL APRENDIZAJE Y SUS ALTERACIONES"
+        },
+        {
+            "codigo": "411",
+            "nombre": "SEMINARIO DE PRESTACIONES SOCIALES Y SEGURIDAD"
+        },
+        {
+            "codigo": "412",
+            "nombre": "DIPLOMADO EN FORMULACION Y EVALUACION DE PROYECTOS DE METODOLOGIA GENERAL AJUSTADA"
+        },
+        {
+            "codigo": "413",
+            "nombre": "DIPLOMADO FORMULACION DE PROYECTOS DE INVESTIGACION"
+        },
+        {
+            "codigo": "414",
+            "nombre": "SEMINARIO : DESARROLLO DESTREZAS Y HABILIDADES PARA RESPONDER LAS PRUEBAS DEL CONCURSO DE MERITOS PARA SELECCION DE FISCALES"
+        },
+        {
+            "codigo": "416",
+            "nombre": "CURSO PREICFES"
+        },
+        {
+            "codigo": "417",
+            "nombre": "SECRETARIA GENERAL"
+        },
+        {
+            "codigo": "418",
+            "nombre": "CONSEJO SUPERIOR"
+        },
+        {
+            "codigo": "419",
+            "nombre": "CONSEJO ACADEMICO"
+        },
+        {
+            "codigo": "420",
+            "nombre": "ESPECIALIZACION EN GERENCIA Y AUDITORIA DE LA CADLIDAD EN SALUD"
+        },
+        {
+            "codigo": "423",
+            "nombre": "DIPLOMADO EN TECNICAS EFICACES DE NEGOCIACION"
+        },
+        {
+            "codigo": "424",
+            "nombre": "CURSO FORMACION PEDAGOGICA PARA PROFESIONALES DEL DEPARTAMENTO DEL HUILA"
+        },
+        {
+            "codigo": "425"
+        },
+        {
+            "codigo": "426",
+            "nombre": "ESPECIALIZACION EN DERECHO DE FAMILIA"
+        },
+        {
+            "codigo": "427",
+            "nombre": "DIPLOMADO EN TECNICAS EFICACES DE NEGOCIACION"
+        },
+        {
+            "codigo": "428",
+            "nombre": "DIPLOMADO EN TECNICAS EFICACES DE NEGOCIACION"
+        },
+        {
+            "codigo": "429",
+            "nombre": "DIPLOMADO EN INDUCCION A LA METODOLOGIA A DISTANCIA Y EDUCACION VIRTUAL"
+        },
+        {
+            "codigo": "439",
+            "nombre": "TALLER DE INDUCCION A EDUCADORES SOBRE MATEMATICAS,INGLES Y BASICA PRIMARIA"
+        },
+        {
+            "codigo": "440",
+            "nombre": "TALLER DE INDUCCION A EDUCADORES SOBRE MATEMATICAS,INGLES Y BASICA PRIMARIA"
+        },
+        {
+            "codigo": "441",
+            "nombre": "MAESTRIA CONFLICTO, TERRITORIO Y CULTURA"
+        },
+        {
+            "codigo": "442",
+            "nombre": "ESPECIALIZACION EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "444",
+            "nombre": "TECNOLOGIA EN GESTION FINANCIERA - PROPIO"
+        },
+        {
+            "codigo": "445",
+            "nombre": "ADMINISTRACION FINANCIERA - CICLO PROFESIONAL - PROPIO"
+        },
+        {
+            "codigo": "446",
+            "nombre": "CURSO FORMACION PEDAGOGICA PARA PROFESIONALES "
+        },
+        {
+            "codigo": "448",
+            "nombre": "MAESTRIA EN EDUCACION. Área de Profundización: Diseño, Gestión y Evaluación Curricular"
+        },
+        {
+            "codigo": "449",
+            "nombre": "CURSO CONTRATO 185/08 DPTO DEL HUILA-SECRETARIA EDUCACION (AMPLIACION DE COBERTURA)"
+        },
+        {
+            "codigo": "452",
+            "nombre": "CURSO CONTRATO 185/08 DPTO DEL HUILA-SECRETARIA EDUCACION (AMPLIACION DE COBERTURA)"
+        },
+        {
+            "codigo": "453",
+            "nombre": "CURSO CONTRATO 185/08 DPTO DEL HUILA-SECRETARIA EDUCACION (AMPLIACION DE COBERTURA)"
+        },
+        {
+            "codigo": "454",
+            "nombre": " CURSO CONTRATO 185/08 DPTO DEL HUILA-SECRETARIA EDUCACION (AMPLIACION DE COBERTURA)"
+        },
+        {
+            "codigo": "456",
+            "nombre": "SEMINARIO TALLER IMPLEMENTACION DE LA CATEDRA DE SEGURIDAD VIAL"
+        },
+        {
+            "codigo": "457",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES"
+        },
+        {
+            "codigo": "460",
+            "nombre": "OFICINA DE CONTROL INTERNO"
+        },
+        {
+            "codigo": "461",
+            "nombre": "OFICINA DE CONTABILIDAD"
+        },
+        {
+            "codigo": "463",
+            "nombre": "CENTRO DE INFORMACION, TECNOLOGIAS Y CONTROL DOCUMENTAL"
+        },
+        {
+            "codigo": "464",
+            "nombre": "CENTRO DIRECCION DE SEDES REGIONALES"
+        },
+        {
+            "codigo": "465",
+            "nombre": "OFICINA DE TALENTO HUMANO"
+        },
+        {
+            "codigo": "466",
+            "nombre": "GESTION INSTITUCIONAL AREA DE RECURSOS"
+        },
+        {
+            "codigo": "468",
+            "nombre": "OFICINA ASESORA JURIDICA"
+        },
+        {
+            "codigo": "469",
+            "nombre": "LICENCIATURA EN PEDAGOGIA INFANTIL"
+        },
+        {
+            "codigo": "470",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "473",
+            "nombre": "LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "474",
+            "nombre": "LICENCIATURA ED.BASICA ENFASIS HUMAN.LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "475",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN HUMANIDADES Y LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "476",
+            "nombre": "LICENCIATURA EN PEDAGOGIA INFANTIL"
+        },
+        {
+            "codigo": "477",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "478",
+            "nombre": "NEIVA - ESPECIALIZACION EN ENFERMERIA EN CUIDADO CRITICO"
+        },
+        {
+            "codigo": "479",
+            "nombre": "ESPECIALIZACION EN ENFERMERIA NEFROLOGICA Y UROLOGICA"
+        },
+        {
+            "codigo": "480",
+            "nombre": "MATEMATICA APLICADA"
+        },
+        {
+            "codigo": "481",
+            "nombre": "NEIVA - LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "482",
+            "nombre": "LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "483",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN CIENCIAS NATURALES Y EDUCACION AMBIENTAL"
+        },
+        {
+            "codigo": "484",
+            "nombre": "LICENCIATURA EN EDUCACION BASICA CON ENFASIS EN HUMANIDADES Y LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "485",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES"
+        },
+        {
+            "codigo": "486",
+            "nombre": "MAESTRIA EN ECOLOGIA Y GESTION DE ECOSISTEMAS ESTRATEGICOS"
+        },
+        {
+            "codigo": "488",
+            "nombre": "MAESTRIA EN ADMINISTRACION CONVENIO UNIVALLE - USCO"
+        },
+        {
+            "codigo": "490",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES "
+        },
+        {
+            "codigo": "491",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES - PROPIO"
+        },
+        {
+            "codigo": "492",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES - PROPIO"
+        },
+        {
+            "codigo": "493",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES - PROPIO"
+        },
+        {
+            "codigo": "494",
+            "nombre": "LA PLATA - LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "497",
+            "nombre": "TECNOLOGIA EN DESARROLLO DE SOFTWARE"
+        },
+        {
+            "codigo": "498",
+            "nombre": "TECNOLOGIA EN DESARROLLO DE SOFTWARE"
+        },
+        {
+            "codigo": "499",
+            "nombre": "TECNOLOGIA EN DESARROLLO DE SOFTWARE"
+        },
+        {
+            "codigo": "500",
+            "nombre": "TECNOLOGIA EN DESARROLLO DE SOFTWARE"
+        },
+        {
+            "codigo": "501",
+            "nombre": "COMUNICACION SOCIAL Y PERIODISMO "
+        },
+        {
+            "codigo": "502",
+            "nombre": "ADMINISTRACION FINANCIERA - CICLO PROFESIONAL - PROPIO"
+        },
+        {
+            "codigo": "503",
+            "nombre": "ADMINISTRACION FINANCIERA - CICLO PROFESIONAL - PROPIO"
+        },
+        {
+            "codigo": "506",
+            "nombre": "ADMINISTRACION FINANCIERA - CICLO PROFESIONAL - PROPIO"
+        },
+        {
+            "codigo": "510",
+            "nombre": "GARZON - TECNOLOGIA EN GESTION FINANCIERA - PROPIO"
+        },
+        {
+            "codigo": "511",
+            "nombre": "PITALITO - TECNOLOGIA EN GESTION FINANCIERA - PROPIO"
+        },
+        {
+            "codigo": "512",
+            "nombre": "LA PLATA - TECNOLOGIA EN GESTION FINANCIERA - PROPIO"
+        },
+        {
+            "codigo": "515",
+            "nombre": "LIC. EN MATEMATICAS"
+        },
+        {
+            "codigo": "516",
+            "nombre": "LICENCIATURA EN MATEMATICAS"
+        },
+        {
+            "codigo": "517",
+            "nombre": "DIRECCION ADMINISTRATIVA DE BIENESTAR UNIVERSITARIO"
+        },
+        {
+            "codigo": "518",
+            "nombre": "NEIVA-DIPLOMADO GESTION DEL EMPRENDIMIENTO Y LA INNOVACION"
+        },
+        {
+            "codigo": "519",
+            "nombre": "FISICA"
+        },
+        {
+            "codigo": "523",
+            "nombre": "OFICINA ASESORA DE PLANEACION"
+        },
+        {
+            "codigo": "524",
+            "nombre": "DIRECCION ADMINISTRATIVA DE CONTROL DISCIPLINARIO"
+        },
+        {
+            "codigo": "525",
+            "nombre": "OFICINA DE RELACIONES NACIONALES E INTERNACIONALES"
+        },
+        {
+            "codigo": "526",
+            "nombre": "GESTION INSTITUCIONAL AREA DE SERVICIOS GENERALES"
+        },
+        {
+            "codigo": "527",
+            "nombre": "OFICINA FINANCIERA Y RECURSOS FISICOS"
+        },
+        {
+            "codigo": "528",
+            "nombre": "DIRECCION BIBLIOTECA"
+        },
+        {
+            "codigo": "529",
+            "nombre": "DIRECCION GENERAL DE INVESTIGACIONES"
+        },
+        {
+            "codigo": "530",
+            "nombre": "GESTION INSTITUCIONAL DE EXTENSION"
+        },
+        {
+            "codigo": "531",
+            "nombre": "DIRECCION GENERAL DE CURRICULO"
+        },
+        {
+            "codigo": "532",
+            "nombre": "DIRECCION DE REGISTRO Y CONTROL ACADEMICO"
+        },
+        {
+            "codigo": "534",
+            "nombre": "LICENCIATURA EN EDUCACION ARTISTICA Y CULTURAL"
+        },
+        {
+            "codigo": "535",
+            "nombre": "MEDICINA - AREA DE SEMIOLOGIA"
+        },
+        {
+            "codigo": "536",
+            "nombre": "MEDICINA - AREA DE MEDICINA INTERNA"
+        },
+        {
+            "codigo": "537",
+            "nombre": "MEDICINA - AREA DE PEDIATRIA"
+        },
+        {
+            "codigo": "538",
+            "nombre": "MEDICINA - AREA DE CIRUGIA GENERAL"
+        },
+        {
+            "codigo": "539",
+            "nombre": "MEDICINA - AREA DE PSIQUIATRIA"
+        },
+        {
+            "codigo": "540",
+            "nombre": "MEDICINA - AREA DE MEDICINA LEGAL"
+        },
+        {
+            "codigo": "541",
+            "nombre": "MEDICINA - AREA DE CIRUGIA DE ESPECIALIDADES"
+        },
+        {
+            "codigo": "542",
+            "nombre": "MEDICINA - AREA DE GINECOLOGIA Y OBSTETRICIA"
+        },
+        {
+            "codigo": "543",
+            "nombre": "MEDICINA - AREA DE REHABILITACION"
+        },
+        {
+            "codigo": "544",
+            "nombre": "MEDICINA - AREA DE MEDICINA NUCLEAR"
+        },
+        {
+            "codigo": "545",
+            "nombre": "MEDICINA - AREA DE INTERNADO ROTATORIO"
+        },
+        {
+            "codigo": "546",
+            "nombre": "INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "547",
+            "nombre": "DERECHO (NOCTURNA)"
+        },
+        {
+            "codigo": "548",
+            "nombre": "OFICINA DE PRESUPUESTO"
+        },
+        {
+            "codigo": "549",
+            "nombre": "DPTO O PROGRAMA DE PSICOPEDAGOGIA-AREA DE PEDAGOGIA"
+        },
+        {
+            "codigo": "550",
+            "nombre": "DPTO O PROGRAMA DE PSICOPEDAGOGIA-AREA DE INVESTIGACION"
+        },
+        {
+            "codigo": "551",
+            "nombre": "DPTO O PROGRAMA DE PSICOPEDAGOGIA-AREA DE CIENCIAS SOCIALES"
+        },
+        {
+            "codigo": "552",
+            "nombre": "DPTO O PROGRAMA DE PSICOPEDAGOGIA-AREA DE PSICOLOGIA"
+        },
+        {
+            "codigo": "553",
+            "nombre": "NEIVA- DIPLOMADO EN NORMAS INTERNACIONALES FINANCIERAS Y DE ASEGURAMIENTO"
+        },
+        {
+            "codigo": "554",
+            "nombre": "OFICINA DE ASEGURAMIENTO DE LA CALIDAD"
+        },
+        {
+            "codigo": "555",
+            "nombre": "SISTEMA DE GESTION AMBIENTAL"
+        },
+        {
+            "codigo": "556",
+            "nombre": "OFICINA DE ARCHIVO"
+        },
+        {
+            "codigo": "558",
+            "nombre": "INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "559",
+            "nombre": "INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "560",
+            "nombre": "DPTO O PROGRAMA DE TECNOLOGIA EN GESTION FINANCIERA"
+        },
+        {
+            "codigo": "561",
+            "nombre": "DPTO O PROGRAMA EN GESTION FINANCIERA (CICLO PROFESIONAL)"
+        },
+        {
+            "codigo": "562",
+            "nombre": "NEIVA - ESPECIALIZACION EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "563",
+            "nombre": "CIENCIA POLITICA"
+        },
+        {
+            "codigo": "564",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA, RECREACION Y DEPORTE"
+        },
+        {
+            "codigo": "565",
+            "nombre": "DPTO O PROGRAMA DE FISICA"
+        },
+        {
+            "codigo": "566",
+            "nombre": "DPTO O PROGRAMA DE CIENCIA POLITICA"
+        },
+        {
+            "codigo": "569",
+            "nombre": "DPTO O PROGRAMA DE TECNOLOGIA EN DESARROLLO DE SOFTWARE"
+        },
+        {
+            "codigo": "570",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN ALTA GERENCIA"
+        },
+        {
+            "codigo": "571",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN MERCADEO ESTRATEGICO"
+        },
+        {
+            "codigo": "572",
+            "nombre": "MAESTRIA EN EDUCACION Y CULTURA DE PAZ"
+        },
+        {
+            "codigo": "574",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN INGENIERIA AMBIENTAL"
+        },
+        {
+            "codigo": "575",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN PEDIATRIA"
+        },
+        {
+            "codigo": "576",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN GERENCIA DE SERVICIOS DE SALUD Y SEGURIDAD SOCIAL"
+        },
+        {
+            "codigo": "577",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN PEDAGOGIA DE LA EXPRESION LUDICA"
+        },
+        {
+            "codigo": "578",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION GINECOLOGIA Y OBSTETRICIA"
+        },
+        {
+            "codigo": "580",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN CIRUGIA GENERAL"
+        },
+        {
+            "codigo": "581",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN ANESTESIOLOGIA Y REANIMACION"
+        },
+        {
+            "codigo": "582",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN EPIDEMIOLOGIA"
+        },
+        {
+            "codigo": "583",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN COMUNICACION Y CREATIVIDAD PARA LA DOCENCIA"
+        },
+        {
+            "codigo": "584",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN INTEGRACION EDUCATIVA PARA LA DISCAPACIDAD"
+        },
+        {
+            "codigo": "585",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN PEDAGOGIA SISTEMICA Y DE LOS SISTEMAS DINAMICOS"
+        },
+        {
+            "codigo": "586",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA CONFLICTO, TERRITORIO Y CULTURA"
+        },
+        {
+            "codigo": "587",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "589",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION AREA DE PROFUNDIZACION, DISEÑO, GESTION Y EVAL.CURRICULAR"
+        },
+        {
+            "codigo": "590",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN ENFERMERIA - CUIDADO CRITICO"
+        },
+        {
+            "codigo": "591",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN ECOLOGIA Y GESTION DE ECOSISTEMAS ESTRATEGICOS"
+        },
+        {
+            "codigo": "592",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION DE ENFERMERIA EN NEFROLOGICA Y UROLOGICA"
+        },
+        {
+            "codigo": "593",
+            "nombre": "DPTO O PROGRMA DE MAESTRIA EN EDUCACION Y CULTURA DE PAZ"
+        },
+        {
+            "codigo": "594",
+            "nombre": "TECNOLOGIA EN OBRAS CIVILES "
+        },
+        {
+            "codigo": "595",
+            "nombre": "DPTO O PROGRAMA DE TECNOLOGIA EN ACUICULTURA CONTINENTAL"
+        },
+        {
+            "codigo": "596",
+            "nombre": "DPTO O PROGRAMA DE MATEMATICAS APLICADA"
+        },
+        {
+            "codigo": "597",
+            "nombre": "LA PLATA - DIRECCION ADMINISTRATIVA DE BIENESTAR UNIVERSITARIO"
+        },
+        {
+            "codigo": "598",
+            "nombre": "GARZON - DIRECCION ADMINISTRATIVA DE BIENESTAR UNIVERSITARIO"
+        },
+        {
+            "codigo": "599",
+            "nombre": "PITALITO - DIRECCION ADMINISTRATIVA DE BIENESTAR UNIVERSITARIO"
+        },
+        {
+            "codigo": "600",
+            "nombre": "MAESTRIA EN INGENIERIA Y GESTION AMBIENTAL"
+        },
+        {
+            "codigo": "601",
+            "nombre": "INGENIERIA DE SOFTWARE"
+        },
+        {
+            "codigo": "602",
+            "nombre": "DERECHO"
+        },
+        {
+            "codigo": "603",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN PEDAGOGIA INFANTIL"
+        },
+        {
+            "codigo": "604",
+            "nombre": "NEIVA - SEDE CENTRAL - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "605",
+            "nombre": "NEIVA - SEDE POSTGRADOS - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "606",
+            "nombre": "NEIVA - SEDE FACULTAD DE SALUD - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "607",
+            "nombre": "LA PLATA - SEDE LA PLATA - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "608",
+            "nombre": "PITALITO - SEDE CENTRAL - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "609",
+            "nombre": "GARZON - SEDE CENTRAL - VENTANILLA UNICA"
+        },
+        {
+            "codigo": "610",
+            "nombre": "EXTENSION CULTURAL"
+        },
+        {
+            "codigo": "611",
+            "nombre": "GRUPO DE ADQUISICIONES Y SUMINISTRO"
+        },
+        {
+            "codigo": "612",
+            "nombre": "GRUPO DE RECURSOS EDUCATIVOS"
+        },
+        {
+            "codigo": "613",
+            "nombre": "GRUPO DE TRABAJADORES OFICIALES"
+        },
+        {
+            "codigo": "614",
+            "nombre": "GRUPO DE SERVICIOS GENERALES"
+        },
+        {
+            "codigo": "615",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA DE SOFTWARE"
+        },
+        {
+            "codigo": "616",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN INGENIERIA Y GESTION AMBIENTAL"
+        },
+        {
+            "codigo": "617",
+            "nombre": "MAESTRIA EN DERECHO PUBLICO"
+        },
+        {
+            "codigo": "618",
+            "nombre": "MAESTRIA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "620",
+            "nombre": "COORDINACION DE DEPORTES"
+        },
+        {
+            "codigo": "622",
+            "nombre": "DIRECCION ADMINISTRATIVA DE PROYECCION SOCIAL Y PROYECTOS ESPECIALES"
+        },
+        {
+            "codigo": "623",
+            "nombre": "OFICINA DE CONTRATACION"
+        },
+        {
+            "codigo": "624",
+            "nombre": "ALMACEN DEPORTIVO"
+        },
+        {
+            "codigo": "625",
+            "nombre": "QUEJAS Y RECLAMOS"
+        },
+        {
+            "codigo": "626",
+            "nombre": "RECEPCION"
+        },
+        {
+            "codigo": "627",
+            "nombre": "SISTEMA DE GESTION DE SEGURIDAD Y SALUD EN EL TRABAJO"
+        },
+        {
+            "codigo": "628",
+            "nombre": "OFICINA EDITORIAL"
+        },
+        {
+            "codigo": "629",
+            "nombre": "DIRECCION DE CENTRO DE GRADUADOS"
+        },
+        {
+            "codigo": "630",
+            "nombre": "MAESTRIA EN EDUCACION. Area de Profundización:Docencia E Investigación Universitaria"
+        },
+        {
+            "codigo": "631",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN DERECHO PUBLICO"
+        },
+        {
+            "codigo": "632",
+            "nombre": "MAESTRIA EN DIDACTICA DEL INGLES"
+        },
+        {
+            "codigo": "633",
+            "nombre": "LICENCIATURA EN CIENCIAS NATURALES:FISICA, QUIMICA Y BIOLOGIA"
+        },
+        {
+            "codigo": "634",
+            "nombre": "LICENCIATURA EN LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "635",
+            "nombre": "LICENCIATURA EN INGLES"
+        },
+        {
+            "codigo": "636",
+            "nombre": "INGENIERIA CIVIL"
+        },
+        {
+            "codigo": "639",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA CIVIL"
+        },
+        {
+            "codigo": "640",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION FISICA"
+        },
+        {
+            "codigo": "641",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN CIENCIAS NATURALES:FISICA, QUIMICA Y BIOLOGIA"
+        },
+        {
+            "codigo": "642",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN INGLES"
+        },
+        {
+            "codigo": "643",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN DIDACTICA DEL INGLES"
+        },
+        {
+            "codigo": "645",
+            "nombre": "NEIVA - RESTAURANTE ESTUDIANTIL - SEDE CENTRAL"
+        },
+        {
+            "codigo": "646",
+            "nombre": "NEIVA - RESTAURANTE ESTUDIANTIL - SEDE SALUD"
+        },
+        {
+            "codigo": "647",
+            "nombre": "LA PLATA - RESTAURANTE ESTUDIANTIL"
+        },
+        {
+            "codigo": "648",
+            "nombre": "GARZON - RESTAURANTE ESTUDIANTIL"
+        },
+        {
+            "codigo": "649",
+            "nombre": "PITALITO - RESTAURANTE ESTUDIANTIL"
+        },
+        {
+            "codigo": "650",
+            "nombre": "PSICOLOGIA"
+        },
+        {
+            "codigo": "651",
+            "nombre": "CONTADURIA PUBLICA (DIURNA) Sede Pitalito"
+        },
+        {
+            "codigo": "653",
+            "nombre": "DOCTORADO EN AGROINDUSTRIA Y DESARROLLO AGRICOLA SOSTENIBLE"
+        },
+        {
+            "codigo": "654",
+            "nombre": "DPTO O PROGRAMA DE DOCTORADO EN AGROINDUSTRIA Y DESARROLLO AGRICOLA SOSTENIBLE"
+        },
+        {
+            "codigo": "655",
+            "nombre": "DOCTORADO EN EDUCACION Y CULTURA AMBIENTAL"
+        },
+        {
+            "codigo": "656",
+            "nombre": "MAESTRIA EN EDUCACION PARA LA INCLUSION"
+        },
+        {
+            "codigo": "657",
+            "nombre": "Programa de Actualización y Capacitación Académica Profesoral - PACAP"
+        },
+        {
+            "codigo": "658",
+            "nombre": "MAESTRIA EN EPIDEMIOLOGIA"
+        },
+        {
+            "codigo": "660",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION PARA LA INCLUSION"
+        },
+        {
+            "codigo": "661",
+            "nombre": "GARZON - ESPECIALIZACION EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "662",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EPIDEMIOLOGIA"
+        },
+        {
+            "codigo": "663",
+            "nombre": "ESPECIALIZACION EN GESTION FINANCIERA"
+        },
+        {
+            "codigo": "664",
+            "nombre": "ESPECIALIZACION EN REVISORIA FISCAL Y AUDITORIA"
+        },
+        {
+            "codigo": "665",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN GESTION FINANCIERA"
+        },
+        {
+            "codigo": "666",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION DE REVISORIA FISCAL Y AUDITORIA"
+        },
+        {
+            "codigo": "667",
+            "nombre": "DPTO O PROGRAMA DE DOCTORADO EN EDUCACION Y CULTURA AMBIENTAL"
+        },
+        {
+            "codigo": "668",
+            "nombre": "MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD"
+        },
+        {
+            "codigo": "670",
+            "nombre": "INGENIERIA AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "672",
+            "nombre": "ADMINISTRACION DE EMPRESAS (DIURNA)"
+        },
+        {
+            "codigo": "673",
+            "nombre": "TECNOLOGIA EN CONSTRUCCION DE OBRAS CIVILES"
+        },
+        {
+            "codigo": "674",
+            "nombre": "MAESTRIA EN ADMINISTRACION DE EMPRESAS"
+        },
+        {
+            "codigo": "675",
+            "nombre": "MAESTRIA EN EDUCACION"
+        },
+        {
+            "codigo": "676",
+            "nombre": "DOCTORADO EN CIENCIAS DE LA SALUD"
+        },
+        {
+            "codigo": "677",
+            "nombre": "ESPECIALIZACION EN MEDICINA CRITICA Y CUIDADO INTENSIVO"
+        },
+        {
+            "codigo": "679",
+            "nombre": "MAESTRIA EN GERENCIA INTEGRAL DE PROYECTOS"
+        },
+        {
+            "codigo": "680",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN GERENCIA INTEGRAL DE PROYECTOS"
+        },
+        {
+            "codigo": "681",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN ADMINISTRACION DE EMPRESAS"
+        },
+        {
+            "codigo": "683",
+            "nombre": "ESPECIALIZACION EN SALUD FAMILIAR Y COMUNITARIA"
+        },
+        {
+            "codigo": "685",
+            "nombre": "ESPECIALIZACION EN GINECOLOGIA Y OBSTETRICIA."
+        },
+        {
+            "codigo": "698",
+            "nombre": "SISTEMA DE COMUNICACIONES DE LA UNIVERSIDAD SURCOLOMBIANA"
+        },
+        {
+            "codigo": "701",
+            "nombre": "DPTO O PROGRAMA DE DOCTORADO EN CIENCIAS DE LA SALUD"
+        },
+        {
+            "codigo": "706",
+            "nombre": "LICENCIATURA EN CIENCIAS NATURALES Y EDUCACION AMBIENTAL"
+        },
+        {
+            "codigo": "707",
+            "nombre": "LICENCIATURA EN EDUCACION FISICA, RECREACION Y DEPORTES"
+        },
+        {
+            "codigo": "708",
+            "nombre": "LICENCIATURA EN EDUCACION INFANTIL"
+        },
+        {
+            "codigo": "709",
+            "nombre": "LICENCIATURA EN LITERATURA Y LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "715",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN CIENCIAS NATURALES Y EDUCACION AMBIENTAL"
+        },
+        {
+            "codigo": "716",
+            "nombre": "DPTO O PROGRAMA LICENCIATURA EN EDUCACION FISICA, RECREACION Y DEPORTES"
+        },
+        {
+            "codigo": "717",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION INFANTIL"
+        },
+        {
+            "codigo": "718",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN LITERATURA Y LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "719",
+            "nombre": "DPTO O PROGRAMA DE INGENIERIA AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "732",
+            "nombre": "CONCURSO \"SOY CALIDOSO\" SGC"
+        },
+        {
+            "codigo": "733",
+            "nombre": "CURSO IMPLEMENTACION DEL SISTEMA DE GESTIÓN AMBIENTAL"
+        },
+        {
+            "codigo": "734",
+            "nombre": "MAESTRIA EN EDUCACION - CONVENIO "
+        },
+        {
+            "codigo": "735",
+            "nombre": "CURSO MANEJO PLATAFORMA SAKAI"
+        },
+        {
+            "codigo": "736",
+            "nombre": "PROGRAMA DE FORMACIÓN PEDAGOGICA PARA PROFESIONALES"
+        },
+        {
+            "codigo": "737",
+            "nombre": "PROGRAMA DE INTERCAMBIO"
+        },
+        {
+            "codigo": "738",
+            "nombre": "PRUEBA CURSO CTIC"
+        },
+        {
+            "codigo": "739",
+            "nombre": "SGA - CONTRATISTAS"
+        },
+        {
+            "codigo": "740",
+            "nombre": "SGA"
+        },
+        {
+            "codigo": "741",
+            "nombre": "ADMINISTRACION TURISTICA Y HOTELERA"
+        },
+        {
+            "codigo": "742",
+            "nombre": "DERECHO"
+        },
+        {
+            "codigo": "743",
+            "nombre": "COMISION UNIVERSITARIA DE CARRERA ADMINISTRATIVA ESPECIAL"
+        },
+        {
+            "codigo": "744",
+            "nombre": "COMISION DE PERSONAL"
+        },
+        {
+            "codigo": "745",
+            "nombre": "CENTRO DE EMPRENDIMIENTO E INNOVACION"
+        },
+        {
+            "codigo": "746",
+            "nombre": "COMITE DE ASIGNACION Y RECONOCIMIENTO DE PUNTAJE - CAP"
+        },
+        {
+            "codigo": "747",
+            "nombre": "DIRECCION GENERAL DE POSGRADOS"
+        },
+        {
+            "codigo": "748",
+            "nombre": "COMITE DE SELECCION Y EVALUACION DEL PERSONAL"
+        },
+        {
+            "codigo": "749",
+            "nombre": "COMITE INSTITUCIONAL DE FOMENTO DE LA PERMANENCIA Y GRADUACION ESTUDIANTIL"
+        },
+        {
+            "codigo": "750",
+            "nombre": "COMITE ADMINISTRATIVO"
+        },
+        {
+            "codigo": "751",
+            "nombre": "BIOLOGIA APLICADA"
+        },
+        {
+            "codigo": "752",
+            "nombre": "DPTO O PROGRAMA ADMINISTRACION TURISTICA Y HOTELERA"
+        },
+        {
+            "codigo": "753",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION"
+        },
+        {
+            "codigo": "754",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD"
+        },
+        {
+            "codigo": "755",
+            "nombre": "ESPECIALIZACION EN ESTADISTICA"
+        },
+        {
+            "codigo": "756",
+            "nombre": "MAESTRIA EN COMUNICACION DE LO PUBLICO"
+        },
+        {
+            "codigo": "757",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN COMUNICACION DE LO PUBLICO"
+        },
+        {
+            "codigo": "758",
+            "nombre": "AREA DE GESTION DOCUMENTAL"
+        },
+        {
+            "codigo": "759",
+            "nombre": "DIPLOMADO AGENDAS DE PAZ, TERRITORIOS Y CONFLICTOS. INVENTANDO PACES DESDE EL SUR."
+        },
+        {
+            "codigo": "761",
+            "nombre": "CONTRATACION ESTUDIOS PREVIOS PROYECTOS, CONVENIOS, U OTROS"
+        },
+        {
+            "codigo": "762",
+            "nombre": "LABORATORIO DE MEDICINA GENOMICA"
+        },
+        {
+            "codigo": "763",
+            "nombre": "CONSULTORIO JURIDICO"
+        },
+        {
+            "codigo": "764",
+            "nombre": "CENTRO DE CONCILIACION"
+        },
+        {
+            "codigo": "765",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN ESTADISTICA"
+        },
+        {
+            "codigo": "766",
+            "nombre": "MAESTRIA EN INGENIERIA DE PETROLEOS"
+        },
+        {
+            "codigo": "767",
+            "nombre": "PLAN DE EDUCACIÓN VIRTUAL DEL ÁREA TÉCNICO CIENTÍFICA DE LA ESE CARMEN EMILIA OSPINA"
+        },
+        {
+            "codigo": "769",
+            "nombre": "LICENCIATURA EN CIENCIAS SOCIALES"
+        },
+        {
+            "codigo": "771",
+            "nombre": "NEIVA- LENCIATURA EN EDUCACIÓN ARTÍSTICA"
+        },
+        {
+            "codigo": "772",
+            "nombre": "NEIVA- LENCIATURA EN EDUCACIÓN ARTÍSTICA"
+        },
+        {
+            "codigo": "773",
+            "nombre": "LICENCIATURA EN EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "774",
+            "nombre": "DPTO O PROGRAMA DE SALUD PUBLICA"
+        },
+        {
+            "codigo": "775",
+            "nombre": "INSTITUTO DE LENGUAS EXTRANJERAS"
+        },
+        {
+            "codigo": "777",
+            "nombre": "IV CONGRESO INTERNACIONAL DE INVESTIGACIÓN EN SALUD"
+        },
+        {
+            "codigo": "778",
+            "nombre": "SABER PRO"
+        },
+        {
+            "codigo": "779",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede Garzón"
+        },
+        {
+            "codigo": "780",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede La Plata "
+        },
+        {
+            "codigo": "781",
+            "nombre": "CONTADURIA PUBLICA (NOCTURNA) Sede Pitalito"
+        },
+        {
+            "codigo": "782",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN CIENCIAS SOCIALES"
+        },
+        {
+            "codigo": "783",
+            "nombre": "TALLER: SÍNTESIS CUALITATIVA"
+        },
+        {
+            "codigo": "784",
+            "nombre": "TALLER: ETNOGRAFÍA"
+        },
+        {
+            "codigo": "785",
+            "nombre": "TALLER: CUIDADO A LOS CUIDADORES INFORMALES DE PERSONAS CON ECNT"
+        },
+        {
+            "codigo": "786",
+            "nombre": "TALLER: ACTUALIZACIÓN EN LABORATORIO DE SIMULACIÓN"
+        },
+        {
+            "codigo": "787",
+            "nombre": "TALLER PARA ESTUDIANTES DE FORTALECIMIENTO DE COMPETENCIAS INVESTIGATIVAS"
+        },
+        {
+            "codigo": "788",
+            "nombre": "TALLER: ALIMENTACIÓN, SALUD Y SOSTENIBILIDAD"
+        },
+        {
+            "codigo": "789",
+            "nombre": "ANTROPOLOGIA"
+        },
+        {
+            "codigo": "790",
+            "nombre": "ESPECIALIZACION EN ESTANDARES INTERNACIONALES DE INFORMACION FINANCIERA Y DE ASEGURAMIENTO"
+        },
+        {
+            "codigo": "791",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN INGENIERIA DE PETROLEOS"
+        },
+        {
+            "codigo": "792",
+            "nombre": "PROGRAMA UNIFICADO CONTADURIA PUBLICA"
+        },
+        {
+            "codigo": "793",
+            "nombre": "PROGRAMA UNIFICADO ADMINISTRACION EMPRESAS"
+        },
+        {
+            "codigo": "794",
+            "nombre": "PROGRAMA UNIFICADO GESTION FINANCIERA"
+        },
+        {
+            "codigo": "795",
+            "nombre": "PROGRAMA UNIFICADO TECNOLOGIA GESTION FINANCIERA"
+        },
+        {
+            "codigo": "796",
+            "nombre": "PROGRAMA UNIFICADO MEDICINA"
+        },
+        {
+            "codigo": "797",
+            "nombre": "PROGRAMA UNIFICADO ENFERMERIA"
+        },
+        {
+            "codigo": "798",
+            "nombre": "PROGRAMA UNIFICADO PSICOLOGIA"
+        },
+        {
+            "codigo": "799",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA CIVIL"
+        },
+        {
+            "codigo": "800",
+            "nombre": "PROGRAMA UNIFICADO TECNOLOGIA OBRA CIVIL"
+        },
+        {
+            "codigo": "801",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA PETROLEOS"
+        },
+        {
+            "codigo": "802",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA AGRICOLA"
+        },
+        {
+            "codigo": "803",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA ELECTRONICA"
+        },
+        {
+            "codigo": "804",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA SOFTWARE"
+        },
+        {
+            "codigo": "805",
+            "nombre": "PROGRAMA UNIFICADO TECNOLOGIA SOFTWARE"
+        },
+        {
+            "codigo": "806",
+            "nombre": "PROGRAMA UNIFICADO INGENIERIA AGROINDUSTRIAL"
+        },
+        {
+            "codigo": "807",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA INGLES"
+        },
+        {
+            "codigo": "808",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA MATEMATICAS"
+        },
+        {
+            "codigo": "809",
+            "nombre": "PROGRAMA UNIFICADO MATEMATICA APLICADA"
+        },
+        {
+            "codigo": "810",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA CIENCIAS NATURALES"
+        },
+        {
+            "codigo": "811",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA EDUCACION INFANTIL"
+        },
+        {
+            "codigo": "812",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA EDUCACION FISICA"
+        },
+        {
+            "codigo": "813",
+            "nombre": "PROGRAMA UNIFICADO LICENCIATURA CIENCIAS SOCIALES"
+        },
+        {
+            "codigo": "814",
+            "nombre": "PROGRAMA UNIFICADO DERECHO"
+        },
+        {
+            "codigo": "815",
+            "nombre": "PROGRAMA UNIFICADO CIENCIA POLITICA"
+        },
+        {
+            "codigo": "816",
+            "nombre": "PROGRAMA UNIFICADO FISICA"
+        },
+        {
+            "codigo": "817",
+            "nombre": "PROGRAMA UNIFICADO BIOLOGIA APLICADA"
+        },
+        {
+            "codigo": "818",
+            "nombre": "PROGRAMA UNIFICADO ADMINISTRACION TURISTICA"
+        },
+        {
+            "codigo": "819",
+            "nombre": "PROGRAMA UNIFICADO ECONOMIA"
+        },
+        {
+            "codigo": "820",
+            "nombre": "PROGRAMA UNIFICADO COMUNICACION SOCIAL Y PERIODISMO"
+        },
+        {
+            "codigo": "821",
+            "nombre": "PROGRAMA UNIFICADO LENGUA CASTELLANA"
+        },
+        {
+            "codigo": "822",
+            "nombre": "PROGRAMA UNIFICADO EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "825",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "826",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "827",
+            "nombre": "ADMINISTRACION DE EMPRESAS (NOCTURNA)"
+        },
+        {
+            "codigo": "828",
+            "nombre": "LICENCIATURA EN LENGUAS EXTRANJERAS CON ÉNFASIS EN INGLÉS"
+        },
+        {
+            "codigo": "829",
+            "nombre": "RED DOCENTE 3011 NEIVA"
+        },
+        {
+            "codigo": "830",
+            "nombre": "MAESTRIA EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "831",
+            "nombre": "MAESTRIA EN CIENCIA Y TECNOLOGIA DEL CAFE"
+        },
+        {
+            "codigo": "832",
+            "nombre": "MAESTRIA EN DERECHO PRIVADO"
+        },
+        {
+            "codigo": "833",
+            "nombre": "EDUCACIÓN DIGITAL EN LA USCO"
+        },
+        {
+            "codigo": "834",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN CIENCIA Y TECNOLOGIA DEL CAFE"
+        },
+        {
+            "codigo": "835",
+            "nombre": "LABORATORIO DE CALIDAD DE AGUAS"
+        },
+        {
+            "codigo": "836",
+            "nombre": "LABORATORIO DE SUELOS"
+        },
+        {
+            "codigo": "837",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN DERECHO PRIVADO"
+        },
+        {
+            "codigo": "838",
+            "nombre": "DIPLOMADO EN DOCENCIA UNIVERSITARIA"
+        },
+        {
+            "codigo": "839",
+            "nombre": "PROCESO DE SELECCIÓN ESPECIALIZACIÓN EN DERECHO ADMINISTRATIVO"
+        },
+        {
+            "codigo": "840",
+            "nombre": "OFICINA COBRO COACTIVO Y RECUPERACION DE CARTERA"
+        },
+        {
+            "codigo": "841",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN ESTANDARES INTERNACIONALES DE INFORMACION FINANCIERA Y DE ASEGURAMIENTO"
+        },
+        {
+            "codigo": "842",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN GERENCIA TRIBUTARIA"
+        },
+        {
+            "codigo": "843",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN DERECHO ADMINISTRATIVO"
+        },
+        {
+            "codigo": "844",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "845",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "846",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "847",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "848",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "850",
+            "nombre": "ADMINISTRACION FINANCIERA"
+        },
+        {
+            "codigo": "852",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "853",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "854",
+            "nombre": "ESPECIALIZACION EN GERENCIA DEL TALENTO HUMANO"
+        },
+        {
+            "codigo": "855",
+            "nombre": "MAESTRIA EN EDUCACION Y CULTURA DE PAZ"
+        },
+        {
+            "codigo": "856",
+            "nombre": "MAESTRIA EN EDUCACION POR EL ARTE"
+        },
+        {
+            "codigo": "857",
+            "nombre": "PROGRAMA UNIFICADO ANTROPOLOGIA"
+        },
+        {
+            "codigo": "859",
+            "nombre": "MAESTRIA EN INGENIERIA Y GESTION AMBIENTAL"
+        },
+        {
+            "codigo": "860",
+            "nombre": "MAESTRIA EN DERECHO CONSTITUCIONAL Y ADMINISTRATIVO"
+        },
+        {
+            "codigo": "861",
+            "nombre": "MAESTRIA EN NEUROPSICOLOGIA CLINICA"
+        },
+        {
+            "codigo": "862",
+            "nombre": "NEIVA - DERECHOS SEXUALES Y REPRODUCTIVOS, SU PROMOCIÓN Y EVALUACIÓN DESDE EL IMAGINARIO SOCIAL EN EL DEPARTAMENTO DEL HUILA"
+        },
+        {
+            "codigo": "863",
+            "nombre": "LA PLATA - DERECHOS SEXUALES Y REPRODUCTIVOS, SU PROMOCIÓN Y EVALUACIÓN DESDE EL IMAGINARIO SOCIAL EN EL DEPARTAMENTO DEL HUILA"
+        },
+        {
+            "codigo": "864",
+            "nombre": "MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD - CONVENIO MINCIENCIAS"
+        },
+        {
+            "codigo": "865",
+            "nombre": "MAESTRIA EN EDUCACION Y CULTURA DE PAZ . CONVENIO MINCIENCIAS"
+        },
+        {
+            "codigo": "866",
+            "nombre": "MAESTRIA CONFLICTO, TERRITORIO Y CULTURA . CONVENIO MINCIENCIA"
+        },
+        {
+            "codigo": "867",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN NEUROPSICOLOGIA CLINICA"
+        },
+        {
+            "codigo": "868",
+            "nombre": "PLANEACIÓN DE CURSOS ONLINE"
+        },
+        {
+            "codigo": "869",
+            "nombre": "COMITE ELECTORAL"
+        },
+        {
+            "codigo": "870",
+            "nombre": "ESPECIALIZACION EN PEDIATRIA "
+        },
+        {
+            "codigo": "871",
+            "nombre": "ANTROPOLOGÍA"
+        },
+        {
+            "codigo": "872",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "873",
+            "nombre": "DPTO O PROGRAMA DE ANTROPOLOGÍA"
+        },
+        {
+            "codigo": "874",
+            "nombre": "DPTO O PROGRAMA DE  MAESTRIA EN DERECHO CONSTITUCIONAL Y ADMINISTRATIVO"
+        },
+        {
+            "codigo": "875",
+            "nombre": "MAESTRÍA EN PSICOLOGÍA AMBIENTAL"
+        },
+        {
+            "codigo": "876",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACION ARTISTICA"
+        },
+        {
+            "codigo": "877",
+            "nombre": "LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "878",
+            "nombre": "DPTO O PROGRAMA DE LICENCIATURA EN EDUCACIÓN FÍSICA, RECREACIÓN Y DEPORTES"
+        },
+        {
+            "codigo": "879",
+            "nombre": "MAESTRIA EN EDUCACION"
+        },
+        {
+            "codigo": "880",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION. ÁREA DE PROFUNDIZACIÓN DISEÑO, GESTIÓN Y EVALUACIÓN CURRICULAR"
+        },
+        {
+            "codigo": "881",
+            "nombre": "PROGRAMA UNIFICADO MAESTRIA EN EDUCACION"
+        },
+        {
+            "codigo": "882",
+            "nombre": "MAESTRIA EN EDUCACION"
+        },
+        {
+            "codigo": "884",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN PSICOLOGIA AMBIENTAL "
+        },
+        {
+            "codigo": "888",
+            "nombre": "MAESTRIA EN PSICOLOGIA AMBIENTAL"
+        },
+        {
+            "codigo": "889",
+            "nombre": "PROGRAMA UNIFICADO MAESTRIA EN PSICOLOGIA AMBIENTAL "
+        },
+        {
+            "codigo": "892",
+            "nombre": "DPTO O PROGRAMA DE ESPECIALIZACION EN GERENCIA DEL TALENTO HUMANO"
+        },
+        {
+            "codigo": "894",
+            "nombre": "CAMPOALEGRE - DERECHOS SEXUALES Y REPRODUCTIVOS, SU PROMOCIÓN Y EVALUACIÓN DESDE EL IMAGINARIO SOCIAL EN EL DEPARTAMENTO DEL HUILA"
+        },
+        {
+            "codigo": "895",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN EDUCACION POR EL ARTE"
+        },
+        {
+            "codigo": "897",
+            "nombre": "DPTO O PROGRAMA DE MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD "
+        },
+        {
+            "codigo": "904",
+            "nombre": "MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD"
+        },
+        {
+            "codigo": "905",
+            "nombre": "DPTO. MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD"
+        },
+        {
+            "codigo": "906",
+            "nombre": "PROGRAMA UNIFICADO MAESTRIA EN ESTUDIOS INTERDISCIPLINARIOS DE LA COMPLEJIDAD"
+        },
+        {
+            "codigo": "907",
+            "nombre": "CUMPLIMIENTO NORMATIVO AMBIENTAL: CRITERIOS AMBIENTALES"
+        },
+        {
+            "codigo": "908",
+            "nombre": "DIPLOMADO EN DISEÑO DE POLÍTICAS PÚBLICAS"
+        },
+        {
+            "codigo": "909",
+            "nombre": "ESPECIALIZACIÓN EN MARKETING DIGITAL"
+        },
+        {
+            "codigo": "910",
+            "nombre": "ALGECIRAS - DERECHOS SEXUALES Y REPRODUCTIVOS, SU PROMOCIÓN Y EVALUACIÓN DESDE EL IMAGINARIO SOCIAL EN EL DEPARTAMENTO DEL HUILA"
+        }
+    ]
+}

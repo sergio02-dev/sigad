@@ -1,0 +1,15 @@
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+
+DirectoryIndex ndxbscusco.php
+RewriteEngine On
+RewriteBase /ndxbscusco/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /bscusco/ndxbscusco.php [L]
+
+</IfModule>
+
+# END WordPress
+
+

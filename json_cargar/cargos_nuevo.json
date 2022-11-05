@@ -1,0 +1,272 @@
+{
+    "cargos":[
+        {
+            "codigo": "1",
+            "nombre": "ADMINISTRADOR"
+        },
+        {
+            "codigo": "2",
+            "nombre": "SECRETARIA ACADEMICA DE DECANATURA"
+        },
+        {
+            "codigo": "3",
+            "nombre": "DOCENTE"
+        },
+        {
+            "codigo": "6",
+            "nombre": "COORDINADOR DE PROYECTO"
+        },
+        {
+            "codigo": "7",
+            "nombre": "DIRECTOR DE CENTRO"
+        },
+        {
+            "codigo": "9",
+            "nombre": "DIRECTOR INSTITUTO DE UNIVERSIDAD  LNR"
+        },
+        {
+            "codigo": "10",
+            "nombre": "DIRECTOR INSTITUTO DE UNIVERSIDAD  LNR (IDEI)"
+        },
+        {
+            "codigo": "11",
+            "nombre": "JEFE DE DIVISION"
+        },
+        {
+            "codigo": "12",
+            "nombre": "JEFE DE OFICINA  "
+        },
+        {
+            "codigo": "14",
+            "nombre": "DIRECTOR DE CENTRO "
+        },
+        {
+            "codigo": "15",
+            "nombre": "PROFESIONAL ESPECIALIZADO"
+        },
+        {
+            "codigo": "16",
+            "nombre": "PROFESIONAL UNIVERSITARIO"
+        },
+        {
+            "codigo": "17",
+            "nombre": "MEDICO  1/2 Tiempo"
+        },
+        {
+            "codigo": "18",
+            "nombre": "ODONTOLOGO  1/2 Tiempo"
+        },
+        {
+            "codigo": "19",
+            "nombre": "DIBUJANTE"
+        },
+        {
+            "codigo": "20",
+            "nombre": "OPERADOR DE EQUIPO DE SISTEMAS"
+        },
+        {
+            "codigo": "21",
+            "nombre": "TECNICO OPERATIVO"
+        },
+        {
+            "codigo": "22",
+            "nombre": "COORDINADOR"
+        },
+        {
+            "codigo": "23",
+            "nombre": "COORDINADOR (BODEGA)"
+        },
+        {
+            "codigo": "26",
+            "nombre": "SECRETARIO EJECUTIVO"
+        },
+        {
+            "codigo": "28",
+            "nombre": "AUXILIAR ADMINISTRATIVO"
+        },
+        {
+            "codigo": "29",
+            "nombre": "SECRETARIO (Mensajero)"
+        },
+        {
+            "codigo": "30",
+            "nombre": "OPERARIO CALIFICADO"
+        },
+        {
+            "codigo": "31",
+            "nombre": "OPERARIO CALIFICADO (Ayudas Audiovis.)"
+        },
+        {
+            "codigo": "32",
+            "nombre": "OPERARIO CALIFICADO (Lab. de FÃ¬sica)"
+        },
+        {
+            "codigo": "33",
+            "nombre": "OPERARIO CALIFICADO (Lab. de InformÃ¡t)"
+        },
+        {
+            "codigo": "34",
+            "nombre": "OPERARIO CALIFICADO (Lab.InformÃ tica)"
+        },
+        {
+            "codigo": "35",
+            "nombre": "OPERARIO CALIFICADO (Piscinero)"
+        },
+        {
+            "codigo": "36",
+            "nombre": "OPERARIO CALIFICADO (RecepciÃ²n)"
+        },
+        {
+            "codigo": "37",
+            "nombre": "OPERARIO CALIFICADO (Ayudas Audiovisua.)"
+        },
+        {
+            "codigo": "38",
+            "nombre": "CONDUCTOR MECANICO"
+        },
+        {
+            "codigo": "39",
+            "nombre": "CELADOR"
+        },
+        {
+            "codigo": "40",
+            "nombre": "ENFERMERO AUXILIAR"
+        },
+        {
+            "codigo": "41",
+            "nombre": "RECTOR DE UNIVERSIDAD "
+        },
+        {
+            "codigo": "42",
+            "nombre": "SUPERNUMERARIA"
+        },
+        {
+            "codigo": "43",
+            "nombre": "NO ASIGNADO"
+        },
+        {
+            "codigo": "44",
+            "nombre": "DIRECTOR DE SEDES"
+        },
+        {
+            "codigo": "45",
+            "nombre": "AUDITOR"
+        },
+        {
+            "codigo": "46",
+            "nombre": "DECANO DE UNIVERSIDAD  "
+        },
+        {
+            "codigo": "47",
+            "nombre": "DIRECTOR ADMINISTRATIVO"
+        },
+        {
+            "codigo": "48",
+            "nombre": "VICERRECTOR DE UNIVERSIDAD  LNR"
+        },
+        {
+            "codigo": "49",
+            "nombre": "DIRECTOR DEPARTAMENTO UNIVERSIDAD  LNR"
+        },
+        {
+            "codigo": "50",
+            "nombre": "SECRETARIO GENERAL DE UNIVERSIDAD"
+        },
+        {
+            "codigo": "51",
+            "nombre": "TECNICO ADMINISTRATIVO"
+        },
+        {
+            "codigo": "52",
+            "nombre": "PROFESIONAL DE GESTION INSTITUCIONAL"
+        },
+        {
+            "codigo": "53",
+            "nombre": "ASEADOR(A)"
+        },
+        {
+            "codigo": "54",
+            "nombre": "AYUDANTE"
+        },
+        {
+            "codigo": "55",
+            "nombre": "JARDINERO"
+        },
+        {
+            "codigo": "56",
+            "nombre": "MAYORDOMO"
+        },
+        {
+            "codigo": "57",
+            "nombre": "OFICIAL DE CARPINTERIA"
+        },
+        {
+            "codigo": "58",
+            "nombre": "OFICIAL DE CONSTRUCCION"
+        },
+        {
+            "codigo": "59",
+            "nombre": "OFICIAL DE ELECTRICIDAD"
+        },
+        {
+            "codigo": "60",
+            "nombre": "OFICIAL DE ORNAMENTACION"
+        },
+        {
+            "codigo": "61",
+            "nombre": "OFICIAL DE PINTURA"
+        },
+        {
+            "codigo": "62",
+            "nombre": "OFICIAL DE PLOMERIA"
+        },
+        {
+            "codigo": "63",
+            "nombre": "APOYO A LA GESTION ADMINISTRATIVA"
+        },
+        {
+            "codigo": "64",
+            "nombre": "APOYO Y ASESORIA"
+        },
+        {
+            "codigo": "67",
+            "nombre": "DIRECTOR ENCARGADO"
+        },
+        {
+            "codigo": "68",
+            "nombre": "MEDICO SERVICIO SOCIAL OBILGATORIO TC"
+        },
+        {
+            "codigo": "69",
+            "nombre": "MEDICO SERVICIO SOCIAL OBLIGATORIO TC"
+        },
+        {
+            "codigo": "73",
+            "nombre": "DIRECTOR ADMINISTRATIVO"
+        },
+        {
+            "codigo": "74",
+            "nombre": "DIRECTOR ADMINISTRATIVO "
+        },
+        {
+            "codigo": "75",
+            "nombre": "JEFE DE OFICINA ASESORA"
+        },
+        {
+            "codigo": "76",
+            "nombre": "JEFE DE PROGRAMA"
+        },
+        {
+            "codigo": "77",
+            "nombre": "JEFE DE DEPARTAMENTO"
+        },
+        {
+            "codigo": "78",
+            "nombre": "auxiliar administrativo"
+        },
+        {
+            "codigo": "79",
+            "nombre": "tecnico administrativo"
+        }
+    ]
+}

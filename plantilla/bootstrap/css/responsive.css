@@ -1,0 +1,39 @@
+@media all and (max-width: 1000px){
+  .card-body {
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      padding: 1.25rem;
+      width: 189%;
+  }
+  .card.card-bodys {
+    width: 110%;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.card.card-bodys1 {
+  width: 110%;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.cargar {
+    height: auto;
+    margin-top: -80%;
+    margin-left: 174px;
+    font-size: 52px;
+}
+.card-body.text-center {
+    margin-left: -38px;
+}
+a#dropdownMenuLink {
+    margin-top: -75%;
+    margin-left: 196px;
+}
+}
+
+@media all and (max-width: 1600px){
+
+a#dropdownMenuLink {
+    margin-top: -66%;
+    margin-left: 11%;
+}
+}

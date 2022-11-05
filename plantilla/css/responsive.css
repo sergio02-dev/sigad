@@ -1,0 +1,20 @@
+  @media all and (max-width: 1200px){
+
+
+  .container {
+  margin-left: -21%;
+}
+  }
+  @media all and (max-width: 600px){
+
+    .row.justify-content-center {
+      margin-left: -120%;
+      width: 115%;
+  }
+  @media (min-width: 768px){
+    .container {
+        max-width: 720px;
+        margin-left: -22% !important;
+    }
+
+  }

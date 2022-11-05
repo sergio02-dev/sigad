@@ -1,0 +1,127 @@
+/* -----------------------------------
+ * Slidebars
+ * Version 0.10.3
+ * http://plugins.adchsm.me/slidebars/
+ *
+ * Written by Adam Smith
+ * http://www.adchsm.me/
+ *
+ * Released under MIT License
+ * http://plugins.adchsm.me/slidebars/license.txt
+ *
+ * -------------------
+ * Slidebars CSS Index
+ *
+ * 001 - Box Model, Html & Body
+ * 002 - Site
+ * 003 - Slidebars
+ * 004 - Animation
+ * 005 - Helper Classes
+ *
+ * ----------------------------
+ * 001 - Box Model, Html & Body
+ */
+
+html, body, #sb-site, .sb-site-container, .sb-slidebar {
+	/* Set box model to prevent any user added margins or paddings from altering the widths or heights. */
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	overflow-x: hidden; /* Stops horizontal scrolling. */
+}
+
+html {
+	height: 100%; /* Site is as tall as device. */
+}
+
+
+/* Site scroll locking - prevent site from scrolling when a Slidebar is open, except when static Slidebars are only available. */
+html.sb-scroll-lock.sb-active:not(.sb-static) {
+	overflow: hidden;
+}
+
+/* ----------
+ * 002 - Site
+ */
+
+#sb-site, .sb-site-container {
+	/* You may now use class .sb-site-container instead of #sb-site and use your own id. However please make sure you don't set any of the following styles any differently on your id. */
+	width: 100%;
+	position: relative;
+	z-index: 1; /* Site sits above Slidebars */
+	background: #F2F2F2;
+}
+
+/* Micro clearfix by Nicolas Gallagher, ensures the site container hits the top and bottom of the screen. */
+#sb-site:before, #sb-site:after, .sb-site-container:before, .sb-site-container:after {
+	content: ' ';
+	display: table;
+}
+
+#sb-site:before, #sb-site:after, .sb-site-container:before, .sb-site-container:after {
+    clear: both;
+}
+
+/* ---------------
+ * 003 - Slidebars
+ */
+
+.sb-slidebar {
+	height: 100%;
+	overflow-y: auto; /* Enable vertical scrolling on Slidebars when needed. */
+	position: fixed;
+	top: 0;
+	z-index: 0; /* Slidebars sit behind sb-site. */
+/*	display: none; /* Initially hide the Slidebars. Changed from visibility to display to allow -webkit-overflow-scrolling. */
+	background-color: #111;
+}
+
+.sb-slidebar, .sb-slidebar * {
+	-webkit-transform: translateZ( 0px ); /* Fixes issues with translated and z-indexed elements on iOS 7. */
+}
+
+.sb-left {
+	left: 0; /* Set Slidebar to the left. */
+}
+
+.sb-right {
+	right: 0; /* Set Slidebar to the right. */
+}
+
+html.sb-static .sb-slidebar,
+.sb-slidebar.sb-static {
+	position: absolute; /* Makes Slidebars scroll naturally with the site, and unfixes them for Android Browser < 3 and iOS < 5. */
+}
+
+.sb-slidebar.sb-active {
+	display: block; /* Makes Slidebars visibile when open. Changed from visibility to display to allow -webkit-overflow-scrolling. */
+/*	z-index: 10000;*/
+}
+
+.sb-style-overlay {
+	z-index: 9999; /* Set z-index high to ensure it overlays any other site elements. */
+}
+
+.sb-momentum-scrolling {
+	-webkit-overflow-scrolling: touch; /* Adds native momentum scrolling for iOS & Android devices. */
+}
+
+/* Slidebar widths for browsers/devices that don't support media queries. */
+	.sb-slidebar {
+		width: 30%;
+		width: 270px;
+	}
+	#verM.expa{
+		left: 30%;
+		left: 270px;
+	}
+
+.sb-hide {
+	display: none; /* Optionally applied to control classes when Slidebars is disabled over a certain width. */
+}

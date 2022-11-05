@@ -1,0 +1,46 @@
+  @media all and (max-width: 1200px){
+    table#dataPersona {
+        width: 100% !important;
+    }
+  }
+
+  @media (min-width: 768px){
+    .container {
+        max-width: 720px;
+    }
+    
+    table#dataPersona {
+        width: 10% !important;
+    }
+    .col-sm-4 {
+        max-width: 100%;
+    }
+    div#dataAperturaReporte_wrapper {
+    width: 130%;
+}
+  }
+  @media all and (max-width: 600px){
+
+    .row.justify-content-center {
+      margin-left: -120%;
+      width: 115%;
+  }
+    .col-sm-9.container-principal {
+        margin-left: 9px;
+        width: 93%;
+      }
+      div#collapse1 {
+        overflow-x: scroll;
+    }
+    .col-sm-12.accordion-container {
+        width: 105%;
+    }
+    .card.mb-0 {
+    width: 113%;
+    margin-left: -31px;
+  }
+
+  .col-sm-4 {
+      max-width: 100%;
+  }
+}

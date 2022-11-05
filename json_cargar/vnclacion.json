@@ -1,0 +1,1439 @@
+{   
+    "vinculacion":[
+        {
+            "num_identificacion": "1004253257",
+            "cargo": "3",
+            "oficina": "317"
+        },
+        {
+            "num_identificacion": "1022352980",
+            "cargo": "28",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "1053766575",
+            "cargo": "3",
+            "oficina": "324"
+        },
+        {
+            "num_identificacion": "1075211206",
+            "cargo": "3",
+            "oficina": "335"
+        },
+        {
+            "num_identificacion": "1075213437",
+            "cargo": "28",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "1075215684",
+            "cargo": "28",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "1075225711",
+            "cargo": "54",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "1075231650",
+            "cargo": "64",
+            "oficina": "465"
+        },
+        {
+            "num_identificacion": "1075233369",
+            "cargo": "28",
+            "oficina": "365"
+        },
+        {
+            "num_identificacion": "1075237649",
+            "cargo": "3",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "1075237797",
+            "cargo": "3",
+            "oficina": "318"
+        },
+        {
+            "num_identificacion": "1075242350",
+            "cargo": "26",
+            "oficina": "210"
+        },
+        {
+            "num_identificacion": "1075242590",
+            "cargo": "3",
+            "oficina": "350"
+        },
+        {
+            "num_identificacion": "1075243530",
+            "cargo": "64",
+            "oficina": "465"
+        },
+        {
+            "num_identificacion": "1075245081",
+            "cargo": "73",
+            "oficina": "396"
+        },
+        {
+            "num_identificacion": "1075247731",
+            "cargo": "64",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "1075249915",
+            "cargo": "30",
+            "oficina": "367"
+        },
+        {
+            "num_identificacion": "1075255505",
+            "cargo": "3",
+            "oficina": "350"
+        },
+        {
+            "num_identificacion": "1075260772",
+            "cargo": "3",
+            "oficina": "340"
+        },
+        {
+            "num_identificacion": "1075263161",
+            "cargo": "3",
+            "oficina": "335"
+        },
+        {
+            "num_identificacion": "1075263860",
+            "cargo": "26",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "1075282351",
+            "cargo": "3",
+            "oficina": "615"
+        },
+        {
+            "num_identificacion": "1075293412",
+            "cargo": "64",
+            "oficina": "22"
+        },
+        {
+            "num_identificacion": "1075293542",
+            "cargo": "64",
+            "oficina": "22"
+        },
+        {
+            "num_identificacion": "1075304114",
+            "cargo": "3",
+            "oficina": "615"
+        },
+        {
+            "num_identificacion": "1077863923",
+            "cargo": "54",
+            "oficina": "3"
+        },
+        {
+            "num_identificacion": "1077867744",
+            "cargo": "3",
+            "oficina": "716"
+        },
+        {
+            "num_identificacion": "1079389487",
+            "cargo": "28",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "1081158941",
+            "cargo": "64",
+            "oficina": "384"
+        },
+        {
+            "num_identificacion": "1082775880",
+            "cargo": "64",
+            "oficina": "461"
+        },
+        {
+            "num_identificacion": "1084254075",
+            "cargo": "26",
+            "oficina": "4"
+        },
+        {
+            "num_identificacion": "1110493687",
+            "cargo": "64",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "11317310",
+            "cargo": "36",
+            "oficina": "605"
+        },
+        {
+            "num_identificacion": "11320587",
+            "cargo": "7",
+            "oficina": "629"
+        },
+        {
+            "num_identificacion": "11376374",
+            "cargo": "12",
+            "oficina": "554"
+        },
+        {
+            "num_identificacion": "12105811",
+            "cargo": "15",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "12105811",
+            "cargo": "52",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "12106781",
+            "cargo": "30",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "12107908",
+            "cargo": "18",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "12108047",
+            "cargo": "3",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "12108428",
+            "cargo": "39",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12109118",
+            "cargo": "58",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12110316",
+            "cargo": "15",
+            "oficina": "382"
+        },
+        {
+            "num_identificacion": "12111312",
+            "cargo": "28",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12111312",
+            "cargo": "30",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12111402",
+            "cargo": "51",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12111600",
+            "cargo": "28",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "12111600",
+            "cargo": "30",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "12112054",
+            "cargo": "30",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "12113482",
+            "cargo": "51",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12114123",
+            "cargo": "39",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12114416",
+            "cargo": "15",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12116176",
+            "cargo": "30",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "12116234",
+            "cargo": "39",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12116891",
+            "cargo": "16",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "12116891",
+            "cargo": "28",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "12117119",
+            "cargo": "28",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12118316",
+            "cargo": "15",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "12118316",
+            "cargo": "52",
+            "oficina": "548"
+        },
+        {
+            "num_identificacion": "12119187",
+            "cargo": "15",
+            "oficina": "461"
+        },
+        {
+            "num_identificacion": "12119304",
+            "cargo": "38",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12119990",
+            "cargo": "61",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12120337",
+            "cargo": "60",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12120351",
+            "cargo": "3",
+            "oficina": "318"
+        },
+        {
+            "num_identificacion": "12120351",
+            "cargo": "52",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "12120882",
+            "cargo": "30",
+            "oficina": "461"
+        },
+        {
+            "num_identificacion": "12122557",
+            "cargo": "15",
+            "oficina": "395"
+        },
+        {
+            "num_identificacion": "12122557",
+            "cargo": "28",
+            "oficina": "395"
+        },
+        {
+            "num_identificacion": "12124131",
+            "cargo": "15",
+            "oficina": "523"
+        },
+        {
+            "num_identificacion": "12124131",
+            "cargo": "21",
+            "oficina": "523"
+        },
+        {
+            "num_identificacion": "12124131",
+            "cargo": "3",
+            "oficina": "339"
+        },
+        {
+            "num_identificacion": "12124531",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "12125023",
+            "cargo": "38",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12128016",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12128692",
+            "cargo": "55",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12129121",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "12130082",
+            "cargo": "39",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12130083",
+            "cargo": "30",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12130083",
+            "cargo": "79",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "12133012",
+            "cargo": "58",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12133561",
+            "cargo": "54",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12133640",
+            "cargo": "54",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "12137514",
+            "cargo": "30",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "12137592",
+            "cargo": "26",
+            "oficina": "596"
+        },
+        {
+            "num_identificacion": "12139155",
+            "cargo": "38",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "12142569",
+            "cargo": "17",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "12187974",
+            "cargo": "15",
+            "oficina": "523"
+        },
+        {
+            "num_identificacion": "12187974",
+            "cargo": "28",
+            "oficina": "382"
+        },
+        {
+            "num_identificacion": "12201284",
+            "cargo": "3",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "12254217",
+            "cargo": "39",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "17414490",
+            "cargo": "47",
+            "oficina": "524"
+        },
+        {
+            "num_identificacion": "19253401",
+            "cargo": "3",
+            "oficina": "569"
+        },
+        {
+            "num_identificacion": "26422914",
+            "cargo": "28",
+            "oficina": "384"
+        },
+        {
+            "num_identificacion": "26424704",
+            "cargo": "28",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "26425494",
+            "cargo": "26",
+            "oficina": "317"
+        },
+        {
+            "num_identificacion": "26425741",
+            "cargo": "26",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "26430945",
+            "cargo": "12",
+            "oficina": "525"
+        },
+        {
+            "num_identificacion": "26433550",
+            "cargo": "26",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "26433756",
+            "cargo": "28",
+            "oficina": "554"
+        },
+        {
+            "num_identificacion": "26433995",
+            "cargo": "28",
+            "oficina": "465"
+        },
+        {
+            "num_identificacion": "26458524",
+            "cargo": "15",
+            "oficina": "385"
+        },
+        {
+            "num_identificacion": "26458524",
+            "cargo": "26",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "26529334",
+            "cargo": "26",
+            "oficina": "384"
+        },
+        {
+            "num_identificacion": "26535076",
+            "cargo": "21",
+            "oficina": "465"
+        },
+        {
+            "num_identificacion": "26559057",
+            "cargo": "26",
+            "oficina": "24"
+        },
+        {
+            "num_identificacion": "26560094",
+            "cargo": "26",
+            "oficina": "24"
+        },
+        {
+            "num_identificacion": "26597723",
+            "cargo": "15",
+            "oficina": "628"
+        },
+        {
+            "num_identificacion": "26597723",
+            "cargo": "52",
+            "oficina": "628"
+        },
+        {
+            "num_identificacion": "26606511",
+            "cargo": "26",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "26606511",
+            "cargo": "26",
+            "oficina": "385"
+        },
+        {
+            "num_identificacion": "28565272",
+            "cargo": "16",
+            "oficina": "642"
+        },
+        {
+            "num_identificacion": "28631188",
+            "cargo": "26",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "28696645",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "30517262",
+            "cargo": "26",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "35198685",
+            "cargo": "3",
+            "oficina": "316"
+        },
+        {
+            "num_identificacion": "36066041",
+            "cargo": "30",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "36066255",
+            "cargo": "28",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "36067598",
+            "cargo": "50",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "36068413",
+            "cargo": "30",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "36152956",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36154954",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36156449",
+            "cargo": "26",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "36156449",
+            "cargo": "28",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "36156640",
+            "cargo": "15",
+            "oficina": "367"
+        },
+        {
+            "num_identificacion": "36156640",
+            "cargo": "26",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "36157291",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36157777",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36159304",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36159308",
+            "cargo": "26",
+            "oficina": "22"
+        },
+        {
+            "num_identificacion": "36159339",
+            "cargo": "28",
+            "oficina": "347"
+        },
+        {
+            "num_identificacion": "36159339",
+            "cargo": "30",
+            "oficina": "320"
+        },
+        {
+            "num_identificacion": "36159828",
+            "cargo": "28",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "36159828",
+            "cargo": "51",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "36160791",
+            "cargo": "52",
+            "oficina": "382"
+        },
+        {
+            "num_identificacion": "36162218",
+            "cargo": "21",
+            "oficina": "612"
+        },
+        {
+            "num_identificacion": "36162218",
+            "cargo": "28",
+            "oficina": "417"
+        },
+        {
+            "num_identificacion": "36162258",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36163832",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36164239",
+            "cargo": "15",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "36164239",
+            "cargo": "15",
+            "oficina": "523"
+        },
+        {
+            "num_identificacion": "36165107",
+            "cargo": "7",
+            "oficina": "532"
+        },
+        {
+            "num_identificacion": "36165473",
+            "cargo": "26",
+            "oficina": "396"
+        },
+        {
+            "num_identificacion": "36165576",
+            "cargo": "26",
+            "oficina": "24"
+        },
+        {
+            "num_identificacion": "36165883",
+            "cargo": "15",
+            "oficina": "365"
+        },
+        {
+            "num_identificacion": "36165883",
+            "cargo": "15",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "36166028",
+            "cargo": "12",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "36166028",
+            "cargo": "15",
+            "oficina": "365"
+        },
+        {
+            "num_identificacion": "36166028",
+            "cargo": "52",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "36166119",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36166693",
+            "cargo": "26",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "36167412",
+            "cargo": "26",
+            "oficina": "622"
+        },
+        {
+            "num_identificacion": "36168341",
+            "cargo": "21",
+            "oficina": "603"
+        },
+        {
+            "num_identificacion": "36168341",
+            "cargo": "28",
+            "oficina": "56"
+        },
+        {
+            "num_identificacion": "36168373",
+            "cargo": "15",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "36168849",
+            "cargo": "51",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "36169075",
+            "cargo": "15",
+            "oficina": "366"
+        },
+        {
+            "num_identificacion": "36169229",
+            "cargo": "26",
+            "oficina": "468"
+        },
+        {
+            "num_identificacion": "36170905",
+            "cargo": "26",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "36170905",
+            "cargo": "28",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "36172126",
+            "cargo": "21",
+            "oficina": "322"
+        },
+        {
+            "num_identificacion": "36172126",
+            "cargo": "28",
+            "oficina": "43"
+        },
+        {
+            "num_identificacion": "36172720",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36173705",
+            "cargo": "15",
+            "oficina": "382"
+        },
+        {
+            "num_identificacion": "36173705",
+            "cargo": "30",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "36176246",
+            "cargo": "30",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "36177848",
+            "cargo": "15",
+            "oficina": "1"
+        },
+        {
+            "num_identificacion": "36177848",
+            "cargo": "28",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "36178128",
+            "cargo": "28",
+            "oficina": "524"
+        },
+        {
+            "num_identificacion": "36179993",
+            "cargo": "26",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "36180778",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "36181286",
+            "cargo": "12",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "36181286",
+            "cargo": "26",
+            "oficina": "384"
+        },
+        {
+            "num_identificacion": "36182497",
+            "cargo": "40",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "36183880",
+            "cargo": "15",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "36183880",
+            "cargo": "21",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "36184480",
+            "cargo": "28",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "36184726",
+            "cargo": "15",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "36184726",
+            "cargo": "52",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "36276285",
+            "cargo": "15",
+            "oficina": "385"
+        },
+        {
+            "num_identificacion": "36276285",
+            "cargo": "52",
+            "oficina": "4"
+        },
+        {
+            "num_identificacion": "36287871",
+            "cargo": "26",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "36290520",
+            "cargo": "17",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "36301461",
+            "cargo": "28",
+            "oficina": "554"
+        },
+        {
+            "num_identificacion": "36304868",
+            "cargo": "28",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "36306739",
+            "cargo": "30",
+            "oficina": "524"
+        },
+        {
+            "num_identificacion": "36309392",
+            "cargo": "26",
+            "oficina": "382"
+        },
+        {
+            "num_identificacion": "36309392",
+            "cargo": "26",
+            "oficina": "782"
+        },
+        {
+            "num_identificacion": "36379396",
+            "cargo": "28",
+            "oficina": "2"
+        },
+        {
+            "num_identificacion": "36384296",
+            "cargo": "28",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "41683446",
+            "cargo": "3",
+            "oficina": "592"
+        },
+        {
+            "num_identificacion": "41683446",
+            "cargo": "3",
+            "oficina": "774"
+        },
+        {
+            "num_identificacion": "41717482",
+            "cargo": "15",
+            "oficina": "620"
+        },
+        {
+            "num_identificacion": "41717482",
+            "cargo": "21",
+            "oficina": "620"
+        },
+        {
+            "num_identificacion": "43903734",
+            "cargo": "3",
+            "oficina": "340"
+        },
+        {
+            "num_identificacion": "4919594",
+            "cargo": "21",
+            "oficina": "364"
+        },
+        {
+            "num_identificacion": "4946974",
+            "cargo": "51",
+            "oficina": "21"
+        },
+        {
+            "num_identificacion": "52273838",
+            "cargo": "28",
+            "oficina": "366"
+        },
+        {
+            "num_identificacion": "52273838",
+            "cargo": "30",
+            "oficina": "611"
+        },
+        {
+            "num_identificacion": "55061131",
+            "cargo": "26",
+            "oficina": "3"
+        },
+        {
+            "num_identificacion": "55111540",
+            "cargo": "26",
+            "oficina": "532"
+        },
+        {
+            "num_identificacion": "55131974",
+            "cargo": "14",
+            "oficina": "464"
+        },
+        {
+            "num_identificacion": "55150830",
+            "cargo": "26",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "55150896",
+            "cargo": "26",
+            "oficina": "395"
+        },
+        {
+            "num_identificacion": "55151123",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "55151269",
+            "cargo": "26",
+            "oficina": "364"
+        },
+        {
+            "num_identificacion": "55151573",
+            "cargo": "26",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "55151783",
+            "cargo": "26",
+            "oficina": "325"
+        },
+        {
+            "num_identificacion": "55152037",
+            "cargo": "28",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "55152221",
+            "cargo": "15",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "55153275",
+            "cargo": "21",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "55153275",
+            "cargo": "52",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "55154214",
+            "cargo": "18",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "55156648",
+            "cargo": "15",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "55156648",
+            "cargo": "28",
+            "oficina": "25"
+        },
+        {
+            "num_identificacion": "55156648",
+            "cargo": "3",
+            "oficina": "318"
+        },
+        {
+            "num_identificacion": "55157319",
+            "cargo": "26",
+            "oficina": "25"
+        },
+        {
+            "num_identificacion": "55157810",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "55159615",
+            "cargo": "26",
+            "oficina": "532"
+        },
+        {
+            "num_identificacion": "55159705",
+            "cargo": "28",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "55160048",
+            "cargo": "30",
+            "oficina": "327"
+        },
+        {
+            "num_identificacion": "55160050",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "55161578",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "55161578",
+            "cargo": "28",
+            "oficina": "366"
+        },
+        {
+            "num_identificacion": "55162091",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "55162287",
+            "cargo": "15",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "55164268",
+            "cargo": "40",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "55165387",
+            "cargo": "21",
+            "oficina": "25"
+        },
+        {
+            "num_identificacion": "55165900",
+            "cargo": "15",
+            "oficina": "627"
+        },
+        {
+            "num_identificacion": "55165900",
+            "cargo": "40",
+            "oficina": "627"
+        },
+        {
+            "num_identificacion": "55166342",
+            "cargo": "26",
+            "oficina": "554"
+        },
+        {
+            "num_identificacion": "55166482",
+            "cargo": "21",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "55166482",
+            "cargo": "28",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "55166564",
+            "cargo": "26",
+            "oficina": "284"
+        },
+        {
+            "num_identificacion": "55166576",
+            "cargo": "26",
+            "oficina": "364"
+        },
+        {
+            "num_identificacion": "55167412",
+            "cargo": "26",
+            "oficina": "22"
+        },
+        {
+            "num_identificacion": "55168896",
+            "cargo": "28",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "55168896",
+            "cargo": "28",
+            "oficina": "623"
+        },
+        {
+            "num_identificacion": "55169073",
+            "cargo": "26",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "55169527",
+            "cargo": "26",
+            "oficina": "627"
+        },
+        {
+            "num_identificacion": "55171315",
+            "cargo": "26",
+            "oficina": "419"
+        },
+        {
+            "num_identificacion": "55171679",
+            "cargo": "26",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "55172453",
+            "cargo": "26",
+            "oficina": "548"
+        },
+        {
+            "num_identificacion": "55176452",
+            "cargo": "26",
+            "oficina": "531"
+        },
+        {
+            "num_identificacion": "55177614",
+            "cargo": "40",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "55177849",
+            "cargo": "21",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "57447191",
+            "cargo": "40",
+            "oficina": "517"
+        },
+        {
+            "num_identificacion": "63509650",
+            "cargo": "28",
+            "oficina": "23"
+        },
+        {
+            "num_identificacion": "63509650",
+            "cargo": "64",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "75037942",
+            "cargo": "28",
+            "oficina": "611"
+        },
+        {
+            "num_identificacion": "75037942",
+            "cargo": "30",
+            "oficina": "385"
+        },
+        {
+            "num_identificacion": "7684590",
+            "cargo": "15",
+            "oficina": "24"
+        },
+        {
+            "num_identificacion": "7684590",
+            "cargo": "28",
+            "oficina": "526"
+        },
+        {
+            "num_identificacion": "7687042",
+            "cargo": "53",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "7691497",
+            "cargo": "28",
+            "oficina": "532"
+        },
+        {
+            "num_identificacion": "7692267",
+            "cargo": "62",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "7694275",
+            "cargo": "57",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "7695442",
+            "cargo": "30",
+            "oficina": "19"
+        },
+        {
+            "num_identificacion": "7695728",
+            "cargo": "28",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "7698365",
+            "cargo": "39",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "7705940",
+            "cargo": "30",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "7707821",
+            "cargo": "26",
+            "oficina": "396"
+        },
+        {
+            "num_identificacion": "7708832",
+            "cargo": "28",
+            "oficina": "528"
+        },
+        {
+            "num_identificacion": "7708832",
+            "cargo": "30",
+            "oficina": "20"
+        },
+        {
+            "num_identificacion": "7710793",
+            "cargo": "53",
+            "oficina": "605"
+        },
+        {
+            "num_identificacion": "7711164",
+            "cargo": "15",
+            "oficina": "523"
+        },
+        {
+            "num_identificacion": "7711734",
+            "cargo": "56",
+            "oficina": "613"
+        },
+        {
+            "num_identificacion": "7712071",
+            "cargo": "3",
+            "oficina": "322"
+        },
+        {
+            "num_identificacion": "7717164",
+            "cargo": "28",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "7717164",
+            "cargo": "64",
+            "oficina": "466"
+        },
+        {
+            "num_identificacion": "7717491",
+            "cargo": "26",
+            "oficina": "527"
+        },
+        {
+            "num_identificacion": "7717651",
+            "cargo": "3",
+            "oficina": "319"
+        },
+        {
+            "num_identificacion": "7722635",
+            "cargo": "48",
+            "oficina": "384"
+        },
+        {
+            "num_identificacion": "7725584",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "7725626",
+            "cargo": "12",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "7725626",
+            "cargo": "12",
+            "oficina": "465"
+        },
+        {
+            "num_identificacion": "7727870",
+            "cargo": "15",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "7727870",
+            "cargo": "3",
+            "oficina": "615"
+        },
+        {
+            "num_identificacion": "7728323",
+            "cargo": "12",
+            "oficina": "623"
+        },
+        {
+            "num_identificacion": "7728537",
+            "cargo": "12",
+            "oficina": "460"
+        },
+        {
+            "num_identificacion": "7733242",
+            "cargo": "28",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "80032711",
+            "cargo": "54",
+            "oficina": "614"
+        },
+        {
+            "num_identificacion": "83040748",
+            "cargo": "28",
+            "oficina": "634"
+        },
+        {
+            "num_identificacion": "83235514",
+            "cargo": "3",
+            "oficina": "350"
+        },
+        {
+            "num_identificacion": "93393425",
+            "cargo": "3",
+            "oficina": "569"
+        },
+        {
+            "num_identificacion": "93393425",
+            "cargo": "7",
+            "oficina": "463"
+        },
+        {
+            "num_identificacion": "96360275",
+            "cargo": "38",
+            "oficina": "395"
+        },
+        {
+            "num_identificacion": "9977177",
+            "cargo": "59",
+            "oficina": "614"
+        }
+    ]
+}
