@@ -1,0 +1,15 @@
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+
+DirectoryIndex ndxsigadusco.php
+RewriteEngine On
+RewriteBase /sigadusco_v2/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /sigadusco_v2/ndxsigadusco.php [L]
+
+</IfModule>
+
+# END WordPress
+
+
