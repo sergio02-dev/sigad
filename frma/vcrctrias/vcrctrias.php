@@ -3,21 +3,21 @@
 
     $list_sedes= $objVicerrectoria->list_sedes();
 
-    $codigo_dependencia = $_REQUEST['codigo_dependencia'];
+    $codigo_vicerrectoria = $_REQUEST['codigo_vicerrectoria'];
 
-    if($codigo_dependencia){
-        $url_guardar="modificardependencia";
-        $task = "MODIFICAR DEPENDENCIA";
+    if($codigo_vicerrectoria){
+        $url_guardar="modificarvicerectoria";
+        $task = "MODIFICAR VICERRECTORIA";
 
-        $form_dependencia = $objDependencias->form_dependencia($codigo_dependencia);
+        $form_vicerrectoria = $objVicerrectoria->form_vicerrectoria($codigo_vicerrectoria);
 
-        foreach ($form_dependencia as $dat_dpndncias) {
-            $ofi_codigo = $dat_dpndncias['ofi_codigo'];
-            $ofi_nombre = $dat_dpndncias['ofi_nombre'];
-            $ofi_estado = $dat_dpndncias['ofi_estado'];
+        foreach ($form_vicerrectoria as $dat_vcrtrias) {
+            $svi_codigo = $dat_vcrtrias['svi_codigo'];
+            $svi_nombre = $dat_vcrtrias['svi_nombre'];
+            $svi_estado = $dat_vcrtrias['svi_estado'];
         }
         
-        if($ofi_estado == 1){
+        if($svi_estado == 1){
             $checkedA = "checked";
             $checkedI = "";
         }
@@ -28,17 +28,17 @@
         
     }
     else{
-        $url_guardar="registrodepenencias";
-        $task = "REGISTRAR DEPENDENCIA";
+        $url_guardar="registrovicerectoria";
+        $task = "REGISTRAR VICERRECTORIA";
         $checkedA = "checked";
         $checkedI = "";
     }
 
-    $capa_direccion = "#dtaDependencia";
-    $url_direccion = "dtadependencia";
+    $capa_direccion = "#dtaVicerrectoria";
+    $url_direccion = "dtaVicerrectoria";
     
 ?>
-<form id="dependenciafrm" role="form">
+<form id="vicerrectoriafrm" role="form">
     <div class="modal-header fondo-titulo">
         <h4 class="modal-title"><strong><?php echo $task; ?></strong></h4>
 
@@ -54,7 +54,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="txtNombre" class="font-weight-bold">Nombre *</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $ofi_nombre; ?>" required>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $svi_nombre; ?>" required>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
@@ -109,17 +109,17 @@
     <div class="modal-footer">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
-        <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_dependencia; ?>">
+        <input type="hidden" name="codigo_vicerrectoria" id="codigo_vicerrectoria" value="<?php echo $codigo_vicerrectoria; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-danger" onclick="validar_dependencia();"><i class="far fa-save"></i> Guardar</button>
+        <button type="submit" class="btn btn-danger" onclick="validar_vicerrectoria();"><i class="far fa-save"></i> Guardar</button>
     </div>
 </form>
 
 
 
-<script src="js/jquery.validate.min.js"></script>
-<script src="vjs/dpndncia/vldar_dependencias.js"></script>
+
+<script src="vjs/vcrctrias/vldar_vcrctria.js"></script>
 
 
 

@@ -3,7 +3,7 @@
 
     $personaSistema = $_SESSION['idusuario'];
     $txtNombre = $_REQUEST['txtNombre'];
-    $chkestado = $_REQUEST['chkestado'];;
+    $chkestado = $_REQUEST['sedes'];;
 
     $registrodependencia = new RgstroDependencia();
 

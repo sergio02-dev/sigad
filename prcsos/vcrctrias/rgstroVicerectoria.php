@@ -1,38 +1,66 @@
 <?php
-include_once('classDependencia.php');
+include_once('classVicerectoria.php');
 
-class RgstroDependencia extends Dependencia{
+class RgstroVicerectoria extends Vicerrectoria {
 
-    private $sql_insert_dependencia;
-    private $codigo_dependecia;
+    private $sql_entidad;
+    private $sql_sedes_vicerrectoria;
+    private $codigo_vicerrectoria;
 
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
-        $this->codigo_dependecia =date('YmdHis').rand(99,99999);
+        $this->codigo_vicerrectoria =date('YmdHis').rand(99,99999);
     }
 
-    public function insertDependencia(){
+    public function insertVicerrectoria(){
+
+
+        $sql_sede_vice ="INSERT INTO usco.sede_vicerrectoria(
+                                                svi_codigo, 
+                                                svi_sede, 
+                                                svi_vicerrectoria, 
+                                                svi_fechacreo, 
+                                                svi_fechamodifico, 
+                                                svi_personacreo, 
+                                                svi_personamodifico, 
+                                                svi_estado)
+                                            VALUES (".$this->codigo_vicerrectoria.",
+                                                    ".$this->getSedes()."',
+                                                    '".$this->getNombre()."',
+                                                    NOW(),
+                                                    ,
+                                                    ".$this->getPersonaSistema().",
+                                                    ,
+                                                    ".$this->getEstado().")";    
+
+        $this->cnxion->ejecutar($sql_sede_vice);
         
-        $sql_insert_dependencia="INSERT INTO usco.oficina(
-                                             ofi_codigo, 
-                                             ofi_nombre, 
-                                             ofi_estado, 
-                                             ofi_fechacreo, 
-                                             ofi_fechamodifico, 
-                                             ofi_personacreo, 
-                                             ofi_personamodifico)
-                                     VALUES (".$this->codigo_dependecia.", 
-                                             '".$this->getNombre()."',
-                                             ".$this->getEstado().", 
-                                             NOW(), 
-                                             NOW(), 
-                                             ".$this->getPersonaSistema().",
-                                             ".$this->getPersonaSistema().");";
+        $sql_entidad="INSERT INTO principal.entidad(
+                                  ent_codigo,
+                                  ent_nombre, 
+                                  ent_descripcion, 
+                                  ent_estado, 
+                                  ent_fechacreo, 
+                                  ent_fechamodifico, 
+                                  ent_personacreo, 
+                                  ent_personamodifico, 
+                                  ent_tipoentidad)
+                                VALUES (".$this->codigo_vicerrectoria.",
+                                        '".$this->getNombre()."',
+                                         ,
+                                         ".$this->getEstado().",
+                                         NOW(),
+                                         ,
+                                         ".$this->getPersonaSistema().",
+                                         ,
+                                          2)";
+    
+        $this->cnxion->ejecutar($sql_entidad);
 
-        $this->cnxion->ejecutar($sql_insert_dependencia);
+      
 
 
-        return $sql_insert_dependencia;
+        return $sql_sede_vice;
 
     }
 }

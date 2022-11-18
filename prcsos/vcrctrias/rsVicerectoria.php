@@ -99,18 +99,17 @@ Class RsVicerrectoria extends Vicerrectoria{
         return $datalist_sedes;
     }
 
-    public function form_dependencia($codigo_dependencia){
+    public function form_vicerrectoria($codigo_vicerrectoria){
         
-        $sql_form_dependencia = "SELECT ofi_codigo, ofi_nombre, ofi_estado
-                                    FROM usco.oficina
-                                  WHERE ofi_codigo = $codigo_dependencia;";
+        $sql_form_vicerrectoria = "SELECT svi_codigo, svi_nombre, svi_estado
+                                    FROM usco.sede_vicerrectoria
+                                  WHERE svi_codigo = $codigo_vicerrectoria;";
 
-        $resultado_form_dependencia = $this->cnxion->ejecutar($sql_form_dependencia);
+        $resultado_form_vicerrectoria = $this->cnxion->ejecutar($sql_form_vicerrectoria);
 
-        while ($data_form_dependencia = $this->cnxion->obtener_filas($resultado_form_dependencia)){
-            $dataform_dependencia[] = $data_form_dependencia;
-        }
-        return $dataform_dependencia;
+        ($data_form_vicerrectoria = $this->cnxion->obtener_filas($resultado_form_vicerrectoria));
+        $dataform_vicerrectoria[] = $data_form_vicerrectoria;
+        return $dataform_vicerrectoria;
     }
 
 }
