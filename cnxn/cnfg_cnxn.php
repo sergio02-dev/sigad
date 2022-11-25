@@ -9,7 +9,7 @@
     $user='postgres';
 
     //Password
-    $password='123456';
+    $password='Santiago1.';
 
     //Base de datos a utilizar
     $db='sigad';
