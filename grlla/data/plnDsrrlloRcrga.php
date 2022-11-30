@@ -100,7 +100,7 @@
                                 return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PDI" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["pde_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div>';
                             }
                             else{
-                                return '<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div> <!--<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" onclick="generarExcel(\''+full["pde_codigo"]+'\');"></i> </div> -->';
+                                return '<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div> &nbsp;&nbsp; <div class="d-inline-block"> <i class="fas fa-undo fa-lg color_icono" style="display: '+full["actualizar_plan"]+';" title="Actualizar PDI" onclick="actualizar_plan(\''+full["pde_codigo"]+'\');"></i> </div><!--<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" onclick="generarExcel(\''+full["pde_codigo"]+'\');"></i> </div> -->';
                             }
                         }
                         else{
@@ -189,6 +189,26 @@
             url:"formplandesarrollo",
             type:"POST",
             data:"valor="+valor,
+            async:true,
+
+            success: function(message){
+                $(".modal-content").empty().append(message);
+            }
+        });
+    }
+    
+
+    function actualizar_plan(codigo_plandesarrollo){
+        var codigo_plandesarrollo=codigo_plandesarrollo;
+
+        $('#frmModal').modal({
+            keyboard: true
+        });
+
+        $.ajax({
+            url:"formactualizarplandesarrollo",
+            type:"POST",
+            data:"codigo_plandesarrollo="+codigo_plandesarrollo,
             async:true,
 
             success: function(message){

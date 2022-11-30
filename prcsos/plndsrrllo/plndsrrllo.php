@@ -80,56 +80,80 @@ class PlnDsrrllo extends PlanDesarrollo{
         return $epp_codigo;
     }
 
+    public function ultimo_plan(){
+
+        $sql_ultimo_plan="SELECT pde_codigo, pde_nombre 
+                            FROM plandesarrollo.plan_desarrollo
+                           ORDER BY pde_yearinicio DESC
+                           LIMIT 1 OFFSET 0;";
+
+        $query_ultimo_plan=$this->cnxion->ejecutar($sql_ultimo_plan);
+
+        $data_ultimo_plan=$this->cnxion->obtener_filas($query_ultimo_plan);
+        
+        $pde_codigo = $data_ultimo_plan['pde_codigo'];
+
+        return $pde_codigo;
+    }
+
     public function datPlanDesarrollo(){
         
         $rs_planDesarrollo=$this->PlanDesarrolloLista();
-        //return $rs_planDesarrollo;
-       
-        foreach ($rs_planDesarrollo as $data_nivelUno) {
-            
-            $pde_codigo = $data_nivelUno['pde_codigo'];
-            $pde_nombre = $data_nivelUno['pde_nombre'];
-            $pde_yearinicio = $data_nivelUno['pde_yearinicio'];
-            $pde_yearfin = $data_nivelUno['pde_yearfin']; 
-            $add_nombre = $data_nivelUno['add_nombre']; 
-            $pde_niveluno = $data_nivelUno['pde_niveluno'];
-            $pde_niveldos = $data_nivelUno['pde_niveldos'];
-            $pde_niveltres = $data_nivelUno['pde_niveltres'];
-            $cantidadsusbistemas = $data_nivelUno['cantidadsusbistemas'];
-            $pde_actoadmin = $data_nivelUno['pde_actoadmin'];
-            $pde_referencianiveluno = $data_nivelUno['pde_referencianiveluno'];
-            $pde_referencianiveldos = $data_nivelUno['pde_referencianiveldos'];
+        if($rs_planDesarrollo){
+            foreach ($rs_planDesarrollo as $data_nivelUno) {
+                $pde_codigo = $data_nivelUno['pde_codigo'];
+                $pde_nombre = $data_nivelUno['pde_nombre'];
+                $pde_yearinicio = $data_nivelUno['pde_yearinicio'];
+                $pde_yearfin = $data_nivelUno['pde_yearfin']; 
+                $add_nombre = $data_nivelUno['add_nombre']; 
+                $pde_niveluno = $data_nivelUno['pde_niveluno'];
+                $pde_niveldos = $data_nivelUno['pde_niveldos'];
+                $pde_niveltres = $data_nivelUno['pde_niveltres'];
+                $cantidadsusbistemas = $data_nivelUno['cantidadsusbistemas'];
+                $pde_actoadmin = $data_nivelUno['pde_actoadmin'];
+                $pde_referencianiveluno = $data_nivelUno['pde_referencianiveluno'];
+                $pde_referencianiveldos = $data_nivelUno['pde_referencianiveldos'];
+    
+                $codigo_ppi = $this->codigo_ppi($pde_codigo);
+                if($codigo_ppi){
+                    $codigo_ppii = $codigo_ppi;
+                    $estado_ppi = $this->estado_ppi($codigo_ppii);
+                }
+                else{
+                    $codigo_ppii = 0;
+                    $estado_ppi = 1;
+                }
 
-            $codigo_ppi = $this->codigo_ppi($pde_codigo);
-            if($codigo_ppi){
-                $codigo_ppii = $codigo_ppi;
-                $estado_ppi = $this->estado_ppi($codigo_ppii);
-            }
-            else{
-                $codigo_ppii = 0;
-                $estado_ppi = 1;
-            }
-
-            $rsPlanDesarrollo[] = array('pde_nombre'=> $pde_nombre, 
-                                'pde_yearinicio'=> $pde_yearinicio, 
-                                'pde_yearfin'=> $pde_yearfin,
-                                'add_nombre'=> $add_nombre,
-                                'pde_codigo'=> $pde_codigo,
-                                'pde_niveluno'=>$pde_niveluno,
-                                'pde_niveldos'=>$pde_niveldos,
-                                'pde_niveltres'=>$pde_niveltres,
-                                'cantidadsusbistemas'=>$cantidadsusbistemas,
-                                'pde_actoadmin'=>$pde_actoadmin,
-                                'pde_referencianiveluno'=>$pde_referencianiveluno,
-                                'pde_referencianiveldos'=>$pde_referencianiveldos,
-                                'codigo_ppii'=> $codigo_ppii,
-                                'estado_ppi'=> $estado_ppi
-                            );
-
+                if($this->ultimo_plan() == $pde_codigo){
+                    $actualizar_plan = "block";
+                }
+                else{
+                    $actualizar_plan = "none";
+                }
+    
+                $rsPlanDesarrollo[] = array('pde_nombre'=> $pde_nombre, 
+                                    'pde_yearinicio'=> $pde_yearinicio, 
+                                    'pde_yearfin'=> $pde_yearfin,
+                                    'add_nombre'=> $add_nombre,
+                                    'pde_codigo'=> $pde_codigo,
+                                    'pde_niveluno'=>$pde_niveluno,
+                                    'pde_niveldos'=>$pde_niveldos,
+                                    'pde_niveltres'=>$pde_niveltres,
+                                    'cantidadsusbistemas'=>$cantidadsusbistemas,
+                                    'pde_actoadmin'=>$pde_actoadmin,
+                                    'pde_referencianiveluno'=>$pde_referencianiveluno,
+                                    'pde_referencianiveldos'=>$pde_referencianiveldos,
+                                    'codigo_ppii'=> $codigo_ppii,
+                                    'estado_ppi'=> $estado_ppi,
+                                    'actualizar_plan'=> $actualizar_plan
+                                );
+            }    
+            $datPlanDesarrollo=json_encode(array("data"=>$rsPlanDesarrollo));  
         }
-
-        $datPlanDesarrollo=json_encode(array("data"=>$rsPlanDesarrollo));
-            
+        else{
+            $datPlanDesarrollo=json_encode(array("data"=>""));
+        }
+         
         return $datPlanDesarrollo;
     }
 
@@ -338,9 +362,7 @@ class PlnDsrrllo extends PlanDesarrollo{
 
     public function dataNivelUno(){
         
-        $rs_nivelUno=$this->listadoNivelUno();
-        //return $rs_planDesarrollo;
-       
+        $rs_nivelUno = $this->listadoNivelUno();
         foreach ($rs_nivelUno as $data_nivelUno) {
             
             $sub_codigo = $data_nivelUno['sub_codigo'];
@@ -366,20 +388,22 @@ class PlnDsrrllo extends PlanDesarrollo{
                 }
             }
 
+
             $refrencia=$sub_referencia.$sub_ref;
 
             $rsNivelUno[] = array('sub_codigo'=> $sub_codigo, 
-                                'sub_nombre'=> $sub_nombre, 
-                                'add_codigo'=> $add_codigo,
-                                'pde_codigo'=> $pde_codigo,
-                                'sub_referencia'=> $refrencia,
-                                'pde_actoadmin'=> $pde_actoadmin,
-                                'pde_referencianiveldos'  => $pde_referencianiveldos,
-                                'pde_niveldos' => $pde_niveldos,
-                                'responsable' => $responsable,
-                                'oficina'=> $ofi_nombre,
-                                'cargo'=> $car_nombre
-                            );
+                                  'sub_nombre'=> $sub_nombre, 
+                                  'add_codigo'=> $add_codigo,
+                                  'pde_codigo'=> $pde_codigo,
+                                  'sub_referencia'=> $refrencia,
+                                  'pde_actoadmin'=> $pde_actoadmin,
+                                  'pde_referencianiveldos'  => $pde_referencianiveldos,
+                                  'pde_niveldos' => $pde_niveldos,
+                                  'responsable' => $responsable,
+                                  'oficina'=> $ofi_nombre,
+                                  'cargo'=> $car_nombre
+
+                                );
 
         }
 
@@ -793,21 +817,7 @@ class PlnDsrrllo extends PlanDesarrollo{
         return $datavigencias_certificado;
     }
 
-    public function ultimo_plan(){
-
-        $sql_ultimo_plan="SELECT pde_codigo, pde_nombre 
-                            FROM plandesarrollo.plan_desarrollo
-                           ORDER BY pde_fechacreo DESC
-                           LIMIT 1 OFFSET 0;";
-
-        $query_ultimo_plan=$this->cnxion->ejecutar($sql_ultimo_plan);
-
-        $data_ultimo_plan=$this->cnxion->obtener_filas($query_ultimo_plan);
-        
-        $pde_codigo = $data_ultimo_plan['pde_codigo'];
-
-        return $pde_codigo;
-    }
+    
 
     public function list_sedes(){
 
