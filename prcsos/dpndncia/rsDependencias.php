@@ -42,7 +42,7 @@ Class RsDependencias extends Dependencia{
 
     
                 $rsDependencias[] = array('ofi_codigo'=> $ofi_codigo, 
-                                            'ofi_nombre'=> $ofi_nombre, 
+                                            'ofi_nombre'=> $ofi_nombre." ".$ofi_codigo, 
                                             'estado'=> $estado,
                                         );
     

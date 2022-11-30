@@ -25,15 +25,16 @@ class RgstroFacultades extends Facultades {
                                                     ent_tipoentidad)
                                                 VALUES (".$this->codigo_facultades.",
                                                         '".$this->getNombre()."',
-                                                        ,
+                                                        '',
                                                         ".$this->getEstado().",
                                                         NOW(),
-                                                        ,
+                                                        NOW(),
                                                         ".$this->getPersonaSistema().",
-                                                        ,
-                                                            1)";
+                                                        ".$this->getPersonaSistema().",
+                                                        1)";
 
         $this->cnxion->ejecutar($sql_entidad);
+
         return $sql_entidad;
 
     }
