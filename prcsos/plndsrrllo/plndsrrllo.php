@@ -147,13 +147,12 @@ class PlnDsrrllo extends PlanDesarrollo{
                                     'estado_ppi'=> $estado_ppi,
                                     'actualizar_plan'=> $actualizar_plan
                                 );
-            }    
+            }   
             $datPlanDesarrollo=json_encode(array("data"=>$rsPlanDesarrollo));  
         }
         else{
             $datPlanDesarrollo=json_encode(array("data"=>""));
         }
-         
         return $datPlanDesarrollo;
     }
 
