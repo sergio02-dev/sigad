@@ -48,7 +48,7 @@
                 type: 'POST'
             },
             columns: [
-                { data: 'fac_nombre', title: 'Nombre'},
+                { data: 'ent_nombre', title: 'Nombre'},
                 { data: 'estado', title: 'Estado'},
                 {
                     data: null,

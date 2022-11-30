@@ -11,12 +11,14 @@ class MdfcarFacultades extends Facultades{
 
     public function updateFacultades(){
         
-        $sql_updte_facultades="UPDATE usco.facultades
-                                   SET fac_nombre='".$this->getNombre()."',
-                                       fac_estado=".$this->getEstado().", 
-                                       fac_fechamodifico=NOW(), 
-                                       fac_personamodifico=".$this->getPersonaSistema()."
-                                 WHERE fac_codigo = ".$this->getCodigo().";";
+        $sql_updte_facultades="UPDATE principal.entidad
+                                SET     ent_nombre='".$this->getNombre()."',
+                                        ent_estado=".$this->getEstado().", 
+                                        ent_fechamodifico=NOW(),  
+                                        ent_personamodifico=".$this->getPersonaSistema()."
+                                WHERE ent_codigo=".$this->getCodigo().";";
+        
+     
 
         $this->cnxion->ejecutar($sql_updte_facultades);
 

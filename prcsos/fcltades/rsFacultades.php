@@ -2,48 +2,53 @@
 include('classFacultades.php');
 Class RsFacultades extends Facultades{
    
+
+   
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
     } 
 
-    public function list_facultades(){
+    public function list_fcltades(){
 
-        
-        $sql_list_facultades = "SELECT fac_codigo, fac_nombre, fac_estado
-                                    FROM usco.facultades;";
+        $sql_list_fcltades = "SELECT ent_codigo, ent_nombre, 
+                                         ent_descripcion, ent_estado
+                                    FROM principal.entidad
+                                   WHERE ent_tipoentidad = 1;";
 
-        $resultado_list_facultades = $this->cnxion->ejecutar($sql_list_facultades);
+        $resultado_list_fcltades = $this->cnxion->ejecutar($sql_list_fcltades);
 
-        while ($data_list_facultades = $this->cnxion->obtener_filas($resultado_list_facultades)){
-            $datalist_facultades[] = $data_list_facultades;
+        while ($data_list_fcltades = $this->cnxion->obtener_filas($resultado_list_fcltades)){
+            $datalist_fcltades[] = $data_list_fcltades;
         }
-        return $datalist_facultades;
+        return $datalist_fcltades;
     }
+
+ 
 
     
 
     public function datFacultades(){
         
-        $list_facultades = $this->list_facultades();
+        $list_facultades = $this->list_fcltades();
 
         if($list_facultades){
-            foreach ($list_facultades as $dat_fcltades) {
-                $fac_codigo = $dat_fcltades['fac_codigo'];
-                $fac_nombre = $dat_fcltades['fac_nombre'];
-                $fac_estado = $dat_fcltades['fac_estado'];
+            foreach ($list_facultades as $dat_fac) {
+                $ent_codigo = $dat_fac['ent_codigo'];
+                $ent_nombre = $dat_fac['ent_nombre'];
+                $ent_descripcion = $dat_fac['ent_descripcion'];
+                $ent_estado = $dat_fac['ent_estado'];
 
-                if($fac_estado == 1){
+                if($ent_estado == 1){
                     $estado = "Activo";
                 }
                 else{
                     $estado = "Inactivo";
                 }
-               
 
     
-                $rsFacultades[] = array('fac_codigo'=> $fac_codigo, 
-                                            'fac_nombre'=> $fac_nombre, 
-                                            'estado'=> $estado,
+                $rsFacultades[] = array('ent_codigo'=> $ent_codigo, 
+                                           'ent_nombre'=> $ent_nombre, 
+                                           'estado'=> $estado,
                                         );
     
             }
@@ -55,17 +60,17 @@ Class RsFacultades extends Facultades{
         return $dattFacultades;
     }
 
+   
     public function form_facultades($codigo_facultades){
         
-        $sql_form_facultades = "SELECT fac_codigo, fac_nombre, fac_estado
-                                    FROM usco.facultades
-                                  WHERE fac_codigo = $codigo_facultades;";
+        $sql_form_facultades = "SELECT ent_codigo, ent_nombre, ent_estado
+                                    FROM principal.entidad
+                                  WHERE ent_codigo = $codigo_facultades;";
 
         $resultado_form_facultades = $this->cnxion->ejecutar($sql_form_facultades);
 
-        while ($data_form_facultades = $this->cnxion->obtener_filas($resultado_form_facultades)){
-            $dataform_facultades[] = $data_form_facultades;
-        }
+        ($data_form_facultades = $this->cnxion->obtener_filas($resultado_form_facultades));
+        $dataform_facultades[] = $data_form_facultades;
         return $dataform_facultades;
     }
 
