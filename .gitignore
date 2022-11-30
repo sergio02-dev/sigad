@@ -1,3 +1,7 @@
-cnxn
+cnxn/
+bootstrap/
+Classes/
+DataTables/
+webfonts/
 .cnfgacces
 .htaccess
