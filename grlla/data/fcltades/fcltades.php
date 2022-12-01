@@ -48,12 +48,12 @@
                 type: 'POST'
             },
             columns: [
-                { data: 'fac_nombre', title: 'Nombre'},
+                { data: 'ent_nombre', title: 'Nombre'},
                 { data: 'estado', title: 'Estado'},
                 {
                     data: null,
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar FACULTAD" style="display:<?php echo $visibilidad; ?>;" onclick="editarFacultades(\''+full["fac_codigo"]+'\');"></i> </div> ';
+                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar FACULTAD" style="display:<?php echo $visibilidad; ?>;" onclick="editarFacultades(\''+full["ent_codigo"]+'\');"></i> </div> ';
                     },
                     title: 'Editar'
                 },	

@@ -11,5 +11,5 @@
     $registrofacultades->setNombre($txtNombre);
     $registrofacultades->setEstado($chkestado);
 
-    $registrofacultades->insertFacultades();
+    echo $registrofacultades->insertFacultades();
 ?>

@@ -10,12 +10,12 @@
         $form_facultades = $objFacultades->form_facultades($codigo_facultades);
 
         foreach ($form_facultades as $dat_fcltades) {
-            $fac_codigo = $dat_fcltades['fac_codigo'];
-            $fac_nombre = $dat_fcltades['fac_nombre'];
-            $fac_estado = $dat_fcltades['fac_estado'];
+            $ent_codigo = $dat_fcltades['ent_codigo'];
+            $ent_nombre = $dat_fcltades['ent_nombre'];
+            $ent_estado = $dat_fcltades['ent_estado'];
         }
         
-        if($fac_estado == 1){
+        if($ent_estado == 1){
             $checkedA = "checked";
             $checkedI = "";
         }
@@ -52,7 +52,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="txtNombre" class="font-weight-bold">Nombre *</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $fac_nombre; ?>" required>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $ent_nombre; ?>" required>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
