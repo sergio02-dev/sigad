@@ -9,10 +9,10 @@
     $user='postgres';
 
     //Password
-    $password='Santiago1.';
+    $password='123456';
 
     //Base de datos a utilizar
-    $db='sigad';
+    $db='sigadusco2021';
     //$db='sigad';
 
 
