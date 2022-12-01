@@ -92,7 +92,7 @@
                     },
                 },
                 {
-                    data: null, /*'act_codigo'*/
+                    data: null,
                     title: 'Plan Indicativo',
                     render: function (data, type, full, meta){
                         if(full["estado_ppi"] == 1){
@@ -100,7 +100,7 @@
                                 return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PDI" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["pde_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div>';
                             }
                             else{
-                                return '<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div> <!--<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" onclick="generarExcel(\''+full["pde_codigo"]+'\');"></i> </div> -->';
+                                return '<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" title="Reporte PDI" onclick="rprte(\''+full["pde_codigo"]+'\');"></i> </div> &nbsp;&nbsp; <div class="d-inline-block"> <i class="fas fa-undo fa-lg color_icono" style="display: '+full["actualizar_plan"]+';" title="Actualizar PDI" onclick="actualizar_plan(\''+full["pde_codigo"]+'\');"></i> </div><!--<div class="d-inline-block"> <i class="fas fa-file-excel fa-lg color_icono" onclick="generarExcel(\''+full["pde_codigo"]+'\');"></i> </div> -->';
                             }
                         }
                         else{
@@ -139,7 +139,6 @@
         function formatNumber(num) {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         }
-
         // Add event listener for opening and closing details
         $('#dataPlanDesarrollo tbody').on('click', 'td.details-control', function(){
             var tr = $(this).closest('tr');
@@ -168,14 +167,13 @@
         $.ajax({
             url:"informacionniveles",
             type:"POST",
-            data:dataenviar, //"codigo_actividad="+codigo_actividad,
+            data:dataenviar, 
             async:true,
 
             success: function(message){
                 $("#infoPlan"+plan).empty().append(message);
             }
         });
-
         return '<div id="infoPlan'+plan+'"></div>';
     }
 
@@ -190,7 +188,24 @@
             type:"POST",
             data:"valor="+valor,
             async:true,
+            success: function(message){
+                $(".modal-content").empty().append(message);
+            }
+        });
+    }
 
+    function actualizar_plan(codigo_plandesarrollo){
+        var codigo_plandesarrollo=codigo_plandesarrollo;
+
+        $('#frmModal').modal({
+            keyboard: true
+        });
+
+        $.ajax({
+            url:"formactualizarplandesarrollo",
+            type:"POST",
+            data:"codigo_plandesarrollo="+codigo_plandesarrollo,
+            async:true,
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -208,7 +223,6 @@
             type:"POST",
             data:"codigo_planDesarrollo="+codigo_plandesarrollo,
             async:true,
-
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -219,14 +233,13 @@
         var codigo_plandesarrollo=codigo_plandesarrollo;
 
         $('#frmModal').modal({
-                keyboard: true
+            keyboard: true
         });
         $.ajax({
             url:"formreportepdi",
             type:"POST",
             data:"codigo_planDesarrollo="+codigo_plandesarrollo,
             async:true,
-
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -237,17 +250,15 @@
         var codigo_plandesarrollo=codigo_plandesarrollo;
         var actoAdministrativo=actoAdministrativo;
         var referencia_nivelUno=referencia_nivelUno;
-        //alert(referencia_nivelUno);
 
         $('#frmModal').modal({
-                keyboard: true
+            keyboard: true
         });
         $.ajax({
             url:"formniveluno",
             type:"POST",
             data:"codigo_planDesarrollo="+codigo_plandesarrollo+'&actoAdministrativo='+actoAdministrativo+'&referencia_nivelUno='+referencia_nivelUno,
             async:true,
-
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -261,14 +272,13 @@
         var referencia_nivelDos=referencia_nivelDos;
 
         $('#frmModal').modal({
-                keyboard: true
+            keyboard: true
         });
         $.ajax({
             url:"formniveldos",
             type:"POST",
             data:"codigo_planDesarrollo="+codigo_plandesarrollo+'&actoAdministrativo='+actoAdministrativo+'&nombre_niveluno='+nombre_niveluno+'&referencia_nivelDos='+referencia_nivelDos,
             async:true,
-
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -289,7 +299,6 @@
             type:"POST",
             data:"codigo_planDesarrollo="+codigo_plandesarrollo+'&actoAdministrativo='+actoAdministrativo+'&nombre_niveluno='+nombre_niveluno+'&nombre_niveldos='+nombre_niveldos,
             async:true,
-
             success: function(message){
                 $(".modal-content").empty().append(message);
             }
@@ -298,7 +307,6 @@
 
     function generarExcel(codigo_plandesarrollo){
         var codigo_plandesarrollo = codigo_plandesarrollo;
-        //alert(codigo_plandesarrollo);
 
         if(codigo_plandesarrollo == 1){
             window.location.href = 'reporteplandesarrolloantiguo?codigo_plandesarrollo='+codigo_plandesarrollo;
@@ -306,7 +314,6 @@
         else{
             window.location.href = 'excelplandesarrollo?codigo_plandesarrollo='+codigo_plandesarrollo;
         }
-        
     }
 
 
