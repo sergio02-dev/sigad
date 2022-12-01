@@ -1,5 +1,4 @@
 <?php
-
     //Datos de configuración de la conexión a la base de datos
 
     //Servidor
@@ -9,7 +8,7 @@
     $user='postgres';
 
     //Password
-    $password='Santiago1.';
+    $password='123456';
 
     //Base de datos a utilizar
     $db='sigad';
