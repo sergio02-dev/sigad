@@ -206,7 +206,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group p-3">
-                    <label for="textPlantaFisica" class="font-weight-bold">Caracteristicas Planta Fisica</label>
+                    <label for="textPlantaFisica" class="font-weight-bold">Caracteristicas Planta Fisica </label> <i class="fas fa-info-circle"></i>
                     <textarea type="textPlantaFisica" class="form-control caja_texto_sizer" id="textPlantaFisica" name="textPlantaFisica" aria-describedby="textHelp" data-rule-required="true" ></textarea>
                         
                 </div>
@@ -246,7 +246,7 @@
                         <span class="help-block" id="error"></span>    
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                     <div class="form-group p-3">
                         <label for="selSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
                         <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
@@ -272,8 +272,9 @@
                     </div>
             </div>
             <div class="col-sm-4">
-                    <div class="form-group p-3">
-                        <label for="selEquipo" class="font-weight-bold"> Equipo</label>
+                    <div class="form-group pt-3 pl-1">
+                        <label for="selEquipo" class="font-weight-bold"> Equipo</label> 
+                        
                         <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
                             <option value="0">Seleccione...</option>
                             <?php
@@ -296,6 +297,9 @@
                         <span class="help-block" id="error"></span>
                     </div>
             </div>
+           <div class="col-sm-1 pt-5 pl-auto">
+                <i class="fas fa-plus-circle" style="color: #BB0900"></i>          
+           </div> 
         </div>
 
         <div class="row">
@@ -344,6 +348,15 @@
                         <input type="number" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="true" required>
                     </div>
             </div>
+        </div>
+        <div class="m-0 row justify-content-center">
+                <div class="col-auto">
+                    <?php $visibilidad=$_SESSION['visibilidadBotones']; ?>
+                    <span class="d-inline-block" tabindex="0"  title="Guardar Formulario"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-md" onclick="agregar();"></i>&nbsp;<strong><i class="fas fa-save">&nbsp;</i>Guardar</strong></button></span>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
         </div>
     </div>
 
