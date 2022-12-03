@@ -1,8 +1,3 @@
-<?php
-    include('data/sbsstma.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
 <style>
 .modal-body {
     max-height: calc(100vh - 210px);
@@ -30,12 +25,10 @@
 
 				</div>
 				<div class="col-sm-9 container-principal" >
-					<div class="col-sm-12 modal-header capa_titulo"><h2> <strong>PERSONA</strong></h2></div>
+					<div class="col-sm-12 modal-header capa_titulo"><h2> <strong>FORMULARIO FUNCIONAMIENTO</strong></h2></div>
                     <div class="col-sm-12">&nbsp;</div>
                     
-					<?php $visibilidad=$_SESSION['visibilidadBotones']; ?>
-                    <span class="d-inline-block" tabindex="0"  title="Crear Persona"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="agregar();"><i class="fas fa-plus"></i>&nbsp;<strong>Crear Persona</strong></button></span>
-                    <!-- **********************          Inicio Modal Forma    *********************************** -->
+					 <!-- **********************          Inicio Modal Forma    *********************************** -->
                         <!-- Large modal -->
                         <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
@@ -45,14 +38,14 @@
                             </div>
                         </div>
                     <!-- **********************          Fin Modal Forma       *********************************** -->
-					
 					<div class="row">
 						<div class="col-sm-12">&nbsp;</div>
 					</div>
-					<div class="col-sm-12" id="persona">
+					<div class="col-sm-12" id="formulariofun">
 						<?php include('frma/formfun/formfun.php'); ?>
 							
 					</div>
+		
 				</div>
 			</div>
 		</div>

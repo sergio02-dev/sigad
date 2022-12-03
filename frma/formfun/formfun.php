@@ -1,162 +1,403 @@
+<!-- **********************          Inicio Modal Forma    *********************************** -->
+<!-- Large modal -->
+<div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            Cargando...
+        </div>
+    </div>
+</div>
+<!-- **********************          Fin Modal Forma       *********************************** -->
+
 <?php 
-    function tildes($palabra){
-        $no_admitidas = array("á","é","í","ó","ú");
-        $admitidas = array("Á", "É", "Í", "Ó", "Ú");
-        $texto = str_replace($no_admitidas, $admitidas ,$palabra);
-        return $texto;
-    }
-    include('crud/rs/prsna.php');
+    $visibilidad=$_SESSION['visibilidadBotones']; 
 
-    $codigo_persona = $_REQUEST['codigo_persona'];
-    $codigo_vinculacion = $_REQUEST['codigo_vinculacion'];
+    $codigo_formfun = $_REQUEST['codigo_formfun'];
 
-    $list_oficina = $objRsPersona->list_oficina();
-    $list_cargo = $objRsPersona->list_cargo();
-    $nombre_persona = $objRsPersona->nombre_persona($codigo_persona);
+    if($codigo_dependencia){
+        $url_guardar="modificardependencia";
+        $task = "MODIFICAR DEPENDENCIA";
 
-    if($codigo_vinculacion){
-        $vinculacionForm = $objRsPersona->vinculacion_form($codigo_vinculacion);
-        foreach ($vinculacionForm as $dta_vnclacion) {
-            $vin_codigo = $dta_vnclacion['vin_codigo'];
-            $vin_persona = $dta_vnclacion['vin_persona'];
-            $vin_oficina = $dta_vnclacion['vin_oficina'];
-            $vin_cargo = $dta_vnclacion['vin_cargo'];
-            $vin_estado = $dta_vnclacion['vin_estado'];
+        $form_dependencia = $objDependencias->form_dependencia($codigo_dependencia);
+
+        foreach ($form_dependencia as $dat_dpndncias) {
+            $ofi_codigo = $dat_dpndncias['ofi_codigo'];
+            $ofi_nombre = $dat_dpndncias['ofi_nombre'];
+            $ofi_estado = $dat_dpndncias['ofi_estado'];
         }
-
-
-        if($vin_estado == 1){
-            $checkedA="checked";
-            $checkedI="";
+        
+        if($ofi_estado == 1){
+            $checkedA = "checked";
+            $checkedI = "";
         }
-        if($vin_estado == 0){
-            $checkedA="";
-            $checkedI="checked";
+        else{
+            $checkedA = "";
+            $checkedI = "checked";
         }
-
-        $url_direccion = "infoprsona?codigo_persona=".$codigo_persona;
-        $capa_direccion = "#infoPersona".$codigo_persona;
-        $url_proceso="modificarvinculacion";
-        $task = "MODIFICAR";
+        
     }
     else{
-        $url_direccion = "datapersona";
-        $capa_direccion = "#persona";
-        $url_proceso="registrovinculacion";
-        $task = "REGISTRAR";
-        $checkedA="checked";
+        $url_guardar="rgstroformulariofun";
+        $task = "REGISTRAR PLAN COMPRAS FUNCIONAMIENTO";
+        $checkedA = "checked";
+        $checkedI = "";
     }
-   
-?>
-<form id="vinculacionform" role="form">
-    <div class="modal-header fondo-titulo">
-        <h4 class="modal-title"><strong><?php echo $task; ?> VINCULACI&Oacute;N <?php echo strtoupper(tildes($nombre_persona)); ?> </strong></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <!-- ******************** INICIO FORMULARIO ************************* -->
+
+    $capa_direccion = "#dtaFormfun";
+    $url_direccion = "dtaformfun";
     
-    <div class="row">
-        <div class="col-sm-11">
-            <div class="form-group">
-                <label for="selOficina" class="font-weight-bold"> Oficina *</label>
-                <select name="selOficina" id="selOficina" class="form-control caja_texto_sizer selectpickerOficina" data-size="10" data-rule-required="true" required>
-                    <option value="0">Seleccione...</option>
-                    <?php
-                        foreach ($list_oficina as $data_list_oficina) {
-                            $ofi_codigo = $data_list_oficina['ofi_codigo'];
-                            $ofi_nombre = $data_list_oficina['ofi_nombre'];
+?>
 
-                        if($vin_oficina == $ofi_codigo){
-                            $select_oficina = "selected";
-                        }
-                        else{
-                            $select_oficina = "";
-                        }
-                    ?>
-                        <option value="<?php echo  $ofi_codigo; ?>"  <?php echo $select_oficina; ?>><?php echo substr($ofi_nombre,0,80); ?> ...</option>
-                    <?php
-                        }
-                    ?>
-                </select>
-                <span class="help-block" id="error"></span>
-            </div>
-        </div>
+
+
+
+<!-- ******************** INICIO FORMULARIO ************************* -->
+
+<form id="plancomprasFUNCIONAMIENTOform" role="form">
+    <div class="col-sm-12 bg-light text-dark border pt-2">
+        <label for="informacionInstitucional" class="font-weight-bold ">INFORMACION INSTITUCIONAL</label>
     </div>
+    <div class= "border"> 
+        <div class="row " >
+            
+            <div class="col-sm-4" >
+                    
+                <div class="form-group p-3">
+                    <label for="textSede" class="font-weight-bold">Sede</label>
+                    <select name="selSede" id="selSede" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
 
-    <div class="row">
-        <div class="col-sm-11">
-            <div class="form-group">
-                <label for="selCargo" class="font-weight-bold"> Cargo </label>
-                <select name="selCargo" id="selCargo" class="form-control caja_texto_sizer selectpickerCargo" data-rule-required="true" required>
-                    <option value="0">Seleccione...</option>
-                    <?php
-                        foreach ($list_cargo as $data_list_cargo) {
-                            $car_codigo = $data_list_cargo['car_codigo'];
-                            $car_nombre = $data_list_cargo['car_nombre'];
-
-                        if($vin_cargo == $car_codigo){
-                            $select_cargo = "selected";
-                        }
-                        else{
-                            $select_cargo = "";
-                        }
-                    ?>
-                        <option value="<?php echo $car_codigo; ?>" <?php echo $select_cargo; ?>><?php echo $car_nombre; ?></option>
-                    <?php
-                        }
-                    ?>
-                </select>
-                <span class="help-block" id="error"></span>
-            </div>
-        </div>        
-    </div>
-
-    <div class="row">
-        
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="chkestado" class="font-weight-bold">Estado *</label>
-                <div class="radio tipo1">
-                    <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> <?php echo $sololectura; ?> required/>
-                    <label for="ractivo"><span></span> &nbsp;Activo</label> &nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <input type="radio"   id="rinactivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> <?php echo $sololectura; ?> required />
-                    <label for="rinactivo"><span></span> &nbsp;Inactivo</label>
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                    </select>
+                    <span class="help-block" id="error"></span>    
                 </div>
             </div>
+            <div class="col-sm-4">
+                    <div class="form-group p-3">
+                        <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
+                        <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
+            <div class="col-sm-4">
+                    <div class="form-group p-3">
+                        <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
+                        <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group p-3">
+                    <label for="textDependencia" class="font-weight-bold">Dependencia</label>
+                    <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>       
+                </div>
+            </div>
+            <div class="col-sm-6">
+                    <div class="form-group p-3">
+                        <label for="textTipoArea" class="font-weight-bold">Area</label>
+                        <select name="selTipoArea" id="selTipoArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
         </div>
     </div>
-    
-    
-    <!-- ******************** FIN FORMULARIO ************************* -->
 
+    <div class="col-sm-12 bg-light text-dark border pt-2">
+        <label for="tipodeGasto" class="font-weight-bold ">TIPO DE GASTO</label>
     </div>
-    <div class="modal-footer">
-    <input type="hidden" id="codigo_vinculacion" name="codigo_vinculacion" value="<?php echo $codigo_vinculacion; ?>">
-        <input type="hidden" id="url_proceso" name="url_proceso" value="<?php echo $url_proceso; ?>">
-        <input type="hidden" id="codigo_persona" name="codigo_persona" value="<?php echo $codigo_persona; ?>">
-        <input type="hidden" id="url_direccion" name="url_direccion" value="<?php echo $url_direccion; ?>">
-        <input type="hidden" id="capa_direccion" name="capa_direccion" value="<?php echo $capa_direccion; ?>">
-        <button type="button" class="btn btn-secondary caja_texto_sizer" data-dismiss="modal"><strong>Cerrar</strong></button>
-        <button type="submit" id="botonGuardar" class="btn btn-danger caja_texto_sizer" onclick="validar_vinculacion();"><i class="far fa-save"></i> <strong>Guardar</strong> </button>
+    <div class= "border"> 
+        <div class="row " >
+            
+            <div class="col-sm-4" >
+                    
+                <div class="form-group p-3">
+                    <label for="textTipoGasto" class="font-weight-bold">Tipo de gasto</label>
+                    <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="FUNCIONAMIENTO" data-rule-required="true" disabled>   
+                </div>
+            </div>            
+        </div>
     </div>
-</form>
+
+    <div class="col-sm-12 bg-light text-dark border pt-2">
+        <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
+    </div>
+    <div class= "border"> 
+        <div class="row " >
+            
+            <div class="col-sm-4" >
+                    
+                <div class="form-group p-3">
+                    <label for="textLineaEquipo" class="font-weight-bold">Linea de equipo</label>
+                    <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>    
+                </div>
+            </div>
+            <div class="col-sm-3">
+                    <div class="form-group p-3">
+                        <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
+                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
+            <div class="col-sm-4">
+                    <div class="form-group pt-3 pl-1">
+                        <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
+                        <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
+           <div class="col-sm-1 pt-5 pl-auto">
+                <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
+           </div> 
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group p-3">
+                    <label for="textCaracteristicas" class="font-weight-bold">Caracteristicas</label>
+                    <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                            <?php
+                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+
+                                if($per_tipoidentificacion==$tid_codigo){
+                                    $select_tipoIdentificacion="selected";
+                                }
+                                else{
+                                    $select_tipoIdentificacion="";
+                                }
+                            ?>
+                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                        <span class="help-block" id="error"></span>       
+                </div>
+            </div>
+            <div class="col-sm-2">
+                    <div class="form-group p-3">
+                        <label for="selCantidad" class="font-weight-bold">Cantidad</label>
+                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
+            <div class="col-sm-5">
+                    <div class="form-group p-3">
+                        <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
+                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" disabled>
+                                
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                    <div class="form-group p-3">
+                        <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
+                        <input type="number" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="true" disabled>
+                    </div>
+            </div>
+        </div>
+        <div class="m-0 row justify-content-center">
+            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
+        </div>
+
+        <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+        </div>
+    </div>
+
+<!-- ******************** FIN FORMULARIO ************************* -->
+    <div class="modal-footer ">
+        <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
+        <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
+        <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_formfun; ?>">
+        <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
+         
+     
+        
+    </div>
+</form> 
+                            
 <script src="js/jquery.validate.min.js"></script>
-<script src="vjs/vldar_vinculacion.js"></script>
+<script src="vjs/formfun/vldar_formfun.js"></script>
 
-<script type="text/javascript">
-    $('.selectpickerOficina').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
-        
-    });
+<script>
+    function agregarEquipo(){
 
-    $('.selectpickerCargo').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
-        
-    });
+        $('#frmModal').modal({
+            keyboard: true
+        });
+        $.ajax({
+            url:"form",
+            type:"POST",
+            data:"",
+            async:true,
+
+            success: function(message){
+                $(".modal-content").empty().append(message);
+            }
+        });
+    }
 </script>
+
+
+    
+   
+    
+    
+
+
+
+
+    
+   
+    
+    
+
