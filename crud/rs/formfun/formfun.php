@@ -1,11 +1,9 @@
 <?php
-    include('prcsos/prsna/prsna.php');
+    include('prcsos/formfun/rsFormfun.php');
 
-    $objRsPersona = new Prsna();
+    $objRsFuncionamiento = new RsFuncionamiento();
 
-    $rs_persona=$objRsPersona->dataPersona(); 
     
-    $rs_TipoIdentificacion=$objRsPersona->dataIdentificacion(); 
     
 
 ?>

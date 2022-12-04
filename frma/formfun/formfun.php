@@ -1,3 +1,15 @@
+<?php
+    include('crud/rs/formfun/formfun.php');
+
+    $visibilidad=$_SESSION['visibilidadBotones']; 
+    $codigo_formfun = $_REQUEST['codigo_formfun'];
+
+    $list_sedes = $objRsFuncionamiento->list_sedes(); 
+   
+    
+   
+?>
+
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 <!-- Large modal -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -9,44 +21,7 @@
 </div>
 <!-- **********************          Fin Modal Forma       *********************************** -->
 
-<?php 
-    $visibilidad=$_SESSION['visibilidadBotones']; 
 
-    $codigo_formfun = $_REQUEST['codigo_formfun'];
-
-    if($codigo_dependencia){
-        $url_guardar="modificardependencia";
-        $task = "MODIFICAR DEPENDENCIA";
-
-        $form_dependencia = $objDependencias->form_dependencia($codigo_dependencia);
-
-        foreach ($form_dependencia as $dat_dpndncias) {
-            $ofi_codigo = $dat_dpndncias['ofi_codigo'];
-            $ofi_nombre = $dat_dpndncias['ofi_nombre'];
-            $ofi_estado = $dat_dpndncias['ofi_estado'];
-        }
-        
-        if($ofi_estado == 1){
-            $checkedA = "checked";
-            $checkedI = "";
-        }
-        else{
-            $checkedA = "";
-            $checkedI = "checked";
-        }
-        
-    }
-    else{
-        $url_guardar="rgstroformulariofun";
-        $task = "REGISTRAR PLAN COMPRAS FUNCIONAMIENTO";
-        $checkedA = "checked";
-        $checkedI = "";
-    }
-
-    $capa_direccion = "#dtaFormfun";
-    $url_direccion = "dtaformfun";
-    
-?>
 
 
 
@@ -61,24 +36,16 @@
         <div class="row " >
             
             <div class="col-sm-4" >
-                    
                 <div class="form-group p-3">
-                    <label for="textSede" class="font-weight-bold">Sede</label>
+                    <label for="selSede" class="font-weight-bold">Sede</label>
                     <select name="selSede" id="selSede" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
+                            <option value="0" data-codigo_sede="0">Seleccione...</option>
                             <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
+                                foreach ($list_sedes as $dat_sede) {
+                                    $sed_codigo = $dat_sede['sed_codigo'];
+                                    $sed_nombre = $dat_sede['sed_nombre'];
                             ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                                <option value="<?php echo  $sed_codigo; ?>" data-codigo_sede="<?php echo  $sed_codigo; ?>"><?php echo $sed_nombre; ?></option>
                             <?php
                                 }
                             ?>
@@ -86,52 +53,37 @@
                     <span class="help-block" id="error"></span>    
                 </div>
             </div>
+            <script type="text/javascript">
+                $('#selSede').change(function(){
+                    var codigo_sede=$(this).find(':selected').data('codigo_sede');
+        
+                    $.ajax({
+                        url:"vicerrectorialist",
+                        type:"POST",
+                        data:"codigo_sede="+codigo_sede,
+                        async:true,
+                        success: function(message){
+                            $(".listVice").empty().append(message);
+                        }
+                    });
+                });
+            </script>
             <div class="col-sm-4">
-                    <div class="form-group p-3">
-                        <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
-                        <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>
-                    </div>
+                <div class="form-group p-3 listVice">
+                    <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
+                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <option value="0">Seleccione la sede..</option>
+                     
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
             <div class="col-sm-4">
-                    <div class="form-group p-3">
+                    <div class="form-group p-3 listFac">
                         <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
                         <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
+                            <option value="0">Seleccione Vicerrectoria</option>
+                            
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
@@ -140,51 +92,21 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group p-3">
+                <div class="form-group p-3 listDep">
                     <label for="textDependencia" class="font-weight-bold">Dependencia</label>
                     <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>       
+                        <option value="0">Seleccione la facultad</option>
+                       
+                    </select>
+                    <span class="help-block" id="error"></span>       
                 </div>
             </div>
             <div class="col-sm-6">
-                    <div class="form-group p-3">
-                        <label for="textTipoArea" class="font-weight-bold">Area</label>
+                    <div class="form-group p-3 listArea">
+                        <label for="selTipoArea" class="font-weight-bold">Area</label>
                         <select name="selTipoArea" id="selTipoArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
+                            <option value="0">Seleccione una Dependencia...</option>
+                        
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
@@ -386,6 +308,31 @@
         });
     }
 </script>
+
+<!-- #region <script type="text/javascript"> 
+    $('#selSede').change(function(){
+        var codigo_sede=$(this).find(':selected').data('codigosede');
+        var nombreVice=$(this).find(':selected').data('nombrevice');
+        //alert(codigo_nivelUno+'  '+nombreNivelDos);
+        if(codigo_sede==0){
+
+        }
+        else{
+        $.ajax({
+            url:"selectvice",
+            type:"POST",
+            data:"codigo_sede="+codigo_sede+'&nombreVice='+nombreVice,
+            async:true,
+
+            success: function(message){
+            //$(".modal-body").empty().append(message);
+            $("#selSede").empty().append(message);
+            }
+        });
+
+        }
+    });
+</script>    <-->
 
 
     
