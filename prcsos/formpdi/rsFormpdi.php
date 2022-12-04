@@ -8,20 +8,71 @@ Class RsFormpdi extends PlandeComprasPDI{
         $this->cnxion = Dtbs::getInstance();
     } 
 
-    public function list_formpdi(){
+    public function list_linea(){
 
-        $sql_list_formpdi = "SELECT ent_codigo, ent_nombre, 
-                                         ent_descripcion, ent_estado
-                                    FROM principal.entidad
-                                   WHERE ent_tipoentidad = 1;";
+        $sql_list_linea = "SELECT lin_codigo, lin_nombre, lin_estado
+                                FROM inventario.linea
+                                ORDER BY lin_nombre ASC;";
 
-        $resultado_list_formpdi = $this->cnxion->ejecutar($sql_list_formpdi);
+        $resultado_list_linea = $this->cnxion->ejecutar($sql_list_linea);
 
-        while ($data_list_formpdi = $this->cnxion->obtener_filas($resultado_list_formpdi)){
-            $datalist_formpdi[] = $data_list_formpdi;
+        while ($data_list_linea = $this->cnxion->obtener_filas($resultado_list_linea)){
+            $datalist_linea[] = $data_list_linea;
         }
-        return $datalist_formpdi;
+        return $datalist_linea;
     }
+
+    public function list_sublinea($codigo_linea){
+
+        $sql_list_sublinea = "SELECT slin_codigo, slin_linea, slin_nombre, slin_estado
+                                FROM inventario.sub_linea
+                               WHERE slin_linea = $codigo_linea
+                                ORDER BY slin_nombre ASC;";
+
+        $resultado_list_sublinea = $this->cnxion->ejecutar($sql_list_sublinea);
+
+        while ($data_list_sublinea = $this->cnxion->obtener_filas($resultado_list_sublinea)){
+            $datalist_sublinea[] = $data_list_sublinea;
+        }
+        return $datalist_sublinea;
+    }
+
+    public function list_equipo($codigo_sublinea){
+
+        $sql_list_equipo = "SELECT slin_codigo, equi_codigo, equi_nombre
+                                FROM inventario.sub_linea
+                                INNER JOIN inventario.equipo ON slin_codigo = equi_sublinea
+                                WHERE slin_codigo = $codigo_sublinea
+                                ORDER BY equi_nombre ASC;";
+
+        $resultado_list_equipo = $this->cnxion->ejecutar($sql_list_equipo);
+
+        while ($data_list_equipo = $this->cnxion->obtener_filas($resultado_list_equipo)){
+            $datalist_equipo[] = $data_list_equipo;
+        }
+        return $datalist_equipo;
+    }
+
+
+    public function list_caracteristicas($codigo_equipo){
+
+        $sql_list_caracteristicas = "SELECT equi_codigo, equi_sublinea, equi_nombre,
+                                            deq_descripcion, deq_valor, deq_codigo,
+                                            deq_valor
+                                        FROM inventario.equipo
+                                        INNER JOIN inventario.descripcion_equipo ON deq_equipo = equi_codigo
+                                        WHERE deq_estado = 1
+                                        AND deq_equipo = $codigo_equipo
+                                        ORDER BY deq_descripcion ASC;";
+
+        $resultado_list_caracteristicas = $this->cnxion->ejecutar($sql_list_caracteristicas);
+
+        while ($data_list_caracteristicas = $this->cnxion->obtener_filas($resultado_list_caracteristicas)){
+            $datalist_caracteristicas[] = $data_list_caracteristicas;
+        }
+        return $datalist_caracteristicas;
+    }
+
 
     public function datFormpdi(){
         
@@ -57,18 +108,7 @@ Class RsFormpdi extends PlandeComprasPDI{
     }
 
    
-    public function form_PlandeComprasPDI($codigo_formpdi){
-        
-        $sql_form_formpdi = "SELECT ent_codigo, ent_nombre, ent_estado
-                                    FROM principal.entidad
-                                  WHERE ent_codigo = $codigo_formpdi;";
 
-        $resultado_form_formpdi = $this->cnxion->ejecutar($sql_form_formpdi);
-
-        ($data_form_formpdi = $this->cnxion->obtener_filas($resultado_form_formpdi));
-        $dataform_formpdi[] = $data_form_formpdi;
-        return $dataform_formpdi;
-    }
 
 }
 ?>
