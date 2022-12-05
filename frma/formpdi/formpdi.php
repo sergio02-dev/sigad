@@ -263,7 +263,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group p-3">
+                <div class=" p-3">
                     <label for="textPlantaFisica" class="font-weight-bold">Caracteristicas Planta Fisica </label> <i class="fas fa-info-circle" style="color: #BB0900"></i>
                     <textarea type="text" class="form-control caja_texto_sizer" id="inputPlantaFisica" name="inputPlantaFisica" aria-describedby="textHelp" data-rule-required="true" ></textarea>
                     <span class="help-block" id="error"></span>
