@@ -206,34 +206,10 @@
                     
                 <div class="form-group p-3">
                     <label for="textTipoGasto" class="font-weight-bold">Tipo de gasto</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="PDI" data-rule-required="true" disabled>   
+                    <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="FUNCIONAMIENTO" data-rule-required="true" disabled>   
                 </div>
             </div>
-            <div class="col-sm-4">
-                    <div class="form-group p-3">
-                        <label for="textCodigoPDI" class="font-weight-bold"> Codigo PDI</label>
-                        <select name="selCodigoPDI" id="selCodigoPDI" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>
-                    </div>
-            </div>
+            
             <div class="col-sm-4">
                     <div class="form-group p-3">
                         <label for="textAccion" class="font-weight-bold"> Accion</label>
