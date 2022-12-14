@@ -3,6 +3,5 @@
 
     $objFormpdi = new RsFormpdi();
 
-    //HOLA
-
+    
 ?>

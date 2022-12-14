@@ -8,6 +8,20 @@ Class RsFormpdi extends PlandeComprasPDI{
         $this->cnxion = Dtbs::getInstance();
     } 
 
+    public function list_sedes(){
+
+        $sql_list_sedes = "SELECT sed_codigo, sed_nombre, sed_estado
+                            FROM principal.sedes
+                            ORDER BY sed_nombre ASC;";
+
+        $resultado_list_sedes = $this->cnxion->ejecutar($sql_list_sedes);
+
+        while ($data_list_sedes = $this->cnxion->obtener_filas($resultado_list_sedes)){
+            $datalist_sedes[] = $data_list_sedes;
+        }
+        return $datalist_sedes;
+    }
+
     public function list_linea(){
 
         $sql_list_linea = "SELECT lin_codigo, lin_nombre, lin_estado
