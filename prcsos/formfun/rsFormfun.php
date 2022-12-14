@@ -22,6 +22,20 @@ Class RsFuncionamiento extends Funcionamiento{
         return $datalist_sedes;
     }
 
+    public function list_linea(){
+
+        $sql_list_linea = "SELECT lin_codigo, lin_nombre, lin_estado
+                                FROM inventario.linea
+                                ORDER BY lin_nombre ASC;";
+
+        $resultado_list_linea = $this->cnxion->ejecutar($sql_list_linea);
+
+        while ($data_list_linea = $this->cnxion->obtener_filas($resultado_list_linea)){
+            $datalist_linea[] = $data_list_linea;
+        }
+        return $datalist_linea;
+    }
+
     public function list_vicerrectoria($codigo_sede){
 
         $sql_list_vicerrectoria = "SELECT DISTINCT ent_codigo, ent_nombre

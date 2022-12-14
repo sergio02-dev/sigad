@@ -27,7 +27,7 @@
         var codigo_sede=$(this).find(':selected').data('codigo_sede');
         var codigo_facultad=$(this).find(':selected').data('codigo_facultad');
         var codigo_dependencia=$(this).find(':selected').data('codigo_dependencia');
-         alert(codigo_dependencia)
+        
 
 
         $.ajax({

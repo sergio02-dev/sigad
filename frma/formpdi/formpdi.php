@@ -15,6 +15,7 @@
     $codigo_formpdi = $_REQUEST['codigo_formpdi'];
 
     $list_linea = $objFormpdi->list_linea();
+    $list_sedes = $objFormpdi->list_sedes(); 
     
    
 
@@ -64,25 +65,17 @@
     <div class= "border"> 
         <div class="row " >
             
-            <div class="col-sm-4" >
-                    
+        <div class="col-sm-4" >
                 <div class="form-group p-3">
                     <label for="selSede" class="font-weight-bold">Sede</label>
                     <select name="selSede" id="selSede" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
+                            <option value="0" data-codigo_sede="0">Seleccione...</option>
                             <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
+                                foreach ($list_sedes as $dat_sede) {
+                                    $sed_codigo = $dat_sede['sed_codigo'];
+                                    $sed_nombre = $dat_sede['sed_nombre'];
                             ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                                <option value="<?php echo  $sed_codigo; ?>" data-codigo_sede="<?php echo  $sed_codigo; ?>"><?php echo $sed_nombre; ?></option>
                             <?php
                                 }
                             ?>
@@ -90,52 +83,37 @@
                     <span class="help-block" id="error"></span>    
                 </div>
             </div>
-            <div class="col-sm-4">
-                    <div class="form-group p-3">
-                        <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
-                        <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>
-                    </div>
+            <script type="text/javascript">
+                $('#selSede').change(function(){
+                    var codigo_sede=$(this).find(':selected').data('codigo_sede');
+        
+                    $.ajax({
+                        url:"vicerrectorialist",
+                        type:"POST",
+                        data:"codigo_sede="+codigo_sede,
+                        async:true,
+                        success: function(message){
+                            $(".listVice").empty().append(message);
+                        }
+                    });
+                });
+            </script>
+             <div class="col-sm-4">
+                <div class="form-group p-3 listVice">
+                    <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
+                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <option value="0">Seleccione la sede..</option>
+                     
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
             <div class="col-sm-4">
-                    <div class="form-group p-3">
+                    <div class="form-group p-3 listFac">
                         <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
                         <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
+                            <option value="0">Seleccione Vicerrectoria</option>
+                            
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
@@ -144,51 +122,21 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group p-3">
+                <div class="form-group p-3 listDep">
                     <label for="textDependencia" class="font-weight-bold">Dependencia</label>
                     <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>       
+                        <option value="0">Seleccione la facultad</option>
+                       
+                    </select>
+                    <span class="help-block" id="error"></span>       
                 </div>
             </div>
             <div class="col-sm-6">
-                    <div class="form-group p-3">
-                        <label for="textTipoArea" class="font-weight-bold">Area</label>
+                    <div class="form-group p-3 listArea">
+                        <label for="selTipoArea" class="font-weight-bold">Area</label>
                         <select name="selTipoArea" id="selTipoArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
+                            <option value="0">Seleccione una Dependencia...</option>
+                        
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
@@ -206,7 +154,7 @@
                     
                 <div class="form-group p-3">
                     <label for="textTipoGasto" class="font-weight-bold">Tipo de gasto</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="FUNCIONAMIENTO" data-rule-required="true" disabled>   
+                    <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="PDI" data-rule-required="true" disabled>   
                 </div>
             </div>
             
@@ -284,7 +232,7 @@
                         <span class="help-block" id="error"></span>
                     </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                     <div class="form-group pt-3 pl-1 equipo">
                         <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
                         <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
@@ -293,7 +241,7 @@
                         <span class="help-block" id="error"></span>
                     </div>
             </div>
-           <div class="col-sm-1 pt-5 pl-auto">
+           <div class="col-sm-2 pt-5">
                 <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
            </div> 
         </div>

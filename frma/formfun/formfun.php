@@ -5,7 +5,7 @@
     $codigo_formfun = $_REQUEST['codigo_formfun'];
 
     $list_sedes = $objRsFuncionamiento->list_sedes(); 
-   
+    $list_linea = $objRsFuncionamiento->list_linea(); 
     
    
 ?>
@@ -136,120 +136,65 @@
     <div class= "border"> 
         <div class="row " >
             
-            <div class="col-sm-4" >
+                <div class="col-sm-4" >
                     
-                <div class="form-group p-3">
-                    <label for="textLineaEquipo" class="font-weight-bold">Linea de equipo</label>
-                    <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>    
-                </div>
-            </div>
-            <div class="col-sm-3">
                     <div class="form-group p-3">
+                        <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
+                        <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                <option value="0" data-codigo_linea="0">Seleccione la linea</option>
+                                <?php
+                                    foreach ($list_linea as $data_listlinea) {
+                                        $lin_codigo=$data_listlinea['lin_codigo'];
+                                        $lin_nombre=$data_listlinea['lin_nombre'];
+    
+                                   
+                                ?>
+                                    <option value="<?php echo  $lin_codigo; ?>" data-codigo_linea="<?php echo $lin_codigo; ?>"><?php echo $lin_nombre; ?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                            <span class="help-block" id="error"></span>    
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group p-3 subLinea">
                         <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
+                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                            <option value="0">Seleccione la sublinea</option>
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
-            </div>
-            <div class="col-sm-4">
-                    <div class="form-group pt-3 pl-1">
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group pt-3 pl-1 equipo">
                         <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
-                        <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
-            </div>
-           <div class="col-sm-1 pt-5 pl-auto">
-                <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
-           </div> 
+                </div>
+                <div class="col-sm-2 pt-5">
+                    <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
+                </div>  
         </div>
 
         <div class="row">
-            <div class="col-sm-5">
-                <div class="form-group p-3">
-                    <label for="textCaracteristicas" class="font-weight-bold">Caracteristicas</label>
-                    <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                            <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
-
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
-                            ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>       
+            <div class="col-sm-12">
+                <div class="form-group p-3 caracteristicas">
+                    <label for="selCaracteristicas" class="font-weight-bold">Caracteristicas</label>
+                    <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                    </select>
+                    <span class="help-block" id="error"></span>       
                 </div>
             </div>
-            <div class="col-sm-2">
-                    <div class="form-group p-3">
-                        <label for="selCantidad" class="font-weight-bold">Cantidad</label>
-                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                        <span class="help-block" id="error"></span>
-                    </div>
-            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 caracteristicasNombre"></div>
+        </div>
+        <div class="row">
             <div class="col-sm-5">
                     <div class="form-group p-3">
                         <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
@@ -257,17 +202,22 @@
                                 
                     </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="col-sm-3">
+                    <div class="form-group p-3">
+                        <label for="selCantidad" class="font-weight-bold">Cantidad</label>
+                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <span class="help-block" id="error"></span>
+                    </div>
+            </div>
             <div class="col-sm-4">
                     <div class="form-group p-3">
                         <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
-                        <input type="number" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="true" disabled>
+                        <input type="number" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="true">
                     </div>
             </div>
         </div>
         <div class="m-0 row justify-content-center">
-            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
+            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formpdi();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
         </div>
 
         <div class="row">
@@ -291,6 +241,30 @@
 <script src="vjs/formfun/vldar_formfun.js"></script>
 
 <script>
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
+    });
+    $('#selLineaEquipo').change(function(){
+        var codigo_linea = $(this).find(':selected').data('codigo_linea');
+       
+        if(codigo_linea==0){
+
+        }
+        else{
+            $.ajax({
+                url:"sublinea",
+                type:"POST",
+                data:"codigo_linea="+codigo_linea,
+                async:true,
+
+                success: function(message){
+                    $(".subLinea").empty().append(message);
+                }
+            });
+        }
+    });
+
     function agregarEquipo(){
 
         $('#frmModal').modal({
