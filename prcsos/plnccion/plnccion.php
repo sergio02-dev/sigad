@@ -640,12 +640,9 @@
 
         public function nombre_sede($codigo_sede){
             
-            $sql_nombre_sede="SELECT ind_codigo, ind_sede,
-                                     sed_nombre
-                                FROM plandesarrollo.indicador,
-                                     principal.sedes
-                               WHERE ind_sede = sed_codigo
-                                 AND ind_codigo = $codigo_sede;";
+            $sql_nombre_sede="SELECT sed_codigo, sed_nombre
+                                FROM principal.sedes
+                               WHERE sed_codigo = $codigo_sede;";
 
             $resultado_nombre_sede=$this->cnxion->ejecutar($sql_nombre_sede);
 

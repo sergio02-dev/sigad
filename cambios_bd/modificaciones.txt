@@ -1,0 +1,99 @@
+agregar campo  tabla usco.oficina nombre campo: ofi_codigousco type: bigint
+
+agregar campo  tabla principal.entidad nombre campo: ent_tipoentidad type: bigint
+actualizar información entidad 
+
+
+Crear tablas 
+
+CREATE TABLE principal.tipo_entidad
+(
+    ten_codigo bigint NOT NULL,
+    ten_nombre character varying(150) COLLATE pg_catalog."default",
+    ten_estado integer,
+    CONSTRAINT tipo_entidad_pkey PRIMARY KEY (ten_codigo)
+);
+
+CREATE TABLE usco.areas
+(
+    are_codigo bigint NOT NULL,
+    are_nombre character varying(250) COLLATE pg_catalog."default",
+    are_estado integer,
+    are_fechacreo timestamp without time zone,
+    are_fechamodifico timestamp without time zone,
+    are_personacreo bigint,
+    are_personamodifico bigint,
+    are_codctic bigint,
+    CONSTRAINT pk_area PRIMARY KEY (are_codigo)
+);
+CREATE TABLE usco.organigrama_usco
+(
+    org_codigo bigint NOT NULL,
+    org_sede bigint,
+    org_vicerrectoria bigint,
+    org_facultades bigint,
+    org_dependencias bigint,
+    org_areas bigint,
+    org_fechacreacion timestamp without time zone,
+    org_fechamodifico timestamp without time zone,
+    org_personacreo bigint,
+    org_personamodifico bigint,
+    CONSTRAINT pk_organigrama PRIMARY KEY (org_codigo)
+);
+CREATE SCHEMA inventario;
+
+CREATE TABLE inventario.linea
+(
+    lin_codigo bigint NOT NULL,
+    lin_nombre text,
+    lin_estado integer,
+    lin_fechacreo timestamp without time zone,
+    lin_fechamodifico timestamp without time zone,
+    lin_personacreo bigint,
+    lin_personamodifico bigint,
+    lin_codigoctic bigint,
+    CONSTRAINT pk_linea PRIMARY KEY (lin_codigo)
+);
+
+CREATE TABLE inventario.sub_linea
+(
+    slin_codigo bigint NOT NULL,
+    slin_linea bigint,
+    slin_nombre text,
+    slin_estado integer,
+    slin_fechacreo timestamp without time zone,
+    slin_fechamodifico timestamp without time zone,
+    slin_personacreo bigint,
+    slin_personamodifico bigint,
+    slin_codigoctic bigint,
+    CONSTRAINT pk_sublinea PRIMARY KEY (slin_codigo)
+);
+
+CREATE TABLE inventario.equipo
+(
+    equi_codigo bigint NOT NULL,
+    equi_sublinea bigint,
+    equi_nombre text,
+    equi_estado integer,
+    equi_fechacreo timestamp without time zone,
+    equi_fechamodifico timestamp without time zone,
+    equi_personacreo bigint,
+    equi_personamodifico bigint,
+    equi_codigoctic bigint,
+    CONSTRAINT pk_equipo PRIMARY KEY (equi_codigo)
+);
+
+CREATE TABLE inventario.descripcion_equipo
+(
+    deq_codigo bigint NOT NULL,
+    deq_equipo bigint,
+    deq_descripcion text,
+    deq_valor numeric,
+    deq_estado integer,
+    deq_fechacreo timestamp without time zone,
+    deq_fechamodifico timestamp without time zone,
+    deq_personacreo bigint,
+    deq_personamodifico bigint,
+    deq_codigoctic bigint,
+    CONSTRAINT pk_descripcionequipo PRIMARY KEY (deq_codigo)
+);

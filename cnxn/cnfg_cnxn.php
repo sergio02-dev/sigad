@@ -12,7 +12,7 @@
     $password='123456';
 
     //Base de datos a utilizar
-    $db='sigadusco2021';
+    $db='sigad_local';
     //$db='sigad';
 
 

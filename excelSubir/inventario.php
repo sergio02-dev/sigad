@@ -3,84 +3,111 @@
 set_time_limit(1800000000000);
 ini_set('memory_limit', '-1');
 
-
 require '../cnxn/cnfg_db.php';
 
 require '../cnxn/cnf_class.php';
 
 $cnxn_pag = Dtbs::getInstance();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-?>
-
-<?php
+function tildes($palabra){
+    $no_admitidas = array("á","é","í","ó","ú","ñ");
+    $admitidas = array("Á", "É", "Í", "Ó", "Ú", "Ñ");
+    $texto = str_replace($no_admitidas, $admitidas ,$palabra);
+    return $texto;
+}
 
 require_once '../Classes/PHPExcel.php';
 
-$archivo = "organigrama/carga_masiva.xlsx";
+$archivo = "organigrama/inventario_sigad.xlsx";
 $inputFileType = PHPExcel_IOFactory::identify($archivo);
 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
 $objPHPExcel = $objReader->load($archivo);
 $sheet = $objPHPExcel->getSheet(0);
 $highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
-$registro=61;
-$codigo_organigrama=1;
 
 for ($row = 2; $row <= $highestRow; $row++){
-    $sedes = $sheet->getCell("B".$row)->getValue();
-    $vicerrectorias = $sheet->getCell("D".$row)->getValue();
-    $facultades = $sheet->getCell("F".$row)->getValue();
-    $nombre_dependencia = $sheet->getCell("G".$row)->getValue();
-    $dependencias = $sheet->getCell("H".$row)->getValue();
-    $areas = $sheet->getCell("J".$row)->getValue();
+    $codigo_linea = $sheet->getCell("A".$row)->getValue();
+    $nombre_linea = strtoupper(tildes($sheet->getCell("B".$row)->getValue()));
+    $codigo_sublinea = $sheet->getCell("C".$row)->getValue();
+    $nombre_sublinea = strtoupper(tildes($sheet->getCell("D".$row)->getValue()));
+    $codigo_equipo = $sheet->getCell("E".$row)->getValue();
+    $nombre_equipo = strtoupper(tildes($sheet->getCell("F".$row)->getValue()));
+    $codigo_descripcion = $sheet->getCell("G".$row)->getValue();
+    $descripcion_equipo = strtoupper(tildes($sheet->getCell("H".$row)->getValue()));
+    $valor_descripcion = $sheet->getCell("I".$row)->getValue();
 
-    if($dependencias == 0){
-        $sqlDependencia = "SELECT MAX(ofi_codigo) AS maximo
-                             FROM usco.oficina;";
+    $sqlValidarLinea = "SELECT lin_codigo, lin_nombre, lin_estado
+                          FROM inventario.linea
+                         WHERE lin_codigo = $codigo_linea;";
 
-        $queryDependencia = $cnxn_pag->ejecutar($sqlDependencia);
-        $dataDependencia = $cnxn_pag->obtener_filas($queryDependencia);
+    $queryValidarLinea = $cnxn_pag->ejecutar($sqlValidarLinea);
+    $dataValidarLinea = $cnxn_pag->obtener_filas($queryValidarLinea);
 
-        $maximo = $dataDependencia['maximo'];
+    $lin_codigo = $dataValidarLinea['lin_codigo'];
 
-        $codigo_dependencia = $maximo+1;
+    if($lin_codigo == ''){
+        $sql_linea = "INSERT INTO inventario.linea(
+                                  lin_codigo, lin_nombre, lin_estado, lin_fechacreo, lin_fechamodifico, lin_personacreo, lin_personamodifico, lin_codigoctic)
+                          VALUES ($codigo_linea, '$nombre_linea', 1, NOW(), NOW(), 1, 1, 0);";
 
-        $sql_registro_dependencia = "INSERT INTO usco.oficina(
-                                                 ofi_codigo, ofi_nombre, 
-                                                 ofi_estado, ofi_fechacreo, 
-                                                 ofi_fechamodifico, ofi_personacreo, 
-                                                 ofi_personamodifico, ofi_codigousco)
-                                         VALUES ($codigo_dependencia, '$nombre_dependencia', 
-                                                 1, NOW(), 
-                                                 NOW(), 1, 
-                                                 1, 0);";
+        $cnxn_pag->ejecutar($sql_linea);
+    }
 
-        $cnxn_pag->ejecutar($sql_registro_dependencia);
+    $sqlValidarSubLinea = "SELECT slin_codigo, slin_linea, slin_nombre 
+                             FROM inventario.sub_linea
+                            WHERE slin_codigo =  $codigo_sublinea;";
 
+    $queryValidarSubLinea = $cnxn_pag->ejecutar($sqlValidarSubLinea);
+    $dataValidarSubLinea = $cnxn_pag->obtener_filas($queryValidarSubLinea);
+
+    $slin_codigo = $dataValidarSubLinea['slin_codigo'];
+
+    if($slin_codigo == ''){
+        $sql_sublinea = "INSERT INTO inventario.sub_linea(
+                                     slin_codigo, slin_linea, slin_nombre, slin_estado, slin_fechacreo, slin_fechamodifico, slin_personacreo, slin_personamodifico, slin_codigoctic)
+                             VALUES ($codigo_sublinea, $codigo_linea, '$nombre_sublinea', 1, NOW(), NOW(), 1, 1, 0);";
+
+        $cnxn_pag->ejecutar($sql_sublinea);       
+    }
+
+    $sqlValidarEquipo = "SELECT equi_codigo, equi_sublinea, equi_nombre 
+                           FROM inventario.equipo
+                          WHERE equi_codigo = $codigo_equipo;";
+
+    $queryValidarEquipo = $cnxn_pag->ejecutar($sqlValidarEquipo);
+    $dataValidarEquipo = $cnxn_pag->obtener_filas($queryValidarEquipo);
+
+    $equi_codigo = $dataValidarEquipo['equi_codigo'];
+
+    if($equi_codigo == ''){
+        $sql_equipo = "INSERT INTO inventario.equipo(
+                                   equi_codigo, equi_sublinea, equi_nombre, equi_estado, equi_fechacreo, equi_fechamodifico, equi_personacreo, equi_personamodifico, equi_codigoctic)
+                           VALUES ($codigo_equipo, $codigo_sublinea, '$nombre_equipo', 1, NOW(), NOW(), 1, 1, 0);";
+        
+        $cnxn_pag->ejecutar($sql_equipo);
+    }
+
+    $sqlCodigoDescripcion = "SELECT MAX(deq_codigo) AS maximodes
+	                           FROM inventario.descripcion_equipo;";
+
+    $queryCodigoDescripcion = $cnxn_pag->ejecutar($sqlCodigoDescripcion);
+    $dataCodigoDescripcion = $cnxn_pag->obtener_filas($queryCodigoDescripcion);
+
+    $maximodes = $dataCodigoDescripcion['maximodes'];
+
+    if($maximodes){
+        $codigo_descripcion = $maximodes+1;
     }
     else{
-        $codigo_dependencia = $dependencias;
+        $codigo_descripcion = 1;
     }
 
-    $sql_organigrama="INSERT INTO usco.organigrama_usco(
-                                  org_codigo, org_sede, 
-                                  org_vicerrectoria, org_facultades, 
-                                  org_dependencias, org_areas, 
-                                  org_fechacreacion, org_fechamodifico, 
-                                  org_personacreo, org_personamodifico)
-                          VALUES ($codigo_organigrama, $sedes, 
-                                  $vicerrectorias, $facultades, 
-                                  $codigo_dependencia, $areas, 
-                                  NOW(), NOW(), 
-                                  1, 1);";
+    $sql_descripcion = "INSERT INTO inventario.descripcion_equipo(
+                                    deq_codigo, deq_equipo, deq_descripcion, deq_valor, deq_estado, deq_fechacreo, deq_fechamodifico, deq_personacreo, deq_personamodifico, deq_codigoctic)
+                            VALUES ($codigo_descripcion, $codigo_equipo, '$descripcion_equipo', $valor_descripcion, 1, NOW(), NOW(), 1, 1, 0);";
 
-    $cnxn_pag->ejecutar($sql_organigrama);
+    $cnxn_pag->ejecutar($sql_descripcion);
 
-    $codigo_organigrama++;
-    $registro++;
 }
 ?>
