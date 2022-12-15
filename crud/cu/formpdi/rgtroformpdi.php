@@ -4,17 +4,18 @@
     $personaSistema = $_SESSION['idusuario'];
     $selSede = $_REQUEST['selSede'];
     $selTipoVicerrectoria = $_REQUEST['selTipoVicerrectoria'];
-    $selTipoFacultad = $_SESSION['selTipoFacultad'];
+    $selTipoFacultad = $_REQUEST['selTipoFacultad'];
     $selDependencia= $_REQUEST['selDependencia'];
-    $selTipoArea= $_REQUEST['selTipoArea'];
-    $selCodigoPDI= $_SESSION['selCodigoPDI'];
-    $selTipoAccion = $_REQUEST['selTipoAccion'];
+    $selArea= $_REQUEST['selArea'];
+    $selAccion = $_REQUEST['selAccion'];
     $inputPlantaFisica = $_REQUEST['inputPlantaFisica'];
     $selLineaEquipo= $_REQUEST['selLineaEquipo'];
-    $selSublineaEquipo= $_SESSION['selSublineaEquipo'];
+    $selSublineaEquipo= $_REQUEST['selSublineaEquipo'];
     $selEquipo = $_REQUEST['selEquipo'];
     $selCaracteristicas = $_REQUEST['selCaracteristicas'];
     $selCantidad = $_REQUEST['selCantidad'];
+    $valor_unitario = $_REQUEST['valor_unitario'];
+
 
 
     $registroplancompraspdi = new RgstroFormpdi();
@@ -24,16 +25,16 @@
     $registroplancompraspdi->setVicerrectoria($selTipoVicerrectoria);
     $registroplancompraspdi->setFacultad($selTipoFacultad);
     $registroplancompraspdi->setDependencia($selDependencia);
-    $registroplancompraspdi->setArea($selTipoArea);
-    $registroplancompraspdi->setCodigopdi($selCodigoPDI);
-    $registroplancompraspdi->setAccion($selTipoAccion);
+    $registroplancompraspdi->setArea($selArea);
+    $registroplancompraspdi->setAccion($selAccion);
     $registroplancompraspdi->setPlantafisica($inputPlantaFisica);
     $registroplancompraspdi->setLineaequipo($selLineaEquipo);
     $registroplancompraspdi->setSublineaequipo($selSublineaEquipo);
     $registroplancompraspdi->setEquipo($selEquipo);
     $registroplancompraspdi->setCaracteristicas($selCaracteristicas);
     $registroplancompraspdi->setCantidad($selCantidad);
+    $registroplancompraspdi->setValorunitario($valor_unitario);
 
 
-    echo $registroplancompras->insertPlanCompras();
+    echo $registroplancompraspdi->insertFormpdi()
 ?>

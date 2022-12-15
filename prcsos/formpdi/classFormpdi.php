@@ -11,8 +11,6 @@ Class PlandeComprasPDI{
     private $facultad;
     private $dependencia;
     private $area;
-    private $tipogasto;
-    private $codigopdi;
     private $accion;
     private $plantafisica;
     private $lineaequipo;
@@ -21,8 +19,8 @@ Class PlandeComprasPDI{
     private $caracteristicas;
     private $cantidad;
     private $valorunitario;
-    private $valortotal;
-    private $personaSistema;
+	private $personaSistema;
+	
     
 
     public function getPersonaSistema(){
@@ -41,15 +39,6 @@ Class PlandeComprasPDI{
         $this->plantafisica = $plantafisica;
 	}
 
-	
-	public function getValortotal() {
-		return $this->valortotal;
-	}
-	
-
-	public function setValortotal($valortotal){
-		$this->valortotal = $valortotal;
-	}
 
 	public function getVicerrectoria() {
 		return $this->vicerrectoria;
@@ -81,25 +70,6 @@ Class PlandeComprasPDI{
 	
 	public function setArea($area) {
 		$this->area = $area;
-	}
-
-	public function getTipogasto() {
-		return $this->tipogasto;
-	}
-	
-
-	public function setTipogasto($tipogasto){
-		$this->tipogasto = $tipogasto;
-
-	}
-
-	public function getCodigopdi() {
-		return $this->codigopdi;
-	}
-
-	public function setCodigopdi($codigopdi){
-		$this->codigopdi = $codigopdi;
-
 	}
 
 	public function getAccion() {
@@ -183,5 +153,6 @@ Class PlandeComprasPDI{
 		$this->caracteristicas = $caracteristicas;
 	
 	}
+
 }
 ?>

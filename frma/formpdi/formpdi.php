@@ -15,9 +15,10 @@
     $codigo_formpdi = $_REQUEST['codigo_formpdi'];
 
     $list_linea = $objFormpdi->list_linea();
-    $list_sedes = $objFormpdi->list_sedes(); 
-    
-   
+    $list_sedes = $objFormpdi->list_sedes();
+    $list_proyecto = $objFormpdi->list_proyecto();
+    $cantidad = 0;
+    $valor_uni = 0;
 
     if($codigo_dependencia){
         $url_guardar="modificardependencia";
@@ -50,7 +51,8 @@
 
     $capa_direccion = "#dtaFormpdi";
     $url_direccion = "dtaformpdi";
-    
+
+
 ?>
 
 
@@ -133,8 +135,8 @@
             </div>
             <div class="col-sm-6">
                     <div class="form-group p-3 listArea">
-                        <label for="selTipoArea" class="font-weight-bold">Area</label>
-                        <select name="selTipoArea" id="selTipoArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <label for="selArea" class="font-weight-bold">Area</label>
+                        <select name="selArea" id="selArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
                             <option value="0">Seleccione una Dependencia...</option>
                         
                         </select>
@@ -157,25 +159,23 @@
                     <input type="text" class="form-control caja_texto_sizer" id="textTipoGasto" name="textTipoGasto" aria-describedby="textHelp" value="PDI" data-rule-required="true" disabled>   
                 </div>
             </div>
-            
-            <div class="col-sm-4">
+        </div>
+        <div class="row">  
+            <div class="col-sm-12">
                     <div class="form-group p-3">
-                        <label for="textAccion" class="font-weight-bold"> Accion</label>
-                        <select name="selTipoAccion" id="selTipoAccion" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
+                        <label for="selProyecto" class="font-weight-bold"> Proyecto</label>
+                        <select name="selProyecto" id="selProyecto" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <option value="0" data-codigo_proyecto="0">Seleccione el proyecto</option>
                             <?php
-                                foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                                    $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                                    $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+                                foreach ($list_proyecto as $data_proyecto) {
+                                    $pro_codigo=$data_proyecto['pro_codigo'];
+                                    $pro_referencia=$data_proyecto['pro_referencia'];
+                                    $pro_descripcion = $data_proyecto['pro_descripcion'];
+                                    $pro_numero = $data_proyecto['pro_numero']
+                                    
 
-                                if($per_tipoidentificacion==$tid_codigo){
-                                    $select_tipoIdentificacion="selected";
-                                }
-                                else{
-                                    $select_tipoIdentificacion="";
-                                }
                             ?>
-                                <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                                <option value="<?php echo  $pro_referencia ?>"  data-codigo_proyecto="<?php echo $pro_codigo; ?>"><?php echo substr($pro_referencia.'.'.$pro_numero.' '.$pro_descripcion,0,200)."..."; ?></option>
                             <?php
                                 }
                             ?>
@@ -184,7 +184,18 @@
                     </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group p-3 Accion">
+                            <label for="selAccion" class="font-weight-bold"> Accion</label>
+                            <select name="selAccion" id="selAccion" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                                <option value="0">Seleccione...</option>
+                            </select>
+                            <span class="help-block" id="error"></span>
+                        </div>
+            </div>
+        </div>
+                                     
         <div class="row">
             <div class="col-sm-6">
                 <div class=" p-3">
@@ -202,7 +213,7 @@
     <div class= "border"> 
         <div class="row " >
             
-            <div class="col-sm-4" >
+            <div class="col-sm-6" >
                     
                 <div class="form-group p-3">
                     <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
@@ -223,27 +234,31 @@
                         <span class="help-block" id="error"></span>    
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                     <div class="form-group p-3 subLinea">
                         <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
                         <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0">Seleccione la sublinea</option>
+                            <option value="0" >Seleccione la sublinea</option>
                         </select>
                         <span class="help-block" id="error"></span>
                     </div>
             </div>
-            <div class="col-sm-3">
-                    <div class="form-group pt-3 pl-1 equipo">
-                        <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
-                        <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                        </select>
-                        <span class="help-block" id="error"></span>
-                    </div>
-            </div>
-           <div class="col-sm-2 pt-5">
-                <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
-           </div> 
+            
+        </div>
+        <div class ="row">
+            <div class="col-sm-10">
+                        <div class="form-group p-3 equipo">
+                            <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
+                            <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                <option value="0">Seleccione...</option>
+                            </select>
+                            <span class="help-block" id="error"></span>
+                        </div>
+                </div>
+            <div class="col-sm-2 pt-5">
+                    <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
+            </div> 
+
         </div>
 
         <div class="row">
@@ -265,21 +280,22 @@
             <div class="col-sm-5">
                     <div class="form-group p-3">
                         <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
-                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" disabled>
+                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
                                 
                     </div>
             </div>
             <div class="col-sm-3">
-                    <div class="form-group p-3">
+                    <div class="form-group p-3" >
                         <label for="selCantidad" class="font-weight-bold">Cantidad</label>
-                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer sma" data-rule-required="true" required aria-describedby="textHelp" value="<?php echo $cantidad;?>">
                         <span class="help-block" id="error"></span>
                     </div>
             </div>
             <div class="col-sm-4">
                     <div class="form-group p-3">
                         <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
-                        <input type="number" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="true">
+                        <input type="text" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="false" aria-describedby="textHelp" readonly>
+                        <span class="help-block" id="error"></span>
                     </div>
             </div>
         </div>
@@ -299,9 +315,9 @@
         <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_formpdi; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
          
-     
+        <input type="text" id="valor_unitario" name="valor_unitario" value="">
         
-    </div>
+    </div>  
 </form> 
                             
 <script src="js/jquery.validate.min.js"></script>
@@ -331,6 +347,42 @@
             });
         }
     });
+    $('#selProyecto').change(function(){
+        var codigo_proyecto = $(this).find(':selected').data('codigo_proyecto');
+       
+        if(codigo_proyecto==0){
+
+        }
+        else{
+            $.ajax({
+                url:"accion",
+                type:"POST",
+                data:"codigo_proyecto="+codigo_proyecto,
+                async:true,
+
+                success: function(message){
+                    $(".Accion").empty().append(message);
+                }
+            });
+        }
+    });
+
+    function numberWithCommas(formatoNumero) {
+        return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    $('.sma').change(function(){
+        var undades = $('#selCantidad').val();
+        var str = $('#selValorUnitario').val();
+        var valor_unidades = 0;
+
+        valor_unidades = str.toString().replace(/\./g,'');
+        
+        var total = undades * valor_unidades;
+
+        $('#selValorTotal').val(numberWithCommas(total));
+    });
+
 
 
 
