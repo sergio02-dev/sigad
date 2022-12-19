@@ -15,7 +15,7 @@
     $selCaracteristicas = $_REQUEST['selCaracteristicas'];
     $selCantidad = $_REQUEST['selCantidad'];
     $valor_unitario = $_REQUEST['valor_unitario'];
-
+    
 
 
     $registroplancompraspdi = new RgstroFormpdi();

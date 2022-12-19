@@ -2,212 +2,133 @@
 
     class Funcionamiento {
 
-        private $cnxion;
-        private $codigoForm;
-        private $estado;
+        private $codigo;
         private $sede;
         private $vicerrectoria;
         private $facultad;
         private $dependencia;
         private $area;
-        private $linea;
-        private $subLinea;
+        private $lineaequipo;
+        private $sublineaequipo;
         private $equipo;
-        private $descripcionEquipo;
+        private $caracteristicas;
         private $cantidad;
-        private $valorUnitario;
-        private $valorTotal;    
+        private $valorunitario;
         private $personaSistema;
    
         
-
-
-        function Funcionamiento(){}
-
+        public function getPersonaSistema(){
+                return $this->personaSistema;
+        } 
+        public function setPersonaSistema($personaSistema){
+                $this->personaSistema=$personaSistema;
+        }
         
-        public function getSede(){
-            return $this->sede;
-        }
-        public function setSede($sede){
-            $this->sede=$sede;
-        }
-       
-        public function getVicerrectoria()
-        {
+        
+        public function getVicerrectoria() {
                 return $this->vicerrectoria;
         }
-
-        public function setVicerrectoria($vicerrectoria)
-        {
+        
+        public function setVicerrectoria($vicerrectoria){
                 $this->vicerrectoria = $vicerrectoria;
-
-                return $this;
         }
 
-     
-        public function getFacultad()
-        {
+        public function getFacultad() {
                 return $this->facultad;
         }
-
-      
-        public function setFacultad($facultad)
-        {
+        
+        public function setFacultad($facultad){
                 $this->facultad = $facultad;
-
-                return $this;
         }
 
-  
-        public function getDependencia()
-        {
+        public function getDependencia() {
                 return $this->dependencia;
         }
-
-        public function setDependencia($dependencia)
-        {
+        
+        public function setDependencia($dependencia){
                 $this->dependencia = $dependencia;
 
-                return $this;
         }
-
-        public function getArea()
-        {
+        public function getArea() {
                 return $this->area;
         }
-
-       
-        public function setArea($area)
-        {
+        
+        public function setArea($area) {
                 $this->area = $area;
-
-                return $this;
         }
 
 
+        public function getCodigo() {
+                return $this->codigo;
+        }
         
-        public function getLinea()
-        {
-                return $this->linea;
+        public function setCodigo($codigo){
+                $this->codigo = $codigo;
+                
+        }
+        public function getSede() {
+                return $this->sede;
         }
 
+        public function setSede($sede){
+                $this->sede = $sede;
+        }
+
+        public function getLineaequipo() {
+                return $this->lineaequipo;
+        }
         
-        public function setLinea($linea)
-        {
-                $this->linea = $linea;
 
-                return $this;
+        public function setLineaequipo($lineaequipo){
+                $this->lineaequipo = $lineaequipo;
+
         }
-
+        public function getSublineaequipo() {
+                return $this->sublineaequipo;
+        }
         
-        public function getSubLinea()
-        {
-                return $this->subLinea;
+        public function setSublineaequipo($sublineaequipo){
+                $this->sublineaequipo = $sublineaequipo;
+
         }
 
-        
-        public function setSubLinea($subLinea)
-        {
-                $this->subLinea = $subLinea;
 
-                return $this;
-        }
-
-       
-        public function getEquipo()
-        {
+        public function getEquipo() {
                 return $this->equipo;
         }
-
-       
-        public function setEquipo($equipo)
-        {
+        
+        public function setEquipo($equipo){
                 $this->equipo = $equipo;
 
-                return $this;
         }
 
-        public function getDescripcionEquipo()
-        {
-                return $this->descripcionEquipo;
+        public function getCantidad() {
+                return $this->cantidad;
         }
+        
 
-       
-        public function setDescripcionEquipo($descripcionEquipo)
-        {
-                $this->descripcionEquipo = $descripcionEquipo;
+        public function setCantidad($cantidad) {
+                $this->cantidad = $cantidad;
 
-                return $this;
         }
+        public function getValorunitario() {
+            return $this->valorunitario;
+        }
+        
+        public function setValorunitario($valorunitario) {
+                $this->valorunitario = $valorunitario;
 
-    
-	
-	public function getCantidad() {
-		return $this->cantidad;
-	}
-	
-	
-	public function setCantidad($cantidad): self {
-		$this->cantidad = $cantidad;
-		return $this;
-	}
-
-	public function getValorUnitario() {
-		return $this->valorUnitario;
-	}
-	
-	
-	public function setValorUnitario($valorUnitario): self {
-		$this->valorUnitario = $valorUnitario;
-		return $this;
-	}
-
-	public function getValorTotal() {
-		return $this->valorTotal;
-	}
-	
-	
-	public function setValorTotal($valorTotal): self {
-		$this->valorTotal = $valorTotal;
-		return $this;
-	}
-
-	
-	public function getPersonaSistema() {
-		return $this->personaSistema;
-	}
-	
-	
-	public function setPersonaSistema($personaSistema): self {
-		$this->personaSistema = $personaSistema;
-		return $this;
-	}
+        }
 
         
-        public function getCodigoForm()
-        {
-                return $this->codigoForm;
+        public function getCaracteristicas() {
+                return $this->caracteristicas;
         }
+        
 
-        public function setCodigoForm($codigoForm)
-        {
-                $this->codigoForm = $codigoForm;
-
-                return $this;
-        }
-
-     
-        public function setEstado($estado)
-        {
-                $this->estado = $estado;
-
-                return $this;
-        }
-
-      
-        public function getEstado()
-        {
-                return $this->estado;
+        public function setCaracteristicas($caracteristicas){
+                $this->caracteristicas = $caracteristicas;
+        
         }
 
   

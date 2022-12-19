@@ -84,6 +84,7 @@ function validar_formpdi(){
                 data: $(form).serialize(),
                 success: function (data, status) {
 					$(capa_direccion).load(url_direccion);
+					
                 }
             });
 			

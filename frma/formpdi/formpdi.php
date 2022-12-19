@@ -315,7 +315,7 @@
         <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_formpdi; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
          
-        <input type="text" id="valor_unitario" name="valor_unitario" value="">
+        <input type="hidden" id="valor_unitario" name="valor_unitario" value="">
         
     </div>  
 </form> 

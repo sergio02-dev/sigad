@@ -5,7 +5,6 @@ function validar_formfun(){
 		rules: {
 			selCantidad:{
 				required: true,
-                max: maximo_admitido,
 			},
 			selSede:{
 				selectSede: true,
@@ -46,7 +45,6 @@ function validar_formfun(){
 			},
 			selCantidad:{
 				required:"Debe digitar este dato",
-                max: "Este valor sobre pasa el 100% del acumulado ",
 			},
 			
 			
@@ -71,8 +69,6 @@ function validar_formfun(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
-					$('#frmModal').modal('hide');
-					$('.modal-backdrop').remove();
 					$(capa_direccion).load(url_direccion);
                 }
             });
