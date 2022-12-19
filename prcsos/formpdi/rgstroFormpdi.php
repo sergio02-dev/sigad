@@ -3,7 +3,7 @@ include_once('classFormpdi.php');
 
 class RgstroFormpdi extends PlandeComprasPDI {
 
-    private $sql_entidad;
+    private $sql_insertformpdi;
     private $codigo_formpdi;
 
     public function __construct(){
@@ -13,29 +13,49 @@ class RgstroFormpdi extends PlandeComprasPDI {
 
     public function insertFormpdi(){
         
-        $sql_formpdi="INSERT INTO principal.entidad(
-                                                    ent_codigo,
-                                                    ent_nombre, 
-                                                    ent_descripcion, 
-                                                    ent_estado, 
-                                                    ent_fechacreo, 
-                                                    ent_fechamodifico, 
-                                                    ent_personacreo, 
-                                                    ent_personamodifico, 
-                                                    ent_tipoentidad)
-                                                VALUES (".$this->codigo_formpdi.",
-                                                        '".$this->getNombre()."',
-                                                        '',
-                                                        ".$this->getEstado().",
-                                                        NOW(),
-                                                        NOW(),
-                                                        ".$this->getPersonaSistema().",
-                                                        ".$this->getPersonaSistema().",
-                                                        1)";
+        $sql_insertformpdi="INSERT INTO usco.formulariopdi(
+                            pdi_codigo, 
+                            pdi_sede, 
+                            pdi_vicerrectoria, 
+                            pdi_facultad, 
+                            pdi_dependencia, 
+                            pdi_area,  
+                            pdi_accion, 
+                            pdi_plantafisica, 
+                            pdi_linea, 
+                            pdi_sublinea, 
+                            pdi_equipo, 
+                            pdi_equipodescripcion, 
+                            pdi_valorunitario, 
+                            pdi_cantidad, 
+                            pdi_fechacreo, 
+                            pdi_fechamodifico, 
+                            pdi_personacreo, 
+                            pdi_personamodifico,
+                            pdi_estado)
+                            VALUES (".$this->codigo_formpdi.",
+                                    ".$this->getSede().",
+                                    ".$this->getVicerrectoria().",
+                                    ".$this->getFacultad().",
+                                    ".$this->getDependencia().",
+                                    ".$this->getArea().",
+                                    ".$this->getAccion().",
+                                    '".$this->getPlantafisica()."',
+                                    ".$this->getLineaequipo().",
+                                    ".$this->getSublineaequipo().",
+                                    ".$this->getEquipo().",
+                                    ".$this->getCaracteristicas().",
+                                    ".$this->getValorunitario().",
+                                    ".$this->getCantidad().",
+                                    NOW(),
+                                    NOW(),
+                                    ".$this->getPersonaSistema().",
+                                    ".$this->getPersonaSistema().",
+                                      1)";
 
-        $this->cnxion->ejecutar($sql_formpdi);
+        $this->cnxion->ejecutar($sql_insertformpdi);
 
-        return $sql_formpdi;
+        return $sql_insertformpdi;
 
     }
 }

@@ -1,5 +1,5 @@
 function validar_formpdi(){
-	var maximo_admitido = parseFloat($('#maximo_admitido').val());
+	
 
 	$("#plancomprasPDIform").validate({
 		rules: {
@@ -10,7 +10,6 @@ function validar_formpdi(){
             },
 			selCantidad:{
 				required: true,
-                max: maximo_admitido,
 			},
 			selSede:{
 				selectSede: true,
@@ -60,7 +59,6 @@ function validar_formpdi(){
 			},
 			selCantidad:{
 				required:"Debe digitar este dato",
-                max: "Este valor sobre pasa el 100% del acumulado ",
 			},
 			
 			
@@ -85,9 +83,8 @@ function validar_formpdi(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
-					$('#frmModal').modal('hide');
-					$('.modal-backdrop').remove();
 					$(capa_direccion).load(url_direccion);
+					
                 }
             });
 			

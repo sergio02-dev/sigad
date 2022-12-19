@@ -22,7 +22,7 @@
             $select_equipo="";
         }
     ?>
-        <option value="<?php echo  $equi_codigo; ?>"data-codigo_equipo="<?php echo $equi_codigo; ?>"<?php echo $select_equipo; ?>><?php echo $equi_nombre; ?></option>
+        <option value="<?php echo  $equi_codigo; ?>"data-codigo_equipo="<?php echo $equi_codigo; ?>"><?php echo $select_equipo; ?><?php echo $equi_nombre; ?></option>
     <?php
         }
     ?>

@@ -38,5 +38,6 @@
         $('.caracteristicasNombre').html('<strong> <div class="col-sm-12 p-3"><label &nbsp;&nbsp;Descripcion: '+descripcion+" </div></p></strong>");
 
         $('#selValorUnitario').val(valor);
+        $('#valor_unitario').val(valor);
     });
 </script>
