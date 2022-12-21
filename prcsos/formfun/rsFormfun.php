@@ -131,5 +131,7 @@ Class RsFuncionamiento extends Funcionamiento{
         return $dataform_formfun;
     }
 
+
+    
 }
 ?>
