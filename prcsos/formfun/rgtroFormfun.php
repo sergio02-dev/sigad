@@ -15,7 +15,7 @@ class RgstroFormfun extends Funcionamiento{
     public function insertFormfun(){
         
         $sql_insert_formfun="INSERT INTO usco.funcionamiento(
-                                        fun_codgio, 
+                                        fun_codigo, 
                                         fun_sede, 
                                         fun_vicerrectoria, 
                                         fun_facultad, 
@@ -24,7 +24,7 @@ class RgstroFormfun extends Funcionamiento{
                                         fun_linea, 
                                         fun_sublinea, 
                                         fun_equipo, 
-                                        fun_euipodescripcion, 
+                                        fun_equipodescripcion, 
                                         fun_valorunitario, 
                                         fun_cantidad, 
                                         fun_fechacreo, 
