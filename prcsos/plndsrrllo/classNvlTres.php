@@ -15,6 +15,8 @@ class NivelTres{
     private $numero;
     private $codigoNivelDos;
     private $personaSistema;
+    private $planCompras;
+    private $plantaFisica;
        
 
     public function getCodigo(){
@@ -127,5 +129,22 @@ class NivelTres{
     public function setPersonaSistema($personaSistema){
         $this->personaSistema=$personaSistema;
     }
+
+    public function getPlanCompras(){
+        return $this->planCompras;
+    } 
+
+    public function setPlanCompras($planCompras){
+        $this->planCompras=$planCompras;
+    }
+
+    public function getPlantaFisica(){
+        return $this->plantaFisica;
+    } 
+    public function setPlantaFisica($plantaFisica){
+        $this->plantaFisica=$plantaFisica;
+    }
+
+
 }
 ?>

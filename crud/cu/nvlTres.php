@@ -21,7 +21,22 @@
     $selTendencia=$_REQUEST['selTendencia'];
     $selTipoComportamiento=$_REQUEST['selTipoComportamiento'];
     $selResponsable=$_REQUEST['selResponsable'];
+    $checkplandecompras = $_REQUEST['checkplandecompras'];
+    $checkplantafisica = $_REQUEST['checkplantafisica'];
 
+    if($checkplandecompras){
+        $plan_compras = $checkplandecompras;
+    }
+    else{
+        $plan_compras = 0;
+    }
+
+    if($checkplantafisica){
+        $planta_fisica = $checkplantafisica;
+    }
+    else{
+        $planta_fisica = 0;
+    }
 
     $registroNivelTres = new RgstroNvlTres();
     
@@ -36,6 +51,8 @@
     $registroNivelTres->setTendenciaPositiva($selTendencia);
     $registroNivelTres->setComportamiento($selTipoComportamiento);
     $registroNivelTres->setResponsable($selResponsable);
+    $registroNivelTres->setPlanCompras($plan_compras);
+    $registroNivelTres->setPlantaFisica($planta_fisica);
 
     echo $registroNivelTres->insertNivelTres();
 

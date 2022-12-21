@@ -17,6 +17,8 @@
     $txtNombre=$_REQUEST['txtNombre'];
     $actoAdministrativo=$_REQUEST['actoAdministrativo'];
     $selResponsable=$_REQUEST['selResponsable'];
+    $checkplandecompras = $_REQUEST['checkplandecompras'];
+    $checkplantafisica = $_REQUEST['checkplantafisica'];
     /*
     $txtLineaBase=$_REQUEST['txtLineaBase'];
     $txtMetaResultado=$_REQUEST['txtMetaResultado'];
@@ -27,6 +29,20 @@
     $numero=$_REQUEST['numero'];
 
 
+    if($checkplandecompras){
+        $plan_compras = $checkplandecompras;
+    }
+    else{
+        $plan_compras = 0;
+    }
+
+    if($checkplantafisica){
+        $planta_fisica = $checkplantafisica;
+    }
+    else{
+        $planta_fisica = 0;
+    }
+
     $updateNivelTres = new UpdateNvlTres();
     
     $updateNivelTres->setCodigo($codigoNivelTres);
@@ -36,6 +52,9 @@
     $updateNivelTres->setActoAdmin($actoAdministrativo);
     $updateNivelTres->setPersonaSistema($personaSistema);
     $updateNivelTres->setResponsable($selResponsable);
+    $updateNivelTres->setPlanCompras($plan_compras);
+    $updateNivelTres->setPlantaFisica($planta_fisica);
+
 
     /*$updateNivelTres->setLineaBase($txtLineaBase);
     $updateNivelTres->setTendenciaPositiva($selTendencia);

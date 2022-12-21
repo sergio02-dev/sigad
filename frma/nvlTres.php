@@ -183,16 +183,18 @@
             </select>
             <span class="help-block" id="error"></span>
         </div>-->
-        
+                
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="txtNombre" class="font-weight-bold">Descripci&oacute;n <?php echo $nombreNivelTres; ?>*</label>
                     <textarea class="form-control caja_texto_sizer" rows="5" id="txtNombre" name="txtNombre" data-rule-required="true" required><?php echo $acc_descripcion; ?></textarea>
                     <span class="help-block" id="error"></span>
+                    
                 </div>
             </div>
         </div>
+       
 
         <div class="row">
             <div class="col-sm-11">
@@ -222,6 +224,7 @@
                 </div>
             </div>
         </div>
+        
 
 
     <!-- ******************** FIN FORMULARIO ************************* -->
