@@ -70,7 +70,7 @@
         <div class="col-sm-4" >
                 <div class="form-group p-3">
                     <label for="selSede" class="font-weight-bold">Sede</label>
-                    <select name="selSede" id="selSede" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selSede" id="selSede" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0" data-codigo_sede="0">Seleccione...</option>
                             <?php
                                 foreach ($list_sedes as $dat_sede) {
@@ -103,7 +103,7 @@
              <div class="col-sm-4">
                 <div class="form-group p-3 listVice">
                     <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
-                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                         <option value="0">Seleccione la sede..</option>
                      
                     </select>
@@ -113,7 +113,7 @@
             <div class="col-sm-4">
                     <div class="form-group p-3 listFac">
                         <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
-                        <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0">Seleccione Vicerrectoria</option>
                             
                         </select>
@@ -126,7 +126,7 @@
             <div class="col-sm-6">
                 <div class="form-group p-3 listDep">
                     <label for="textDependencia" class="font-weight-bold">Dependencia</label>
-                    <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                         <option value="0">Seleccione la facultad</option>
                        
                     </select>
@@ -136,7 +136,7 @@
             <div class="col-sm-6">
                     <div class="form-group p-3 listArea">
                         <label for="selArea" class="font-weight-bold">Area</label>
-                        <select name="selArea" id="selArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <select name="selArea" id="selArea" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0">Seleccione una Dependencia...</option>
                         
                         </select>
@@ -164,7 +164,7 @@
             <div class="col-sm-12">
                     <div class="form-group p-3">
                         <label for="selProyecto" class="font-weight-bold"> Proyecto</label>
-                        <select name="selProyecto" id="selProyecto" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <select name="selProyecto" id="selProyecto" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0" data-codigo_proyecto="0">Seleccione el proyecto</option>
                             <?php
                                 foreach ($list_proyecto as $data_proyecto) {
@@ -188,7 +188,7 @@
             <div class="col-sm-12">
                 <div class="form-group p-3 Accion">
                             <label for="selAccion" class="font-weight-bold"> Accion</label>
-                            <select name="selAccion" id="selAccion" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                            <select name="selAccion" id="selAccion" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                                 <option value="0">Seleccione...</option>
                             </select>
                             <span class="help-block" id="error"></span>
@@ -322,8 +322,10 @@
                             
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/formpdi/vldar_formpdi.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+    
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1

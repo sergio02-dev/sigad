@@ -4,11 +4,13 @@ class RgstroNvlTres extends NivelTres{
 
     private $insert_nivelTres;
     private $codigoNivelTres;
-
+    private $insertPlanComprasAccion;
+    private $codigoPlandeComprasAccion;
 
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
         $this->codigoNivelTres=date('YmdHis').rand(99,99999);
+        $this->codigoPlandeComprasAccion=date('YmHis').rand(99,99999);
     }
 
     public function referenciaNivel(){
@@ -71,7 +73,34 @@ class RgstroNvlTres extends NivelTres{
         $this->cnxion->ejecutar($insert_nivelTres);
 
 
+        if($this->getPlanCompras() == 1){
+            $insertPlanComprasAccion = "INSERT INTO plandesarrollo.plan_compras_accion(
+                                                    pca_codigo, 
+                                                    pca_accion, 
+                                                    pca_plantafisica, 
+                                                    pca_estado, 
+                                                    pca_fechacreo, 
+                                                    pca_fechamodifico, 
+                                                    pca_personacreo, 
+                                                    pca_personamodifico)
+                                            VALUES (".$this->codigoPlandeComprasAccion.", 
+                                                    ".$this->codigoNivelTres.", 
+                                                    ".$this->getPlantaFisica().", 
+                                                    1, 
+                                                    NOW(), 
+                                                    NOW(), 
+                                                    ".$this->getPersonaSistema().", 
+                                                    ".$this->getPersonaSistema().");";
+
+            $this->cnxion->ejecutar($insertPlanComprasAccion);
+        }
+        else{
+
+        }
+
         return $insert_nivelTres;
     }
+
+
 }
 ?>

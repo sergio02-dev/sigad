@@ -3,7 +3,8 @@ include('classNvlTres.php');
 class UpdateNvlTres extends NivelTres{
 
     private $update_nivelTres;
-
+    private $update_PlanComprasAccion;
+    private $insert_PlanComprasAccion;
 
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
@@ -42,8 +43,40 @@ class UpdateNvlTres extends NivelTres{
 
         $this->cnxion->ejecutar($update_nivelTres);
 
+        
+        $update_PlanComprasAccion="UPDATE plandesarrollo.plan_compras_accion
+                                      SET pca_estado = 0, 
+                                          pca_fechamodifico=NOW(), 
+                                          pca_personamodifico=".$this->getPersonaSistema()."
+                                    WHERE pca_accion=".$this->getCodigo().";";
+        
+        $this->cnxion->ejecutar($update_PlanComprasAccion);
+
+        if($this->getPlanCompras() == 1){
+            $codigoPlandeComprasAccion=date('YmHis').rand(99,99999);
+            $insert_PlanComprasAccion = "INSERT INTO plandesarrollo.plan_compras_accion(
+                                                    pca_codigo,
+                                                    pca_accion, 
+                                                    pca_plantafisica, 
+                                                    pca_estado, 
+                                                    pca_fechamodifico, 
+                                                    pca_personamodifico)
+                                            VALUES (".$codigoPlandeComprasAccion.",
+                                                    ".$this->getCodigo().", 
+                                                    1, 
+                                                    1, 
+                                                    NOW(), 
+                                                    ".$this->getPersonaSistema().");";
+        
+           $this->cnxion->ejecutar($insert_PlanComprasAccion);                                         
+        }
+        else{
+
+        }
 
         return $update_nivelTres;
     }
+
+   
 }
 ?>

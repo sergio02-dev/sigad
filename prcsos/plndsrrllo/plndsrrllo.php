@@ -1238,5 +1238,21 @@ class PlnDsrrllo extends PlanDesarrollo{
         }
         return $datavigencia_pssai_plan;
     }
+
+    
+    public function plan_compras_accion($codigo_accion){
+
+        $sql_plan_compras_accion="SELECT pca_codigo, pca_accion, pca_plantafisica, pca_estado
+                                    FROM plandesarrollo.plan_compras_accion
+                                   WHERE pca_estado = 1
+                                     AND pca_accion = $codigo_accion;";
+
+        $query_plan_compras_accion = $this->cnxion->ejecutar($sql_plan_compras_accion);
+
+        while($data_plan_compras_accion=$this->cnxion->obtener_filas($query_plan_compras_accion)){
+            $dataplan_compras_accion[] = $data_plan_compras_accion;
+        }
+        return $dataplan_compras_accion;
+    }
 }
 ?>
