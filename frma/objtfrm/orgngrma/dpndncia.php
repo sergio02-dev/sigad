@@ -8,7 +8,7 @@
     $list_dependencia = $objRsFuncionamiento->list_dependencia($codigo_sede, $codigo_vicerrectoria, $codigo_facultad); 
 ?>
 <label for="selDependencia" class="font-weight-bold">Dependencia</label>
-<select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
+<select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
     <option value="0" data-codigo_dependencia="0" data-codigo_facultad="<?php echo $codigo_facultad; ?>" data-codigo_sede="<?php echo  $codigo_sede; ?>" data-codigo_vicerrectoria="<?php echo  $codigo_vicerrectoria; ?>">Seleccione...</option>
     <?php
         foreach ($list_dependencia as $dat_dependencia) {
@@ -22,6 +22,12 @@
 </select>
 <span class="help-block" id="error"></span>  
 <script type="text/javascript">
+
+
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
+    });
     $('#selDependencia').change(function(){
         var codigo_vicerrectoria=$(this).find(':selected').data('codigo_vicerrectoria');
         var codigo_sede=$(this).find(':selected').data('codigo_sede');

@@ -7,7 +7,7 @@
     $list_facultad = $objRsFuncionamiento->list_facultad($codigo_sede, $codigo_vicerrectoria); 
 ?>
 <label for="selTipoFacultad" class="font-weight-bold"> Facultad</label>
-<select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+<select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
     <option value="0" data-codigo_facultad="0" data-codigo_sede="<?php echo  $codigo_sede; ?>" data-codigo_vicerrectoria="<?php echo  $codigo_vicerrectoria; ?>">Seleccione...</option>
     <?php
         foreach ($list_facultad as $dat_fac) {
@@ -21,6 +21,11 @@
 </select>
 <span class="help-block" id="error"></span>
 <script type="text/javascript">
+
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
+    });
     $('#selTipoFacultad').change(function(){
         var codigo_vicerrectoria=$(this).find(':selected').data('codigo_vicerrectoria');
         var codigo_sede=$(this).find(':selected').data('codigo_sede');

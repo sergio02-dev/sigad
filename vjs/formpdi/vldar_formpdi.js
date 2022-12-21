@@ -83,6 +83,7 @@ function validar_formpdi(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
+					plancomprasPDIform.reset();
 					$(capa_direccion).load(url_direccion);
 					plancomprasPDIform.reset();
 						$('#selSede').selectpicker('val', '0');

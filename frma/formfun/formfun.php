@@ -1,5 +1,6 @@
 <?php
     include('crud/rs/formfun/formfun.php');
+    
 
     $visibilidad=$_SESSION['visibilidadBotones']; 
     $codigo_formfun = $_REQUEST['codigo_formfun'];
@@ -44,7 +45,7 @@
    
 ?>
 
-<!-- **********************          Inicio Modal Forma    *********************************** -->
+<!-- ********          Inicio Modal Forma    ************* -->
 <!-- Large modal -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -53,16 +54,17 @@
         </div>
     </div>
 </div>
-<!-- **********************          Fin Modal Forma       *********************************** -->
+<!-- ********          Fin Modal Forma       ************* -->
 
 
 
 
 
 
-<!-- ******************** INICIO FORMULARIO ************************* -->
 
-<form id="plancomprasFUNCIONAMIENTOform" role="form">
+<!-- ******* INICIO FORMULARIO ********** -->
+
+<form id="plancomprasFUNCIONAMIENTOform" name="fun" role="form">
     <div class="col-sm-12 bg-light text-dark border pt-2">
         <label for="informacionInstitucional" class="font-weight-bold ">INFORMACION INSTITUCIONAL</label>
     </div>
@@ -72,7 +74,7 @@
             <div class="col-sm-4" >
                 <div class="form-group p-3">
                     <label for="selSede" class="font-weight-bold">Sede</label>
-                    <select name="selSede" id="selSede" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selSede"  id="selSede" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0" data-codigo_sede="0">Seleccione...</option>
                             <?php
                                 foreach ($list_sedes as $dat_sede) {
@@ -102,33 +104,38 @@
                     });
                 });
             </script>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="form-group p-3 listVice">
                     <label for="textTipoVicerrectoria" class="font-weight-bold"> Vicerrectoria</label>
-                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selTipoVicerrectoria" id="selTipoVicerrectoria" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                         <option value="0">Seleccione la sede..</option>
                      
                     </select>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
-            <div class="col-sm-4">
-                    <div class="form-group p-3 listFac">
-                        <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
-                        <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                            <option value="0">Seleccione Vicerrectoria</option>
-                            
-                        </select>
-                        <span class="help-block" id="error"></span>
-                    </div>
+            <div class="col-sm-2">
             </div>
         </div>
+            <div class="row">
+                <div class="col-sm-6">
+                        <div class="form-group p-3 listFac">
+                            <label for="textTipoFacultad" class="font-weight-bold"> Facultad</label>
+                            <select name="selTipoFacultad" id="selTipoFacultad" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                <option value="0">Seleccione Vicerrectoria</option>
+                                
+                            </select>
+                            <span class="help-block" id="error"></span>
+                        </div>
+                </div>
+            </div>
+        
 
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group p-3 listDep">
                     <label for="textDependencia" class="font-weight-bold">Dependencia</label>
-                    <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <select name="selDependencia" id="selDependencia" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                         <option value="0">Seleccione la facultad</option>
                        
                     </select>
@@ -138,7 +145,7 @@
             <div class="col-sm-6">
                     <div class="form-group p-3 listArea">
                         <label for="selArea" class="font-weight-bold">Area</label>
-                        <select name="selArea" id="selArea" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <select name="selArea" id="selArea" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                             <option value="0">Seleccione una Dependencia...</option>
                         
                         </select>
@@ -232,7 +239,7 @@
             <div class="col-sm-5">
                     <div class="form-group p-3">
                         <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
-                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
+                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer " data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
                                 
                     </div>
             </div>
@@ -252,7 +259,7 @@
             </div>
         </div>
         <div class="m-0 row justify-content-center">
-            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
+            <button type="submit" name="guardar" id="guardar" class="btn btn-danger"  style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
         </div>
 
         <div class="row">
@@ -260,7 +267,7 @@
         </div>
     </div>
 
-<!-- ******************** FIN FORMULARIO ************************* -->
+<!-- ******* FIN FORMULARIO ********** -->
     <div class="modal-footer ">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
@@ -274,11 +281,16 @@
                             
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/formfun/vldar_formfun.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 
 <script>
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
+        
+        
     });
     $('#selLineaEquipo').change(function(){
         var codigo_linea = $(this).find(':selected').data('codigo_linea');
@@ -316,6 +328,8 @@
         $('#selValorTotal').val(numberWithCommas(total));
     });
 
+    
+
     function agregarEquipo(){
 
         $('#frmModal').modal({
@@ -328,25 +342,9 @@
             async:true,
 
             success: function(message){
+                selEquipo.reset();
                 $(".modal-content").empty().append(message);
             }
         });
     }
 </script>
-
-
-
-
-    
-   
-    
-    
-
-
-
-
-    
-   
-    
-    
-

@@ -1,5 +1,4 @@
 function validar_formfun(){
-	var maximo_admitido = parseFloat($('#maximo_admitido').val());
 
 	$("#plancomprasFUNCIONAMIENTOform").validate({
 		rules: {
@@ -13,7 +12,7 @@ function validar_formfun(){
 				selectVicerrectoria: true, 
 			},
 			selTipoFacultad:{
-				selectFacultad: true,
+				selectFacultad: false,
 			},
 			selDependencia:{
 				selectDependencia: true,
@@ -69,14 +68,41 @@ function validar_formfun(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
+					
 					$(capa_direccion).load(url_direccion);
+					//$("#selSede option[value='seleccione sede'").attr("selected",true);
+					//document.fun.selSede.options[0].selected=true;
+					plancomprasFUNCIONAMIENTOform.reset();
+					$('#selSede').selectpicker('val', '0');
+					$('#selTipoVicerrectoria').selectpicker('val', '0');
+					$('#selTipoFacultad').selectpicker('val', '0');
+					$('#selDependencia').selectpicker('val', '0');
+					$('#selArea').selectpicker('val', '0');
+					$('#selLineaEquipo').selectpicker('val', '0');
+					$('#selSublineaEquipo').selectpicker('val', '0');
+					$('#selEquipo').selectpicker('val', '0');
+					$('#selCaracteristicas').selectpicker('val', '0');
+									
+
+					
+					swal({
+						title: "Registro Exitoso",
+						text: "",
+						icon: "success",
+						button: "OK",
+					  });
                 }
             });
+
+
+			
 			
             return false; 
 		
 		}
 	});
+
+
 
 	jQuery.validator.addMethod('selectSede', function (value) {
 		return (value != '0');
