@@ -45,10 +45,9 @@ class UpdateNvlTres extends NivelTres{
 
         
         $update_PlanComprasAccion="UPDATE plandesarrollo.plan_compras_accion
-                                        SET pca_plantafisica='0',
-                                        pca_estado= '1', 
-                                        pca_fechamodifico=NOW(), 
-                                        pca_personamodifico=".$this->getPersonaSistema()."
+                                      SET pca_estado = 0, 
+                                          pca_fechamodifico=NOW(), 
+                                          pca_personamodifico=".$this->getPersonaSistema()."
                                     WHERE pca_accion=".$this->getCodigo().";";
         
         $this->cnxion->ejecutar($update_PlanComprasAccion);
