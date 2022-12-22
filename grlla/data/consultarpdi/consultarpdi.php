@@ -117,9 +117,33 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
 
        	/////Inicio Mas primera columna
 		function format(codigo_data) {
-			var codigo_accion=codigo_data.acc_codigo;
+			var sed_nombre =  codigo_data.sed_nombre;
+            var vic_nombre = codigo_data.vic_nombre;
+            var fac_nombre = codigo_data.fac_nombre;
+            var ofi_nombre = codigo_data.ofi_nombre;
+            var area_nombre = codigo_data.area_nombre;
+            var acc_nombre = codigo_data.acc_nombre;
+            var pdi_plantafisica = codigo_data.pdi_plantafisica;
+            var lin_nombre = codigo_data.lin_nombre;
+            var slin_nombre = codigo_data.slin_nombre;
+            var equi_nombre = codigo_data.equi_nombre;
+            var deq_descripcion = codigo_data.deq_descripcion;
+            var pdi_cantidad = codigo_data.pdi_cantidad;
+            var pdi_valorunitario = codigo_data.pdi_valorunitario;
 			var dataenviar = {
-								"codigo_accion": codigo_accion
+								"sed_nombre": sed_nombre,
+                                "vic_nombre": vic_nombre,
+                                "fac_nombre": fac_nombre,
+                                "ofi_nombre": ofi_nombre,
+                                "area_nombre": area_nombre,
+                                "acc_nombre": acc_nombre,
+                                "pdi_plantafisica": pdi_plantafisica,
+                                "lin_nombre": lin_nombre,
+                                "slin_nombre": slin_nombre,
+                                "equi_nombre": equi_nombre,
+                                "deq_descripcion": deq_descripcion,
+                                "pdi_cantidad": pdi_cantidad,
+                                "pdi_valorunitario": pdi_valorunitario,
 							}
 
 			$.ajax({
@@ -129,11 +153,11 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
 				async:true,
 
 				success: function(message){
-					$("#registroActividad"+codigo_accion).empty().append(message);
+					$("#registroActividad"+sed_nombre).empty().append(message);
 				}
 			});
 
-			return '<div id="registroActividad'+codigo_accion+'"></div>';
+			return '<div id="registroActividad'+sed_nombre+'"></div>';
 		}
 		// Fin Mas primera columna
 
