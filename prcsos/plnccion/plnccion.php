@@ -653,6 +653,23 @@
             return $sed_nombre;
         }
 
+        public function sede_indicador($codigo_indicador){
+            
+            $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida, ind_sede,
+                                        sed_nombre
+                                FROM plandesarrollo.indicador
+                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                WHERE ind_codigo = $codigo_indicador";
+
+            $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
+
+            $data_sede_indicador = $this->cnxion->obtener_filas($resultado_sede_indicador);
+
+            $sed_nombre = $data_sede_indicador['sed_nombre'];
+
+            return $sed_nombre;
+        }
+
         public function indicadores_accion($codigo_accion){
 
             $sql_indicadores_accion = "SELECT ind_codigo, ind_unidadmedida, ind_lineabase, 

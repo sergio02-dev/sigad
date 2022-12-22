@@ -37,6 +37,7 @@ for ($row = 2; $row <= $highestRow; $row++){
     $descripcion_equipo = strtoupper(tildes($sheet->getCell("H".$row)->getValue()));
     $valor_descripcion = $sheet->getCell("I".$row)->getValue();
 
+    //Se consulta la linea para saber si existe !
     $sqlValidarLinea = "SELECT lin_codigo, lin_nombre, lin_estado
                           FROM inventario.linea
                          WHERE lin_codigo = $codigo_linea;";
@@ -46,6 +47,7 @@ for ($row = 2; $row <= $highestRow; $row++){
 
     $lin_codigo = $dataValidarLinea['lin_codigo'];
 
+    //Si la linea no viene se crea
     if($lin_codigo == ''){
         $sql_linea = "INSERT INTO inventario.linea(
                                   lin_codigo, lin_nombre, lin_estado, lin_fechacreo, lin_fechamodifico, lin_personacreo, lin_personamodifico, lin_codigoctic)
@@ -54,6 +56,7 @@ for ($row = 2; $row <= $highestRow; $row++){
         $cnxn_pag->ejecutar($sql_linea);
     }
 
+    //Se consulta la sub linea para saber si existe !
     $sqlValidarSubLinea = "SELECT slin_codigo, slin_linea, slin_nombre 
                              FROM inventario.sub_linea
                             WHERE slin_codigo =  $codigo_sublinea;";
@@ -63,6 +66,7 @@ for ($row = 2; $row <= $highestRow; $row++){
 
     $slin_codigo = $dataValidarSubLinea['slin_codigo'];
 
+    //Si la Sub Linea no existe se crea! 
     if($slin_codigo == ''){
         $sql_sublinea = "INSERT INTO inventario.sub_linea(
                                      slin_codigo, slin_linea, slin_nombre, slin_estado, slin_fechacreo, slin_fechamodifico, slin_personacreo, slin_personamodifico, slin_codigoctic)
@@ -71,6 +75,8 @@ for ($row = 2; $row <= $highestRow; $row++){
         $cnxn_pag->ejecutar($sql_sublinea);       
     }
 
+
+    //Se consulta el equipo para saber si existe 
     $sqlValidarEquipo = "SELECT equi_codigo, equi_sublinea, equi_nombre 
                            FROM inventario.equipo
                           WHERE equi_codigo = $codigo_equipo;";
