@@ -93,28 +93,52 @@
         }
 
         function format(codigo_data) {
-			var codigo_fuente = codigo_data.ppi_fuente;
-            var codigo_plan = codigo_data.ppi_plan;
-            var codigoPpi = codigo_data.ppi_codigoppi;
+			var fun_codigo = codigo_data.fun_codigo;
+            var sed_nombre = codigo_data.sed_nombre;
+            var ofi_nombre = codigo_data.ofi_nombre;
+            var equi_nombre = codigo_data.equi_nombre;
+            var deq_descripcion = codigo_data.deq_descripcion;
+            var fun_cantidad = codigo_data.fun_cantidad;
+            var fun_valorunitario = codigo_data.fun_valorunitario;
+            var estado = codigo_data.estado;
+            var are_nombre = codigo_data.are_nombre;
+            var ent_nombre = codigo_data.ent_nombre;
+            var fac_nombre = codigo_data.fac_nombre;
+            var lin_nombre = codigo_data.lin_nombre;
+            var slin_nombre = codigo_data.slin_nombre;
+            
+
 
 			var dataenviar = {
-								"codigo_fuente": codigo_fuente,
-                                "codigo_plan": codigo_plan,
-                                "codigoPpi": codigoPpi,
+								"fun_codigo": fun_codigo,
+                                "sed_nombre": sed_nombre,
+                                "ofi_nombre": ofi_nombre,
+                                "equi_nombre": equi_nombre,
+                                "deq_descripcion": deq_descripcion,
+                                "fun_cantidad": fun_cantidad,
+                                "fun_valorunitario": fun_valorunitario,
+                                "estado": estado,
+                                "are_nombre": are_nombre,
+                                "ent_nombre": ent_nombre,
+                                "fac_nombre": fac_nombre,
+                                "lin_nombre": lin_nombre,
+                                "slin_nombre": slin_nombre,
+                                
+
 							}
 
 			$.ajax({
-				url:"infoppi",
+				url:"infofuncionamiento",
 				type:"POST",
 				data:dataenviar, 
 				async:true,
 
 				success: function(message){
-					$("#infoPpi"+codigo_fuente).empty().append(message);
+					$("#infoPlanCompras"+fun_codigo).empty().append(message);
 				}
 			});
 
-			return '<div id="infoPpi'+codigo_fuente+'"></div>';
+			return '<div id="infoPlanCompras'+fun_codigo+'"></div>';
 		}
 
         // Add event listener for opening and closing details
