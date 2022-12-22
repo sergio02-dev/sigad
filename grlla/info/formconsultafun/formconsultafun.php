@@ -16,37 +16,8 @@
     $valor_total = $fun_cantidad * $fun_valorunitario;
 	$personaSistema = $_SESSION['idusuario'];
     //echo $fun_codigo;
-    echo $sed_nombre; 
-    echo $ofi_nombre;
-    echo $equi_nombre;
-    echo $deq_descripcion;
-    echo $fun_cantidad;
-    echo $fun_valorunitario;
-    echo $estado;
-    echo $are_nombre;
-    echo $fac_nombre;
-
-    
-
-
-
 ?>
-<style>
-    .modal-content<?php echo $acp_codigo; ?> {
-        position: relative;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        width: 100%;
-        pointer-events: auto;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid rgba(0,0,0,.2);
-        border-radius: .3rem;
-        outline: 0;
-    }
-</style>
+
 
         <!-- **********************          Inicio Modal Forma    *********************************** -->
         <div class="modal fade" tabindex="-1" id="frmModal<?php echo $acp_codigo; ?>" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -69,28 +40,52 @@
         <!-- **********************          Fin Modal Forma       *********************************** -->
 
 
-    <table style = "padding-left:50px">
+        <table>
         <tr>
-            <th><strong>Sede:<br></strong><?php echo $sed_nombre;?></th>
-            <th><strong>Vicerrectoria:<br></strong><?php echo $ent_nombre;?></th>
-            <th><strong>Facultad:<br></strong><?php echo $fac_nombre;?></th>
-            <th><strong>Dependencia:<br></strong><?php echo $ofi_nombre;?></th>
-            <th><strong>Area:<br></strong><?php echo $are_nombre;?></th>
+            <th ><strong>Sede:</strong> <?php echo $sed_nombre; ?> </th>
+            <th><strong>Vicerrectoria:</strong> <?php echo $ent_nombre; ?> </th>
+            <th><strong>Facultad:</strong> <?php echo $fac_nombre; ?> </th>
+            <th colspan="2"><strong>Dependencia:</strong> <?php echo $ofi_nombre; ?> </th>
+            <th><strong>Area:</strong> <?php echo $are_nombre; ?> </th>
+           
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <strong>Linea equipo:</strong><br>
+                <?php echo $lin_nombre; ?>
+            </td>
+            <td colspan="2">
+                <strong>Sublinea equipo:</strong><br>
+                <?php echo $slin_nombre; ?>
+            </td>
+            <td colspan="2">
+                <strong>Equipo:</strong><br>
+                <?php echo $equi_nombre; ?>
+            </td>
+            
         </tr>
         <tr>
-            <th><strong>Linea de Equipo:<br></strong><?php echo $lin_nombre;?></th>
-            <th><strong>Sublinea de Equipo:<br></strong><?php echo $slin_nombre;?></th>
-            <th><strong>Equipo:<br></strong><?php echo $equi_nombre;?></th>
-            <th><strong>Descripción:<br></strong><?php echo $deq_descripcion;?></th>
-            <th><strong>Cantidad:<br></strong><?php echo $fun_cantidad;?></th>
+            <td colspan="2">
+                <strong>Descripcion:</strong><br>
+                <?php echo $deq_descripcion; ?>
+            </td>
+            <td colspan="1">
+                <strong>Cantidad:</strong><br>
+                <?php  echo $fun_cantidad?>
+            </td>
+            <td colspan="2">
+                <strong>Valor unitario:</strong><br>
+                <?php  echo  "$".number_format($fun_valorunitario, 0, ',', '.'); ?>
+            </td>
+            <td colspan="1">
+                <strong>Valor total:</strong><br>
+                <?php   echo  "$".number_format($valor_total, 0, ',', '.');?>
+            </td>
         </tr>
-        <tr>
-            <th><strong>Valor Unitario:<br></strong><?php echo $fun_valorunitario;?></th>
-            <th><strong>Valor Total:<br></strong><?php echo $valor_total;?></th>
-        </tr>
+    </table> <br>   
 
 
-    </table>
 
     
 

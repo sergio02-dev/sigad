@@ -50,7 +50,6 @@
                 { data: 'sed_nombre', title: 'Sede'},               
                 { data: 'ofi_nombre', title: 'Depedencia'},
                 { data: 'equi_nombre', title: 'Equipo'},
-                { data: 'deq_descripcion', title: 'Descripción'},
                 { data: 'fun_cantidad', title: 'Cantidad'},
                 { data: 'fun_valorunitario', title: 'Valor Unitario'},
                 { data: 'estado', title: 'Estado'},
@@ -79,11 +78,10 @@
                 { "width": "10%", "targets": 0 },
                 { "width": "25%", "targets": 1 },
                 { "width": "15%", "targets": 2 },
-                { "width": "25%", "targets": 3 },
-                { "width": "7%", "targets": 4 },
-                { "width": "5%", "targets": 5 },
-                { "width": "5%", "targets": 6 },
-                { "width": "5%", "targets": 7 },
+                { "width": "15%", "targets": 3 },
+                { "width": "15%", "targets": 4 },
+                { "width": "10%", "targets": 5 },
+                { "width": "10%", "targets": 6 },
             ],
         });
 
