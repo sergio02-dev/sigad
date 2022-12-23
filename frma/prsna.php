@@ -2,6 +2,7 @@
     include('crud/rs/prsna.php');
     $rs_tipoIdentificacion=$objRsPersona->selectIdentificacion();
     $rs_entidades=$objRsPersona->selectEntidad();
+    $rs_facultades=$objRsPersona->selectFacultad();
 
     $codigo_persona=$_REQUEST['codigo_persona'];
 
@@ -21,6 +22,9 @@
         }
 
         $per_entidad=$objRsPersona->entidad($per_codigo);
+        $per_facultad=$objRsPersona->facultad($per_codigo);
+
+        
 
         if($per_estado==1){
             $checkedI="";
@@ -119,7 +123,7 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="selEntidad" class="font-weight-bold"> Entidad </label>
+                <label for="selEntidad" class="font-weight-bold"> Vicerrectoria </label>
                 <select name="selEntidad" id="selEntidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
                     <option value="0">Seleccione...</option>
                     <?php
@@ -143,6 +147,34 @@
             </div>
         </div>        
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="selFacultad" class="font-weight-bold"> Facultad </label>
+                    <select name="selFacultad" id="selFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                        <?php
+                            foreach ($rs_facultades as $data_fac) {
+                                $fac_codigo=$data_fac['ent_codigo'];
+                                $fac_nombre=$data_fac['ent_nombre'];
+
+                            if($per_facultad==$fac_codigo){
+                                $select_entidadpersona="selected";
+                            }
+                            else{
+                                $select_entidadpersona="";
+                            }
+                        ?>
+                            <option value="<?php echo $fac_codigo; ?>"  <?php echo $select_entidadpersona; ?>><?php echo $fac_nombre; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>        
+        </div>
+    
 
     <div class="row">
         <div class="col-sm-6">

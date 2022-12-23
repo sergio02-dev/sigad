@@ -30,9 +30,9 @@ class RgstroPrsna extends Persona{
 
         $insert_entidad_persona="INSERT INTO principal.entidad_persona(
                                              epe_codigo, epe_persona, epe_estado, epe_personacreo, epe_personamodifico, 
-                                             epe_fechacreo, epe_fechamodifico, epe_entidad)
+                                             epe_fechacreo, epe_fechamodifico, epe_entidad, epe_facultad)
                                      VALUES (".$this->codigoEntidad.", ".$this->codigoPersona.", '1', ".$this->getPersonaSistema().", ".$this->getPersonaSistema().", 
-                                            NOW(), NOW(), ".$this->getEntidadPersona().");";
+                                            NOW(), NOW(), ".$this->getEntidadPersona().", ".$this->getFacultadPersona().");";
 
         $this->cnxion->ejecutar($insert_entidad_persona);
 
