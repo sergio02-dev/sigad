@@ -9,7 +9,7 @@ Class RsVicerrectoria extends Vicerrectoria{
     public function list_vicerctorias(){
 
         $sql_list_vicerctorias = "SELECT ent_codigo, ent_nombre, 
-                                         ent_descripcion, ent_estado
+                                         ent_estado
                                     FROM principal.entidad
                                    WHERE ent_tipoentidad = 2;";
 
@@ -21,7 +21,7 @@ Class RsVicerrectoria extends Vicerrectoria{
         return $datalist_vicerctorias;
     }
 
-    public function sedes_vicerrectoria($codigo_vicerrectoria){
+  /*  public function sedes_vicerrectoria($codigo_vicerrectoria){
 
         
         $sql_sedes_vicerrectoria = "SELECT svi_codigo, svi_sede, svi_vicerrectoria,
@@ -36,7 +36,7 @@ Class RsVicerrectoria extends Vicerrectoria{
             $datasedes_vicerrectoria[] = $data_sedes_vicerrectoria;
         }
         return $datasedes_vicerrectoria;
-    }
+    }*/
 
     
 
@@ -48,7 +48,6 @@ Class RsVicerrectoria extends Vicerrectoria{
             foreach ($list_vicerctorias as $dat_vices) {
                 $ent_codigo = $dat_vices['ent_codigo'];
                 $ent_nombre = $dat_vices['ent_nombre'];
-                $ent_descripcion = $dat_vices['ent_descripcion'];
                 $ent_estado = $dat_vices['ent_estado'];
 
                 if($ent_estado == 1){
@@ -58,7 +57,7 @@ Class RsVicerrectoria extends Vicerrectoria{
                     $estado = "Inactivo";
                 }
 
-                $sedes_vicerrectoria = $this->sedes_vicerrectoria($ent_codigo);
+                /*$sedes_vicerrectoria = $this->sedes_vicerrectoria($ent_codigo);
                 $nombre_sedes = '';
                 if($sedes_vicerrectoria){
                     foreach ($sedes_vicerrectoria as $dat_sedes) {
@@ -67,12 +66,12 @@ Class RsVicerrectoria extends Vicerrectoria{
 
                         $nombre_sedes = $nombre_sedes.$sed_nombre.'\n';
                     }
-                }
+                }*/
     
                 $rsVicerrectoria[] = array('ent_codigo'=> $ent_codigo, 
                                            'ent_nombre'=> $ent_nombre, 
                                            'estado'=> $estado,
-                                           'nombre_sedes'=> $nombre_sedes
+                                           //'nombre_sedes'=> $nombre_sedes
                                         );
     
             }
@@ -84,7 +83,7 @@ Class RsVicerrectoria extends Vicerrectoria{
         return $dattVicerrectoria;
     }
 
-    public function list_sedes(){
+    /*public function list_sedes(){
         
         $sql_list_sedes = "SELECT sed_codigo, sed_nombre, sed_estado
                              FROM principal.sedes
@@ -110,7 +109,24 @@ Class RsVicerrectoria extends Vicerrectoria{
         ($data_form_vicerrectoria = $this->cnxion->obtener_filas($resultado_form_vicerrectoria));
         $dataform_vicerrectoria[] = $data_form_vicerrectoria;
         return $dataform_vicerrectoria;
+    }*/
+
+    public function form_vicerrectoria($codigo_vicerrectoria){
+        
+        $sql_form_vicerrectoria  = "SELECT ent_codigo, ent_nombre, 
+                                        ent_estado
+                                     FROM principal.entidad
+                                    WHERE ent_codigo = $codigo_vicerrectoria;";
+        
+
+        $resultado_form_vicerrectoria  = $this->cnxion->ejecutar($sql_form_vicerrectoria);
+
+        ($data_form_vicerrectoria  = $this->cnxion->obtener_filas($resultado_form_vicerrectoria ));
+         $dataform_vicerrectoria [] = $data_form_vicerrectoria ;
+    
+        return $dataform_vicerrectoria;
     }
+
 
 }
 ?>
