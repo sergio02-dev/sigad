@@ -42,9 +42,34 @@
             $acc_metaresultado=$dataNivelTresForm['acc_metaresultado'];
             $acc_responsable=$dataNivelTresForm['acc_responsable'];
         }
+
         $refrencia=$acc_referencia;
         $url_guardar="crudupdateniveltres";
         $task = "MODIFICAR";
+
+        $plan_compras_accion = $objRsPlanDesarrollo->plan_compras_accion($codigo_NivelTres);
+        if($plan_compras_accion){
+            foreach ($plan_compras_accion as $dta_plan_compras) {
+                $pca_codigo = $dta_plan_compras['pca_codigo'];
+                $pca_accion = $dta_plan_compras['pca_accion'];
+                $pca_plantafisica = $dta_plan_compras['pca_plantafisica'];
+            }
+            $checkedPlanCompras = "checked";
+            $ver_plan_compras = "block";
+
+            if($pca_plantafisica == 1){
+                $checkedPlantaFisica = "checked";
+            }
+            else{
+                $checkedPlantaFisica = "";
+            }
+        }
+        else{
+            $checkedPlanCompras = "";
+            $checkedPlantaFisica = "";
+            $ver_plan_compras = "none";
+        }
+
     }
     else{
         $url_guardar="crudniveltres";
@@ -52,6 +77,7 @@
         $sub_codigo=$_REQUEST['codigoNivelUno'];
         $refrencia=$_REQUEST['ref'];
         $task = "REGISTRAR";
+        $ver_plan_compras = "none";
     }
 
 ?>
@@ -193,7 +219,25 @@
                 </div>
             </div>
         </div>
-
+        
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="radio tipo1">
+                        <input type="checkbox"   id="checkplandecompras" name="checkplandecompras" aria-describedby="textHelp"  value="1" <?php echo $checkedPlanCompras; ?> />
+                        <label for="checkbox"><span></span> Plan de compras</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group planCompras" style="display: <?php echo $ver_plan_compras;?> ;">
+                    <div class="radio tipo1">
+                        <input type="checkbox"  id="checkplantafisica" name="checkplantafisica"  aria-describedby="textHelp"  value="1" <?php echo $checkedPlantaFisica; ?> />
+                        <label for="checkplantafisica"><span></span> Planta fisica</label>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <!--<div class="row">
             <div class="col-sm-11">
                 <div class="form-group">
@@ -241,10 +285,22 @@
 </form>
 
 <script type="text/javascript">
+    $('#checkplandecompras').change(function(){
+        var plan_compras = $('input:checkbox[name=checkplandecompras]:checked').val();
+        if(plan_compras == 1){
+            $('.planCompras').fadeIn(1);
+        }
+        else{
+            $('.planCompras').fadeOut(1);
+        }
+    });
+
+
+
     $('#selNivelUno').change(function(){
         var codigo_nivelUno=$(this).find(':selected').data('codigouno');
         var nombreNivelDos=$(this).find(':selected').data('nombreniveldos');
-        //alert(codigo_nivelUno+'  '+nombreNivelDos);
+        
         if(codigo_nivelUno==0){
 
         }
@@ -256,8 +312,7 @@
             async:true,
 
             success: function(message){
-            //$(".modal-body").empty().append(message);
-            $("#selectNivelDos").empty().append(message);
+                $("#selectNivelDos").empty().append(message);
             }
         });
 

@@ -6,6 +6,9 @@ function validar_facultades(){
                 required: true,
 				minlength:3,
             },
+			selCantidad:{
+				required: true,
+			},
 			chkestado:{
 				required: true,
 			},
@@ -19,6 +22,9 @@ function validar_facultades(){
 			},
 			chkestado:{
 				required: "Digite la Descripción",
+			},
+			selCantidad:{
+				required:"Debe digitar este dato",
 			},
 		},
 		errorPlacement : function(error, element) {
