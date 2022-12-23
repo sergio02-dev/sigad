@@ -10,15 +10,22 @@ require '../cnxn/cnf_class.php';
 $cnxn_pag = Dtbs::getInstance();
 
 function tildes($palabra){
-    $no_admitidas = array("á","é","í","ó","ú","ñ");
-    $admitidas = array("Á", "É", "Í", "Ó", "Ú", "Ñ");
+    $no_admitidas = array("á","é","í","ó","ú","ñ","'");
+    $admitidas = array("Á", "É", "Í", "Ó", "Ú", "Ñ","");
+    $texto = str_replace($no_admitidas, $admitidas ,$palabra);
+    return $texto;
+}
+
+function espacios_signos($palabra){
+    $no_admitidas = array(" ",",","$");
+    $admitidas = array("");
     $texto = str_replace($no_admitidas, $admitidas ,$palabra);
     return $texto;
 }
 
 require_once '../Classes/PHPExcel.php';
 
-$archivo = "organigrama/inventario_sigad.xlsx";
+$archivo = "organigrama/inventario_datos.xlsx";
 $inputFileType = PHPExcel_IOFactory::identify($archivo);
 $objReader = PHPExcel_IOFactory::createReader($inputFileType);
 $objPHPExcel = $objReader->load($archivo);
@@ -26,7 +33,8 @@ $sheet = $objPHPExcel->getSheet(0);
 $highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
 
-for ($row = 2; $row <= $highestRow; $row++){
+//for ($row = 2; $row <= $highestRow; $row++){
+for ($row = 2; $row <= 1086; $row++){
     $codigo_linea = $sheet->getCell("A".$row)->getValue();
     $nombre_linea = strtoupper(tildes($sheet->getCell("B".$row)->getValue()));
     $codigo_sublinea = $sheet->getCell("C".$row)->getValue();
@@ -35,7 +43,7 @@ for ($row = 2; $row <= $highestRow; $row++){
     $nombre_equipo = strtoupper(tildes($sheet->getCell("F".$row)->getValue()));
     $codigo_descripcion = $sheet->getCell("G".$row)->getValue();
     $descripcion_equipo = strtoupper(tildes($sheet->getCell("H".$row)->getValue()));
-    $valor_descripcion = $sheet->getCell("I".$row)->getValue();
+    $valor_descripcion = espacios_signos($sheet->getCell("I".$row)->getValue());
 
     //Se consulta la linea para saber si existe !
     $sqlValidarLinea = "SELECT lin_codigo, lin_nombre, lin_estado
@@ -86,6 +94,7 @@ for ($row = 2; $row <= $highestRow; $row++){
 
     $equi_codigo = $dataValidarEquipo['equi_codigo'];
 
+    //Si no existe se crea
     if($equi_codigo == ''){
         $sql_equipo = "INSERT INTO inventario.equipo(
                                    equi_codigo, equi_sublinea, equi_nombre, equi_estado, equi_fechacreo, equi_fechamodifico, equi_personacreo, equi_personamodifico, equi_codigoctic)
@@ -94,26 +103,27 @@ for ($row = 2; $row <= $highestRow; $row++){
         $cnxn_pag->ejecutar($sql_equipo);
     }
 
-    $sqlCodigoDescripcion = "SELECT MAX(deq_codigo) AS maximodes
-	                           FROM inventario.descripcion_equipo;";
+    //Si existe la Descripción $codigo_descripcion
+    $sqlValidarDescripcion = "SELECT deq_codigo, deq_equipo, deq_descripcion
+                                FROM inventario.descripcion_equipo
+                               WHERE deq_codigo = $codigo_descripcion;";
 
-    $queryCodigoDescripcion = $cnxn_pag->ejecutar($sqlCodigoDescripcion);
-    $dataCodigoDescripcion = $cnxn_pag->obtener_filas($queryCodigoDescripcion);
+    $queryValidarDescripcion = $cnxn_pag->ejecutar($sqlValidarDescripcion);
+    $dataValidarDescripcion = $cnxn_pag->obtener_filas($queryValidarDescripcion);
 
-    $maximodes = $dataCodigoDescripcion['maximodes'];
+    $deq_codigo = $dataValidarDescripcion['deq_codigo'];
 
-    if($maximodes){
-        $codigo_descripcion = $maximodes+1;
+    //Si no existe la crea
+    if($deq_codigo == ''){
+       
+        $sql_descripcion = "INSERT INTO inventario.descripcion_equipo(
+                                        deq_codigo, deq_equipo, deq_descripcion, deq_valor, deq_estado, deq_fechacreo, deq_fechamodifico, deq_personacreo, deq_personamodifico, deq_codigoctic)
+                                VALUES ($codigo_descripcion, $codigo_equipo, '$descripcion_equipo', $valor_descripcion, 1, NOW(), NOW(), 1, 1, 0);";
+
+        $cnxn_pag->ejecutar($sql_descripcion);
     }
-    else{
-        $codigo_descripcion = 1;
-    }
 
-    $sql_descripcion = "INSERT INTO inventario.descripcion_equipo(
-                                    deq_codigo, deq_equipo, deq_descripcion, deq_valor, deq_estado, deq_fechacreo, deq_fechamodifico, deq_personacreo, deq_personamodifico, deq_codigoctic)
-                            VALUES ($codigo_descripcion, $codigo_equipo, '$descripcion_equipo', $valor_descripcion, 1, NOW(), NOW(), 1, 1, 0);";
-
-    $cnxn_pag->ejecutar($sql_descripcion);
+    
 
 }
 ?>
