@@ -26,17 +26,19 @@
 
     if($checkplandecompras){
         $plan_compras = $checkplandecompras;
+        if($checkplantafisica){
+            $planta_fisica = $checkplantafisica;
+        }
+        else{
+            $planta_fisica = 0;
+        }
     }
     else{
         $plan_compras = 0;
-    }
-
-    if($checkplantafisica){
-        $planta_fisica = $checkplantafisica;
-    }
-    else{
         $planta_fisica = 0;
     }
+
+    
 
     $registroNivelTres = new RgstroNvlTres();
     

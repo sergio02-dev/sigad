@@ -63,6 +63,8 @@ Class RsFormpdi extends PlandeComprasPDI{
     }
 
 
+
+
     public function list_sedes(){
 
         $sql_list_sedes = "SELECT sed_codigo, sed_nombre, sed_estado
@@ -175,6 +177,22 @@ Class RsFormpdi extends PlandeComprasPDI{
         return $dattPlandeComprasPDI;
     }
 
+
+    public function planta_fisica($codigo_accion){
+
+        $sql_planta_fisica="SELECT pca_codigo, pca_plantafisica
+                                FROM plandesarrollo.plan_compras_accion
+                                WHERE pca_estado = 1
+                                AND pca_accion =$codigo_accion;";
+
+        $query_planta_fisica=$this->cnxion->ejecutar($sql_planta_fisica);
+
+        $data_planta_fisica=$this->cnxion->obtener_filas($query_planta_fisica);
+        
+        $pca_plantafisica = $data_planta_fisica['pca_plantafisica'];
+
+        return $pca_plantafisica;
+    }
    
 
 

@@ -63,7 +63,7 @@ class UpdateNvlTres extends NivelTres{
                                                     pca_personamodifico)
                                             VALUES (".$codigoPlandeComprasAccion.",
                                                     ".$this->getCodigo().", 
-                                                    1, 
+                                                    ".$this->getPlantaFisica().", 
                                                     1, 
                                                     NOW(), 
                                                     ".$this->getPersonaSistema().");";
