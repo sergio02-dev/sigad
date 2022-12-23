@@ -197,116 +197,121 @@
         </div>
                                      
         <div class="row">
-            <div class="col-sm-6">
-                <div class=" p-3">
+            <div class="col-sm-8 plantaFisica" style="display:none;">
+                <div class=" p-3 ">
                     <label for="textPlantaFisica" class="font-weight-bold">Caracteristicas Planta Fisica </label> <i class="fas fa-info-circle" style="color: #BB0900"></i>
-                    <textarea type="text" class="form-control caja_texto_sizer" id="inputPlantaFisica" name="inputPlantaFisica" aria-describedby="textHelp" data-rule-required="true" ></textarea>
+                    <textarea type="text" class="form-control caja_texto_sizer" id="inputPlantaFisica" name="inputPlantaFisica" aria-describedby="textHelp"   data-rule-required="true" ></textarea>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-12 bg-light text-dark border pt-2">
+    <div class="col-sm-12 bg-light text-dark border pt-2 " style="display:none;">
         <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
     </div>
-    <div class= "border"> 
-        <div class="row " >
+    <div class= "border" > 
+        <div class =" productos"  style="display:none;">
+            <div class="row ">
             
-            <div class="col-sm-6" >
-                    
-                <div class="form-group p-3">
-                    <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
-                    <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0" data-codigo_linea="0">Seleccione la linea</option>
-                            <?php
-                                foreach ($list_linea as $data_listlinea) {
-                                    $lin_codigo=$data_listlinea['lin_codigo'];
-                                    $lin_nombre=$data_listlinea['lin_nombre'];
+                <div class="col-sm-6" >
+                        
+                    <div class="form-group p-3">
+                        <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
+                        <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                <option value="0" data-codigo_linea="0">Seleccione la linea</option>
+                                <?php
+                                    foreach ($list_linea as $data_listlinea) {
+                                        $lin_codigo=$data_listlinea['lin_codigo'];
+                                        $lin_nombre=$data_listlinea['lin_nombre'];
 
-                               
-                            ?>
-                                <option value="<?php echo  $lin_codigo; ?>" data-codigo_linea="<?php echo $lin_codigo; ?>"><?php echo $lin_nombre; ?></option>
-                            <?php
-                                }
-                            ?>
-                        </select>
-                        <span class="help-block" id="error"></span>    
-                </div>
-            </div>
-            <div class="col-sm-6">
-                    <div class="form-group p-3 subLinea">
-                        <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0" >Seleccione la sublinea</option>
-                        </select>
-                        <span class="help-block" id="error"></span>
+                                
+                                ?>
+                                    <option value="<?php echo  $lin_codigo; ?>" data-codigo_linea="<?php echo $lin_codigo; ?>"><?php echo $lin_nombre; ?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                            <span class="help-block" id="error"></span>    
                     </div>
-            </div>
-            
-        </div>
-        <div class ="row">
-            <div class="col-sm-10">
-                        <div class="form-group p-3 equipo">
-                            <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
-                            <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                                <option value="0">Seleccione...</option>
+                </div>
+                <div class="col-sm-6">
+                        <div class="form-group p-3 subLinea">
+                            <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
+                            <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                <option value="0" >Seleccione la sublinea</option>
                             </select>
                             <span class="help-block" id="error"></span>
                         </div>
                 </div>
-            <div class="col-sm-2 pt-5">
-                    <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
-            </div> 
+                
+            </div>
+            <div class ="row">
+                <div class="col-sm-10">
+                            <div class="form-group p-3 equipo">
+                                <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
+                                <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                                    <option value="0">Seleccione...</option>
+                                </select>
+                                <span class="help-block" id="error"></span>
+                            </div>
+                </div>
+                <div class="col-sm-2 pt-5">
+                        <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
+                </div> 
 
-        </div>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group p-3 caracteristicas">
-                    <label for="selCaracteristicas" class="font-weight-bold">Caracteristicas</label>
-                    <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                        <option value="0">Seleccione...</option>
-                    </select>
-                    <span class="help-block" id="error"></span>       
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group p-3 caracteristicas">
+                        <label for="selCaracteristicas" class="font-weight-bold">Caracteristicas</label>
+                        <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                            <option value="0">Seleccione...</option>
+                        </select>
+                        <span class="help-block" id="error"></span>       
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-12 caracteristicasNombre"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-5">
-                    <div class="form-group p-3">
-                        <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
-                        <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
-                                
-                    </div>
+            <div class="row">
+                <div class="col-sm-12 caracteristicasNombre"></div>
             </div>
-            <div class="col-sm-3">
-                    <div class="form-group p-3" >
-                        <label for="selCantidad" class="font-weight-bold">Cantidad</label>
-                        <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer sma" data-rule-required="true" required aria-describedby="textHelp" value="<?php echo $cantidad;?>">
-                        <span class="help-block" id="error"></span>
-                    </div>
-            </div>
-            <div class="col-sm-4">
-                    <div class="form-group p-3">
-                        <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
-                        <input type="text" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="false" aria-describedby="textHelp" readonly>
-                        <span class="help-block" id="error"></span>
-                    </div>
-            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                        <div class="form-group p-3">
+                            <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
+                            <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
+                                    
+                        </div>
+                </div>
+                <div class="col-sm-3">
+                        <div class="form-group p-3" >
+                            <label for="selCantidad" class="font-weight-bold">Cantidad</label>
+                            <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer sma" data-rule-required="true" required aria-describedby="textHelp" value="<?php echo $cantidad;?>">
+                            <span class="help-block" id="error"></span>
+                        </div>
+                </div>
+                <div class="col-sm-4">
+                        <div class="form-group p-3">
+                            <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
+                            <input type="text" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="false" aria-describedby="textHelp" readonly>
+                            <span class="help-block" id="error"></span>
+                        </div>
+                </div>
         </div>
-        <div class="m-0 row justify-content-center">
-            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formpdi();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
-        </div>
-
+    </div>
         <div class="row">
                 <div class="col-sm-12">&nbsp;</div>
         </div>
-    </div>
+        <div class="m-0 row justify-content-center">
+            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formpdi();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
+        
+        </div>
+        <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+        </div>
+</div>
 
 <!-- ******************** FIN FORMULARIO ************************* -->
     <div class="modal-footer ">
