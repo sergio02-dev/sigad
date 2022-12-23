@@ -49,12 +49,11 @@
             },
             columns: [
                 { data: 'ent_nombre', title: 'Nombre'},
-                { data: 'nombre_sedes', title: 'Sedes'},
                 { data: 'estado', title: 'Estado'},
                 {
                     data: null,
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarVicerrectoria(\''+full["ofi_codigo"]+'\');"></i> </div> ';
+                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarVicerrectoria(\''+full["ent_codigo"]+'\');"></i> </div> ';
                     },
                     title: 'Editar'
                 },	
@@ -72,9 +71,8 @@
             "order": [[0, 'asc']],
             "columnDefs": [
                 { "width": "45%", "targets": 0 },
-                { "width": "45%", "targets": 1 },
-                { "width": "6%", "targets": 2 },
-                { "width": "4%", "targets": 3 },
+                { "width": "6%", "targets": 1 },
+                { "width": "4%", "targets": 2 },
             ],
         });
 

@@ -71,7 +71,7 @@
             paging:         false,
             buttons:        [ 'colvis' ],
             fixedColumns:   {
-                leftColumns: 2
+                leftColumns: 6
             },
             "order": [[0, 'asc']],
             "columnDefs": [
@@ -80,8 +80,8 @@
                 { "width": "15%", "targets": 2 },
                 { "width": "15%", "targets": 3 },
                 { "width": "15%", "targets": 4 },
-                { "width": "10%", "targets": 5 },
-                { "width": "10%", "targets": 6 },
+                { "width": "15%", "targets": 5 },
+                { "width": "4%", "targets": 6 },
             ],
         });
 
