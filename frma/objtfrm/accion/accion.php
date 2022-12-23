@@ -18,6 +18,8 @@
             $acc_descripcion=$data_tipoAccion['acc_descripcion'];
             $acc_numero = $data_tipoAccion['acc_numero']
 
+            
+
     ?>
         <option value="<?php echo  $acc_codigo; ?>" data-descripcion="<?php echo $acc_descripcion; ?>"><?php echo $acc_referencia.'.'.$acc_numero.' '.$acc_descripcion ?></option>
     <?php
