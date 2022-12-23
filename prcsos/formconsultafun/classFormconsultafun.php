@@ -4,24 +4,11 @@
 
         
         private $sede;
-        
-        
         private $dependencia;
-        
-   
         private $equipo;
         private $caracteristicas;
         private $cantidad;
         private $valorunitario;
-
-   
-        
-      
-        
-        
-        
-
-        
 
         public function getDependencia() {
                 return $this->dependencia;

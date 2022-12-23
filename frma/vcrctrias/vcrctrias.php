@@ -1,7 +1,7 @@
 <?php
     include('crud/rs/vcrctrias/vcrctrias.php'); 
 
-    
+    $list_sedes= $objVicerrectoria->list_sedes();
 
     $codigo_vicerrectoria = $_REQUEST['codigo_vicerrectoria'];
 
@@ -35,7 +35,7 @@
     }
 
     $capa_direccion = "#dtaVicerrectoria";
-    $url_direccion = "dtaVicerrectoria";
+    $url_direccion = "dtavicerectoria";
     
 ?>
 <form id="vicerrectoriafrm" role="form">
@@ -56,6 +56,34 @@
                     <label for="txtNombre" class="font-weight-bold">Nombre *</label>
                     <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $ent_nombre; ?>" required>
                     <span class="help-block" id="error"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="bg">
+                    <div>
+                    <?php
+                        if($list_sedes){
+                            foreach ($list_sedes as $data_sede) {
+                                $sed_codigo=$data_sede['sed_codigo'];
+                                $sed_nombre=$data_sede['sed_nombre'];
+
+
+                    ?>
+                        <div class="chiller_cb">
+                            <input id="sedes<?php echo $sed_codigo; ?>" name="sedes[]" type="checkbox" value="<?php echo $sed_codigo; ?>" data-rule-required="true" required <?php echo $chckdPdre; ?>>
+                            <label for="sedes<?php echo $sed_codigo; ?>" class="caja_texto_sizer"><?php echo $sed_nombre; ?></label>
+                            <span></span>
+                        </div>
+                    <?php
+                                
+                            }//Foreach Menu
+                        }//if Menu
+                    ?>
+
+                    </div>
                 </div>
             </div>
         </div>
