@@ -49,7 +49,6 @@
             },
             columns: [
                 { data: 'ent_nombre', title: 'Nombre'},
-                { data: 'nombre_sedes', title: 'Sedes'},
                 { data: 'estado', title: 'Estado'},
                {
                     data: null,
@@ -73,8 +72,8 @@
             "columnDefs": [
                 { "width": "45%", "targets": 0 },
                 { "width": "45%", "targets": 1 },
-                { "width": "6%", "targets": 2 },
-                { "width": "4%", "targets": 3 },
+               // { "width": "6%", "targets": 2 },
+                { "width": "4%", "targets": 2 },
             ],
         });
 

@@ -30,7 +30,11 @@ Class RsFormpdi extends PlandeComprasPDI{
                                FROM plandesarrollo.proyecto
                               INNER JOIN plandesarrollo.subsistema ON plandesarrollo.proyecto.sub_codigo = plandesarrollo.subsistema.sub_codigo
                               WHERE pde_codigo = $codigo_plan
-                              ORDER BY pro_referencia, pro_numero ASC";
+                                AND pro_codigo IN(SELECT DISTINCT acc_proyecto
+                                                    FROM plandesarrollo.plan_compras_accion
+                                                    INNER JOIN  plandesarrollo.accion ON pca_accion = acc_codigo
+                                                    WHERE pca_estado = 1)
+                                ORDER BY pro_referencia, pro_numero ASC";
     
         $resultado_list_proyecto = $this->cnxion->ejecutar($sql_list_proyecto);
 
@@ -45,6 +49,9 @@ Class RsFormpdi extends PlandeComprasPDI{
         $sql_list_accion= "SELECT acc_codigo, acc_referencia, acc_descripcion,acc_numero,acc_proyecto
                             FROM plandesarrollo.accion
                             WHERE acc_proyecto = $codigo_proyecto
+                            AND acc_codigo IN (SELECT DISTINCT pca_accion
+                                                 FROM plandesarrollo.plan_compras_accion
+                                                WHERE pca_estado = 1)
                             ORDER BY acc_referencia, acc_numero ASC";
     
         $resultado_list_accion = $this->cnxion->ejecutar($sql_list_accion);
