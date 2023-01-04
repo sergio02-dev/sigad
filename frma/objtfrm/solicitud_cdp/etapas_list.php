@@ -7,12 +7,13 @@
     $etapas_list = $objSolicitudCdp->etapas_actividad($codigo_actividad);
 
 ?>
+<div class="row"><div class="col-md-12">&nbsp;</div></div>
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <label for="selEtapa<?php echo $codigo_actividad; ?>" class="font-weight-bold"><?php echo $nombre_nivel_tres; ?> *</label>
-            <select name="selEtapa<?php echo $codigo_actividad; ?>" id="selEtapa<?php echo $codigo_actividad; ?>"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required <?php echo $disabled; ?> >
-            <option value="0" data-codigo_accion="0"> Seleccione ...</option>
+            <label for="etpass<?php echo $codigo_actividad; ?>" class="font-weight-bold">Etapa *</label>
+            <select name="etpass<?php echo $codigo_actividad; ?>" id="etpass<?php echo $codigo_actividad; ?>" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required <?php echo $disabled; ?> >
+            <option value="0" data-codigo_etapa="0" data-descrpcion="" data-rcursos_etapa="0"> Seleccione ...</option>
                 <?php
                     if($etapas_list){
                         foreach ($etapas_list as $dta_etpas_list) {
@@ -32,15 +33,14 @@
 
                             $rcursos_etapa = $poa_recurso - $poai_etapa_gasto;
 
-                    
                 ?>
-                    <option value="<?php echo  $poa_codigo; ?>"><?php echo substr($etpa_nombre,0,110); ?></option>
+                    <option value="<?php echo  $poa_codigo; ?>" data-codigo_etapa="<?php echo $poa_codigo; ?>" data-descrpcion="<?php echo $etpa_nombre; ?>" data-rcursos_etapa="<?php echo $rcursos_etapa; ?>"><?php echo substr($etpa_nombre,0,110); ?></option>
                 <?php
                         }
                     }
                     else{
                 ?>
-                    <option value="0"> No hay <?php echo $nombre_nivel_tres; ?></option>
+                    <option value="0" data-codigo_etapa="0" data-descrpcion="" data-rcursos_etapa="0"> No hay Etapas</option>
                 <?php
                     }
                 ?>
@@ -50,9 +50,45 @@
     </div>
 </div>
 
+<div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
+    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">uno</div>
+    <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
+</div>
+
+<div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
+    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">dos</div>
+    <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
+</div>
+
+<div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
+    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">tres</div>
+    <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
+</div>
+
 <script type="text/javascript">
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
+    });
+
+    function numberWithCommas(formatoNumero) {
+        return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    $('#etpass<?php echo $codigo_actividad; ?>').change(function(){
+        var codigo_etapa = $(this).find(':selected').data('codigo_etapa');
+        var descrpcion = $(this).find(':selected').data('descrpcion');
+        var rcursos_etapa = $(this).find(':selected').data('rcursos_etapa');
+        
+        if(codigo_etapa == 0){
+            $('.datosEtapa<?php echo $codigo_actividad; ?>').fadeOut(1);
+            $('.desc<?php echo $codigo_actividad; ?>').html('');
+            $('.pric<?php echo $codigo_actividad; ?>').html('');
+        }
+        else{
+            $('.datosEtapa<?php echo $codigo_actividad; ?>').fadeIn(1);
+            $('.desc<?php echo $codigo_actividad; ?>').html(descrpcion);
+            $('.pric<?php echo $codigo_actividad; ?>').html("$ "+numberWithCommas(rcursos_etapa));            
+        }
     });
 </script>
