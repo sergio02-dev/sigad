@@ -51,21 +51,64 @@
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
-    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">uno</div>
+    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>"></div>
     <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
-    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">dos</div>
-    <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
+    <div class="col-md-8">
+        <br>
+        <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="0">
+        <input type="checkbox" name="checkOtrval<?php echo $codigo_actividad; ?>" id="checkOtrval<?php echo $codigo_actividad; ?>" value="1"> &nbsp;Otro valor
+    </div>
+    <div class="col-md-4">
+        <div class="form-group" id="text_valor<?php echo $codigo_actividad; ?>" style="display: none;">
+            <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
+            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="" required>
+            <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+        </div> 
+    </div>
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
-    <div class="col-md-8 desc<?php echo $codigo_actividad; ?>">tres</div>
-    <div class="col-md-4 pric<?php echo $codigo_actividad; ?>"></div>
+    <div class="col-md-8">tres</div>
+    <div class="col-md-4"></div>
+</div>
+
+<div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
+    <div class="col-md-12">
+        <label style="color: #C2240B; display: none;"  class="font-weight-bold" id="titulo_fuente<?php echo $codigo_actividad; ?>"><strong>Fuentes</strong></label>         
+        <div class="fuente_etapa<?php echo $codigo_actividad; ?>">
+
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
+    $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
+        var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
+        
+        if(val_other==1){
+            $('#text_valor<?php echo $codigo_actividad; ?>').fadeIn(100);
+            $('#control_valor_chek<?php echo $codigo_actividad; ?>').val(1);
+        }
+        else{
+            $('#text_valor<?php echo $codigo_actividad; ?>').fadeOut(100);
+            $('#control_valor_chek<?php echo $codigo_actividad; ?>').val(0);
+        }
+    });
+
+    $(".puntos_miles_etapa").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
@@ -81,14 +124,29 @@
         var rcursos_etapa = $(this).find(':selected').data('rcursos_etapa');
         
         if(codigo_etapa == 0){
+            $('#titulo_fuente<?php echo $codigo_actividad; ?>').fadeOut(1);
+            $('.fuente_etapa<?php echo $codigo_actividad; ?>').empty();
             $('.datosEtapa<?php echo $codigo_actividad; ?>').fadeOut(1);
             $('.desc<?php echo $codigo_actividad; ?>').html('');
             $('.pric<?php echo $codigo_actividad; ?>').html('');
+            $('#valor<?php echo $codigo_actividad; ?>').val(0);
         }
         else{
+            $('#titulo_fuente<?php echo $codigo_actividad; ?>').fadeIn(1);
             $('.datosEtapa<?php echo $codigo_actividad; ?>').fadeIn(1);
             $('.desc<?php echo $codigo_actividad; ?>').html(descrpcion);
-            $('.pric<?php echo $codigo_actividad; ?>').html("$ "+numberWithCommas(rcursos_etapa));            
+            $('.pric<?php echo $codigo_actividad; ?>').html("$ "+numberWithCommas(rcursos_etapa));
+            $('#valor<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa));         
+        
+            $.ajax({
+                url:"fuenteasignadaxetapa",
+                type:"POST",
+                data:'codigo_etapa='+codigo_etapa,
+                async:true,
+                success: function(message){
+                    $(".fuente_etapa<?php echo $codigo_actividad; ?>").empty().append(message);
+                }
+            });
         }
     });
 </script>
