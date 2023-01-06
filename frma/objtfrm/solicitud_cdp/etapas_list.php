@@ -71,20 +71,74 @@
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
-    <div class="col-md-8">tres</div>
-    <div class="col-md-4"></div>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th colspan="3">Codigo Casificador</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-label-group form-group">
+                        <!--<input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="Codigo Clasificador" name="codigo_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> -->
+                        <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker clasificadorData<?php echo $codigo_actividad; ?>" data-size="8" data-rule-required="true"></select>
+                    </div> 
+                </td>
+                <td>
+                    <div class="form-label-group form-group">
+                        <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="codigo_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                    </div> 
+                </td>
+                <td><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
     <div class="col-md-12">
         <label style="color: #C2240B; display: none;"  class="font-weight-bold" id="titulo_fuente<?php echo $codigo_actividad; ?>"><strong>Fuentes</strong></label>         
         <div class="fuente_etapa<?php echo $codigo_actividad; ?>">
-
+            
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        listClasificadores();
+        /*$.getJSON('http://192.168.1.4/lexlegal/datosbancos', function(data){
+            let dataSelectBancos = '';
+            let len = data.length;
+            let rsd = 0;
+            for (rsbancos = 0; rsbancos < len; rsbancos++) {
+                dataSelectBancos += '<option value="' + data[rsbancos].bancocodigo + '">' +    data[rsbancos].banconombre + '</option>';
+            }
+            $('#selBancos').append(dataSelectBancos);
+        });*/
+
+    });   
+
+    function listClasificadores() {
+
+        $.ajax({
+            url:"jclasificadores",
+            type:"POST",
+            data:'',
+            async:true,
+            dataType: 'json',
+            success: function(message){
+                
+                var select_info = '';
+
+                $.each(message, function(index, element){
+                    select_info += '<option value="'+ element.bancocodigo+'">'+element.banconombre+'</option>';
+                })
+            }
+            $('.clasificadorData<?php echo $codigo_actividad; ?>').append(select_info);
+        })
+    }
+
     $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
         var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
         
