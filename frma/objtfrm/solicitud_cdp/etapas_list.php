@@ -45,7 +45,7 @@
                     }
                 ?>
             </select>
-            <div class="alert alert-danger alerta-forcliente" id="error_etapaactivdad<?php echo $codigo_actividad; ?>" role="alert"></div>
+            <span id="error_etapa<?php echo $codigo_actividad; ?>" style="color:#C2240B; font-weight: bold;"></span>
         </div>
     </div>
 </div>
@@ -191,7 +191,7 @@
     function getInput(type, activCode){
         var activCode = activCode;
         cantida_clasificador = cantida_clasificador +1;
-        var dta = '<tr class="'+activCode+cantida_clasificador+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador(\''+cantida_clasificador+'\')"></i><td></tr>'
+        var dta = '<tr class="'+activCode+cantida_clasificador+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+cantida_clasificador+'\')"></i><td></tr>'
         return dta;
     }
 
@@ -222,7 +222,7 @@
         append("tablaClasificadores"+activCode, nodo_clasificacion);
     }
 
-    function eliminar_clasificador(data_info){
+    function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
         var data_info = data_info;
         $('.<?php echo $codigo_actividad; ?>'+data_info).remove();
     }

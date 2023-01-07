@@ -3,7 +3,6 @@ function validar_solicitud_cdp(){
     var chkestado = $('input:radio[name=chkestado]:checked').val();
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
-	var cod_actividades = new Array();
 
 	if(txtFechaSolicitud == '0'){
         $("#error_fecha_solicitud").fadeIn('300');
@@ -45,53 +44,19 @@ function validar_solicitud_cdp(){
         $("#error_estado").fadeOut('300');
     }
 
-	//Inicio Validacion actividades
-	cod_actividades = $('[name="actvddes[]"]:checked').map(function () {
-							return this.value;
-						}).get();
+	//Inicio Validacion Etapas
+	cod_etapas = $('[name="etpass[]"]:checked').map(function () {
+						return this.value;
+					}).get();
 
-	cantidad_actividades = cod_actividades.length;
+	cantidad_etapas = cod_etapas.length;
 
-	if(cantidad_actividades == 0){
-		$('#error_actividades').html('Seleccione al menos una Actividad');
+	if(cantidad_etapas == 0){
+		$('#error_etapas').html('Seleccione al menos una Etapa');
 		return false;
 	}
 	else{
-		$('#error_actividades').html('');
-	}
-
-	for (let countActivis = 0; countActivis < cod_actividades.length; countActivis++) {
-		var codigo_etapa = $('#etpass'+cod_actividades[countActivis]).val();
-
-		if(codigo_etapa == 0){
-			$('#error_etapa'+cod_actividades[countActivis]).html('Seleccione al menos una Actividad');
-			return false;
-		}
-		else{
-			$('#error_etapa'+cod_actividades[countActivis]).html('');
-		}
-
-		var control_valor = $('#control_valor_chek'+cod_actividades[countActivis]).val();
-		var valor_etapa =  $('#valor_etapa'+cod_actividades[countActivis]).val();
-		var other_valor = $('#valor'+cod_actividades[countActivis]).val();
-
-		other_valor = other_valor.toString().replace(/\./g,'');
-
-		if(control_valor == 1){
-			if(parseFloat(valor_etapa) < parseFloat(other_valor)){
-				$('#error_valor_etpa'+cod_actividades[countActivis]).html('No puede ser mayor al valor de la Etapa');
-				return false;
-			}
-			else{
-				$('#error_valor_etpa'+cod_actividades[countActivis]).html('');
-			}
-			valor_validar = other_valor;
-		}
-		else{
-			control_valor = 0;
-			valor_validar = valor_etapa;
-		}
-
+		$('#error_etapas').html('');
 	}
 	
 	for (let index = 0; index < cod_etapas.length; index++) {
@@ -106,6 +71,20 @@ function validar_solicitud_cdp(){
 
 		var valor_validar = 0;
 
+		if(control_valor == 1){
+			if(parseFloat(valetapa) < parseFloat(other_valor)){
+				$('#error_valor_etpa'+cod_etapas[index]).html('No puede ser mayor al valor de la Etapa');
+				return false;
+			}
+			else{
+				$('#error_valor_etpa'+cod_etapas[index]).html('');
+			}
+			valor_validar = other_valor;
+		}
+		else{
+			control_valor = 0;
+			valor_validar = valetapa;
+		}
 
 		var num_clasificadores = 0;
 		$("input[name='codigo_clasificador"+cod_etapas[index]+"[]']").each(function(indice, elemento) {

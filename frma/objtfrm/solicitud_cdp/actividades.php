@@ -53,6 +53,8 @@
     </table>
     <span class="help-block" id="error"></span>
 </div>
+<span id="error_actividades" style="color:#C2240B; font-weight: bold;"></span>
+
 <span id="error_solicitud" style="color:red; font-weight: bold;"></span>
 <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>>">
 
