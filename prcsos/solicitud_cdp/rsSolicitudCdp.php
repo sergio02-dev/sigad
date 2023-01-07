@@ -766,7 +766,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $valor_expddo;
     }
 
-
     public function poai_etpa_gasto_mod($codigo_etapa, $codigo_solicitud){
 
         $sql_poai_etapa_gasto="SELECT SUM(aes_valoretapa) AS valor_expedido
@@ -906,19 +905,18 @@ Class RsSolicitudCdp extends SolicitudCdp{
                 $cla_nombre = $dta_clsfcdores['cla_nombre'];
                 $cla_numero = $dta_clsfcdores['cla_numero'];
 
-                $rsRslciones[] = array('cla_codigo'=> $cla_codigo, 
+                $rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
                                        'cla_nombre'=> $cla_nombre, 
                                        'cla_numero'=> $cla_numero
                                     );
 
             }
-
-            $datResolucion=json_encode($rsRslciones);
+            $datClasificadores = json_encode(array("data"=>$rsClsfcdres));
         }
         else{
-            $datResolucion=json_encode("");
+            $datClasificadores = json_encode(array("data"=>""));
         }
-        return $datResolucion;
+        return $datClasificadores;
     }
 
 }

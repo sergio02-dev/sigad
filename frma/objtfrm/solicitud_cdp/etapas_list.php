@@ -78,9 +78,9 @@
             </tr>
             <tr>
                 <td>
-                    <div class="form-label-group form-group">
+                    <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
                         <!--<input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="Codigo Clasificador" name="codigo_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> -->
-                        <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker clasificadorData<?php echo $codigo_actividad; ?>" data-size="8" data-rule-required="true"></select>
+                        <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" id="opcions<?php echo $codigo_actividad; ?>" data-size="8" data-rule-required="true"></select>
                     </div> 
                 </td>
                 <td>
@@ -104,22 +104,40 @@
 </div>
 
 <script type="text/javascript">
-
+    var select_info = '';
+    var lista_opciones = '';
+    
     $(document).ready(function () {
-        listClasificadores();
-        /*$.getJSON('http://192.168.1.4/lexlegal/datosbancos', function(data){
-            let dataSelectBancos = '';
-            let len = data.length;
-            let rsd = 0;
-            for (rsbancos = 0; rsbancos < len; rsbancos++) {
-                dataSelectBancos += '<option value="' + data[rsbancos].bancocodigo + '">' +    data[rsbancos].banconombre + '</option>';
+        
+        /*$.ajax({
+            url:"jclasificadores",
+            type:"POST",
+            data:'valor',
+            async:true,
+            dataType: 'json',
+            success: function(message){
+                datos = message.data;
+                $.each(datos, function(index, element){
+                    lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
+                });
+
+                //select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>';
+                alert(lista_opciones);
+                
+                $("#opcions<?php echo $codigo_actividad; ?>").empty().append(lista_opciones);
+
+                //$('#dtaClasificador<?php echo $codigo_actividad;?>').empty().append(select_info);
+                //$('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info);
             }
-            $('#selBancos').append(dataSelectBancos);
         });*/
+        
+        
+        
+        
+    });   //*/
+    
 
-    });   
-
-    function listClasificadores() {
+    /*function listClasificadores() {
 
         $.ajax({
             url:"jclasificadores",
@@ -128,16 +146,16 @@
             async:true,
             dataType: 'json',
             success: function(message){
-                
+                console.log(JSON.stringify(message));
                 var select_info = '';
 
                 $.each(message, function(index, element){
                     select_info += '<option value="'+ element.bancocodigo+'">'+element.banconombre+'</option>';
                 })
             }
-            $('.clasificadorData<?php echo $codigo_actividad; ?>').append(select_info);
+            //$('.clasificadorData<?php echo $codigo_actividad; ?>').append(select_info);
         })
-    }
+    }*/
 
     $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
         var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
@@ -199,6 +217,25 @@
                 async:true,
                 success: function(message){
                     $(".fuente_etapa<?php echo $codigo_actividad; ?>").empty().append(message);
+                }
+            });
+
+            
+            $.ajax({
+                url:"jclasificadores",
+                type:"POST",
+                data:'valor',
+                async:true,
+                dataType: 'json',
+                success: function(message){
+                    datos = message.data;
+                    $.each(datos, function(index, element){
+                        lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
+                    });
+
+                    select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>';
+                    alert(select_info);
+                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html('<select class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>');
                 }
             });
         }

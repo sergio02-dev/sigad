@@ -3,5 +3,5 @@
 
     $objSolicitudCdp = new RsSolicitudCdp();
      
-    $datListSolicitudes = $objSolicitudCdp->datListSolicitudes();
+    $jsonCsfcdores = $objSolicitudCdp->jsonCsfcdores();
 ?>
