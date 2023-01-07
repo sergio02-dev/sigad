@@ -66,29 +66,29 @@
             <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
             <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="" required>
             <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+            <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="">
         </div> 
     </div>
 </div>
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
     <div class="col-md-12">
-        <table class="table">
+        <table class="table tablaClasificadores<?php echo $codigo_actividad; ?>">
             <tr>
                 <th colspan="3">Codigo Casificador</th>
             </tr>
             <tr>
-                <td>
+                <td style="width: 65%">
                     <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
-                        <!--<input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="Codigo Clasificador" name="codigo_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> -->
-                        <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" id="opcions<?php echo $codigo_actividad; ?>" data-size="8" data-rule-required="true"></select>
+                        
                     </div> 
                 </td>
-                <td>
+                <td style="width: 30%">
                     <div class="form-label-group form-group">
-                        <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="codigo_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                        <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
                     </div> 
                 </td>
-                <td><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
+                <td style="width: 5%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
             </tr>
         </table>
     </div>
@@ -107,56 +107,6 @@
     var select_info = '';
     var lista_opciones = '';
     
-    $(document).ready(function () {
-        
-        /*$.ajax({
-            url:"jclasificadores",
-            type:"POST",
-            data:'valor',
-            async:true,
-            dataType: 'json',
-            success: function(message){
-                datos = message.data;
-                $.each(datos, function(index, element){
-                    lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
-                });
-
-                //select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>';
-                alert(lista_opciones);
-                
-                $("#opcions<?php echo $codigo_actividad; ?>").empty().append(lista_opciones);
-
-                //$('#dtaClasificador<?php echo $codigo_actividad;?>').empty().append(select_info);
-                //$('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info);
-            }
-        });*/
-        
-        
-        
-        
-    });   //*/
-    
-
-    /*function listClasificadores() {
-
-        $.ajax({
-            url:"jclasificadores",
-            type:"POST",
-            data:'',
-            async:true,
-            dataType: 'json',
-            success: function(message){
-                console.log(JSON.stringify(message));
-                var select_info = '';
-
-                $.each(message, function(index, element){
-                    select_info += '<option value="'+ element.bancocodigo+'">'+element.banconombre+'</option>';
-                })
-            }
-            //$('.clasificadorData<?php echo $codigo_actividad; ?>').append(select_info);
-        })
-    }*/
-
     $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
         var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
         
@@ -168,22 +118,6 @@
             $('#text_valor<?php echo $codigo_actividad; ?>').fadeOut(100);
             $('#control_valor_chek<?php echo $codigo_actividad; ?>').val(0);
         }
-    });
-
-    $(".puntos_miles_etapa").on({
-        "focus": function (event) {
-            $(event.target).select();
-        },
-        "keyup": function (event) {
-            $(event.target).val(function (index, value ) {
-                return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-            });
-        }
-    });
-
-    $('.selectpicker').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
     });
 
     function numberWithCommas(formatoNumero) {
@@ -202,13 +136,15 @@
             $('.desc<?php echo $codigo_actividad; ?>').html('');
             $('.pric<?php echo $codigo_actividad; ?>').html('');
             $('#valor<?php echo $codigo_actividad; ?>').val(0);
+            $('#valor_etapa<?php echo $codigo_actividad; ?>').val(0);
         }
         else{
             $('#titulo_fuente<?php echo $codigo_actividad; ?>').fadeIn(1);
             $('.datosEtapa<?php echo $codigo_actividad; ?>').fadeIn(1);
             $('.desc<?php echo $codigo_actividad; ?>').html(descrpcion);
             $('.pric<?php echo $codigo_actividad; ?>').html("$ "+numberWithCommas(rcursos_etapa));
-            $('#valor<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa));         
+            $('#valor<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa)); 
+            $('#valor_etapa<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa));       
         
             $.ajax({
                 url:"fuenteasignadaxetapa",
@@ -233,10 +169,71 @@
                         lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
                     });
 
-                    select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>';
-                    alert(select_info);
-                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html('<select class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">'+lista_opciones+'</select>');
+                    select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
+
+                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info);
+                    
+                    $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
+                        liveSearch: true,
+                        maxOptions: 1
+                    });
                 }
+            });
+        }
+    });
+
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
+    });
+
+    var cantida_clasificador = 0;
+    function getInput(type, activCode){
+        var activCode = activCode;
+        cantida_clasificador = cantida_clasificador +1;
+        var dta = '<tr class="'+activCode+cantida_clasificador+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador(\''+cantida_clasificador+'\')"></i><td></tr>'
+        return dta;
+    }
+
+    function append(className, nodoToAppend){
+        var nodo = document.getElementsByClassName(className)[0];
+        $('.'+className).append(nodoToAppend);
+
+        $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
+            liveSearch: true,
+            maxOptions: 1
+        });
+
+        $(".puntos_miles_valor").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value ) {
+                    return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                });
+            }
+        });
+    }
+
+    function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
+        var activCode = activCode;
+        var nodo_clasificacion = getInput("text", activCode);
+        append("tablaClasificadores"+activCode, nodo_clasificacion);
+    }
+
+    function eliminar_clasificador(data_info){
+        var data_info = data_info;
+        $('.<?php echo $codigo_actividad; ?>'+data_info).remove();
+    }
+
+    $(".puntos_miles_etapa").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
             });
         }
     });

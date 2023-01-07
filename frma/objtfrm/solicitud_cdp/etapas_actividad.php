@@ -122,7 +122,6 @@
                             append("clasfcdorCdgo"+poaCode, nodo_clasificacion);
                         }
 
-
                         $('#checkOtrval<?php echo $poa_codigo; ?>').change(function(){
                             var val_other = $('input:checkbox[name=checkOtrval<?php echo $poa_codigo; ?>]:checked').val();
                             

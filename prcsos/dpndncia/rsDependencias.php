@@ -38,8 +38,6 @@ Class RsDependencias extends Dependencia{
                 else{
                     $estado = "Inactivo";
                 }
-               
-
     
                 $rsDependencias[] = array('ofi_codigo'=> $ofi_codigo, 
                                             'ofi_nombre'=> $ofi_nombre, 
