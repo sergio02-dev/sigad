@@ -146,7 +146,6 @@ function validar_solicitud_cdp(){
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
 		}
 
-		alert('Valor Etapa '+valor_validar+' Valor clasificadores '+total_clsfcdor)
 		//Valor de la Discriminación 
 		if(parseFloat(valor_validar) == parseFloat(total_clsfcdor)){
 			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
@@ -159,8 +158,10 @@ function validar_solicitud_cdp(){
 		}
 
 		var cantidad_asignacion = $('#cantidad_asignaciones'+codigo_etapa).val();
-
+		
+		 
 		if(cantidad_asignacion > 0){
+			var valor_tomar_asignacion = 0;
 			$("input[name='codigo_recurso"+codigo_etapa+"[]']").each(function(indice, elemento) { 
 				var codigo_asignacion = $(elemento).val();
 				var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
@@ -169,8 +170,9 @@ function validar_solicitud_cdp(){
 
 				fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
 
+				//alert('Codigo Asignacion '+codigo_asignacion)
 				if(!cambio_valor){
-
+					valor_tomar_asignacion = parseFloat(valor_tomar_asignacion) + parseFloat(recurso_asignado);
 				}
 				else{
 					if(fuente_cambio == ''){
@@ -191,11 +193,12 @@ function validar_solicitud_cdp(){
 							$("#error_valor_asignado"+codigo_asignacion).fadeOut('300');
 							$('#error_valor_asignado'+codigo_asignacion).html('');							
 						}
-					}					
+					}
+					valor_tomar_asignacion = parseFloat(valor_tomar_asignacion) + parseFloat(fuente_cambio);					
 				}
 			});
 
-			if(parseFloat(valor_validar) == parseFloat(suma_validacion)){
+			if(parseFloat(valor_validar) == parseFloat(valor_tomar_asignacion)){
 				$("#error_solicitado_etapa"+codigo_etapa).fadeOut('300');
 				$('#error_solicitado_etapa'+codigo_etapa).html('');
 			}
@@ -213,7 +216,7 @@ function validar_solicitud_cdp(){
 		}
 
 	}
-	
+	return false;
 	//Fin Validacion Etapas y valores
 
 	var url_proceso = $('#url_proceso').val();
