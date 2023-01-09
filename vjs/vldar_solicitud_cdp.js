@@ -216,7 +216,6 @@ function validar_solicitud_cdp(){
 		}
 
 	}
-	return false;
 	//Fin Validacion Etapas y valores
 
 	var url_proceso = $('#url_proceso').val();

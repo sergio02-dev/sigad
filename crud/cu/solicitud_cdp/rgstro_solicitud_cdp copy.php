@@ -1,36 +1,26 @@
 <?php
-    header("Content-type: application/json");
+    //header("Content-type: application/json");
     include('prcsos/solicitud_cdp/rgstroSolicitudCdp.php');
 
     $personaSistema = $_SESSION['idusuario'];
 
     $txtFechaSolicitud = $_REQUEST['txtFechaSolicitud'];
+    $txtNumeroSolicitud = $_REQUEST['txtNumeroSolicitud'];
     $selAccion = $_REQUEST['selAccion'];
     $etpass = $_REQUEST['etpass'];
     $chkestado = $_REQUEST['chkestado'];
-    $SumTotal = str_replace('.','',$_REQUEST['SumTotal']);
-    $fuente_financiacion = $_REQUEST['fuenntes'];
    
     $registrosolicitudcdp = new RgstroSolicitudCdp();
 
     $array_datos = array();
+
     if($etpass){
         $cantidad = count($etpass);
-        $codigos_etapas_actividad = "";
         $num_etapas = 1;
         for ($array_etapa=0; $array_etapa < $cantidad; $array_etapa++) { 
             $codigo_etapa = $etpass[$array_etapa];
             $otro_valor = $_REQUEST['checkOtrval'.$codigo_etapa];
-            $valor_caja_texto = $_REQUEST['valor'.$codigo_etapa];
-
-            if($cantidad == $num_etapas){
-                $coma = "";
-            }
-            else{
-                $coma = ",";
-            }
-
-            $codigos_etapas_actividad = $codigos_etapas_actividad.$codigo_etapa.$coma;
+            $valor_caja_texto = str_replace('.','',$_REQUEST['valor'.$codigo_etapa]);
 
             $dtEtpa = $registrosolicitudcdp->data_etapa($codigo_etapa);
 
@@ -50,56 +40,52 @@
                     $valor_solicitud = $poa_recurso;
                 }
 
+                $codigo_recurso = $_REQUEST['codigo_recurso'.$poa_codigo];
+
+                for ($array_recurso=0; $array_recurso < count($codigo_recurso); $array_recurso++) {
+                    $codigo_asignacion = $codigo_recurso[$array_recurso];
+                    $cambio_valor = $_REQUEST['checkCmbioval'.$codigo_asignacion];
+                    $recurso_asignado = $_REQUEST['recurso_asignado'.$codigo_asignacion];
+                    $fuentes_asgnacion = str_replace('.','',$_REQUEST['fuentes_asgnacion'.$codigo_asignacion]);
+
+                    if($cambio_valor == 1){
+                        $verificar_cambio = $cambio_valor;
+                        $valor_cambio = $fuentes_asgnacion;
+
+                    }
+                    else{
+                        $verificar_cambio = 0;
+                        $valor_cambio = $recurso_asignado;
+                    }
+
+                    $array_fuente_valor[] = array('codigo_etapa'=> $poa_codigo,
+                                                  'codigo_asignacion'=> $codigo_asignacion,
+                                                  'verificar_cambio'=> $verificar_cambio,
+                                                  'valor_cambio'=> $valor_cambio,
+                                                );
+
+                }
+
                 $array_datos[] = array('codigo_etapa'=> $poa_codigo,
                                        'codigo_actividad'=> $acp_codigo,
                                        'recurso'=>  $valor_solicitud,
                                        'other_value'=> $other_value,
-                                       'codigo_clasificador'=> $codigo_clasificador
+                                       'codigo_clasificador'=> $codigo_clasificador,
+                                       'asignaciones_solicitud'=> $array_fuente_valor
                                     );
             }
             $num_etapas++;
         }
     }
-    else{
-        $codigos_etapas_actividad = 0;
-    }
-
-    $array_fuentes_financiacion = array();
-    if($fuente_financiacion){
-        $numero_validacion = 0;
-        $cantidad_fuentes = count($fuente_financiacion);
-        for ($lista_fuentes=0; $lista_fuentes < $cantidad_fuentes ; $lista_fuentes++) { 
-            $codigo_fuente = $fuente_financiacion[$lista_fuentes];
-            $valor_solicitado = $_REQUEST['valorpoai'.$codigo_fuente];
-
-            $array_fuentes_financiacion[] = array('codigo_poai'=> $codigo_fuente, 
-                                                  'valor_solicitado'=> $valor_solicitado,
-                                                );
-
-            $validacion_saldo_poai = $registrosolicitudcdp->validacion_saldo_poai($codigo_fuente);
-
-            $saldo = $validacion_saldo_poai - $valor_solicitado;
-
-            if($saldo < 0){
-                $numero_validacion++; 
-            }
-        }
-    }  
+ 
 
     $registrosolicitudcdp->setFecha($txtFechaSolicitud);
+    $registrosolicitudcdp->setCodigoSolicitud($txtNumeroSolicitud);
     $registrosolicitudcdp->setAccion($selAccion);
     $registrosolicitudcdp->setEstado($chkestado);
     $registrosolicitudcdp->setPersonaSistema($personaSistema);
     $registrosolicitudcdp->setArrayDatos($array_datos);
-    $registrosolicitudcdp->setFuentesFinanciacion($array_fuentes_financiacion);
 
-    if($numero_validacion == 0){
-        $registrosolicitudcdp->insertSolicitud();
-    }
-    else{
-
-    }
-
-    echo $numero_validacion;
+    $registrosolicitudcdp->insertSolicitud();
     
 ?>
