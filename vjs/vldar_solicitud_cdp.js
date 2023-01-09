@@ -45,7 +45,7 @@ function validar_solicitud_cdp(){
         $("#error_estado").fadeOut('300');
     }
 
-	//Inicio Validacion actividades
+	//Inicio Validación actividades
 	cod_actividades = $('[name="actvddes[]"]:checked').map(function () {
 							return this.value;
 						}).get();
@@ -60,11 +60,13 @@ function validar_solicitud_cdp(){
 		$('#error_actividades').html('');
 	}
 
+	//Inicio Validación Etapas
 	for (let countActivis = 0; countActivis < cod_actividades.length; countActivis++) {
 		var codigo_etapa = $('#etpass'+cod_actividades[countActivis]).val();
+		var array_clasificadores = new Array();
 
 		if(codigo_etapa == 0){
-			$('#error_etapa'+cod_actividades[countActivis]).html('Seleccione al menos una Actividad');
+			$('#error_etapa'+cod_actividades[countActivis]).html('Seleccione la Etapa');
 			return false;
 		}
 		else{
@@ -77,8 +79,9 @@ function validar_solicitud_cdp(){
 
 		other_valor = other_valor.toString().replace(/\./g,'');
 
+		//Validación valor etapa
 		if(control_valor == 1){
-			if(parseFloat(valor_etapa) < parseFloat(other_valor)){
+			if(parseFloat(other_valor) >= parseFloat(valor_etapa)){
 				$('#error_valor_etpa'+cod_actividades[countActivis]).html('No puede ser mayor al valor de la Etapa');
 				return false;
 			}
@@ -92,42 +95,73 @@ function validar_solicitud_cdp(){
 			valor_validar = valor_etapa;
 		}
 
-	}
-	
-	for (let index = 0; index < cod_etapas.length; index++) {
-		var valetapa = $('#valetapa'+cod_etapas[index]).val();
-		var control_valor = $('#control_valor'+cod_etapas[index]).val();
-		var other_valor = $('#valor'+cod_etapas[index]).val();
-		var sumatoria_etapa = $('#sumatoria_etapa'+cod_etapas[index]).val();
-		var cantidad_asignacion = $('#cantidad_asignaciones'+cod_etapas[index]).val();
-		var suma_validacion = $('#suma_validacion'+cod_etapas[index]).val();
+		array_clasificadores = $('select[name="selClasificador'+cod_actividades[countActivis]+'[]"]').map(function () {
+			return this.value;
+		}).get();
 
-		other_valor = other_valor.toString().replace(/\./g,'');
+		cantidad_clasificadores = array_clasificadores.length;
 
-		var valor_validar = 0;
-
-
+		//Validación Clasificadores
 		var num_clasificadores = 0;
-		$("input[name='codigo_clasificador"+cod_etapas[index]+"[]']").each(function(indice, elemento) {
-			var clasificador_etapa = $(elemento).val();
-
-			if(clasificador_etapa == ''){
+		for (let dto_clasificadores = 0; dto_clasificadores < cantidad_clasificadores; dto_clasificadores++) {
+			var clasificador_etapa = array_clasificadores[dto_clasificadores];
+			
+			if(clasificador_etapa == 0){
 				num_clasificadores++;
 			}
-		});
-
+		}
+	
 		if(num_clasificadores > 0){
-			$("#errro_clasificador"+cod_etapas[index]).fadeIn('300');
-			$('#errro_clasificador'+cod_etapas[index]).html('Debe Ingresar los clasificadores');
+			$("#error_clasificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_clasificador'+cod_actividades[countActivis]).html('Debe Seleccionar los clasificadores');
 			return false;
 		}
 		else{
-			$("#errro_clasificador"+cod_etapas[index]).fadeOut('300');
-			$('#errro_clasificador'+cod_etapas[index]).html('');
+			$("#error_clasificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_clasificador'+cod_actividades[countActivis]).html('');
 		}
 
+		//Validación Valor Clasificador
+		var dscrmncion_clsfcdor = 0;
+		var total_clsfcdor = 0;
+		$("input[name='valor_clasificador"+cod_actividades[countActivis]+"[]']").each(function(indice, elemento) {
+			var valor_clsdcdor = $(elemento).val();
+			valor_clsdcdor = valor_clsdcdor.toString().replace(/\./g,'');
+
+			if(valor_clsdcdor == ''){
+				dscrmncion_clsfcdor++;
+			}
+			else{
+				total_clsfcdor = parseFloat(total_clsfcdor) + parseFloat(valor_clsdcdor);
+			}
+		});
+
+		if(dscrmncion_clsfcdor > 0){
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('Debe discriminar el valor por cada Clasificador');
+			return false;
+		}
+		else{
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
+		}
+
+		alert('Valor Etapa '+valor_validar+' Valor clasificadores '+total_clsfcdor)
+		//Valor de la Discriminación 
+		if(parseFloat(valor_validar) == parseFloat(total_clsfcdor)){
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
+		}
+		else{
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('El valor discriminado no coincide con el valor Solicitado');
+			return false;
+		}
+
+		var cantidad_asignacion = $('#cantidad_asignaciones'+codigo_etapa).val();
+
 		if(cantidad_asignacion > 0){
-			$("input[name='codigo_recurso"+cod_etapas[index]+"[]']").each(function(indice, elemento) {
+			$("input[name='codigo_recurso"+codigo_etapa+"[]']").each(function(indice, elemento) { 
 				var codigo_asignacion = $(elemento).val();
 				var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
 				var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
@@ -157,32 +191,29 @@ function validar_solicitud_cdp(){
 							$("#error_valor_asignado"+codigo_asignacion).fadeOut('300');
 							$('#error_valor_asignado'+codigo_asignacion).html('');							
 						}
-					}
-
-					
+					}					
 				}
-
 			});
 
 			if(parseFloat(valor_validar) == parseFloat(suma_validacion)){
-				$("#error_solicitado_etapa"+cod_etapas[index]).fadeOut('300');
-				$('#error_solicitado_etapa'+cod_etapas[index]).html('');
+				$("#error_solicitado_etapa"+codigo_etapa).fadeOut('300');
+				$('#error_solicitado_etapa'+codigo_etapa).html('');
 			}
 			else{
-				$("#error_solicitado_etapa"+cod_etapas[index]).fadeIn('300');
-				$('#error_solicitado_etapa'+cod_etapas[index]).html('EL Valor Solicitado no coincide con el valor asignado');
+				$("#error_solicitado_etapa"+codigo_etapa).fadeIn('300');
+				$('#error_solicitado_etapa'+codigo_etapa).html('EL Valor Solicitado no coincide con el valor asignado');
 				return false;
 			}
-			
+
 		}
 		else{
-			$("#recurso_slctado"+cod_etapas[index]).fadeIn('300');
-			$('#recurso_slctado'+cod_etapas[index]).html('No hay recursos Asignados para la Etapa');
+			$("#recurso_slctado"+codigo_etapa).fadeIn('300');
+			$('#recurso_slctado'+codigo_etapa).html('No hay recursos Asignados para la Etapa');
 			return false;
 		}
 
 	}
-
+	
 	//Fin Validacion Etapas y valores
 
 	var url_proceso = $('#url_proceso').val();

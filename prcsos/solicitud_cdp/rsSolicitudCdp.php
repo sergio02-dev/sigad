@@ -887,7 +887,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         $sql_list_cldfcadores = "SELECT cla_codigo, cla_nombre, cla_numero, cla_estado
                                    FROM principal.clasificadores
                                   WHERE cla_estado = 1
-                                  ORDER BY cla_numero, cla_nombre ASC;";
+                                  ORDER BY cla_numero ASC;";
 
         $query_list_cldfcadores = $this->cnxion->ejecutar($sql_list_cldfcadores);
 

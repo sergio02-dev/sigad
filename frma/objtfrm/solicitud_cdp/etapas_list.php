@@ -91,6 +91,9 @@
                 <td style="width: 5%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
             </tr>
         </table>
+        <span id="error_clasificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+        <span id="error_valor_clsificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+
     </div>
 </div>
 
@@ -144,7 +147,7 @@
             $('.desc<?php echo $codigo_actividad; ?>').html(descrpcion);
             $('.pric<?php echo $codigo_actividad; ?>').html("$ "+numberWithCommas(rcursos_etapa));
             $('#valor<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa)); 
-            $('#valor_etapa<?php echo $codigo_actividad; ?>').val(numberWithCommas(rcursos_etapa));       
+            $('#valor_etapa<?php echo $codigo_actividad; ?>').val(rcursos_etapa);       
         
             $.ajax({
                 url:"fuenteasignadaxetapa",
