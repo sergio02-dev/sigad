@@ -97,8 +97,6 @@
 
                     </div>
                     
-                   
-                    
                     <script type="text/javascript">
                         var cantida_clasificador = 0;
                         function getInput(type, poaCode){
@@ -124,8 +122,6 @@
                             append("clasfcdorCdgo"+poaCode, nodo_clasificacion);
                         }
 
-                        //cantida_clasificador
-
                         $('#checkOtrval<?php echo $poa_codigo; ?>').change(function(){
                             var val_other = $('input:checkbox[name=checkOtrval<?php echo $poa_codigo; ?>]:checked').val();
                             
@@ -139,8 +135,6 @@
                             }
                         });
                     </script>
-
-                    
 
                     <label style="color: #C2240B; display: none;"  class="font-weight-bold" id="titulo_fuente<?php echo $poa_codigo; ?>"><strong>Fuentes</strong></label>
 

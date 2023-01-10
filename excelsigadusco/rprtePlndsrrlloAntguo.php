@@ -41,7 +41,6 @@ $objPHPExcel->getProperties()
       'color' => array('rgb' => '6284F7')
     )
   );
-
   $texto_left=array(
     'font'  => array(
       //'bold'  => true,
@@ -88,6 +87,8 @@ $objPHPExcel->getProperties()
     )
   );
 
+
+  
   $titulo_left = array(
     'font'  => array(
         'bold'  => true,

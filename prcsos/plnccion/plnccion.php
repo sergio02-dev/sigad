@@ -640,18 +640,32 @@
 
         public function nombre_sede($codigo_sede){
             
-            $sql_nombre_sede="SELECT ind_codigo, ind_sede,
-                                     sed_nombre
-                                FROM plandesarrollo.indicador,
-                                     principal.sedes
-                               WHERE ind_sede = sed_codigo
-                                 AND ind_codigo = $codigo_sede;";
+            $sql_nombre_sede="SELECT sed_codigo, sed_nombre
+                                FROM principal.sedes
+                               WHERE sed_codigo = $codigo_sede;";
 
             $resultado_nombre_sede=$this->cnxion->ejecutar($sql_nombre_sede);
 
             $data_nombre_sede = $this->cnxion->obtener_filas($resultado_nombre_sede);
 
             $sed_nombre = $data_nombre_sede['sed_nombre'];
+
+            return $sed_nombre;
+        }
+
+        public function sede_indicador($codigo_indicador){
+            
+            $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida, ind_sede,
+                                        sed_nombre
+                                FROM plandesarrollo.indicador
+                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                WHERE ind_codigo = $codigo_indicador";
+
+            $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
+
+            $data_sede_indicador = $this->cnxion->obtener_filas($resultado_sede_indicador);
+
+            $sed_nombre = $data_sede_indicador['sed_nombre'];
 
             return $sed_nombre;
         }

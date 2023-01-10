@@ -3,6 +3,7 @@ function validar_solicitud_cdp(){
     var chkestado = $('input:radio[name=chkestado]:checked').val();
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
+	var cod_actividades = new Array();
 
 	if(txtFechaSolicitud == '0'){
         $("#error_fecha_solicitud").fadeIn('300');
@@ -44,69 +45,124 @@ function validar_solicitud_cdp(){
         $("#error_estado").fadeOut('300');
     }
 
-	//Inicio Validacion Etapas
-	cod_etapas = $('[name="etpass[]"]:checked').map(function () {
-						return this.value;
-					}).get();
+	//Inicio Validación actividades
+	cod_actividades = $('[name="actvddes[]"]:checked').map(function () {
+							return this.value;
+						}).get();
 
-	cantidad_etapas = cod_etapas.length;
+	cantidad_actividades = cod_actividades.length;
 
-	if(cantidad_etapas == 0){
-		$('#error_etapas').html('Seleccione al menos una Etapa');
+	if(cantidad_actividades == 0){
+		$('#error_actividades').html('Seleccione al menos una Actividad');
 		return false;
 	}
 	else{
-		$('#error_etapas').html('');
+		$('#error_actividades').html('');
 	}
-	
-	for (let index = 0; index < cod_etapas.length; index++) {
-		var valetapa = $('#valetapa'+cod_etapas[index]).val();
-		var control_valor = $('#control_valor'+cod_etapas[index]).val();
-		var other_valor = $('#valor'+cod_etapas[index]).val();
-		var sumatoria_etapa = $('#sumatoria_etapa'+cod_etapas[index]).val();
-		var cantidad_asignacion = $('#cantidad_asignaciones'+cod_etapas[index]).val();
-		var suma_validacion = $('#suma_validacion'+cod_etapas[index]).val();
+
+	//Inicio Validación Etapas
+	for (let countActivis = 0; countActivis < cod_actividades.length; countActivis++) {
+		var codigo_etapa = $('#etpass'+cod_actividades[countActivis]).val();
+		var array_clasificadores = new Array();
+
+		if(codigo_etapa == 0){
+			$('#error_etapa'+cod_actividades[countActivis]).html('Seleccione la Etapa');
+			return false;
+		}
+		else{
+			$('#error_etapa'+cod_actividades[countActivis]).html('');
+		}
+
+		var control_valor = $('#control_valor_chek'+cod_actividades[countActivis]).val();
+		var valor_etapa =  $('#valor_etapa'+cod_actividades[countActivis]).val();
+		var other_valor = $('#valor'+cod_actividades[countActivis]).val();
 
 		other_valor = other_valor.toString().replace(/\./g,'');
 
-		var valor_validar = 0;
-
+		//Validación valor etapa
 		if(control_valor == 1){
-			if(parseFloat(valetapa) < parseFloat(other_valor)){
-				$('#error_valor_etpa'+cod_etapas[index]).html('No puede ser mayor al valor de la Etapa');
+			if(parseFloat(other_valor) >= parseFloat(valor_etapa)){
+				$('#error_valor_etpa'+cod_actividades[countActivis]).html('No puede ser mayor al valor de la Etapa');
 				return false;
 			}
 			else{
-				$('#error_valor_etpa'+cod_etapas[index]).html('');
+				$('#error_valor_etpa'+cod_actividades[countActivis]).html('');
 			}
 			valor_validar = other_valor;
 		}
 		else{
 			control_valor = 0;
-			valor_validar = valetapa;
+			valor_validar = valor_etapa;
 		}
 
-		var num_clasificadores = 0;
-		$("input[name='codigo_clasificador"+cod_etapas[index]+"[]']").each(function(indice, elemento) {
-			var clasificador_etapa = $(elemento).val();
+		array_clasificadores = $('select[name="selClasificador'+cod_actividades[countActivis]+'[]"]').map(function () {
+			return this.value;
+		}).get();
 
-			if(clasificador_etapa == ''){
+		cantidad_clasificadores = array_clasificadores.length;
+
+		//Validación Clasificadores
+		var num_clasificadores = 0;
+		for (let dto_clasificadores = 0; dto_clasificadores < cantidad_clasificadores; dto_clasificadores++) {
+			var clasificador_etapa = array_clasificadores[dto_clasificadores];
+			
+			if(clasificador_etapa == 0){
 				num_clasificadores++;
 			}
-		});
-
+		}
+	
 		if(num_clasificadores > 0){
-			$("#errro_clasificador"+cod_etapas[index]).fadeIn('300');
-			$('#errro_clasificador'+cod_etapas[index]).html('Debe Ingresar los clasificadores');
+			$("#error_clasificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_clasificador'+cod_actividades[countActivis]).html('Debe Seleccionar los clasificadores');
 			return false;
 		}
 		else{
-			$("#errro_clasificador"+cod_etapas[index]).fadeOut('300');
-			$('#errro_clasificador'+cod_etapas[index]).html('');
+			$("#error_clasificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_clasificador'+cod_actividades[countActivis]).html('');
 		}
 
+		//Validación Valor Clasificador
+		var dscrmncion_clsfcdor = 0;
+		var total_clsfcdor = 0;
+		$("input[name='valor_clasificador"+cod_actividades[countActivis]+"[]']").each(function(indice, elemento) {
+			var valor_clsdcdor = $(elemento).val();
+			valor_clsdcdor = valor_clsdcdor.toString().replace(/\./g,'');
+
+			if(valor_clsdcdor == ''){
+				dscrmncion_clsfcdor++;
+			}
+			else{
+				total_clsfcdor = parseFloat(total_clsfcdor) + parseFloat(valor_clsdcdor);
+			}
+		});
+
+		if(dscrmncion_clsfcdor > 0){
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('Debe discriminar el valor por cada Clasificador');
+			return false;
+		}
+		else{
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
+		}
+
+		//Valor de la Discriminación 
+		if(parseFloat(valor_validar) == parseFloat(total_clsfcdor)){
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
+		}
+		else{
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('El valor discriminado no coincide con el valor Solicitado');
+			return false;
+		}
+
+		var cantidad_asignacion = $('#cantidad_asignaciones'+codigo_etapa).val();
+		
+		 
 		if(cantidad_asignacion > 0){
-			$("input[name='codigo_recurso"+cod_etapas[index]+"[]']").each(function(indice, elemento) {
+			var valor_tomar_asignacion = 0;
+			$("input[name='codigo_recurso"+codigo_etapa+"[]']").each(function(indice, elemento) { 
 				var codigo_asignacion = $(elemento).val();
 				var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
 				var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
@@ -114,8 +170,9 @@ function validar_solicitud_cdp(){
 
 				fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
 
+				//alert('Codigo Asignacion '+codigo_asignacion)
 				if(!cambio_valor){
-
+					valor_tomar_asignacion = parseFloat(valor_tomar_asignacion) + parseFloat(recurso_asignado);
 				}
 				else{
 					if(fuente_cambio == ''){
@@ -137,31 +194,28 @@ function validar_solicitud_cdp(){
 							$('#error_valor_asignado'+codigo_asignacion).html('');							
 						}
 					}
-
-					
+					valor_tomar_asignacion = parseFloat(valor_tomar_asignacion) + parseFloat(fuente_cambio);					
 				}
-
 			});
 
-			if(parseFloat(valor_validar) == parseFloat(suma_validacion)){
-				$("#error_solicitado_etapa"+cod_etapas[index]).fadeOut('300');
-				$('#error_solicitado_etapa'+cod_etapas[index]).html('');
+			if(parseFloat(valor_validar) == parseFloat(valor_tomar_asignacion)){
+				$("#error_solicitado_etapa"+codigo_etapa).fadeOut('300');
+				$('#error_solicitado_etapa'+codigo_etapa).html('');
 			}
 			else{
-				$("#error_solicitado_etapa"+cod_etapas[index]).fadeIn('300');
-				$('#error_solicitado_etapa'+cod_etapas[index]).html('EL Valor Solicitado no coincide con el valor asignado');
+				$("#error_solicitado_etapa"+codigo_etapa).fadeIn('300');
+				$('#error_solicitado_etapa'+codigo_etapa).html('EL Valor Solicitado no coincide con el valor asignado');
 				return false;
 			}
-			
+
 		}
 		else{
-			$("#recurso_slctado"+cod_etapas[index]).fadeIn('300');
-			$('#recurso_slctado'+cod_etapas[index]).html('No hay recursos Asignados para la Etapa');
+			$("#recurso_slctado"+codigo_etapa).fadeIn('300');
+			$('#recurso_slctado'+codigo_etapa).html('No hay recursos Asignados para la Etapa');
 			return false;
 		}
 
 	}
-
 	//Fin Validacion Etapas y valores
 
 	var url_proceso = $('#url_proceso').val();
