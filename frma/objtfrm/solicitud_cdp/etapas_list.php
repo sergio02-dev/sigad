@@ -107,7 +107,7 @@
 </div>
 
 <script type="text/javascript">
-    var select_info = '';
+    var select_info<?php echo $codigo_actividad; ?> = '';
     var lista_opciones = '';
     
     $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
@@ -172,9 +172,9 @@
                         lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
                     });
 
-                    select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
+                    select_info<?php echo $codigo_actividad; ?> = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
 
-                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info);
+                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info<?php echo $codigo_actividad; ?>);
                     
                     $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
                         liveSearch: true,
@@ -190,11 +190,14 @@
         maxOptions: 1
     });
 
-    var cantida_clasificador = 0;
+    var cantida_clasificador<?php echo $codigo_actividad; ?> = 0;
     function getInput(type, activCode){
         var activCode = activCode;
-        cantida_clasificador = cantida_clasificador +1;
-        var dta = '<tr class="'+activCode+cantida_clasificador+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+cantida_clasificador+'\')"></i><td></tr>'
+        cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
+        var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
+      
+        var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+        nombre_capa = '';
         return dta;
     }
 
@@ -221,13 +224,15 @@
 
     function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
         var activCode = activCode;
+
         var nodo_clasificacion = getInput("text", activCode);
         append("tablaClasificadores"+activCode, nodo_clasificacion);
     }
 
     function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
         var data_info = data_info;
-        $('.<?php echo $codigo_actividad; ?>'+data_info).remove();
+
+        $(data_info).remove();
     }
 
     $(".puntos_miles_etapa").on({

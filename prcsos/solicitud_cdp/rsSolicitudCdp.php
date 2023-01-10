@@ -287,7 +287,8 @@ Class RsSolicitudCdp extends SolicitudCdp{
                                 FROM cdp.asignacion_solicitud
                                INNER JOIN planaccion.asignacion_recuersos_etapa ON aso_asignacion = asre_codigo
                                INNER JOIN planaccion.fuente_financiacion ON asre_fuente = ffi_codigo
-                                WHERE aso_solicitud = $codigo_solicitud
+                               WHERE aso_solicitud = $codigo_solicitud
+                                 AND aso_valor > 0
                                 ORDER BY asre_vigenciarecurso ASC";
  
         $query_fuentes_solctud=$this->cnxion->ejecutar($sql_fuentes_solctud);
@@ -869,7 +870,8 @@ Class RsSolicitudCdp extends SolicitudCdp{
     public function clasificador_etapa_solicitud($codigo_solicitud, $codigo_etapa){
 
         $sql_clasificador_etapa_solicitud = "SELECT esc_codigo, esc_solicitud, esc_etapa, 
-                                                    esc_solitudetapa, esc_clasificador
+                                                    esc_solitudetapa, esc_clasificador,
+                                                    esc_valor
                                                FROM cdp.etapa_solicitud_clasificador
                                               WHERE esc_solicitud = $codigo_solicitud
                                                 AND esc_etapa = $codigo_etapa;";
@@ -919,5 +921,20 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $datClasificadores;
     }
 
+    public function nmbre_clsfcdor($codigo_clasificador){
+
+        $sql_nmbre_clsfcdor = "SELECT cla_codigo, cla_nombre, cla_numero, cla_estado
+                                 FROM principal.clasificadores
+                                WHERE cla_codigo = $codigo_clasificador";
+
+        $query_nmbre_clsfcdor = $this->cnxion->ejecutar($sql_nmbre_clsfcdor);
+
+        $data_nmbre_clsfcdor=$this->cnxion->obtener_filas($query_nmbre_clsfcdor);
+
+        $cla_nombre = $data_nmbre_clsfcdor['cla_nombre'];
+        $cla_numero = $data_nmbre_clsfcdor['cla_numero'];
+
+        return array($cla_nombre, $cla_numero);
+    }
 }
 ?>

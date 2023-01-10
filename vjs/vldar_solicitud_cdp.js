@@ -100,7 +100,7 @@ function validar_solicitud_cdp(){
 		}).get();
 
 		cantidad_clasificadores = array_clasificadores.length;
-
+		
 		//Validación Clasificadores
 		var num_clasificadores = 0;
 		for (let dto_clasificadores = 0; dto_clasificadores < cantidad_clasificadores; dto_clasificadores++) {
@@ -147,6 +147,7 @@ function validar_solicitud_cdp(){
 		}
 
 		//Valor de la Discriminación 
+		alert('valor validar '+valor_validar+' valor clasificadores '+total_clsfcdor)
 		if(parseFloat(valor_validar) == parseFloat(total_clsfcdor)){
 			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
@@ -214,6 +215,9 @@ function validar_solicitud_cdp(){
 			$('#recurso_slctado'+codigo_etapa).html('No hay recursos Asignados para la Etapa');
 			return false;
 		}
+
+		dscrmncion_clsfcdor = 0;
+		total_clsfcdor = 0;
 
 	}
 	//Fin Validacion Etapas y valores
