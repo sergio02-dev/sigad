@@ -825,8 +825,7 @@ $objPHPExcel->getProperties()
 $muyBajo= array(
   'font'  => array(
       'bold'  => true,
-      'color' => array('rgb' => '000000'),
-      //'color' => array('rgb' => 'FFFFFF'),
+      'color' => array('rgb' => 'FFFFFF'),
       'size'  => 11,
       'name'  => 'Calibri'
   ),
@@ -843,8 +842,7 @@ $muyBajo= array(
   ),
   'fill' => array(
     'type' => PHPExcel_Style_Fill::FILL_SOLID,
-    'color' => array('rgb' => 'FFFFFF')
-    //'color' => array('rgb' => '8D26EE')
+    'color' => array('rgb' => '8D26EE')
   )
 );
 $bajo= array(
@@ -867,8 +865,7 @@ $bajo= array(
   ),
   'fill' => array(
     'type' => PHPExcel_Style_Fill::FILL_SOLID,
-    'color' => array('rgb' => 'FFFFFF')
-    //'color' => array('rgb' => 'F6240B')
+    'color' => array('rgb' => 'F6240B')
   )
 );
 $medio= array(
@@ -891,8 +888,7 @@ $medio= array(
   ),
   'fill' => array(
     'type' => PHPExcel_Style_Fill::FILL_SOLID,
-    'color' => array('rgb' => 'FFFFFF')
-    //'color' => array('rgb' => 'DFE085')
+    'color' => array('rgb' => 'DFE085')
   )
 );
 
@@ -916,8 +912,7 @@ $alto= array(
   ),
   'fill' => array(
     'type' => PHPExcel_Style_Fill::FILL_SOLID,
-    'color' => array('rgb' => 'FFFFFF')
-    //'color' => array('rgb' => 'F5F903')
+    'color' => array('rgb' => 'F5F903')
   )
 );
 $muyAlto= array(
@@ -940,8 +935,7 @@ $muyAlto= array(
   ),
   'fill' => array(
     'type' => PHPExcel_Style_Fill::FILL_SOLID,
-    'color' => array('rgb' => 'FFFFFF')
-    //'color' => array('rgb' => '2AE910')
+    'color' => array('rgb' => '2AE910')
   )
 );
  
@@ -982,7 +976,7 @@ $muyAlto= array(
       
       $sheet->mergeCells("A".($num_registro).":G".($num_registro));
       $objPHPExcel->setActiveSheetIndex($numero_registro)
-      ->setCellValue('A'.$num_registro, 'TRIMESTRE '.$trimestreee);
+      ->setCellValue('A'.$num_registro, 'TRIMESTRE 1');
 
       $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".($num_registro).":G".($num_registro))->applyFromArray($trimestre);
 
@@ -1077,35 +1071,34 @@ $muyAlto= array(
           if($efficiencia<=20){
             $semaforoTablaUno=$muyBajo;
             $textoTablaUno="MUY BAJO";
-			$bolitasSemaforo = "img/semaforo/violsemaforo.png";
+            $bolitasSemaforo = "img/semaforo/violsemaforo.png";
           }
           if(($efficiencia>20)&&($efficiencia<=40)){
             $semaforoTablaUno=$bajo;
             $textoTablaUno="BAJO";
-			$bolitasSemaforo = "img/semaforo/redsemaforo.png";
+            $bolitasSemaforo = "img/semaforo/redsemaforo.png";
           }
           if(($efficiencia>40)&&($efficiencia<=60)){
             $semaforoTablaUno=$medio;
             $textoTablaUno="MEDIO";
-			$bolitasSemaforo = "img/semaforo/orangesemaforo.jpg";
+            $bolitasSemaforo = "img/semaforo/yellowsemaforo.png";
           }
           if(($efficiencia>60)&&($efficiencia<=80)){
             $semaforoTablaUno=$alto;
             $textoTablaUno="ALTO";
-			$bolitasSemaforo = "img/semaforo/yellowsemaforo.png";
+            $bolitasSemaforo = "img/semaforo/orangesemaforo.png";
           }
           if($efficiencia>80){
             $semaforoTablaUno=$muyAlto;
             $textoTablaUno="MUY ALTO";
-			$bolitasSemaforo = "img/semaforo/greensemaforo.png";
+            $bolitasSemaforo = "img/semaforo/greensemaforo.png";
           }
-		  
-		  $resultadodiferencia=abs(round($difffMetaLinea));
+
           $objPHPExcel->setActiveSheetIndex($numero_registro)
           ->setCellValue('A'.$num_registro, $acc_indicador)
           ->setCellValue('B'.$num_registro, $lineaBase)
           ->setCellValue('C'.$num_registro, $metaResultado)
-          ->setCellValue('D'.$num_registro, $resultadodiferencia)
+          ->setCellValue('D'.$num_registro, round($difffMetaLinea))
           ->setCellValue('E'.$num_registro, round($lineaAccionArr))
           ->setCellValue('F'.$num_registro, round($diferencia4mns5))
           ->setCellValue('G'.$num_registro, round($efficiencia,2))
@@ -1115,17 +1108,19 @@ $muyAlto= array(
           $objDrawing->setName($textoTablaUno);
           $objDrawing->setDescription($textoTablaUno);
           $objDrawing->setPath($bolitasSemaforo);
-          $objDrawing->setCoordinates('H'.$num_registro);   
+          $objDrawing->setCoordinates('I'.$num_registro);   
                           
           //setOffsetX works properly
-          $objDrawing->setOffsetX(120); 
-          $objDrawing->setOffsetY(10);                
+          $objDrawing->setOffsetX(10); 
+          $objDrawing->setOffsetY(5);                
           //set width, height
           $objDrawing->setWidth(50); 
           $objDrawing->setHeight(25); 
           $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
           $objPHPExcel->getActiveSheet()->getRowDimension($num_registro)->setRowHeight(30);
 
+
+         
 
           $objPHPExcel->getActiveSheet($numero_registro)->getStyle('A'.$num_registro)->applyFromArray($celdas);
           $objPHPExcel->getActiveSheet($numero_registro)->getStyle('B'.$num_registro)->applyFromArray($celdas);
@@ -1160,18 +1155,17 @@ $muyAlto= array(
      //Inicio Tabla Dos
      $sheet->mergeCells("A".($num_registro).":G".($num_registro));
      $objPHPExcel->setActiveSheetIndex($numero_registro)
-     ->setCellValue('A'.$num_registro, 'ACUMULADO 2015 T '.$trimestreee.' 2019');
+     ->setCellValue('A'.$num_registro, 'ACUMULADO 2015 T 1 2019');
 
      $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".($num_registro).":G".($num_registro))->applyFromArray($trimestre);
 
      $num_registro++;
-	
-	$operaciontrimestre=$trimestreee/4;
+
      $objPHPExcel->setActiveSheetIndex($numero_registro)
      ->setCellValue('A'.$num_registro, 'META RESULTADO (1)')
      ->setCellValue('B'.$num_registro, 'LÍNEA BASE 2014  (2)')
-     ->setCellValue('C'.$num_registro, 'ACUMULADO PDI T '.$trimestreee.' 2019 (3) = LINEA BASE 2018 + META 2019 * '.$operaciontrimestre.')')
-     ->setCellValue('D'.$num_registro, 'LOGRO HASTA T '.$trimestreee.' 2019 (4) = LINEA BASE 2018 + LOGRO T1 2019')
+     ->setCellValue('C'.$num_registro, 'ACUMULADO PDI T 1 2019 (3) = LINEA BASE 2018 + META 2019 / 4)')
+     ->setCellValue('D'.$num_registro, 'LOGRO HASTA T 1 2019 (4) = LINEA BASE 2018 + LOGRO T1 2019')
      ->setCellValue('E'.$num_registro, 'DIFERENCIA (5) = 4 - 5')
      ->setCellValue('F'.$num_registro, 'EFICACIA (6) = 4 / 3')
      ->setCellValue('G'.$num_registro, 'RANGO INDICADOR DE EFICACIA');
@@ -1204,19 +1198,16 @@ $muyAlto= array(
 
          $diffMetaLineaVla=$metaResultado-$lineaBase;
 
-         //$cmpoC=$valorEsperado+(($diffMetaLineaVla/4)*$trimestreee);
-		 $cmpoC=$lineaBase+($diffMetaLineaVla*$operaciontrimestre);
-		 $campoC=$cmpoC;
-		 
-         if($cmpoC > 0){
+         $cmpoC=$valorEsperado+(($diffMetaLineaVla/4)*$trimestreee);
+         if($cmpoC>0){
            $celdasCC=$celdas;
-          //$campoC=round($cmpoC,2);
+          $campoC=round($cmpoC,2);
          }
          else{
            $celdasCC=$celdasRojo;
-           //$campoC=round($cmpoC,2);
+           $campoC=round($cmpoC,2);
          }
-		
+
          $diffMetaLinea=$metaResultado-$lineaBase;
          if($diffMetaLinea<0){
            //$difffMetaLinea="-";
@@ -1277,27 +1268,31 @@ $muyAlto= array(
         if($cmpoF<=20){
           $semaforoTablaDos=$muyBajo;
           $textoTablaDos="MUY BAJO";
-		   $bolitasSemaforoDos="img/semaforo/violsemaforo.png";
+          $bolitasSemaforoDos="img/semaforo/violsemaforo.png";
         }
         if(($cmpoF>20)&&($cmpoF<=40)){
           $semaforoTablaDos=$bajo;
           $textoTablaDos="BAJO";
-		  $bolitasSemaforoDos="img/semaforo/redsemaforo.png";
+          $bolitasSemaforoDos="img/semaforo/redsemaforo.png";
+
         }
         if(($cmpoF>40)&&($cmpoF<=60)){
           $semaforoTablaDos=$medio;
           $textoTablaDos="MEDIO";
-		  $bolitasSemaforoDos = "img/semaforo/orangesemaforo.jpg";
+          $bolitasSemaforoDos = "img/semaforo/yellowsemaforo.png";
+
         }
         if(($cmpoF>60)&&($cmpoF<=80)){
           $semaforoTablaDos=$alto;
           $textoTablaDos="ALTO";
-		  $bolitasSemaforoDos = "img/semaforo/yellowsemaforo.png";
+          $bolitasSemaforoDos = "img/semaforo/orangesemaforo.png";
+
         }
         if($cmpoF>80){
           $semaforoTablaDos=$muyAlto;
           $textoTablaDos="MUY ALTO";
-		  $bolitasSemaforoDos = "img/semaforo/greensemaforo.png";
+          $bolitasSemaforoDos = "img/semaforo/greensemaforo.png";
+
         }
 
 
@@ -1310,22 +1305,22 @@ $muyAlto= array(
          ->setCellValue('F'.$num_registro, round($cmpoF,2))
          ->setCellValue('G'.$num_registro, $textoTablaDos);
 
+         
          $objDrawing = new PHPExcel_Worksheet_Drawing();
          $objDrawing->setName($textoTablaDos);
          $objDrawing->setDescription($textoTablaDos);
          $objDrawing->setPath($bolitasSemaforoDos);
-         $objDrawing->setCoordinates('G'.$num_registro);   
+         $objDrawing->setCoordinates('H'.$num_registro);   
 
 
           //setOffsetX works properly
-          $objDrawing->setOffsetX(120); 
-          $objDrawing->setOffsetY(10);                
+          $objDrawing->setOffsetX(10); 
+          $objDrawing->setOffsetY(5);                
           //set width, height
           $objDrawing->setWidth(50); 
           $objDrawing->setHeight(25); 
           $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
           $objPHPExcel->getActiveSheet()->getRowDimension($num_registro)->setRowHeight(30);
-
 
          $objPHPExcel->getActiveSheet($numero_registro)->getStyle('A'.$num_registro)->applyFromArray($celdas);
          $objPHPExcel->getActiveSheet($numero_registro)->getStyle('B'.$num_registro)->applyFromArray($celdas);
@@ -1369,8 +1364,8 @@ $muyAlto= array(
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('D')->setWidth(12);
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('E')->setWidth(10);
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('F')->setWidth(15);
-  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('G')->setWidth(24);
-  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('H')->setWidth(24);
+  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('G')->setWidth(13);
+  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('H')->setWidth(13);
   $objPHPExcel->getActiveSheet($numero_excel)->getRowDimension($numero_ingresos)->setRowHeight(30);
 
   //***************Fin Hoja Dos *************** */
@@ -1590,53 +1585,26 @@ $muyAlto= array(
       //Semaforo
       if(round($ArrayPorcentejeProyecto[$contadorProyecto],2)<=20){
         $semaforoResumen=$muyBajo;
-		$bolitasSemaforo = "img/semaforo/violsemaforo.png";
-		$alertsemaforo="\nMUY BAJO";
       }
       if((round($ArrayPorcentejeProyecto[$contadorProyecto],2)>20)&&(round($ArrayPorcentejeProyecto[$contadorProyecto],2)<=40)){
         $semaforoResumen=$bajo;
-		$bolitasSemaforo = "img/semaforo/redsemaforo.png";
-		$alertsemaforo="\nBAJO";
       }
       if((round($ArrayPorcentejeProyecto[$contadorProyecto],2)>40)&&(round($ArrayPorcentejeProyecto[$contadorProyecto],2)<=60)){
         $semaforoResumen=$medio;
-		$bolitasSemaforo = "img/semaforo/orangesemaforo.jpg";
-		$alertsemaforo="\nMEDIO";
       }
       if((round($ArrayPorcentejeProyecto[$contadorProyecto],2)>60)&&(round($ArrayPorcentejeProyecto[$contadorProyecto],2)<=80)){
         $semaforoResumen=$alto;
-		$bolitasSemaforo = "img/semaforo/yellowsemaforo.png";
-		$alertsemaforo="\nALTO";
       }
       if(round($ArrayPorcentejeProyecto[$contadorProyecto],2)>80){
         $semaforoResumen=$muyAlto;
-		$bolitasSemaforo = "img/semaforo/greensemaforo.png";
-		$alertsemaforo="\nMUY ALTO";
       }
-
-
-	  $objDrawing = new PHPExcel_Worksheet_Drawing();
-	  $objDrawing->setName($textoTablaUno);
-	  $objDrawing->setDescription($textoTablaUno);
-	  $objDrawing->setPath($bolitasSemaforo);
-	  $objDrawing->setCoordinates('C'.$num_registro);   
-					  
-	  //setOffsetX works properly
-	  $objDrawing->setOffsetX(120); 
-	  $objDrawing->setOffsetY(10);                
-	  //set width, height
-	  $objDrawing->setWidth(50); 
-	  $objDrawing->setHeight(25); 
-	  $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
-	  $objPHPExcel->getActiveSheet()->getRowDimension($num_registro)->setRowHeight(30);
-
 
       $promedioProyecto=$promedioProyecto+round($ArrayPorcentejeProyecto[$contadorProyecto],2);
 
       $objPHPExcel->setActiveSheetIndex($numero_registro)
       ->setCellValueExplicit('A'.$numero_registroProyecto, '',PHPExcel_Cell_DataType::TYPE_STRING)
       ->setCellValueExplicit('B'.$num_registro, 'PROMEDIO AVANCE PROYECTO',PHPExcel_Cell_DataType::TYPE_STRING)
-      ->setCellValueExplicit('C'.$num_registro, (round($ArrayPorcentejeProyecto[$contadorProyecto],2)/100).' '.$alertsemaforo,PHPExcel_Cell_DataType::TYPE_STRING)
+      ->setCellValueExplicit('C'.$num_registro, (round($ArrayPorcentejeProyecto[$contadorProyecto],2)/100),PHPExcel_Cell_DataType::TYPE_STRING)
       ->setCellValueExplicit('D'.$num_registro, 'TOTAL PROYECTO $',PHPExcel_Cell_DataType::TYPE_STRING)
       ->setCellValueExplicit('E'.$num_registro, $ArrayCostoProyecto[$contadorProyecto],PHPExcel_Cell_DataType::TYPE_NUMERIC);
 
@@ -1725,7 +1693,7 @@ $muyAlto= array(
 
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('A')->setWidth(35);
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('B')->setWidth(30);
-  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('C')->setWidth(25);
+  $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('C')->setWidth(15);
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('D')->setWidth(15);
   $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('E')->setWidth(40);
   $objPHPExcel->getActiveSheet($numero_excel)->getRowDimension($numero_ingresos)->setRowHeight(30);
@@ -1847,8 +1815,7 @@ $muyAlto= array(
 /*********************Inicio Grafica ****************************/
 $numero_registro=4;
 $objPHPExcel->setActiveSheetIndex($numero_registro);
-//$objPHPExcel->getActiveSheet()->setTitle('Graficas');
-$objPHPExcel->getActiveSheet()->setTitle('Hoja 10');
+$objPHPExcel->getActiveSheet()->setTitle('Graficas');
 $nombreHoja="Graficas";
 /*
 $objPHPExcel->setActiveSheetIndex($numero_registro)

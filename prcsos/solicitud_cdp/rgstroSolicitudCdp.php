@@ -294,6 +294,46 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         return $poav_fuentefinanciacion;
     }
 
+    public function cod_clasf(){
+
+        $sql_cod_clasf="SELECT MAX(esc_codigo) AS cod_clss
+                        FROM cdp.etapa_solicitud_clasificador;";
+
+        $query_cod_clasf=$this->cnxion->ejecutar($sql_cod_clasf);
+
+        $data_cod_clasf=$this->cnxion->obtener_filas($query_cod_clasf);
+
+        $cod_clss = $data_cod_clasf['cod_clss'];
+
+        if($cod_clss){
+            $cod_classf = $cod_clss++;
+        }
+        else{
+            $cod_classf = 1;
+        }
+        return $cod_classf;
+    }
+
+    public function cod_etpa_slctud(){
+
+        $sql_cod_etpa_slctud="SELECT MAX(aes_codigo) AS cod_etpslcclass
+                                FROM cdp.actividad_etapa_solicitud;";
+
+        $query_cod_etpa_slctud=$this->cnxion->ejecutar($sql_cod_etpa_slctud);
+
+        $data_cod_etpa_slctud=$this->cnxion->obtener_filas($query_cod_etpa_slctud);
+
+        $cod_etpslcclass = $data_cod_etpa_slctud['cod_etpslcclass'];
+
+        if($cod_etpslcclass){
+            $cod_etplcclass = $cod_etpslcclass++;
+        }
+        else{
+            $cod_etplcclass = 1;
+        }
+        return $cod_etplcclass;
+    }
+
     public function oficina_cargo(){
 
         $codigo_proyecto = $this->codigo_proyecto($this->getAccion());
@@ -356,7 +396,6 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            NOW(), 
                                            NOW());";
                                         
-        //echo "ejemplo ".$insert_solicitud_cdp;
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 
         $datos_etapa = $this->getArrayDatos();
@@ -367,10 +406,10 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                 $codigo_actividad = $dta_etapas['codigo_actividad'];
                 $recurso = $dta_etapas['recurso'];
                 $other_value = $dta_etapas['other_value'];
-                $codigo_clasificador = $dta_etapas['codigo_clasificador'];
+                $cdgo_clasificador = $dta_etapas['codigo_clasificador'];
                 $asignaciones_solicitud = $dta_etapas['asignaciones_solicitud'];
 
-                $codigo_etapa_solicitud = date('YmdHis').rand(99,99999);
+                $codigo_etapa_solicitud = $this->cod_etpa_slctud();
 
                 $insert_etpas = "INSERT INTO cdp.actividad_etapa_solicitud(
                                              aes_codigo, 
@@ -397,11 +436,14 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                 $this->cnxion->ejecutar($insert_etpas);
 
                 //Clasificadores etapas
-                for ($clasfcadorEtpa=0; $clasfcadorEtpa < count($codigo_clasificador) ; $clasfcadorEtpa++) { 
-                    
-                    $cdg[$clasfcadorEtpa] = date('YmdHis').rand(99,99999);
+                if($cdgo_clasificador){
+                    foreach ($cdgo_clasificador as $dta_clasificadores) {
+                        $codigo_clasificador = $dta_clasificadores['codigo_clasificador'];
+                        $valor_clasificador = $dta_clasificadores['valor_clasificador'];
 
-                    $sql_insrt_clsfcdor[$clasfcadorEtpa] = "INSERT INTO cdp.etapa_solicitud_clasificador(
+                        $cod_clasf = $this->cod_clasf();
+
+                        $sql_insrt_clsfcdor = "INSERT INTO cdp.etapa_solicitud_clasificador(
                                                                         esc_codigo, 
                                                                         esc_solicitud, 
                                                                         esc_etapa, 
@@ -410,22 +452,25 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                                         esc_personacreo, 
                                                                         esc_personamodifico, 
                                                                         esc_fechacreo, 
-                                                                        esc_fechamodifico)
-                                                                VALUES ($cdg[$clasfcadorEtpa], 
+                                                                        esc_fechamodifico,
+                                                                        esc_valor)
+                                                                VALUES ($cod_clasf, 
                                                                         ".$this->codigoSolicitud.", 
                                                                         $codigo_etapa, 
                                                                         $codigo_etapa_solicitud, 
-                                                                        '".strtoupper($codigo_clasificador[$clasfcadorEtpa])."', 
+                                                                        '".$codigo_clasificador."', 
                                                                         ".$this->getPersonaSistema().", 
                                                                         ".$this->getPersonaSistema().", 
                                                                         NOW(), 
-                                                                        NOW());";
+                                                                        NOW(),
+                                                                        ".$valor_clasificador.");";
                                                                         
-                    $this->cnxion->ejecutar($sql_insrt_clsfcdor[$clasfcadorEtpa]);
+                    $this->cnxion->ejecutar($sql_insrt_clsfcdor);
+
+                    }
                 }
 
                 //fuentes recrsos 
-
                 foreach ($asignaciones_solicitud as $dta_asignacion) {
                     $codigo_etapa = $dta_asignacion['codigo_etapa'];
                     $codigo_asignacion = $dta_asignacion['codigo_asignacion'];

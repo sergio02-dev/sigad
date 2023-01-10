@@ -1,5 +1,6 @@
 <?php
-set_time_limit(1800000000);
+set_time_limit(180000000000);
+ini_set('memory_limit', '512M');
 $fecha_generar=date('Y-m-d_H:i:s');
 
 /** Incluir la libreria PHPExcel */

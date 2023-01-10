@@ -501,8 +501,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $dataform_solicitud_cdp;
     }
 
-    
-
     public function cantidad_chequed_actividades($codigo_solicitud){
 
         $sql_cantidad_chequed_actividades="SELECT COUNT(DISTINCT aes_actividad) AS cantidad
@@ -712,8 +710,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $valor_slctado;
     }
 
-
-
     public function lista_recursos_disponibles($codigo_actividades){
         $codigo_actividades = $codigo_actividades;
         $array_fuentes_disponibles = array();
@@ -769,7 +765,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $valor_expddo;
     }
-
 
     public function poai_etpa_gasto_mod($codigo_etapa, $codigo_solicitud){
 
@@ -887,6 +882,42 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $dataclasificador_etapa_solicitud;
     }
 
+    public function list_cldfcadores(){
+
+        $sql_list_cldfcadores = "SELECT cla_codigo, cla_nombre, cla_numero, cla_estado
+                                   FROM principal.clasificadores
+                                  WHERE cla_estado = 1
+                                  ORDER BY cla_numero ASC;";
+
+        $query_list_cldfcadores = $this->cnxion->ejecutar($sql_list_cldfcadores);
+
+        while($data_list_cldfcadores=$this->cnxion->obtener_filas($query_list_cldfcadores)){
+            $datalist_cldfcadores[] = $data_list_cldfcadores;
+        }
+        return $datalist_cldfcadores;
+    }
+
+    public function jsonCsfcdores(){
+        $list_cldfcadores = $this->list_cldfcadores();
+        if($list_cldfcadores){
+            foreach ($list_cldfcadores as $dta_clsfcdores) {
+                $cla_codigo = $dta_clsfcdores['cla_codigo'];
+                $cla_nombre = $dta_clsfcdores['cla_nombre'];
+                $cla_numero = $dta_clsfcdores['cla_numero'];
+
+                $rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
+                                       'cla_nombre'=> $cla_nombre, 
+                                       'cla_numero'=> $cla_numero
+                                    );
+
+            }
+            $datClasificadores = json_encode(array("data"=>$rsClsfcdres));
+        }
+        else{
+            $datClasificadores = json_encode(array("data"=>""));
+        }
+        return $datClasificadores;
+    }
 
 }
 ?>

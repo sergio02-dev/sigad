@@ -11,7 +11,7 @@
     $password='123456';
 
     //Base de datos a utilizar
-    $db='sigad';
+    $db='sigadlocal';
     //$db='sigad';
 
 

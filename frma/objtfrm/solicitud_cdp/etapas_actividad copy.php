@@ -46,7 +46,7 @@
 
                         $etpa_nombre = $poa_referencia.".".$poa_numero." ".$poa_objeto;
 
-                        $poai_etapa_gasto = $objSolicitudCdp->poai_etapa_gasto($poa_codigo);
+                        $poai_etapa_gasto = $objSolicitudCdp->poai_etapa_gasto($poa_codigo, $codigo_solicitud);
 
                         $rcursos_etapa = $poa_recurso - $poai_etapa_gasto;
 
@@ -78,6 +78,8 @@
                             <table class="clasfcdorCdgo<?php echo $poa_codigo; ?>">
                             
                             </table>
+
+                            <div class="alert alert-danger alerta-forcliente" id="errro_clasificador<?php echo $poa_codigo; ?>" role="alert"></div>
                             
                         </div>
 
@@ -126,8 +128,7 @@
 
                         $('#checkOtrval<?php echo $poa_codigo; ?>').change(function(){
                             var val_other = $('input:checkbox[name=checkOtrval<?php echo $poa_codigo; ?>]:checked').val();
-                            //var 
-
+                            
                             if(val_other==1){
                                 $('#text_valor<?php echo $poa_codigo; ?>').fadeIn(100);
                                 $('#control_valor_chek<?php echo $poa_codigo; ?>').val(1);
@@ -135,14 +136,13 @@
                             else{
                                 $('#text_valor<?php echo $poa_codigo; ?>').fadeOut(100);
                                 $('#control_valor_chek<?php echo $poa_codigo; ?>').val(0);
-
                             }
                         });
                     </script>
 
                     
 
-                    <label style="color: #CE270D; display: none;"  class="font-weight-bold" id="titulo_fuente<?php echo $poa_codigo; ?>">Fuentes</label>
+                    <label style="color: #C2240B; display: none;"  class="font-weight-bold" id="titulo_fuente<?php echo $poa_codigo; ?>"><strong>Fuentes</strong></label>
 
                     <div class="fuente_etapa<?php echo $poa_codigo; ?>">
 
@@ -151,13 +151,13 @@
                     
                 </td>
                 <td>
-                    &nbsp;<br><?php echo "$".number_format($rcursos_etapa,0,'','.'); ?>
+                    &nbsp;<br><strong><?php echo "$".number_format($rcursos_etapa,0,'','.'); ?></strong>
                     <br>
                     <div class="row">
                         <div class="col-sm-12" id="text_valor<?php echo $poa_codigo; ?>" style="display: <?php echo $otro_valor_campo; ?>;">
                             <div class="form-group">
                                 <label for="valor<?php echo $poa_codigo; ?>" class="font-weight-bold" >Valor </label>
-                                <input type="number" class="form-control caja_texto_sizer" min="0" max="<?php echo $rcursos_etapa; ?>" id="valor<?php echo $poa_codigo; ?>" name="valor<?php echo $poa_codigo; ?>" aria-describedby="textHelp" value="<?php echo $aes_valoretapa; ?>" required>
+                                <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" max="<?php echo $rcursos_etapa; ?>" id="valor<?php echo $poa_codigo; ?>" name="valor<?php echo $poa_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($rcursos_etapa,0,'','.'); ?>" required>
                                 <span id="error_valor_etpa<?php echo $poa_codigo; ?>" style="color:red; font-weight: bold;"></span>
                             </div> 
                         </div>
@@ -181,104 +181,30 @@
         
     </div>
     <span class="help-block" id="error"></span>
-    <span id="error_etapas" style="color:red; font-weight: bold;"></span>
-
+    <span id="error_etapas" style="color:#C2240B; font-weight: bold;"></span>
 </div>
-
-<!--<div class="form-group">
-    <label for="SumTotal" class="font-weight-bold">Total*</label>
-    <input type="text" class="form-control" id="SumTotal" name="SumTotal" aria-describedby="textHelp" data-rule-required="true" value="<?php echo number_format($valor_etps,0,'','.'); ?>" required readonly>
-    <span class="help-block" id="error"></span>            
-</div>-->
-
-<div class="form-group">
-    <label class="font-weight-bold">Fuentes de Finaniaci&oacute;n * </label>
-    <div class="bg">
-        <table class="table table-sm">
-            <?php
-                $lista_recursos_disponibles = $objSolicitudCdp->lista_recursos_disponibles($cdigo_actividad);
-                if($lista_recursos_disponibles){
-                    foreach($lista_recursos_disponibles as $dat_rcsos_disponibles){
-                        $codigo_poai = $dat_rcsos_disponibles['codigo_poai'];
-                        $codigo_fuente = $dat_rcsos_disponibles['codigo_fuente'];
-                        $recursos = $dat_rcsos_disponibles['recursos'];
-                        $nombre_fuente = $dat_rcsos_disponibles['nombre_fuente'];
-
-                        $checkear_fuente = "";
-            ?>
-            <tr>
-                <td>
-                    <div class="chiller_cb">
-                        <input id="listffnte<?php echo $codigo_poai; ?>" class="fntesRcrsos" name="fuenntes[]" data-valor_fuentes="<?php echo $recursos; ?>" type="checkbox" value="<?php echo $codigo_poai; ?>" <?php echo $checkear_fuente; ?> data-rule-required="true" required>
-                        <label for="listffnte<?php echo $codigo_poai; ?>"><?php echo $nombre_fuente; ?></label>
-                        <span></span>
-                    </div>
-                </td>
-                <td>
-                    &nbsp;<br><?php echo "$".number_format($recursos,0,'','.'); ?>
-                    <br>
-                    <div class="row">
-                        <input type="hidden" id="control_fuente<?php echo $codigo_poai; ?>" value="0">
-                        <div class="col-sm-12" id="text_solicitud_fuente<?php echo $codigo_poai; ?>" style="display: none;">
-                            <div class="form-group">
-                                <label for="valorpoai<?php echo $codigo_poai; ?>" class="font-weight-bold">Valor </label>
-                                <input type="number" class="form-control caja_texto_sizer" min="0" max="<?php echo $recursos; ?>" id="valorpoai<?php echo $codigo_poai; ?>" name="valorpoai<?php echo $codigo_poai; ?>" aria-describedby="textHelp" value="" required>
-                                <div class="alert alert-danger alerta-forcliente" id="error_valor_fuente<?php echo $codigo_poai; ?>" role="alert"></div>
-                            </div> 
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <?php
-                    }
-                }
-                else{
-            ?>
-            <tr>
-                <td>No hay Recursos</td>
-            </tr>
-            <?php
-                }
-            ?>
-        </table>
-        <div class="alert alert-danger alerta-forcliente" id="error_fuente" role="alert"></div>
-        <div class="alert alert-danger alerta-forcliente" id="error_valor_solicitado" role="alert"></div>
-        <div class="alert alert-danger alerta-forcliente" id="error_recursos_disponibles" role="alert"></div>
-    </div>
-</div>
-
 
 <input type="hidden" name="summaa" id="summaa" value="<?php echo $valor_etps; ?>">
 <script type="text/javascript">
-    
 
-    var valor_total = new Array();
+    $(".puntos_miles_etapa").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+    });
+
 
     function numberWithCommas(formatoNumero) {
         return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    $('.fntesRcrsos').change(function(){
-
-        //manejo visibilidad campo otro valor 
-        var codigo_poai = this.value;
-        //alert(codigo_poai);
-        if($('#control_fuente'+codigo_poai).val() == 0){
-            $('#control_fuente'+codigo_poai).val(1);
-            $('#text_solicitud_fuente'+codigo_poai).fadeIn(1);
-        }
-        else{
-            $('#control_fuente'+codigo_poai).val(0);
-            $('#text_solicitud_fuente'+codigo_poai).fadeOut(1);
-        }
-        //fin manejo visibilidad campo otro valor
-        
-    });
-
     $('.etapps').change(function(){
-
         var suma_etapa = 0;
-
         //manejo visibilidad campo otro valor 
         var codigo_etpa = this.value;
         if($('#control_valor'+codigo_etpa).val() == 0){
@@ -286,15 +212,24 @@
             $('.otro_valor'+codigo_etpa).fadeIn(1);
 
             //Fuentes 
-            $('#titulo_fuente'+codigo_poai).fadeIn(1);
+            $('#titulo_fuente'+codigo_etpa).fadeIn(1);
+            $.ajax({
+                url:"fuenteasignadaxetapa",
+                type:"POST",
+                data:'codigo_etapa='+codigo_etpa,
+                async:true,
+                success: function(message){
+                    $(".fuente_etapa"+codigo_etpa).empty().append(message);
+                }
+            });
+
         }
         else{
             $('#control_valor'+codigo_etpa).val(0);
             $('.otro_valor'+codigo_etpa).fadeOut(1);
-
             //Fuentes 
-            $('#titulo_fuente'+codigo_poai).fadeIn(1);
-            $("#etpas_lista").empty();
+            $('#titulo_fuente'+codigo_etpa).fadeOut(1);
+            $(".fuente_etapa"+codigo_etpa).empty();
         }
         //fin manejo visibilidad campo otro valor
 
@@ -306,7 +241,6 @@
             suma_etapa = parseInt(suma_etapa) + parseInt(valor_etapa[index]);   
         }
 
-        //$('#SumTotal').val(numberWithCommas(suma_etapa));
         $('#summaa').val(suma_etapa);
         
     });
