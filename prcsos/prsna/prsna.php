@@ -39,7 +39,8 @@
 
             $sql_selectEntidad="SELECT ent_codigo, ent_nombre
                                   FROM principal.entidad
-                                  WHERE ent_tipoentidad = 2;";
+                                  WHERE ent_tipoentidad = 2
+                                  AND ent_estado='1';";
 
             $query_selectEntidad=$this->cnxion->ejecutar($sql_selectEntidad);
 
@@ -53,7 +54,8 @@
 
             $sql_selectFacultad="SELECT ent_codigo, ent_nombre
                                   FROM principal.entidad
-                                  WHERE ent_tipoentidad = 1;";
+                                  WHERE ent_tipoentidad = 1
+                                  AND ent_estado='1';";
 
             $query_selectFacultad=$this->cnxion->ejecutar($sql_selectFacultad);
 
