@@ -629,7 +629,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_codigos_clasificadores_etapas="SELECT esc_codigo, esc_solicitud, 
                                                    esc_etapa, esc_solitudetapa, 
-                                                   esc_clasificador
+                                                   esc_clasificador, esc_valor
                                               FROM cdp.etapa_solicitud_clasificador
                                              WHERE esc_solicitud = $codigo_solicitud
                                                AND esc_etapa = $codigo_etapa
@@ -935,6 +935,25 @@ Class RsSolicitudCdp extends SolicitudCdp{
         $cla_numero = $data_nmbre_clsfcdor['cla_numero'];
 
         return array($cla_nombre, $cla_numero);
+    }
+
+    public function form_dta_etapa_solicitud($codigo_actividad, $codigo_solicitud){
+
+        $sql_form_dta_etapa_solicitud = "SELECT aes_codigo, aes_solicitud, aes_actividad, 
+                                                aes_etapa, aes_valoretapa, aes_otrovalor,
+                                                poa_referencia, poa_objeto, poa_numero,
+                                                poa_recurso
+                                           FROM cdp.actividad_etapa_solicitud
+                                          INNER JOIN planaccion.poai ON aes_etapa = poa_codigo
+                                          WHERE aes_actividad = $codigo_actividad
+                                            AND aes_solicitud = $codigo_solicitud;";
+
+        $query_form_dta_etapa_solicitud = $this->cnxion->ejecutar($sql_form_dta_etapa_solicitud);
+
+        while($data_form_dta_etapa_solicitud=$this->cnxion->obtener_filas($query_form_dta_etapa_solicitud)){
+            $dataform_dta_etapa_solicitud[] = $data_form_dta_etapa_solicitud;
+        }
+        return $dataform_dta_etapa_solicitud;
     }
 }
 ?>

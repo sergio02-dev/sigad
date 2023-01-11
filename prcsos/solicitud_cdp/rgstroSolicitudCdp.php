@@ -417,8 +417,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            ".$this->getPersonaSistema().", 
                                            NOW(), 
                                            NOW());";
-            echo "<br> sql Solicitud ".$insert_solicitud_cdp;
-                                        
+                                                                                   
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 
         $datos_etapa = $this->getArrayDatos();

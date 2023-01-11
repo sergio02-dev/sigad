@@ -19,8 +19,6 @@
     $datos_accion = $objSolicitudCdp->datos_accion($scdp_accion);
 
     $plan_accion_consulta = $objSolicitudCdp->plan_accion_consulta($codigo_plan);
-
-    $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
     
     $url_guardar="modificarsolicitudcdp";
     $task = "MODIFICAR SOLICITUD CDP";
@@ -81,245 +79,22 @@
             $actividades_solicitud = $objSolicitudCdp->actividades_solicitud($codigo_solicitud);
             if($actividades_solicitud){
                 foreach ($actividades_solicitud as $dat_actvdades_slctud) {
-                    $codigo_actividad = $dat_actvdades_slctud['aes_actividad'];
+                    $aes_actividad = $dat_actvdades_slctud['aes_actividad'];
                     $acp_referencia = $dat_actvdades_slctud['acp_referencia'];
                     $acp_numero = $dat_actvdades_slctud['acp_numero'];
                     $acp_descripcion = $dat_actvdades_slctud['acp_descripcion'];
 
                     $descripcion_actividad = "<strong>Actividad: </strong><br>".$acp_referencia.".".$acp_numero." ".$acp_descripcion;
                 
-                    $etapas_list = $objSolicitudCdp->etapas_actividad($codigo_actividad);
-
-                    $form_dta_etapa_solicitud = $objSolicitudCdp->form_dta_etapa_solicitud($codigo_actividad, $codigo_solicitud);
-                    if($form_dta_etapa_solicitud){
-                        foreach ($form_dta_etapa_solicitud as $dta_frma_etps) {
-                            $cod_etp = $dta_frma_etps['aes_etapa'];
-                            $ref_etp = $dta_frma_etps['poa_referencia'];
-                            $num_etp = $dta_frma_etps['poa_numero'];
-                            $objto_etp = $dta_frma_etps['poa_objeto'];
-                            $rcrso_etp = $dta_frma_etps['poa_recurso'];
-                            $other_val = $dta_frma_etps['aes_otrovalor'];
-                            $val_slctdo = $dta_frma_etps['aes_valoretapa'];                     
-                        }
-                        $dscrpp = $ref_etp.".".$num_etp." ".$objto_etp;
-                        $prcs = $rcrso_etp;
-                    }
-                    else{
-                        $cod_etp = 0;
-                        $dscrpp = "";
-                        $prcs = 0;
-                        $other_val = 0;
-                    }
-
-                    if($other_val == 1){
-                        $display_otro_valor = "block";
-                        $check_otro_valor = "checked";
-                        $cmpo_otro = $val_slctdo;
-                    }
-                    else{
-                        $display_otro_valor = "none";
-                        $check_otro_valor = "";
-                        $cmpo_otro = $prcs;
-                    }
         ?>
                     <div class="row">
                         <div class="col-md-12">
                             <label style="font-size: 15px;"><?php echo $descripcion_actividad; ?></label>
                         </div>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="etpass<?php echo $codigo_actividad; ?>" class="font-weight-bold">Etapa *</label>
-                                <select name="etpass<?php echo $codigo_actividad; ?>" id="etpass<?php echo $codigo_actividad; ?>" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true">
-                                    <option value="0" data-codigo_etapa="0" data-descrpcion="" data-rcursos_etapa="0"> Seleccione ...</option>
-                                    <?php
-                                        if($etapas_list){
-                                            foreach ($etapas_list as $dta_etpas_list) {
-                                                $poa_codigo = $dta_etpas_list['poa_codigo'];
-                                                $poa_referencia = $dta_etpas_list['poa_referencia'];
-                                                $poa_objeto = $dta_etpas_list['poa_objeto']; 
-                                                $poa_recurso = $dta_etpas_list['poa_recurso'];
-                                                $poa_estado = $dta_etpas_list['poa_estado'];
-                                                $poa_numero = $dta_etpas_list['poa_numero']; 
-                                                $poa_vigencia = $dta_etpas_list['poa_vigencia'];
-
-                                                $etpa_nombre = $poa_referencia.".".$poa_numero." ".$poa_objeto;
-
-                                                $poai_etapa_gasto = $objSolicitudCdp->poai_etapa_gasto($poa_codigo, $codigo_solicitud);
-
-                                                $rcursos_etapa = $poa_recurso - $poai_etapa_gasto;
-                                                
-                                                if($cod_etp == $poa_codigo){
-                                                    $selected_etpa = "selected";
-                                                }
-                                                else{
-                                                    $selected_etpa = "";
-                                                }
-                                    ?>
-                                        <option value="<?php echo  $poa_codigo; ?>" <?php echo $selected_etpa; ?> data-codigo_etapa="<?php echo $poa_codigo; ?>" data-rprpcion="<?php echo $etpa_nombre; ?>" data-rcursos_etapa="<?php echo $rcursos_etapa; ?>"><?php echo substr($etpa_nombre,0,110); ?></option>
-                                    <?php
-                                            }
-                                        }
-                                        else{
-                                    ?>
-                                        <option value="0" data-codigo_etapa="0" data-pcion="" data-rcursos_etapa="0"> No hay Etapas</option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                                <span id="error_etapa<?php echo $codigo_actividad; ?>" style="color:#C2240B; font-weight: bold;"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="informacion_etapa<?php echo $codigo_actividad; ?>">
-                        <div class="row">
-                            <div class="col-md-8"><?php echo $dscrpp; ?></div>
-                            <div class="col-md-4"><?php echo "$".number_format($prcs,0,'','.'); ?></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <br>
-                                <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="0">
-                                <input type="checkbox" name="checkOtrval<?php echo $codigo_actividad; ?>" id="checkOtrval<?php echo $codigo_actividad; ?>" value="1" <?php echo $check_otro_valor; ?>> &nbsp;Otro valor
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group" id="text_valor<?php echo $codigo_actividad; ?>" style="display: <?php echo $display_otro_valor; ?>;">
-                                    <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
-                                    <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="<?php echo number_format($cmpo_otro,0,'','.'); ?>" required>
-                                    <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
-                                    <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="<?php echo $prcs; ?>">
-                                </div> 
-                            </div>
-                        </div>                       
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table tablaClasificadores<?php echo $codigo_actividad; ?>">
-                                <tr>
-                                    <th colspan="3">Codigo Casificador</th>
-                                </tr>
-                                <?php 
-                                    $codigos_clasificadores_etapas = $objSolicitudCdp->codigos_clasificadores_etapas($codigo_solicitud, $cod_etp);
-                                    if($codigos_clasificadores_etapas){
-                                        $num_control = 0;
-                                        $nun_inicio = count($codigos_clasificadores_etapas);
-                                        foreach ($codigos_clasificadores_etapas as $dta_clsfcador) {
-                                            $esc_codigo = $dta_clsfcador['esc_codigo']; 
-                                            $esc_etapa = $dta_clsfcador['esc_etapa'];
-                                            $esc_solitudetapa = $dta_clsfcador['esc_solitudetapa'];
-                                            $esc_clasificador = $dta_clsfcador['esc_clasificador'];
-                                            $esc_valor = $dta_clsfcador['esc_valor'];
-
-                                            if($num_control == 0){
-                                ?>
-                                <tr>
-                                    <td style="width: 65%">
-                                        <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
-                                            <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8">
-                                                <option value="0">Seleccione...</option>
-                                                <?php
-                                                    if($list_cldfcadores){
-                                                        foreach ($list_cldfcadores as $dat_clsfcdor) {
-                                                            $cla_codigo = $dta_clsfcador['cla_codigo'];
-                                                            $cla_nombre = $dta_clsfcador['cla_nombre'];
-                                                            $cla_numero = $dta_clsfcador['cla_numero'];
-
-                                                            if($esc_clasificador == $cla_codigo){
-                                                                $selected_clas = "selected";
-                                                            }
-                                                            else{
-                                                                $selected_clas = "";
-                                                            }
-                                                ?>
-                                                <option value="<?php echo $cla_codigo; ?>" <?php echo $selected_clas; ?>><?php echo $cla_numero." ".$cla_nombre; ?></option>
-                                                <?php
-                                                        }
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 30%">
-                                        <div class="form-label-group form-group">
-                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        <i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i>
-                                    </td>
-                                </tr>
-                                <?php
-                                            }
-                                            else{
-                                ?>
-                                <tr class="<?php echo $codigo_actividad.$num_control; ?>">
-                                    <td style="width: 65%">
-                                        <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
-                                            <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8">
-                                                <option value="0">Seleccione...</option>
-                                                <?php
-                                                    if($list_cldfcadores){
-                                                        foreach ($list_cldfcadores as $dat_clsfcdor) {
-                                                            $cla_codigo = $dta_clsfcador['cla_codigo'];
-                                                            $cla_nombre = $dta_clsfcador['cla_nombre'];
-                                                            $cla_numero = $dta_clsfcador['cla_numero'];
-
-                                                            if($esc_clasificador == $cla_codigo){
-                                                                $selected_clas = "selected";
-                                                            }
-                                                            else{
-                                                                $selected_clas = "";
-                                                            }
-                                                ?>
-                                                <option value="<?php echo $cla_codigo; ?>" <?php echo $selected_clas; ?>><?php echo $cla_numero." ".$cla_nombre; ?></option>
-                                                <?php
-                                                        }
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td style="width: 30%">
-                                        <div class="form-label-group form-group">
-                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
-                                        </div>
-                                    </td>
-                                    <td style="width: 5%">
-                                        <i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad.$num_control; ?>')"></i>
-                                    </td>
-                                </tr>
-                                <?php
-                                            }
-
-                                ?>
-
-
-                                <?php
-                                            $num_control++;
-                                        }
-                                    }
-                                ?>
-                            </table>
-                            <input type="hidden" name="num_ini<?php echo $codigo_actividad; ?>" id="num_ini<?php echo $codigo_actividad; ?>" value="<?php echo $nun_inicio; ?>">
-                        </div>
-                    </div>
-                    
-                    
-
-
-
-
-
+                    <br>
         <?php
-                    $etapas_solicitud = $objSolicitudCdp->etapas_solicitud($codigo_actividad, $codigo_solicitud);
+                    $etapas_solicitud = $objSolicitudCdp->etapas_solicitud($aes_actividad, $codigo_solicitud);
                     if($etapas_solicitud){
         ?>
                     <div class="form-group">
@@ -657,71 +432,6 @@
                     </div>
         <?php
                     }
-        ?>
-        <script type="text/javascript">
-            var select_info<?php echo $codigo_actividad; ?> = '';
-            var lista_opciones<?php echo $codigo_actividad; ?> = '';
-
-            function cargar_select() {
-                $.ajax({
-                    url:"jclasificadores",
-                    type:"POST",
-                    data:'valor',
-                    async:true,
-                    dataType: 'json',
-                    success: function(message){
-                        datos = message.data;
-                        $.each(datos, function(index, element){
-                            lista_opciones<?php echo $codigo_actividad; ?> += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
-                        });
-
-                        select_info<?php echo $codigo_actividad; ?> = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones<?php echo $codigo_actividad; ?>+'</select>';
-
-                    }
-                });
-            }
-
-            var cantida_clasificador<?php echo $codigo_actividad; ?> = $('#num_ini<?php echo $codigo_actividad; ?>').val(); 
-            function getInput(type, activCode){
-                var activCode = activCode;
-                cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
-                var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
-            
-                var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
-                nombre_capa = '';
-                return dta;
-            }
-
-            function append(className, nodoToAppend){
-                var nodo = document.getElementsByClassName(className)[0];
-                $('.'+className).append(nodoToAppend);
-
-                $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
-                    liveSearch: true,
-                    maxOptions: 1
-                });
-
-                $(".puntos_miles_valor").on({
-                    "focus": function (event) {
-                        $(event.target).select();
-                    },
-                    "keyup": function (event) {
-                        $(event.target).val(function (index, value ) {
-                            return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-                        });
-                    }
-                });
-            }
-            
-            function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
-                cargar_select();
-                var activCode = activCode;
-
-                var nodo_clasificacion = getInput("text", activCode);
-                append("tablaClasificadores"+activCode, nodo_clasificacion);
-            }     
-        </script>
-        <?php
                 }
             }
         ?>
@@ -758,7 +468,6 @@
 <script src="vjs/vldar_solicitud_cdp_mod.js"></script>
 
 <script type="text/javascript">
-
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
