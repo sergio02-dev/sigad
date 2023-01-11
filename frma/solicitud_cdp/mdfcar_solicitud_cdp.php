@@ -218,6 +218,7 @@
                                             $esc_clasificador = $dta_clsfcador['esc_clasificador'];
                                             $esc_valor = $dta_clsfcador['esc_valor'];
 
+
                                             if($num_control == 0){
                                 ?>
                                 <tr>
@@ -228,9 +229,9 @@
                                                 <?php
                                                     if($list_cldfcadores){
                                                         foreach ($list_cldfcadores as $dat_clsfcdor) {
-                                                            $cla_codigo = $dta_clsfcador['cla_codigo'];
-                                                            $cla_nombre = $dta_clsfcador['cla_nombre'];
-                                                            $cla_numero = $dta_clsfcador['cla_numero'];
+                                                            $cla_codigo = $dat_clsfcdor['cla_codigo'];
+                                                            $cla_nombre = $dat_clsfcdor['cla_nombre'];
+                                                            $cla_numero = $dat_clsfcdor['cla_numero'];
 
                                                             if($esc_clasificador == $cla_codigo){
                                                                 $selected_clas = "selected";
@@ -249,7 +250,7 @@
                                     </td>
                                     <td style="width: 30%">
                                         <div class="form-label-group form-group">
-                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo number_format($esc_valor,0,'','.'); ?>" required> 
                                         </div>
                                     </td>
                                     <td style="width: 5%">
@@ -268,9 +269,9 @@
                                                 <?php
                                                     if($list_cldfcadores){
                                                         foreach ($list_cldfcadores as $dat_clsfcdor) {
-                                                            $cla_codigo = $dta_clsfcador['cla_codigo'];
-                                                            $cla_nombre = $dta_clsfcador['cla_nombre'];
-                                                            $cla_numero = $dta_clsfcador['cla_numero'];
+                                                            $cla_codigo = $dat_clsfcdor['cla_codigo'];
+                                                            $cla_nombre = $dat_clsfcdor['cla_nombre'];
+                                                            $cla_numero = $dat_clsfcdor['cla_numero'];
 
                                                             if($esc_clasificador == $cla_codigo){
                                                                 $selected_clas = "selected";
@@ -289,11 +290,11 @@
                                     </td>
                                     <td style="width: 30%">
                                         <div class="form-label-group form-group">
-                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                                            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo number_format($esc_valor,0,'','.'); ?>" required> 
                                         </div>
                                     </td>
                                     <td style="width: 5%">
-                                        <i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad.$num_control; ?>')"></i>
+                                        <i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>('.<?php echo $codigo_actividad.$num_control; ?>')"></i>
                                     </td>
                                 </tr>
                                 <?php
@@ -660,25 +661,12 @@
         ?>
         <script type="text/javascript">
             var select_info<?php echo $codigo_actividad; ?> = '';
-            var lista_opciones<?php echo $codigo_actividad; ?> = '';
+           
+            function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
+     
+                var data_info = data_info;
 
-            function cargar_select() {
-                $.ajax({
-                    url:"jclasificadores",
-                    type:"POST",
-                    data:'valor',
-                    async:true,
-                    dataType: 'json',
-                    success: function(message){
-                        datos = message.data;
-                        $.each(datos, function(index, element){
-                            lista_opciones<?php echo $codigo_actividad; ?> += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
-                        });
-
-                        select_info<?php echo $codigo_actividad; ?> = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones<?php echo $codigo_actividad; ?>+'</select>';
-
-                    }
-                });
+                $(data_info).remove();
             }
 
             var cantida_clasificador<?php echo $codigo_actividad; ?> = $('#num_ini<?php echo $codigo_actividad; ?>').val(); 
@@ -686,8 +674,9 @@
                 var activCode = activCode;
                 cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
                 var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
-            
-                var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+                var select_options<?php echo $codigo_actividad; ?> = '<select name="selClasificador'+activCode+'[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
+
+                var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
                 nombre_capa = '';
                 return dta;
             }
@@ -714,9 +703,7 @@
             }
             
             function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
-                cargar_select();
                 var activCode = activCode;
-
                 var nodo_clasificacion = getInput("text", activCode);
                 append("tablaClasificadores"+activCode, nodo_clasificacion);
             }     
@@ -758,6 +745,25 @@
 <script src="vjs/vldar_solicitud_cdp_mod.js"></script>
 
 <script type="text/javascript">
+    var select_data = '';
+    var lista_opciones = '';
+    $( document ).ready(function() {
+        $.ajax({
+            url:"jclasificadores",
+            type:"POST",
+            data:'valor',
+            async:true,
+            dataType: 'json',
+            success: function(message){
+                datos = message.data;
+                $.each(datos, function(index, element){
+                    lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
+                });
+            }
+        });
+    });
+
+    
 
     $('.selectpicker').selectpicker({
         liveSearch: true,
