@@ -299,11 +299,6 @@
                                 </tr>
                                 <?php
                                             }
-
-                                ?>
-
-
-                                <?php
                                             $num_control++;
                                         }
                                     }
@@ -314,7 +309,142 @@
                     </div>
                     
                     
+                    <div class="fuentes_etapa<?php echo $codigo_actividad; ?>">
+                        <div class="row">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Fuentes</th>
+                                    </tr>
+                                </thead>
+                                <?php 
+                                    $fuente_asignada_etapa = $objSolicitudCdp->fuente_asignada_etapa($cod_etp);
+                                    if($fuente_asignada_etapa){
+                                        $cant = 0;
+                                ?>
+                                <tbody>
+                                <?php
+                                    foreach ($fuente_asignada_etapa as $dta_fnte_asgnda_etpa) {
+                                        $asre_codigo = $dta_fnte_asgnda_etpa['asre_codigo'];
+                                        $asre_etapa = $dta_fnte_asgnda_etpa['asre_etapa'];
+                                        $asre_accion = $dta_fnte_asgnda_etpa['asre_etapa'];
+                                        $asre_fuente = $dta_fnte_asgnda_etpa['asre_fuente']; 
+                                        $asre_indicador = $dta_fnte_asgnda_etpa['asre_indicador'];
+                                        $asrerecurso = $dta_fnte_asgnda_etpa['asre_recurso'];
+                                        $ffi_nombre = $dta_fnte_asgnda_etpa['ffi_nombre'];
+                                        $asre_vigenciarecurso = $dta_fnte_asgnda_etpa['asre_vigenciarecurso'];
 
+                                        $gasto_asignacion = $objSolicitudCdp->gasto_asignacion($asre_codigo, $codigo_solicitud);
+
+                                        $asre_recurso = $asrerecurso - $gasto_asignacion;
+                                        
+                                        list($otro_valor_asignacion, $valor_asignacion) = $objSolicitudCdp->presupuesto_x_fuente($codigo_solicitud, $asre_codigo);
+                                        if($otro_valor_asignacion == 1){
+                                            $ver_caja = "block";
+                                            $check_valor = "checked";
+                                            $valor_suma_fuentes = $valor_suma_fuentes + $valor_asignacion; 
+                                            $asre_recurso_mod = $valor_asignacion;
+                                        }
+                                        else{
+                                            $ver_caja = "none";
+                                            $check_valor = "";
+                                            $valor_suma_fuentes = $valor_suma_fuentes + $asre_recurso; 
+                                            $asre_recurso_mod = $asre_recurso;
+                                        }
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?php echo $asre_vigenciarecurso." ".str_replace('INV -','', $ffi_nombre); ?></strong>
+                                        </td>
+                                        <td>
+                                            <strong><?php echo "$ ".number_format($asre_recurso,0,'','.'); ?></strong><br>
+                                            &nbsp;&nbsp;<input type="checkbox" name="checkCmbioval<?php echo $asre_codigo; ?>" id="checkCmbioval<?php echo $asre_codigo; ?>"  value="1" <?php echo $check_valor; ?>> &nbsp;Otro valor
+                                            <input type="hidden" id="recurso_asignado<?php echo $asre_codigo; ?>" name="recurso_asignado<?php echo $asre_codigo; ?>" value="<?php echo $asre_recurso; ?>">
+                                            <input type="hidden" name="codigo_recurso<?php echo $poa_codigo; ?>[]" value="<?php echo $asre_codigo; ?>">
+
+                                            <script type="text/javascript">
+                                                $('#checkCmbioval<?php echo $asre_codigo; ?>').change(function(){
+                                                    var cambio_valor = $('input:checkbox[name=checkCmbioval<?php echo $asre_codigo; ?>]:checked').val();
+                                                    var valor_solicitado = 0;
+
+                                                    if(!cambio_valor){
+                                                        $('.valor_cambio<?php echo $asre_codigo; ?>').fadeOut('100');
+                                                    }
+                                                    else{
+                                                        $('.valor_cambio<?php echo $asre_codigo; ?>').fadeIn('100');
+                                                    }
+
+                                                    $("input[name='codigo_recurso<?php echo $poa_codigo; ?>[]']").each(function(indice, elemento) {
+                                                        var codigo_asignacion = $(elemento).val();
+                                                        var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
+                                                        var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
+                                                        var cambio_valor = $('input:checkbox[name=checkCmbioval'+codigo_asignacion+']:checked').val();
+                                                        
+                                                        fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
+
+                                                        if(!cambio_valor){
+                                                            valor_solicitado = parseFloat(valor_solicitado) + parseFloat(recurso_asignado);
+                                                        }
+                                                        else{
+                                                            if(fuente_cambio == ''){
+                                                                $("#error_vacio_asignado"+codigo_asignacion).fadeIn('300');
+                                                                $('#error_vacio_asignado'+codigo_asignacion).html('El campo no puede ir vacío');
+                                                                return false;
+                                                            }
+                                                            else{
+                                                                $("#error_vacio_asignado"+codigo_asignacion).fadeOut('300');
+                                                                $('#error_vacio_asignado'+codigo_asignacion).html('');
+                                                            }
+                                                            valor_solicitado = parseFloat(valor_solicitado) + parseFloat(fuente_cambio);
+                                                        }
+                                                    });
+                                                    
+
+                                                    $('#suma_validacion<?php echo $poa_codigo; ?>').val(valor_solicitado);
+                                                    $('#sumaValores<?php echo $poa_codigo; ?>').html(numberWithCommas(valor_solicitado));
+                                                });
+                                            </script>
+                                        </td>
+                                        <td> 
+                                            <div class="row valor_cambio<?php echo $asre_codigo; ?>" style="display: <?php echo $ver_caja;?>;">
+                                                <div class="col-md-12">
+                                                    <div class="form-label-group form-group"> 
+                                                        <input type="text" onblur="totales_solicitud<?php echo $poa_codigo; ?>()" class="form-control caja_texto_sizer puntos_miles" placeholder="$...." id="fuentes_asgnacion<?php echo $asre_codigo; ?>" name="fuentes_asgnacion<?php echo $asre_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($asre_recurso_mod,0,'','.');?>" required> 
+                                                        <div class="alert alert-danger alerta-forcliente" id="error_valor_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
+                                                        <div class="alert alert-danger alerta-forcliente" id="error_vacio_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php
+                                        $cant++;
+                                    }
+                                ?>
+                                </tbody>
+                                <?php
+                                        
+                                    }
+                                ?>
+                                
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <br>
+                                <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="0">
+                                <input type="checkbox" name="checkOtrval<?php echo $codigo_actividad; ?>" id="checkOtrval<?php echo $codigo_actividad; ?>" value="1" <?php echo $check_otro_valor; ?>> &nbsp;Otro valor
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" id="text_valor<?php echo $codigo_actividad; ?>" style="display: <?php echo $display_otro_valor; ?>;">
+                                    <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
+                                    <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="<?php echo number_format($cmpo_otro,0,'','.'); ?>" required>
+                                    <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+                                    <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="<?php echo $prcs; ?>">
+                                </div> 
+                            </div>
+                        </div>                       
+                    </div>
 
 
 
