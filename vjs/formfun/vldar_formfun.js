@@ -12,7 +12,7 @@ function validar_formfun(){
 				selectVicerrectoria: true, 
 			},
 			selTipoFacultad:{
-				selectFacultad: false,
+				selectFacultad: true,
 			},
 			selDependencia:{
 				selectDependencia: true,
