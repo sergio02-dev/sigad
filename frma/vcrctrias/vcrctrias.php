@@ -34,7 +34,11 @@
         $checkedI = "";
     }
 
+<<<<<<< HEAD
     $capa_direccion = "#datavicerectoria";
+=======
+    $capa_direccion = "#dataVicerrectoria";
+>>>>>>> sergio01
     $url_direccion = "datavicerectoria";
     
 ?>

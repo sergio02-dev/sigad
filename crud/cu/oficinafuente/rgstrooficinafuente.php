@@ -5,14 +5,14 @@
     $selOficina = $_REQUEST['selOficina'];
     $selCargo = $_REQUEST['selCargo'];
     $fuente = $_REQUEST['fuente'];
-    $chkestado = $_REQUEST['chkestado'];
+    $chkestado = $_REQUEST['chkestado'];;
 
     $registrooficinafuente = new RgstroOficinaFuente();
 
     $registrooficinafuente ->setPersonaSistema($personaSistema);
-    $registrooficinafuente->setCodigo_oficina($selOficina);
-    $registrooficinafuente->setCodigo_cargo($selCargo);
-    $registrooficinafuente->setCodigo_fuente($fuente);
+    $registrooficinafuente->setOficina($selOficina);
+    $registrooficinafuente->setCargo($selCargo);
+    $registrooficinafuente->setFuente($fuente);
     $registrooficinafuente->setEstado($chkestado);
 
     $registrooficinafuente->insertOficinafuente();

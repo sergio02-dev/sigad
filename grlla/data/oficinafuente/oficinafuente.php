@@ -10,13 +10,13 @@
 <!-- **********************          Fin Modal Forma       *********************************** -->
 
 <!-- **********************     Inicio Tabla Datatable     *********************************** -->
-<table id="dataOficinafuente" class="table table-striped table-bordered">
+<table id="dataPPI" class="table table-striped table-bordered">
 
 </table>
 
 <script>
     $(document).ready(function() {
-        var table =	$('#dataOficinafuente').DataTable({
+        var table =	$('#dataPPI').DataTable({
             "processing": true,
             "language": {
                 "sProcessing":     "Procesando...",
@@ -49,12 +49,12 @@
             columns: [
                 { data: 'ofi_nombre', title: 'Oficina'},
                 { data: 'car_nombre', title: 'Cargo'},
-                { data: 'ffi_nombre', title: 'Fuente'},
-                { data: 'estado', title: 'Estado'},
-               {
+                { data: 'off_fuente', title: 'Fuente'},
+                {data: 'estado', title: 'Estado'},
+                {
                     data: null,
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarOficinafuente(\''+full["off_oficina"]+'\');"></i> </div> ';
+                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarOficinafuente(\''+full["off_oficina"]+'\',\''+full["off_cargo"]+'\');"></i> </div> ';
                     },
                     title: 'Editar'
                 },	
@@ -73,9 +73,9 @@
             "columnDefs": [
                 { "width": "30%", "targets": 0 },
                 { "width": "30%", "targets": 1 },
-                { "width": "30%", "targets": 2 },
-                { "width": "5%", "targets": 3 },
-                { "width": "5%", "targets": 4 }
+                { "width": "36%", "targets": 2 },
+                { "width": "2%", "targets": 3},
+                { "width": "2%", "targets": 4}
             ],
         });
 
@@ -110,7 +110,7 @@
 		}
 
         // Add event listener for opening and closing details
-        $('#dataOficinafuente tbody').on('click', 'td.details-control', function(){
+        $('#dataPPI tbody').on('click', 'td.details-control', function(){
             var tr = $(this).closest('tr');
             var row = table.row(tr);
 
@@ -144,15 +144,17 @@
         });
     }
 
-    function editarOficinafuente(codigo_oficinafuente){
-        var codigo_oficinafuente = codigo_oficinafuente;
+    function editarOficinafuente(off_oficina, off_cargo){
+        var off_oficina = off_oficina;
+        var off_cargo = off_cargo;
+        
         $('#frmModal').modal({
             keyboard: true
         });
         $.ajax({
-            url:"formoficinafuente",
+            url:"mdfcaroficinafuente",
             type:"POST",
-            data:"codigo_oficinafuente="+codigo_oficinafuente,
+            data:"off_oficina="+off_oficina+'&off_cargo='+off_cargo,
             async:true,
 
             success: function(message){

@@ -108,7 +108,7 @@
 		}
 
         // Add event listener for opening and closing details
-        $('#dataVicerrectoria tbody').on('click', 'td.details-control', function(){
+        $('#dataPPI tbody').on('click', 'td.details-control', function(){
             var tr = $(this).closest('tr');
             var row = table.row(tr);
 

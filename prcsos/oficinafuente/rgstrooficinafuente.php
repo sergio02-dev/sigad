@@ -33,13 +33,13 @@ class RgstroOficinaFuente extends OficinaFuente {
                                                     ".$this->getOficina().", 
                                                     ".$this->getCargo().",
                                                     ".$fuentes[$lista_fuentes].",
-                                                    1,
+                                                    ".$this->getEstado().", 
                                                     NOW(),
                                                     NOW(),
                                                     ".$this->getPersonaSistema().",
                                                     ".$this->getPersonaSistema().");";
 
-            echo "sq---- " . $sql_oficinafuente[$lista_fuentes];
+            
             $this->cnxion->ejecutar($sql_oficinafuente[$lista_fuentes]);
         }
         
