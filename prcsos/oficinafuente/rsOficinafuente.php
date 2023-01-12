@@ -95,7 +95,7 @@ Class RsOficinafuente extends OficinaFuente{
 
     public function list_oficina_fuente(){
 
-        $sql_list_oficina_fuente = "SELECT DISTINCT off_oficina, off_cargo, off_codigo,off_estado
+        $sql_list_oficina_fuente = "SELECT DISTINCT off_oficina, off_cargo,off_estado
                                       FROM usco.oficinafuente
                                      WHERE off_estado = 1;";
 
