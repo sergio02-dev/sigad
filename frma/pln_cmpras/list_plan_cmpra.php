@@ -62,10 +62,10 @@
                             foreach($list_plan_cmpras as $dta_list_plan_cmpras){
                                 $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
                                 $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
-                                $pco_descrpcion = $dta_list_plan_cmpras['pco_descrpcion']; 
-                                $pco_cantidad = $dta_list_plan_cmpras['pco_cantidad'];
-                                $pco_valorunitario = $dta_list_plan_cmpras['pco_valorunitario'];
-                                $pco_estado = $dta_list_plan_cmpras['pco_estado'];
+                                $pdi_equipodescripcion = $dta_list_plan_cmpras['pdi_equipodescripcion']; 
+                                $pdi_cantidad = $dta_list_plan_cmpras['pdi_cantidad'];
+                                $pdi_valorunitario = $dta_list_plan_cmpras['pdi_valorunitario'];
+                                
 
                                
 
@@ -78,7 +78,7 @@
                                     $checkedI = "checked";
                                 }
 
-                                $valor = $pco_cantidad * $pco_valorunitario;
+                                $valor = $pdi_cantidad * $pdi_valorunitario;
                     ?>
                     <tr>    
                         <td><?php echo $num; ?></td>

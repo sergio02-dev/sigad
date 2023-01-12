@@ -30,11 +30,11 @@
 
         public function list_plan_cmpras($codigo_plan_cmpra){
 
-            $sql_list_plan_cmpras="SELECT pco_codigo, pco_etapa, pco_descrpcion, 
-                                          pco_cantidad, pco_valorunitario, pco_estado
-                                     FROM usco.plan_compras
-                                    WHERE pco_etapa = $codigo_plan_cmpra
-                                    ORDER BY pco_fechacreo ASC;";
+            $sql_list_plan_cmpras="SELECT pdi_codigo,pdi_dependencia, pdi_area, 
+                                          pdi_equipodescripcion, pdi_valorunitario, pdi_cantidad
+                                        FROM usco.formulariopdi
+                                      WHERE pdi_accion = $codigo_plan_cmpra
+                                    ORDER BY pdi_equipodescripcion ASC;";
 
             $query_list_plan_cmpras=$this->cnxion->ejecutar($sql_list_plan_cmpras);
             while($data_list_plan_cmpras=$this->cnxion->obtener_filas($query_list_plan_cmpras)){
