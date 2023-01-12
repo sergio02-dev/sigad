@@ -306,7 +306,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         $cod_clss = $data_cod_clasf['cod_clss'];
 
         if($cod_clss){
-            $cod_classf = $cod_clss++;
+            $cod_classf = $cod_clss + 1;
         }
         else{
             $cod_classf = 1;
@@ -326,13 +326,35 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         $cod_etpslcclass = $data_cod_etpa_slctud['cod_etpslcclass'];
 
         if($cod_etpslcclass){
-            $cod_etplcclass = $cod_etpslcclass++;
+            $cod_etplcclass = $cod_etpslcclass + 1;
         }
         else{
             $cod_etplcclass = 1;
         }
         return $cod_etplcclass;
     }
+
+    public function cod_asigncion_slctud(){
+
+        $sql_cod_asigncion_slctud="SELECT MAX(aso_codigo) AS cod_asg
+                                    FROM cdp.asignacion_solicitud;";
+
+        $query_cod_asigncion_slctud=$this->cnxion->ejecutar($sql_cod_asigncion_slctud);
+
+        $data_cod_asigncion_slctud=$this->cnxion->obtener_filas($query_cod_asigncion_slctud);
+
+        $cod_asg = $data_cod_asigncion_slctud['cod_asg'];
+
+        if($cod_asg){
+            $cod_asgnc = $cod_asg + 1;
+        }
+        else{
+            $cod_asgnc = 1;
+        }
+        return $cod_asgnc;
+    }
+
+    
 
     public function oficina_cargo(){
 
@@ -395,7 +417,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            ".$this->getPersonaSistema().", 
                                            NOW(), 
                                            NOW());";
-                                        
+                                                                                   
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 
         $datos_etapa = $this->getArrayDatos();
@@ -465,8 +487,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                                         NOW(),
                                                                         ".$valor_clasificador.");";
                                                                         
-                    $this->cnxion->ejecutar($sql_insrt_clsfcdor);
-
+                        $this->cnxion->ejecutar($sql_insrt_clsfcdor);
                     }
                 }
 
@@ -477,7 +498,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                     $verificar_cambio = $dta_asignacion['verificar_cambio'];
                     $valor_cambio = $dta_asignacion['valor_cambio'];
 
-                    $cdg_asign = date('YmdHis').rand(99,99999);
+                    $cdg_asign = $this->cod_asigncion_slctud();
 
                     $sql_fuentes_solicitud = "INSERT INTO cdp.asignacion_solicitud(
                                                           aso_codigo, 

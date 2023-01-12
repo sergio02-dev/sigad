@@ -12,7 +12,7 @@
         <th>Actividad</th>
         <th>Etapa</th>
         <th>Valor</th>
-        <th>Clasificadores</th>
+        <th colspan="2">Clasificadores</th>
     </tr>
     <?php
         if($info_cdp){
@@ -40,21 +40,34 @@
         <td><?php echo $actividad; ?></td>
         <td><?php echo $etapa; ?></td>
         <td><?php echo "$".number_format($aes_valoretapa,0,'','.'); ?></td>     
-        <td>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <th>Clasificador </th>
+                    <th>Valor</th>
+                    
+                </tr>
             <?php 
                 $clasificador_etapa_solicitud = $objSolicitudCdp->clasificador_etapa_solicitud($codigo_cdp, $aes_etapa);
                 if($clasificador_etapa_solicitud){
                     foreach ($clasificador_etapa_solicitud as $dta_clsfcdres) {
                         $esc_codigo = $dta_clsfcdres['esc_codigo'];
                         $esc_clasificador = $dta_clsfcdres['esc_clasificador'];
+                        $esc_valor = $dta_clsfcdres['esc_valor'];
+
+
+                        list($nombre, $numero) = $objSolicitudCdp->nmbre_clsfcdor($esc_clasificador);
             ?>
-            <?php echo "- ".$esc_clasificador; ?><br>
+                <tr>
+                    <td><?php echo $numero." - ".$nombre; ?></td>
+                    <td><?php echo "$".number_format($esc_valor,0,'','.'); ?></td>
+                </tr>
             <?php
                     }
                 }
             
             ?>
-        
+            </table>
         </td> 
     </tr>
     <?php

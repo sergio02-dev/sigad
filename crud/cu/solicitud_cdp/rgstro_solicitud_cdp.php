@@ -71,8 +71,8 @@
 
             }
 
-            $array_datos[] = array('codigo_etapa'=> $poa_codigo,
-                                   'codigo_actividad'=> $acp_codigo,
+            $array_datos[] = array('codigo_etapa'=> $codigo_etapa,
+                                   'codigo_actividad'=> $codigo_actividad,
                                    'recurso'=>  $valor_solicitud,
                                    'other_value'=> $other_value,
                                    'codigo_clasificador'=> $array_clasificador,
