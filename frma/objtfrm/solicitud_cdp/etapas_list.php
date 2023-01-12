@@ -13,7 +13,7 @@
         <div class="form-group">
             <label for="etpass<?php echo $codigo_actividad; ?>" class="font-weight-bold">Etapa *</label>
             <select name="etpass<?php echo $codigo_actividad; ?>" id="etpass<?php echo $codigo_actividad; ?>" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required <?php echo $disabled; ?> >
-            <option value="0" data-codigo_etapa="0" data-descrpcion="" data-rcursos_etapa="0"> Seleccione ...</option>
+                <option value="0" data-codigo_etapa="0" data-descrpcion="" data-rcursos_etapa="0"> Seleccione ...</option>
                 <?php
                     if($etapas_list){
                         foreach ($etapas_list as $dta_etpas_list) {
@@ -24,8 +24,6 @@
                             $poa_estado = $dta_etpas_list['poa_estado'];
                             $poa_numero = $dta_etpas_list['poa_numero']; 
                             $poa_vigencia = $dta_etpas_list['poa_vigencia'];
-                            $acp_codigo = $dta_etpas_list['acp_codigo'];
-                            $poa_logroejecutado = $dta_etpas_list['poa_logroejecutado'];
 
                             $etpa_nombre = $poa_referencia.".".$poa_numero." ".$poa_objeto;
 
@@ -107,8 +105,8 @@
 </div>
 
 <script type="text/javascript">
-    var select_info = '';
-    var lista_opciones = '';
+    var select_info<?php echo $codigo_actividad; ?> = '';
+    var lista_opciones<?php echo $codigo_actividad; ?> = '';
     
     $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
         var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
@@ -169,12 +167,12 @@
                 success: function(message){
                     datos = message.data;
                     $.each(datos, function(index, element){
-                        lista_opciones += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
+                        lista_opciones<?php echo $codigo_actividad; ?> += '<option value="'+element.cla_codigo+'">'+element.cla_numero+' '+element.cla_nombre+'</option>';
                     });
 
-                    select_info = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
+                    select_info<?php echo $codigo_actividad; ?> = '<select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones<?php echo $codigo_actividad; ?>+'</select>';
 
-                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info);
+                    $('#dtaClasificador<?php echo $codigo_actividad;?>').html(select_info<?php echo $codigo_actividad; ?>);
                     
                     $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
                         liveSearch: true,
@@ -190,11 +188,14 @@
         maxOptions: 1
     });
 
-    var cantida_clasificador = 0;
+    var cantida_clasificador<?php echo $codigo_actividad; ?> = 0;
     function getInput(type, activCode){
         var activCode = activCode;
-        cantida_clasificador = cantida_clasificador +1;
-        var dta = '<tr class="'+activCode+cantida_clasificador+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+cantida_clasificador+'\')"></i><td></tr>'
+        cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
+        var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
+      
+        var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+        nombre_capa = '';
         return dta;
     }
 
@@ -221,13 +222,15 @@
 
     function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
         var activCode = activCode;
+
         var nodo_clasificacion = getInput("text", activCode);
         append("tablaClasificadores"+activCode, nodo_clasificacion);
     }
 
     function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
         var data_info = data_info;
-        $('.<?php echo $codigo_actividad; ?>'+data_info).remove();
+
+        $(data_info).remove();
     }
 
     $(".puntos_miles_etapa").on({
