@@ -20,7 +20,7 @@ function validar_formpdi(){
 				selectVicerrectoria: true, 
 			},
 			selTipoFacultad:{
-				selectFacultad: false,
+				selectFacultad: true,
 			},
 			selDependencia:{
 				selectDependencia: true,
