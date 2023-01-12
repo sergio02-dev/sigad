@@ -88,11 +88,11 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
     public function fuentes_vigencia_accion($codigo_accion, $codigo_indicador, $vigencia_actividad){
 
         if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
-            $codigo_session = $_SESSION['idusuario'];
             $condicion_uno="";
             $condicion_dos="";
         }
         else{
+            $codigo_session = $_SESSION['idusuario'];
             $condicion_uno = "AND poav_fuentefinanciacion IN(SELECT DISTINCT off_fuente
                                                                FROM usco.vinculacion, usco.oficinafuente
                                                             WHERE vin_persona = $codigo_session
@@ -154,9 +154,9 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                        WHERE tpo_accion = $codigo_accion
                                          AND poav_vigencia = $vigencia_actividad
                                          AND tpo_indicador = $codigo_indicador
+                                         $condicion_dos
                                        GROUP BY fuente_financiacion, vigencia_recurso
-	                                   ORDER BY vigencia_recurso, fuente_financiacion
-                                       $condicion_dos;";       
+	                                   ORDER BY vigencia_recurso, fuente_financiacion;";       
 
         $query_fuentes_vigencia_accion=$this->cnxion->ejecutar($sql_fuentes_vigencia_accion);
 
