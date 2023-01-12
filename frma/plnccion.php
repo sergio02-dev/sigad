@@ -196,13 +196,13 @@
                 </div>
             </div>
 
-            <!--<div class="col-md-4">
+            <div class="col-md-4">
                 <div class="form-check">
                     <br/>
                     <input class="form-check-input" type="checkbox" value="1" id="checkedPlanCompras" name="checkedPlanCompras" <?php echo $planCmpras; ?>>
                     <label class="form-check-label" for="checkedPlanCompras">Plan de Compras</label>
                 </div>
-            </div>-->
+            </div>
 
             
             

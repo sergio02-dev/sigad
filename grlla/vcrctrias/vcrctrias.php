@@ -42,7 +42,7 @@
 
 					<?php $visibilidad=$_SESSION['visibilidadBotones']; ?>
 
-                    <div class="col-sm-12" id="dtaVicerrectoria">
+                    <div class="col-sm-12" id="datavicerectoria">
                         <?php 
                             include('grlla/data/vcrctrias/vcrctrias.php');
                         ?>

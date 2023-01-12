@@ -34,8 +34,8 @@
         $checkedI = "";
     }
 
-    $capa_direccion = "#dtaVicerrectoria";
-    $url_direccion = "dtavicerectoria";
+    $capa_direccion = "#datavicerectoria";
+    $url_direccion = "datavicerectoria";
     
 ?>
 <form id="vicerrectoriafrm" role="form">

@@ -47,12 +47,13 @@
             <div class="col-sm-12">
                 <table class="table table-striped table-bordered table-sm fuente_input_tabla">
                     <tr>
-                        <th style="width: 5% ">No</th>
-                        <th style="width: 40% ">Descripción</th>
-                        <th style="width: 10% ">Cant.</th>
-                        <th style="width: 16% ">Valor Unitario</th>
-                        <th style="width: 16% ">Valor Total</th>
-                        <th style="width: 13% ">Estado</th>
+                        <th style="width: 3% ">No</th>
+                        <th style="width: 27% ">Dependencia</th>
+                        <th style="width: 12% ">Area</th>
+                        <th style="width: 25% ">Caracteristica</th>
+                        <th style= "width: 10%"> Cantidad </th>
+                        <th style="width: 10% ">Valor unitario</th>
+                        <th style="width: 13% ">Valor total</th>
                     </tr>
                     <?php
                         if($list_plan_cmpras){
