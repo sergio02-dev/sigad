@@ -66,10 +66,10 @@ Class RsOficinafuente extends OficinaFuente{
 
     public function list_cargo(){
 
-        $sql_list_cargo = "SELECT   car_codigo, 
-                                    car_nombre
-                                    FROM usco.cargo
-                                    ORDER by car_nombre ASC;";
+        $sql_list_cargo = "SELECT car_codigo, 
+                                  car_nombre
+                                FROM usco.cargo
+                                  ORDER by car_nombre ASC;";
 
         $resultado_list_cargo = $this->cnxion->ejecutar($sql_list_cargo);
 
@@ -81,24 +81,23 @@ Class RsOficinafuente extends OficinaFuente{
 
     public function list_fuente(){
 
-        $sql_list_cargo = "SELECT ffi_codigo, ffi_nombre 
+        $sql_list_fuente = "SELECT ffi_codigo, ffi_nombre 
                             FROM planaccion.fuente_financiacion
                          WHERE ffi_clasificacion=3;";
 
-        $resultado_list_cargo = $this->cnxion->ejecutar($sql_list_cargo);
+        $resultado_list_fuente = $this->cnxion->ejecutar($sql_list_fuente);
 
-        while ($data_list_cargo = $this->cnxion->obtener_filas($resultado_list_cargo)){
-            $datalist_cargo[] = $data_list_cargo;
+        while ($data_list_fuente = $this->cnxion->obtener_filas($resultado_list_fuente)){
+            $datalist_fuente[] = $data_list_fuente;
         }
-        return $datalist_cargo;
+        return $datalist_fuente;
     }
 
     public function list_oficina_fuente(){
 
-        $sql_list_oficina_fuente = "SELECT off_oficina, 
-                                           off_cargo,
-                                           off_fuente
-                                        FROM usco.oficinafuente;";
+        $sql_list_oficina_fuente = "SELECT DISTINCT off_oficina, off_cargo, off_codigo,off_estado
+                                      FROM usco.oficinafuente
+                                     WHERE off_estado = 1;";
 
         $resultado_list_oficina_fuente = $this->cnxion->ejecutar($sql_list_oficina_fuente);
 
@@ -106,6 +105,23 @@ Class RsOficinafuente extends OficinaFuente{
             $datalist_oficina_fuente[] = $data_list_oficina_fuente;
         }
         return $datalist_oficina_fuente;
+    }
+
+    public function fuentes_oficina_cargo($oficina, $cargo){
+
+        $sql_list_fuentes_oficina_cargo = "SELECT off_oficina, off_cargo,ffi_nombre
+                                      FROM usco.oficinafuente
+                                     INNER JOIN planaccion.fuente_financiacion ON off_fuente = ffi_codigo
+                                     WHERE off_estado = 1
+                                       AND off_oficina = $oficina
+                                       AND off_cargo = $cargo;";
+                                       
+        $resultado_list_fuentes_oficina_cargo= $this->cnxion->ejecutar($sql_list_fuentes_oficina_cargo);
+
+        while ($data_list_fuentes_oficina_cargo = $this->cnxion->obtener_filas($resultado_list_fuentes_oficina_cargo)){
+            $datalist_fuentes_oficina_cargo[] = $data_list_fuentes_oficina_cargo;
+        }
+        return $datalist_fuentes_oficina_cargo;
     }
     
 
@@ -117,25 +133,39 @@ Class RsOficinafuente extends OficinaFuente{
             foreach ($list_oficinafuente as $dat_oficinafuente) {
                 $off_oficina = $dat_oficinafuente['off_oficina'];
                 $off_cargo = $dat_oficinafuente['off_cargo'];
-                $off_fuente = $dat_oficinafuente['off_fuente'];
+                $off_codigo = $dat_oficinafuente['off_codigo'];
                 $off_estado = $dat_oficinafuente['off_estado'];
 
                 $nombre_oficina = $this->nombre_oficina($off_oficina);
-                $nombre_cargo = $this->nombre_oficina($off_cargo);
-                $nombre_fuente = $this->nombre_oficina($off_fuente);
+                $nombre_cargo = $this->nombre_cargo($off_cargo);
+                
+                $oficina_fuente = $this->fuentes_oficina_cargo($off_oficina,$off_cargo);
 
+
+                $nombre_fuente = '';
+                foreach($oficina_fuente as $dat_oficina_fuente){
+                    $ffi_nombre = $dat_oficina_fuente['ffi_nombre'];
+
+                    $nombre_fuente = $nombre_fuente.$ffi_nombre.'<br/>';
+                }
+               
                 if($off_estado == 1){
                     $estado = "Activo";
                 }
                 else{
                     $estado = "Inactivo";
                 }
+                
+
 
     
                 $rsOficinafuente[] = array('ofi_nombre'=> $nombre_oficina, 
                                            'car_nombre'=> $nombre_cargo,
-                                           'ffi_nombre'=> $nombre_fuente, 
-                                           'estado'=> $estado,
+                                           'off_fuente'=> $nombre_fuente,
+                                           'off_oficina' => $off_oficina,
+                                           'off_cargo'=> $off_cargo,
+                                           'off_codigo'=> $off_codigo,
+                                           'estado'=> $estado
                                         );
     
             }
@@ -145,6 +175,48 @@ Class RsOficinafuente extends OficinaFuente{
             $dattOficinafuente=json_encode(array("data"=>""));
         } 
         return $dattOficinafuente;
+    }
+
+    public function form_oficinafuente($codigo_oficinafuente){
+        
+        $sql_form_oficinafuente  = "SELECT off_oficina, 
+                                        off_estado, off_cargo, off_fuente
+                                     FROM usco.oficinafuente
+                                    WHERE off_codigo = $codigo_oficinafuente;";
+        
+
+        $resultado_form_oficinafuente  = $this->cnxion->ejecutar($sql_form_oficinafuente );
+
+        while($data_form_oficinafuente  = $this->cnxion->obtener_filas($resultado_form_oficinafuente  ));
+         $dataform_oficinafuente  [] = $data_form_oficinafuente  ;
+    
+        return $dataform_oficinafuente ;
+    }
+
+    public function check_arreglo($codigo_cargo, $codigo_oficina, $codigo_fuente){
+        
+        $sql_check_arreglo  = "SELECT COUNT(*) checkbox
+                                     FROM usco.oficinafuente
+                                    WHERE off_oficina = $codigo_oficina
+                                    AND off_cargo = $codigo_cargo
+                                    AND off_fuente = $codigo_fuente
+                                    AND off_estado = 1;";
+        
+
+        $resultado_check_arreglo  = $this->cnxion->ejecutar($sql_check_arreglo);
+
+        $data_check_arreglo = $this->cnxion->obtener_filas($resultado_check_arreglo);
+
+        $checkbox = $data_check_arreglo['checkbox'];
+
+        if($checkbox == 0){
+            $checkear = "";
+        }
+        else{
+            $checkear = "checked";
+        }
+
+        return $checkear;
     }
 
  

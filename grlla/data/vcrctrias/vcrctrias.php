@@ -11,13 +11,13 @@
 <!-- **********************          Fin Modal Forma       *********************************** -->
 
 <!-- **********************     Inicio Tabla Datatable     *********************************** -->
-<table id="dataVicerrectoria" class="table table-striped table-bordered">
+<table id="dataPPI" class="table table-striped table-bordered">
 
 </table>
 
 <script>
     $(document).ready(function() {
-        var table =	$('#dataVicerrectoria').DataTable({
+        var table =	$('#dataPPI').DataTable({
             "processing": true,
             "language": {
                 "sProcessing":     "Procesando...",
@@ -108,7 +108,7 @@
 		}
 
         // Add event listener for opening and closing details
-        $('#dataVicerrectoria tbody').on('click', 'td.details-control', function(){
+        $('#dataPPI tbody').on('click', 'td.details-control', function(){
             var tr = $(this).closest('tr');
             var row = table.row(tr);
 
