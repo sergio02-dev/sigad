@@ -30,7 +30,11 @@ Class RsFormpdi extends PlandeComprasPDI{
                                FROM plandesarrollo.proyecto
                               INNER JOIN plandesarrollo.subsistema ON plandesarrollo.proyecto.sub_codigo = plandesarrollo.subsistema.sub_codigo
                               WHERE pde_codigo = $codigo_plan
-                              ORDER BY pro_referencia, pro_numero ASC";
+                                AND pro_codigo IN(SELECT DISTINCT acc_proyecto
+                                                    FROM plandesarrollo.plan_compras_accion
+                                                    INNER JOIN  plandesarrollo.accion ON pca_accion = acc_codigo
+                                                    WHERE pca_estado = 1)
+                                ORDER BY pro_referencia, pro_numero ASC";
     
         $resultado_list_proyecto = $this->cnxion->ejecutar($sql_list_proyecto);
 
@@ -45,6 +49,9 @@ Class RsFormpdi extends PlandeComprasPDI{
         $sql_list_accion= "SELECT acc_codigo, acc_referencia, acc_descripcion,acc_numero,acc_proyecto
                             FROM plandesarrollo.accion
                             WHERE acc_proyecto = $codigo_proyecto
+                            AND acc_codigo IN (SELECT DISTINCT pca_accion
+                                                 FROM plandesarrollo.plan_compras_accion
+                                                WHERE pca_estado = 1)
                             ORDER BY acc_referencia, acc_numero ASC";
     
         $resultado_list_accion = $this->cnxion->ejecutar($sql_list_accion);
@@ -54,6 +61,8 @@ Class RsFormpdi extends PlandeComprasPDI{
         }
         return $datalist_accion;
     }
+
+
 
 
     public function list_sedes(){
@@ -168,6 +177,22 @@ Class RsFormpdi extends PlandeComprasPDI{
         return $dattPlandeComprasPDI;
     }
 
+
+    public function planta_fisica($codigo_accion){
+
+        $sql_planta_fisica="SELECT pca_codigo, pca_plantafisica
+                                FROM plandesarrollo.plan_compras_accion
+                                WHERE pca_estado = 1
+                                AND pca_accion =$codigo_accion;";
+
+        $query_planta_fisica=$this->cnxion->ejecutar($sql_planta_fisica);
+
+        $data_planta_fisica=$this->cnxion->obtener_filas($query_planta_fisica);
+        
+        $pca_plantafisica = $data_planta_fisica['pca_plantafisica'];
+
+        return $pca_plantafisica;
+    }
    
 
 

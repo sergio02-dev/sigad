@@ -35,16 +35,16 @@
 				</div>
 
 				<div class="col-sm-9 container-principal" >
-					<div class="col-sm-12 modal-header capa_titulo"><h2><strong>VICERRECTORIAS</strong> </h2></div>
+					<div class="col-sm-12 modal-header capa_titulo"><h2><strong>ASIGNACION DE FUENTE DE FINANCIACION</strong> </h2></div>
 
 					<div class="col-sm-12">&nbsp;</div>
-                    <span class="d-inline-block" tabindex="0"  title="Crear Vicerrectoria"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="agregar();"><i class="fas fa-plus"></i>&nbsp;<strong>Crear Vicerrectoria</strong></button></span>
+                    <span class="d-inline-block" tabindex="0"  title="Asignacion"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="agregar();"><i class="fas fa-plus"></i>&nbsp;<strong>Crear Asignacion</strong></button></span>
 
 					<?php $visibilidad=$_SESSION['visibilidadBotones']; ?>
 
-                    <div class="col-sm-12" id="dataVicerrectoria">
+                    <div class="col-sm-12" id="dtaOficinafuente">
                         <?php 
-                            include('grlla/data/vcrctrias/vcrctrias.php');
+                            include('grlla/data/oficinafuente/oficinafuente.php');
                         ?>
                     </div>
 						

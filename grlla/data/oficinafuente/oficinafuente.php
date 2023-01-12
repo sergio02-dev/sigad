@@ -1,4 +1,3 @@
-
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 <!-- Large modal -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -44,16 +43,18 @@
                 }
             },
             ajax: {
-                url: 'jvicerectoria',
+                url: 'joficinafuente',
                 type: 'POST'
             },
             columns: [
-                { data: 'ent_nombre', title: 'Nombre'},
-                { data: 'estado', title: 'Estado'},
-               {
+                { data: 'ofi_nombre', title: 'Oficina'},
+                { data: 'car_nombre', title: 'Cargo'},
+                { data: 'off_fuente', title: 'Fuente'},
+                {data: 'estado', title: 'Estado'},
+                {
                     data: null,
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarVicerrectoria(\''+full["ent_codigo"]+'\');"></i> </div> ';
+                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" title="Editar PPI" style="display:<?php echo $visibilidad; ?>;" onclick="editarOficinafuente(\''+full["off_oficina"]+'\',\''+full["off_cargo"]+'\');"></i> </div> ';
                     },
                     title: 'Editar'
                 },	
@@ -70,10 +71,11 @@
             },
             "order": [[0, 'asc']],
             "columnDefs": [
-                { "width": "45%", "targets": 0 },
-                { "width": "45%", "targets": 1 },
-               // { "width": "6%", "targets": 2 },
-                { "width": "4%", "targets": 2 },
+                { "width": "30%", "targets": 0 },
+                { "width": "30%", "targets": 1 },
+                { "width": "36%", "targets": 2 },
+                { "width": "2%", "targets": 3},
+                { "width": "2%", "targets": 4}
             ],
         });
 
@@ -131,7 +133,7 @@
             keyboard: true
         });
         $.ajax({
-            url:"formvicerectorias",
+            url:"formoficinafuente",
             type:"POST",
             data:"",
             async:true,
@@ -142,15 +144,17 @@
         });
     }
 
-    function editarVicerrectoria(codigo_vicerrectoria){
-        var codigo_vicerrectoria = codigo_vicerrectoria;
+    function editarOficinafuente(off_oficina, off_cargo){
+        var off_oficina = off_oficina;
+        var off_cargo = off_cargo;
+        
         $('#frmModal').modal({
             keyboard: true
         });
         $.ajax({
-            url:"formvicerectorias",
+            url:"mdfcaroficinafuente",
             type:"POST",
-            data:"codigo_vicerrectoria="+codigo_vicerrectoria,
+            data:"off_oficina="+off_oficina+'&off_cargo='+off_cargo,
             async:true,
 
             success: function(message){

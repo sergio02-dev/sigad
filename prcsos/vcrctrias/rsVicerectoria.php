@@ -21,7 +21,7 @@ Class RsVicerrectoria extends Vicerrectoria{
         return $datalist_vicerctorias;
     }
 
-  /*  public function sedes_vicerrectoria($codigo_vicerrectoria){
+    /*public function sedes_vicerrectoria($codigo_vicerrectoria){
 
         
         $sql_sedes_vicerrectoria = "SELECT svi_codigo, svi_sede, svi_vicerrectoria,
@@ -96,13 +96,13 @@ Class RsVicerrectoria extends Vicerrectoria{
             $datalist_sedes[] = $data_list_sedes;
         }
         return $datalist_sedes;
-    }
+    }*/
 
-    public function form_vicerrectoria($codigo_vicerrectoria){
+    /*public function form_vicerrectoria($codigo_vicerrectoria){
         
-        $sql_form_vicerrectoria = "SELECT svi_codigo, svi_nombre, svi_estado
-                                    FROM usco.sede_vicerrectoria
-                                  WHERE svi_codigo = $codigo_vicerrectoria;";
+        $sql_form_vicerrectoria = "SELECT ent_codigo, ent_nombre, ent_estado
+                                    FROM principal.entidad
+                                 WHERE ent_codigo = $codigo_vicerrectoria;";
 
         $resultado_form_vicerrectoria = $this->cnxion->ejecutar($sql_form_vicerrectoria);
 

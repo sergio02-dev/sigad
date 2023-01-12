@@ -14,6 +14,7 @@ $textSegundoApellido=$_REQUEST['textSegundoApellido'];
 $selTipoIdentificacion=$_REQUEST['selTipoIdentificacion'];
 $textIdentificacion=$_REQUEST['textIdentificacion'];
 $selEntidad=$_REQUEST['selEntidad'];
+$selFacultad=$_REQUEST['selFacultad'];
 $chkgenero=$_REQUEST['chkgenero'];
 $chkestado=$_REQUEST['chkestado'];
 $per_codigo=$_REQUEST['per_codigo'];
@@ -30,6 +31,7 @@ $updatePersona->setEstadoPersona($chkestado);
 $updatePersona->setPersonaSistema($personaSistema);
 $updatePersona->setCodigoPersona($per_codigo);
 $updatePersona->setEntidadPersona($selEntidad);
+$updatePersona->setFacultadPersona($selFacultad);
 
 echo $updatePersona->updatePersona();
 

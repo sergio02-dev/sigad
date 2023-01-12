@@ -8,13 +8,27 @@
     $selDependencia= $_REQUEST['selDependencia'];
     $selArea= $_REQUEST['selArea'];
     $selAccion = $_REQUEST['selAccion'];
-    $inputPlantaFisica = $_REQUEST['inputPlantaFisica'];
-    $selLineaEquipo= $_REQUEST['selLineaEquipo'];
-    $selSublineaEquipo= $_REQUEST['selSublineaEquipo'];
-    $selEquipo = $_REQUEST['selEquipo'];
-    $selCaracteristicas = $_REQUEST['selCaracteristicas'];
-    $selCantidad = $_REQUEST['selCantidad'];
-    $valor_unitario = $_REQUEST['valor_unitario'];
+    
+    $plantaFisica= $_REQUEST['plantaFisica'];
+
+    if($plantaFisica == 1){
+        $inputPlantaFisica = $_REQUEST['inputPlantaFisica'];
+        $selLineaEquipo= 0;
+        $selSublineaEquipo= 0;
+        $selEquipo = 0;
+        $selCaracteristicas = 0;
+        $selCantidad = 0;
+        $valor_unitario = 0;
+    }
+    else{
+        $inputPlantaFisica = "";
+        $selLineaEquipo= $_REQUEST['selLineaEquipo'];
+        $selSublineaEquipo= $_REQUEST['selSublineaEquipo'];
+        $selEquipo = $_REQUEST['selEquipo'];
+        $selCaracteristicas = $_REQUEST['selCaracteristicas'];
+        $selCantidad = $_REQUEST['selCantidad'];
+        $valor_unitario = $_REQUEST['valor_unitario'];
+    }
     
 
 

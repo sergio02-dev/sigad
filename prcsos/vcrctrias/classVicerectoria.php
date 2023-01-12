@@ -7,7 +7,6 @@
 Class Vicerrectoria {
     private $codigo;
     private $nombre;
-    //private $sedes;
     private $estado;
     private $personaSistema;
     
@@ -31,13 +30,6 @@ Class Vicerrectoria {
     public function getEstado(){
         return $this->estado;
     }
-
-   /* public function setSedes($sedes){
-        $this->sedes=$sedes;
-    }
-    public function getSedes(){
-        return $this->sedes;
-    }*/
 
     public function getPersonaSistema(){
         return $this->personaSistema;

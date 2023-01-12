@@ -38,7 +38,9 @@
         public function selectEntidad(){
 
             $sql_selectEntidad="SELECT ent_codigo, ent_nombre
-                                  FROM principal.entidad;";
+                                  FROM principal.entidad
+                                  WHERE ent_tipoentidad = 2
+                                  AND ent_estado='1';";
 
             $query_selectEntidad=$this->cnxion->ejecutar($sql_selectEntidad);
 
@@ -46,6 +48,21 @@
                 $dataselectEntidad[]=$data_selectEntidad;
             }
             return $dataselectEntidad;
+        }
+
+        public function selectFacultad(){
+
+            $sql_selectFacultad="SELECT ent_codigo, ent_nombre
+                                  FROM principal.entidad
+                                  WHERE ent_tipoentidad = 1
+                                  AND ent_estado='1';";
+
+            $query_selectFacultad=$this->cnxion->ejecutar($sql_selectFacultad);
+
+            while($data_selectFacultad=$this->cnxion->obtener_filas($query_selectFacultad)){
+                $dataselectFacultad[]=$data_selectFacultad;
+            }
+            return $dataselectFacultad;
         }
 
         public function tipoIdentificacion($tipoId){
@@ -158,6 +175,24 @@
              
             return $epe_entidad;
         }
+
+        public function facultad($per_codigo){
+
+            $sql_facultad="SELECT epe_facultad, epe_codigo
+                            FROM principal.entidad_persona
+                            WHERE epe_estado='1'
+                              AND epe_persona=$per_codigo;";
+
+            $query_facultad=$this->cnxion->ejecutar($sql_facultad);
+
+            $data_facultad=$this->cnxion->obtener_filas($query_facultad);
+
+            $epe_facultad=$data_facultad['epe_facultad'];
+             
+            return $epe_facultad;
+        }
+
+        
 
         public function getSql_persona(){
             return $this->sql_persona=$this->selectPersona();

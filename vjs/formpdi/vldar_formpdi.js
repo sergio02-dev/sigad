@@ -4,7 +4,9 @@ function validar_formpdi(){
 	$("#plancomprasPDIform").validate({
 		rules: {
         	inputPlantaFisica:{
-                required: true,
+				required: function(element){
+					return $('#plantaFisica').val() == 1;
+				},
 				minlength:3,
 				
             },
@@ -18,7 +20,7 @@ function validar_formpdi(){
 				selectVicerrectoria: true, 
 			},
 			selTipoFacultad:{
-				selectFacultad: false,
+				selectFacultad: true,
 			},
 			selDependencia:{
 				selectDependencia: true,
@@ -33,16 +35,24 @@ function validar_formpdi(){
 				selectTipoAccion: true,
 			},
 			selLineaEquipo:{
-				selectLineaEquipo: true,
+				selectLineaEquipo:  function(element){
+					return $('#plantaFisica').val() == 0;
+				}
 			},
 			selSublineaEquipo:{
-				selectSublineaEquipo: true,
+				selectSublineaEquipo:   function(element){
+					return $('#plantaFisica').val() == 0;
+				}
 			},
 			selEquipo:{
-				selectEquipo: true,
+				selectEquipo:  function(element){
+					return $('#plantaFisica').val() == 0;
+				}
 			},
 			selCaracteristicas:{
-				selectCaracteristicas: true,
+				selectCaracteristicas:   function(element){
+					return $('#plantaFisica').val() == 0;
+				}
 			}
 
 			

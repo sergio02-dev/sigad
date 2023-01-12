@@ -13,6 +13,7 @@
         private $estadoPersona;
         private $personaSistema;
         private $entidadPersona;
+        private $facultadPersona;
         
 
 
@@ -87,6 +88,13 @@
         }
         public function setEntidadPersona($entidadPersona){
             $this->entidadPersona=$entidadPersona;
+        }
+
+        public function getFacultadPersona(){
+            return $this->facultadPersona;
+        }
+        public function setFacultadPersona($facultadPersona){
+            $this->facultadPersona=$facultadPersona;
         }
 
 
