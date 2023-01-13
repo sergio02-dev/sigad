@@ -206,6 +206,8 @@
             return $dataplan_accion;
         }
 
+
+
         public function contratacion2($codigo_planaccion){
 
            
@@ -802,6 +804,22 @@
             $ccp_descripcion = $data_list_codigo_presupuestal['ccp_descripcion'];
             
             return array($ccp_code, $ccp_descripcion);
+        }
+
+        public function plan_accion_compras($codigo_accion){
+
+            $sql_plan_accion_compras="SELECT COUNT(*)AS plan_compras
+                                        FROM plandesarrollo.plan_compras_accion
+                                       WHERE pca_estado = 1
+                                         AND pca_accion = $codigo_accion;";
+    
+            $query_plan_accion_compras = $this->cnxion->ejecutar($sql_plan_accion_compras);
+    
+            $data_plan_accion_compras = $this->cnxion->obtener_filas($query_plan_accion_compras);
+            
+            $plan_compras = $data_plan_accion_compras['plan_compras'];
+            
+            return $plan_compras;
         }
     }
 ?>

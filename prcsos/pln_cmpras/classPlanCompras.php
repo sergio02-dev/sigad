@@ -4,6 +4,9 @@
 
         private $codigoPlanCompras;
         private $codigoEtapa;
+        private $sede;
+        private $dependencia;
+        private $area;
         private $descripcion;
         private $cantidad;
         private $valorUnitario;
@@ -19,6 +22,27 @@
         }
         public function setCodigoPlanCompras($codigoPlanCompras) {
             $this->codigoPlanCompras = $codigoPlanCompras;
+        }
+
+        public function getSede() {
+            return $this->sede;
+        }
+        public function setSede($sede) {
+            $this->sede = $sede;
+        }
+
+        public function getDependencia() {
+            return $this->dependencia;
+        }
+        public function setDependencia($dependencia) {
+            $this->dependencia = $dependencia;
+        }
+
+        public function getArea() {
+            return $this->area;
+        }
+        public function setArea($area) {
+            $this->area = $area;
         }
 
         public function getCodigoEtapa() {

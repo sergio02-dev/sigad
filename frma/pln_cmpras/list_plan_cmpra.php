@@ -2,13 +2,16 @@
 
    $codigo_poai = $_REQUEST['codigo_poai'];
    $codigo_accion = $_REQUEST['codigo_accion'];   
+   $nom_sede = $_REQUEST['nom_sede'];
    
    include('crud/rs/pln_cmpras/pln_cmpras.php');
 
    $datos_etapa = $objPlanCompras->datos_etapa($codigo_poai);
 
-   $list_plan_cmpras = $objPlanCompras->list_plan_cmpras($codigo_poai);
+   $codigo_sede = $objPlanCompras->etapas_actividad_sede($codigo_poai);
 
+   $list_plan_cmpras = $objPlanCompras->list_plan_cmpras($codigo_accion, $codigo_sede);
+   
     $url_guardar="modificarplancompras";
     $codigo_formulario = $codigo_poai;
     $tarea = "MODIFICAR";
@@ -40,6 +43,8 @@
         <div class="row">
             <div class="col-md-12">
                 <p style="font-size: 113%;"><?php echo $datos_etapa; ?></p>
+                <p style="font-size: 113%;"><?php echo $nom_sede; ?></p>
+                
             </div>
         </div>
 
@@ -47,12 +52,15 @@
             <div class="col-sm-12">
                 <table class="table table-striped table-bordered table-sm fuente_input_tabla">
                     <tr>
-                        <th style="width: 5% ">No</th>
-                        <th style="width: 40% ">Descripción</th>
-                        <th style="width: 10% ">Cant.</th>
-                        <th style="width: 16% ">Valor Unitario</th>
-                        <th style="width: 16% ">Valor Total</th>
-                        <th style="width: 13% ">Estado</th>
+                        <th style="width: 3% ">No</th>
+                        <th style="width : 4%" > Sede</th>
+                        <th style="width: 23% ">Dependencia</th>
+                        <th style="width: 12% ">Area</th>
+                        <th style="width: 10% ">Planta fisica</th>
+                        <th style="width: 15% ">Caracteristica</th>
+                        <th style= "width: 10%"> Cantidad </th>
+                        <th style="width: 10% ">Valor unitario</th>
+                        <th style="width: 13% ">Valor total</th>
                     </tr>
                     <?php
                         if($list_plan_cmpras){
@@ -61,46 +69,48 @@
                             foreach($list_plan_cmpras as $dta_list_plan_cmpras){
                                 $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
                                 $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
-                                $pco_descrpcion = $dta_list_plan_cmpras['pco_descrpcion']; 
-                                $pco_cantidad = $dta_list_plan_cmpras['pco_cantidad'];
-                                $pco_valorunitario = $dta_list_plan_cmpras['pco_valorunitario'];
-                                $pco_estado = $dta_list_plan_cmpras['pco_estado'];
+                                $pdi_sede = $dta_list_plan_cmpras['pdi_sede'];
+                                $pdi_dependencia = $dta_list_plan_cmpras['pdi_dependencia'];
+                                $pdi_area = $dta_list_plan_cmpras['pdi_area'];
+                                $pdi_plantafisica = $dta_list_plan_cmpras['pdi_plantafisica'];
+                                $pdi_equipodescripcion = $dta_list_plan_cmpras['pdi_equipodescripcion']; 
+                                $pdi_cantidad = $dta_list_plan_cmpras['pdi_cantidad'];
+                                $pdi_valorunitario = $dta_list_plan_cmpras['pdi_valorunitario'];
 
-                               
-
-                                if($pco_estado == 1){
-                                    $checkedA = "checked";
-                                    $checkedI = "";
-                                }
-                                else{
-                                    $checkedA = "";
-                                    $checkedI = "checked";
-                                }
-
-                                $valor = $pco_cantidad * $pco_valorunitario;
+                                $nombre_sede = $objPlanCompras->nombre_sede($pdi_sede);
+                                $nombre_dependencia = $objPlanCompras->nombre_dependencia($pdi_dependencia);
+                                $nombre_area = $objPlanCompras->nombre_area($pdi_area);
+                                $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
+                                $valor = $pdi_cantidad * $pdi_valorunitario;
                     ?>
-                    <tr>    
+                    <tr>   
                         <td><?php echo $num; ?></td>
+                        <td><?php echo $nombre_sede; ?></td>    
                         <td>
-                            <input type="hidden" name="codigo_mod<?php echo $num; ?>" id="codigo_mod<?php echo $num; ?>" value="<?php echo $pco_codigo; ?>">
-                            <textarea class="form-control fuente_input_tabla" rows="2" name="txtDescripcion<?php echo $num; ?>" id="txtDescripcion<?php echo $num; ?>" aria-describedby="textHelp" data-rule-required="true"  required><?php echo $pco_descrpcion; ?></textarea>  
+                            
+                            <?php echo $nombre_dependencia; ?>
                         </td>
                         <td>
-                            <input type="number" class="form-control fuente_input_tabla sma<?php echo $num; ?>" id="txtCantidad<?php echo $num; ?>" name="txtCantidad<?php echo $num; ?>" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $pco_cantidad;?>" required>
+                            
+                            <?php echo $nombre_area; ?>
                         </td>
                         <td>
-                            <input type="text" class="form-control fuente_input_tabla sma<?php echo $num; ?>" id="txtValorUnitario<?php echo $num; ?>" name="txtValorUnitario<?php echo $num; ?>" aria-describedby="textHelp" data-rule-required="true" value="<?php echo number_format($pco_valorunitario,0,'','.'); ?>" required>
+                            
+                            <?php echo $pdi_plantafisica; ?>
+                        </td>
+                        <td>
+                            <?php echo $nombre_descripcionEquipo; ?>
+                        </td>
+                        <td>
+                           <?php echo $pdi_cantidad;?>
+                        </td>
+                        <td>
+                          <?php echo number_format($pdi_valorunitario,0,'','.'); ?>
                         </td>
                         <td>
                             $ <span id="valorFinal<?php echo $num; ?>"><?php echo number_format($valor,0,'','.'); ?></span>
                         </td>
-                        <td>
-                            <input type="radio"   id="ractivo<?php echo $num; ?>" name="chkestado<?php echo $num; ?>"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> required/>
-                            <label for="ractivo<?php echo $num; ?>">&nbsp; Activo &nbsp;&nbsp;</label>
-                            <br>
-                            <input type="radio"   id="rinactivo<?php echo $num; ?>" name="chkestado<?php echo $num; ?>"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> required />
-                            <label for="rinactivo<?php echo $num; ?>">&nbsp; Inactivo</label>
-                        </td>
+                    
                     </tr>
                     <script type="text/javascript">
 
@@ -134,6 +144,7 @@
                     </script>
                     <?php
                                 $num++;
+                                
                             }
                         }
                     ?>
