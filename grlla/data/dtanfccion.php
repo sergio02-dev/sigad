@@ -225,14 +225,10 @@
                                         <td><?php echo $poa_descripcionclasificador; ?></td>
                                         <td>
                                             <div style="display: <?php echo $visibilidad; ?>"><i  class="fas fa-edit" style="color: #BB0900;" title="Editar Etapa" onclick="editarEtapa('<?php echo $poa_codigo; ?>','<?php echo $poa_referencia; ?>','<?php echo $acp_codigo; ?>', '<?php echo $acc_codigo; ?>');"></i></div>
-                                            <?php 
-                                                if($poa_plancompras == 1){
-                                            ?>
+                                         
                                             <i class="fas fa-plus-circle" style="color: #BB0900;"  title="Agergar Plan Compras" onclick="addPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>');"></i>
                                             <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>');"></i>
-                                            <?php 
-                                                }
-                                            ?>
+                                         
                                         </td>
                                     </tr>
                                 <?php

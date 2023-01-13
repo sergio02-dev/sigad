@@ -5,9 +5,11 @@
    
    include('crud/rs/pln_cmpras/pln_cmpras.php');
 
+  
+
    $datos_etapa = $objPlanCompras->datos_etapa($codigo_poai);
 
-    $url_guardar="registroplancompras";
+    $url_guardar="consultarpdi";
     $codigo_formulario = $codigo_poai;
     $tarea = "REGISTRAR";
     $checkedA="checked";
@@ -39,10 +41,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="txtDescripcion" class="font-weight-bold">Descripci&oacute;n *</label>
-                    <textarea class="form-control caja_texto_sizer" rows="4" name="txtDescripcion" id="txtDescripcion" aria-describedby="textHelp" data-rule-required="true"  required><?php echo $poa_objeto; ?></textarea>
+                    <label for="txtDescripcion" class="font-weight-bold">Sede:  <?php echo $codigo_accion; ?></label>
+
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
