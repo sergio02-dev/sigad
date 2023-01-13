@@ -2,7 +2,7 @@
 
    $codigo_poai = $_REQUEST['codigo_poai'];
    $codigo_accion = $_REQUEST['codigo_accion'];   
-   $nom_sede = $_REQUEST['nom_sede'];
+  
    
    include('crud/rs/pln_cmpras/pln_cmpras.php');
 
@@ -14,7 +14,7 @@
    
     $url_guardar="modificarplancompras";
     $codigo_formulario = $codigo_poai;
-    $tarea = "MODIFICAR";
+    $tarea = "LISTADO";
     $checkedA="checked";
     $checkedI="";
     $valor_uni = 0;
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p style="font-size: 113%;"><?php echo $datos_etapa; ?></p>
-                <p style="font-size: 113%;"><?php echo $nom_sede; ?></p>
+                
                 
             </div>
         </div>
