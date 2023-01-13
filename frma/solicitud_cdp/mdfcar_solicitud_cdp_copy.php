@@ -129,7 +129,6 @@
         ?>
                             <tr>
                                 <td>
-                                    
                                     <?php echo $etpa_nombre; ?><br>
                                     <!--- Datos Otro valor --->
                                     <input type="hidden" name="valetapa<?php echo $poa_codigo; ?>" id="valetapa<?php echo $poa_codigo; ?>" value="<?php echo $rcursos_etapa; ?>">

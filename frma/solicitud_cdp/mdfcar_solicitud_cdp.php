@@ -360,7 +360,7 @@
                                             <strong><?php echo "$ ".number_format($asre_recurso,0,'','.'); ?></strong><br>
                                             &nbsp;&nbsp;<input type="checkbox" name="checkCmbioval<?php echo $asre_codigo; ?>" id="checkCmbioval<?php echo $asre_codigo; ?>"  value="1" <?php echo $check_valor; ?>> &nbsp;Otro valor
                                             <input type="hidden" id="recurso_asignado<?php echo $asre_codigo; ?>" name="recurso_asignado<?php echo $asre_codigo; ?>" value="<?php echo $asre_recurso; ?>">
-                                            <input type="hidden" name="codigo_recurso<?php echo $poa_codigo; ?>[]" value="<?php echo $asre_codigo; ?>">
+                                            <input type="hidden" name="codigo_recurso<?php echo $cod_etp; ?>[]" value="<?php echo $asre_codigo; ?>">
 
                                             <script type="text/javascript">
                                                 $('#checkCmbioval<?php echo $asre_codigo; ?>').change(function(){
@@ -400,8 +400,8 @@
                                                     });
                                                     
 
-                                                    $('#suma_validacion<?php echo $poa_codigo; ?>').val(valor_solicitado);
-                                                    $('#sumaValores<?php echo $poa_codigo; ?>').html(numberWithCommas(valor_solicitado));
+                                                    $('#suma_validacion<?php echo $cod_etp; ?>').val(valor_solicitado);
+                                                    $('#sumaValores<?php echo $cod_etp; ?>').html(numberWithCommas(valor_solicitado));
                                                 });
                                             </script>
                                         </td>
@@ -409,7 +409,7 @@
                                             <div class="row valor_cambio<?php echo $asre_codigo; ?>" style="display: <?php echo $ver_caja;?>;">
                                                 <div class="col-md-12">
                                                     <div class="form-label-group form-group"> 
-                                                        <input type="text" onblur="totales_solicitud<?php echo $poa_codigo; ?>()" class="form-control caja_texto_sizer puntos_miles" placeholder="$...." id="fuentes_asgnacion<?php echo $asre_codigo; ?>" name="fuentes_asgnacion<?php echo $asre_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($asre_recurso_mod,0,'','.');?>" required> 
+                                                        <input type="text" onblur="totales_solicitud<?php echo $cod_etp; ?>()" class="form-control caja_texto_sizer puntos_miles" placeholder="$...." id="fuentes_asgnacion<?php echo $asre_codigo; ?>" name="fuentes_asgnacion<?php echo $asre_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($asre_recurso_mod,0,'','.');?>" required> 
                                                         <div class="alert alert-danger alerta-forcliente" id="error_valor_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
                                                         <div class="alert alert-danger alerta-forcliente" id="error_vacio_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
                                                     </div> 
@@ -422,422 +422,123 @@
                                     }
                                 ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>TOTAL</th>
+                                        <th colspan="2">
+                                            $ <span id="sumaValores<?php echo $cod_etp; ?>"><?php echo number_format($valor_suma_fuentes,0,'','.'); ?> </span>
+                                            <input type="hidden" name="sumatoria_etapa<?php echo $cod_etp; ?>" id="sumatoria_etapa<?php echo $cod_etp; ?>" value="<?php echo $valor_suma_fuentes; ?>">
+                                            <input type="hidden" name="suma_validacion<?php echo $cod_etp; ?>" id="suma_validacion<?php echo $cod_etp; ?>" value="<?php echo $valor_suma_fuentes; ?>">
+                                            <div class="alert alert-danger alerta-forcliente" id="error_solicitado_etapa<?php echo $cod_etp; ?>" role="alert"></div>
+                                        </th>
+                                    </tr> 
+                                </tfoot>
+                                <input type="hidden" id="cantidad_asignaciones<?php echo $cod_etp; ?>" name="cantidad_asignaciones<?php echo $cod_etp; ?>" value="<?php echo $cant; ?>">
                                 <?php
                                         
                                     }
+                                    else{
+                                        $cantidad_fuentes = 0;
                                 ?>
-                                
+                                        <tr>
+                                            <td>
+                                                <strong>No hay Recusos Asignados</strong>
+                                                <input type="hidden" id="validacion_recuersos<?php echo $cod_etp; ?>" value="0"/>
+                                                <input type="hidden" id="cantidad_asignaciones<?php echo $cod_etp; ?>" name="cantidad_asignaciones<?php echo $cod_etp; ?>" value="0">
+                                                <div class="alert alert-danger alerta-forcliente" id="recurso_slctado<?php echo $cod_etp; ?>" role="alert"></div>
+                                            </td>
+                                        </tr>
+
+                                <?php
+                                    }
+                                ?>                                
                             </table>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <br>
-                                <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="0">
-                                <input type="checkbox" name="checkOtrval<?php echo $codigo_actividad; ?>" id="checkOtrval<?php echo $codigo_actividad; ?>" value="1" <?php echo $check_otro_valor; ?>> &nbsp;Otro valor
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group" id="text_valor<?php echo $codigo_actividad; ?>" style="display: <?php echo $display_otro_valor; ?>;">
-                                    <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
-                                    <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="<?php echo number_format($cmpo_otro,0,'','.'); ?>" required>
-                                    <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
-                                    <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="<?php echo $prcs; ?>">
-                                </div> 
-                            </div>
-                        </div>                       
-                    </div>
 
+                        <script type="text/javascript">
+                            function totales_solicitud<?php echo $cod_etp; ?>(){
+                                var valor_solicitado = 0;
 
-
-
-        <?php
-                    $etapas_solicitud = $objSolicitudCdp->etapas_solicitud($codigo_actividad, $codigo_solicitud);
-                    if($etapas_solicitud){
-        ?>
-                    <div class="form-group">
-                        <label class="font-weight-bold">Etapas </label>
-                        <table class="table table-sm">
-        <?php
-                        foreach($etapas_solicitud as $dat_etapas_slicitud){
-                            $poa_codigo = $dat_etapas_slicitud['poa_codigo'];
-                            $poa_referencia = $dat_etapas_slicitud['poa_referencia'];
-                            $poa_numero = $dat_etapas_slicitud['poa_numero'];
-                            $poa_objeto = $dat_etapas_slicitud['poa_objeto'];
-                            $poa_recurso = $dat_etapas_slicitud['poa_recurso'];
-                            $aes_valoretapa = $dat_etapas_slicitud['aes_valoretapa'];
-                            $aes_otrovalor = $dat_etapas_slicitud['aes_otrovalor'];
-
-                            $etpa_nombre = $poa_referencia.".".$poa_numero." ".$poa_objeto;
-
-                            $poai_etapa_gasto = $objSolicitudCdp->poai_etapa_gasto($poa_codigo, $codigo_solicitud);
-
-                            $rcursos_etapa = $poa_recurso - $poai_etapa_gasto;
-
-                            if($aes_otrovalor == 1){
-                                $control_valor = 1;
-                                $otro_valor_campo = "block";
-                                $checkVlor = "checked";
-                            }
-                            else{
-                                $control_valor = 0;
-                                $otro_valor_campo = "none";
-                                $checkVlor = "";
-                            }
-        ?>
-                            <tr>
-                                <td>
+                                $("input[name='codigo_recurso<?php echo $cod_etp; ?>[]']").each(function(indice, elemento) {
+                                    var codigo_asignacion = $(elemento).val();
+                                    var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
+                                    var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
+                                    var cambio_valor = $('input:checkbox[name=checkCmbioval'+codigo_asignacion+']:checked').val();
                                     
-                                    <?php echo $etpa_nombre; ?><br>
-                                    <!--- Datos Otro valor --->
-                                    <input type="hidden" name="valetapa<?php echo $poa_codigo; ?>" id="valetapa<?php echo $poa_codigo; ?>" value="<?php echo $rcursos_etapa; ?>">
-                                    <input type="hidden" id="control_valor<?php echo $poa_codigo; ?>" value="<?php echo $control_valor; ?>">
-                                    <input type="hidden" name="etapass[]" value="<?php echo $poa_codigo; ?>">
-                                    <div class="row">
-                                        <div class="col-sm-6 otro_valor<?php echo $poa_codigo; ?> " style="display: <?php echo $ver_check_caja; ?>;">
-                                            <label for="codigo_clasificador<?php echo $poa_codigo; ?>" class="font-weight-bold" >Codigo Clasificador</label>
+                                    fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
 
-                                            <table class="clasfcdorCdgo<?php echo $poa_codigo; ?>">
-                                            <?php
-                                                $codigos_clasificadores_etapas = $objSolicitudCdp->codigos_clasificadores_etapas($codigo_solicitud, $poa_codigo);
-                                                if($codigos_clasificadores_etapas){
-                                                    $num_control = 0;
-                                                    $nun_inicio = count($codigos_clasificadores_etapas);
-                                                    foreach ($codigos_clasificadores_etapas as $dta_clsfcador) {
-                                                        $esc_codigo = $dta_clsfcador['esc_codigo']; 
-                                                        $esc_etapa = $dta_clsfcador['esc_etapa'];
-                                                        $esc_solitudetapa = $dta_clsfcador['esc_solitudetapa'];
-                                                        $esc_clasificador = $dta_clsfcador['esc_clasificador'];
-
-                                                        if($num_control == 0){
-                                            ?>
-                                                <tr>
-                                                    <td style="width: 90%"> <input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Clasificador" name="codigo_clasificador<?php echo $poa_codigo; ?>[]" aria-describedby="textHelp" value="<?php echo $esc_clasificador; ?>"/> </td>
-                                                    <td style="width: 10%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $poa_codigo; ?>('<?php echo $poa_codigo; ?>')"></i></td>
-                                                </tr>
-                                            <?php
-                                                        }
-                                                        else{
-                                            ?>
-                                                <tr class="<?php echo $poa_codigo.$num_control; ?>"> 
-                                                    <td style="width: 90%"><input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Clasificador" id="codigo_clasificador<?php echo $poa_codigo.$num_control; ?>" name="codigo_clasificador<?php echo $poa_codigo; ?>[]" value="<?php echo $esc_clasificador; ?>"/></td>
-                                                    <td style="width: 10%"><i class="fas fa-minus fa-lg color_icono" id="botton<?php echo $poa_codigo.$num_control; ?>" onclick="eliminar_clasificador('<?php echo $num_control; ?>', '<?php echo $poa_codigo; ?>')"></i></td>
-                                                </tr>
-                                            <?php
-                                                        }
-
-                                                        $num_control++;
-                                                    }
-                                                }
-                                                else{
-                                                    $nun_inicio = 0;
-                                            ?>
-                                                <tr>
-                                                    <td style="width: 90%"> <input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Clasificador" name="codigo_clasificador<?php echo $poa_codigo; ?>[]" aria-describedby="textHelp" value=""/> </td>
-                                                    <td style="width: 10%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $poa_codigo; ?>('<?php echo $poa_codigo; ?>')"></i></td>
-                                                </tr>
-                                            
-                                            
-                                            <?php
-                                                }
-                                            ?>
-                                            </table>
-                                            <div class="alert alert-danger alerta-forcliente" id="errro_clasificador<?php echo $poa_codigo; ?>" role="alert"></div>
-                                        </div>
-                                        <div class="col-sm-3 otro_valor<?php echo $poa_codigo; ?>" style="display: <?php echo $ver_check_caja; ?>;">
-                                            <br>
-                                            <lable>&nbsp;</label>
-                                            &nbsp;&nbsp;<input type="checkbox" <?php echo $checkVlor; ?> name="checkOtrval<?php echo $poa_codigo; ?>" id="checkOtrval<?php echo $poa_codigo; ?>" value="1"> &nbsp;Otro valor
-                                        </div>
-
-                                    </div>
-                                    <input type="hidden" name="num_ini" id="num_ini" value="<?php echo $nun_inicio; ?>">
-
-                                    <script type="text/javascript">
-                                        var cantida_clasificador = $('#num_ini').val();
-                                        function getInput(type, poaCode){
-                                            var poaCode = poaCode;
-                                            cantida_clasificador = parseInt(cantida_clasificador) +1;
-                                            var dta = '<tr class="'+poaCode+cantida_clasificador+'"><td style="width: 90%"><input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Clasificador" id="codigo_clasificador'+poaCode+cantida_clasificador+'" name="codigo_clasificador'+poaCode+'[]" /></td><td style="width: 10%"><i class="fas fa-minus fa-lg color_icono" id="botton'+poaCode+cantida_clasificador+'" onclick="eliminar_clasificador(\''+cantida_clasificador+'\',\''+poaCode+'\')"></i><td></tr>'
-                                            return dta;
-                                        }
-
-                                        function eliminar_clasificador(data_info, codPoa){
-                                            var data_info = data_info;
-                                            var codPoa = codPoa;
-                                            var capa_remove = "."+codPoa+data_info;
-                                            $(capa_remove).remove();
-                                        }
-
-                                        function append(className, nodoToAppend){
-                                            var nodo = document.getElementsByClassName(className)[0];
-                                            $('.'+className).append(nodoToAppend);
-                                        }
-
-                                        function Agregaitems<?php echo $poa_codigo; ?>(poaCode){
-                                            var poaCode = poaCode;
-                                            var nodo_clasificacion = getInput("text", poaCode);
-                                            append("clasfcdorCdgo"+poaCode, nodo_clasificacion);
-                                        }
-
-                                        $('#checkOtrval<?php echo $poa_codigo; ?>').change(function(){
-                                            var val_other = $('input:checkbox[name=checkOtrval<?php echo $poa_codigo; ?>]:checked').val();
-
-                                            if(val_other==1){
-                                                $('#text_valor<?php echo $poa_codigo; ?>').fadeIn(100);
-                                                $('#control_valor<?php echo $poa_codigo; ?>').val(1);
-                                            }
-                                            else{
-                                                $('#text_valor<?php echo $poa_codigo; ?>').fadeOut(100);
-                                                $('#control_valor<?php echo $poa_codigo; ?>').val(0);
-                                            }
-                                        });
-                                    </script>  
-                                </td>
-                                <td>
-                                    &nbsp;<br><strong><?php echo "$".number_format($rcursos_etapa,0,'','.'); ?></strong>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-sm-12" id="text_valor<?php echo $poa_codigo; ?>" style="display: <?php echo $otro_valor_campo; ?>;">
-                                            <div class="form-group">
-                                                <label for="valor<?php echo $poa_codigo; ?>" class="font-weight-bold" >Valor </label>
-                                                <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" max="<?php echo $rcursos_etapa; ?>" id="valor<?php echo $poa_codigo; ?>" name="valor<?php echo $poa_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($aes_valoretapa,0,'','.'); ?>" required>
-                                                <span id="error_valor_etpa<?php echo $poa_codigo; ?>" style="color:red; font-weight: bold;"></span>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <label style="color: #C2240B;"  class="font-weight-bold" id="titulo_fuente<?php echo $poa_codigo; ?>"><strong>Fuentes</strong></label>
-                                    <table class="table">
-                                    <?php
-                                        $fuente_asignada_etapa = $objSolicitudCdp->fuente_asignada_etapa($poa_codigo);
-                                        if($fuente_asignada_etapa){
-                                    ?>
-                                        <tbody>
-                                    <?php
-                                            $cant = 0;
-                                            foreach($fuente_asignada_etapa as $dta_fnte_asgnda_etpa){
-                                                $asre_codigo = $dta_fnte_asgnda_etpa['asre_codigo'];
-                                                $asre_etapa = $dta_fnte_asgnda_etpa['asre_etapa'];
-                                                $asre_accion = $dta_fnte_asgnda_etpa['asre_etapa'];
-                                                $asre_fuente = $dta_fnte_asgnda_etpa['asre_fuente']; 
-                                                $asre_indicador = $dta_fnte_asgnda_etpa['asre_indicador'];
-                                                $asrerecurso = $dta_fnte_asgnda_etpa['asre_recurso'];
-                                                $ffi_nombre = $dta_fnte_asgnda_etpa['ffi_nombre'];
-                                                $asre_vigenciarecurso = $dta_fnte_asgnda_etpa['asre_vigenciarecurso'];
-
-                                                $gasto_asignacion = $objSolicitudCdp->gasto_asignacion($asre_codigo, $codigo_solicitud);
-
-                                                $asre_recurso = $asrerecurso - $gasto_asignacion;
-                                                
-                                                list($otro_valor_asignacion, $valor_asignacion) = $objSolicitudCdp->presupuesto_x_fuente($codigo_solicitud, $asre_codigo);
-                                                if($otro_valor_asignacion == 1){
-                                                    $ver_caja = "block";
-                                                    $check_valor = "checked";
-                                                    $valor_suma_fuentes = $valor_suma_fuentes + $valor_asignacion; 
-                                                    $asre_recurso_mod = $valor_asignacion;
-                                                }
-                                                else{
-                                                    $ver_caja = "none";
-                                                    $check_valor = "";
-                                                    $valor_suma_fuentes = $valor_suma_fuentes + $asre_recurso; 
-                                                    $asre_recurso_mod = $asre_recurso;
-                                                }
-                                    ?>
-                                            <tr>
-                                                <td>
-                                                    <strong><?php echo $asre_vigenciarecurso." ".str_replace('INV -','', $ffi_nombre); ?></strong>
-                                                </td>
-                                                <td>
-                                                    <strong><?php echo "$ ".number_format($asre_recurso,0,'','.'); ?></strong><br>
-                                                    &nbsp;&nbsp;<input type="checkbox" name="checkCmbioval<?php echo $asre_codigo; ?>" id="checkCmbioval<?php echo $asre_codigo; ?>"  value="1" <?php echo $check_valor; ?>> &nbsp;Otro valor
-                                                    <input type="hidden" id="recurso_asignado<?php echo $asre_codigo; ?>" name="recurso_asignado<?php echo $asre_codigo; ?>" value="<?php echo $asre_recurso; ?>">
-                                                    <input type="hidden" name="codigo_recurso<?php echo $poa_codigo; ?>[]" value="<?php echo $asre_codigo; ?>">
-
-                                                    <script type="text/javascript">
-                                                        $('#checkCmbioval<?php echo $asre_codigo; ?>').change(function(){
-                                                            var cambio_valor = $('input:checkbox[name=checkCmbioval<?php echo $asre_codigo; ?>]:checked').val();
-                                                            var valor_solicitado = 0;
-
-                                                            if(!cambio_valor){
-                                                                $('.valor_cambio<?php echo $asre_codigo; ?>').fadeOut('100');
-                                                            }
-                                                            else{
-                                                                $('.valor_cambio<?php echo $asre_codigo; ?>').fadeIn('100');
-                                                            }
-
-                                                            $("input[name='codigo_recurso<?php echo $poa_codigo; ?>[]']").each(function(indice, elemento) {
-                                                                var codigo_asignacion = $(elemento).val();
-                                                                var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
-                                                                var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
-                                                                var cambio_valor = $('input:checkbox[name=checkCmbioval'+codigo_asignacion+']:checked').val();
-                                                                
-                                                                fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
-
-                                                                if(!cambio_valor){
-                                                                    valor_solicitado = parseFloat(valor_solicitado) + parseFloat(recurso_asignado);
-                                                                }
-                                                                else{
-                                                                    if(fuente_cambio == ''){
-                                                                        $("#error_vacio_asignado"+codigo_asignacion).fadeIn('300');
-                                                                        $('#error_vacio_asignado'+codigo_asignacion).html('El campo no puede ir vacío');
-                                                                        return false;
-                                                                    }
-                                                                    else{
-                                                                        $("#error_vacio_asignado"+codigo_asignacion).fadeOut('300');
-                                                                        $('#error_vacio_asignado'+codigo_asignacion).html('');
-                                                                    }
-                                                                    valor_solicitado = parseFloat(valor_solicitado) + parseFloat(fuente_cambio);
-                                                                }
-                                                            });
-                                                            
-
-                                                            $('#suma_validacion<?php echo $poa_codigo; ?>').val(valor_solicitado);
-                                                            $('#sumaValores<?php echo $poa_codigo; ?>').html(numberWithCommas(valor_solicitado));
-                                                        });
-                                                    </script>
-                                                </td>
-                                                <td> 
-                                                    <div class="row valor_cambio<?php echo $asre_codigo; ?>" style="display: <?php echo $ver_caja;?>;">
-                                                        <div class="col-md-12">
-                                                            <div class="form-label-group form-group"> 
-                                                                <input type="text" onblur="totales_solicitud<?php echo $poa_codigo; ?>()" class="form-control caja_texto_sizer puntos_miles" placeholder="$...." id="fuentes_asgnacion<?php echo $asre_codigo; ?>" name="fuentes_asgnacion<?php echo $asre_codigo; ?>" aria-describedby="textHelp" value="<?php echo number_format($asre_recurso_mod,0,'','.');?>" required> 
-                                                                <div class="alert alert-danger alerta-forcliente" id="error_valor_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
-                                                                <div class="alert alert-danger alerta-forcliente" id="error_vacio_asignado<?php echo $asre_codigo; ?>" role="alert"></div>
-                                                            </div> 
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    <?php
-                                                $cant++;
-                                            }
-                                    ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>TOTAL</th>
-                                                <th colspan="2">
-                                                    $ <span id="sumaValores<?php echo $poa_codigo; ?>"><?php echo number_format($valor_suma_fuentes,0,'','.'); ?> </span>
-                                                    <input type="hidden" name="sumatoria_etapa<?php echo $poa_codigo; ?>" id="sumatoria_etapa<?php echo $poa_codigo; ?>" value="<?php echo $valor_suma_fuentes; ?>">
-                                                    <input type="hidden" name="suma_validacion<?php echo $poa_codigo; ?>" id="suma_validacion<?php echo $poa_codigo; ?>" value="<?php echo $valor_suma_fuentes; ?>">
-                                                    <div class="alert alert-danger alerta-forcliente" id="error_solicitado_etapa<?php echo $poa_codigo; ?>" role="alert"></div>
-                                                </th>
-                                            </tr> 
-                                        </tfoot>
-                                        <input type="hidden" id="cantidad_asignaciones<?php echo $poa_codigo; ?>" name="cantidad_asignaciones<?php echo $poa_codigo; ?>" value="<?php echo $cant; ?>">
-                                    <?php
+                                    if(!cambio_valor){
+                                        valor_solicitado = parseFloat(valor_solicitado) + parseFloat(recurso_asignado);
+                                    }
+                                    else{
+                                        if(fuente_cambio == ''){
+                                            $("#error_vacio_asignado"+codigo_asignacion).fadeIn('300');
+                                            $('#error_vacio_asignado'+codigo_asignacion).html('El campo no puede ir vacío');
+                                            return false;
                                         }
                                         else{
-                                            $cantidad_fuentes = 0;
-                                    ?>
-                                            <tr>
-                                                <td>
-                                                    <strong>No hay Recusos Asignados</strong>
-                                                    <input type="hidden" id="validacion_recuersos<?php echo $poa_codigo; ?>" value="0"/>
-                                                    <input type="hidden" id="cantidad_asignaciones<?php echo $poa_codigo; ?>" name="cantidad_asignaciones<?php echo $poa_codigo; ?>" value="0">
-                                                    <div class="alert alert-danger alerta-forcliente" id="recurso_slctado<?php echo $poa_codigo; ?>" role="alert"></div>
-                                                </td>
-                                            </tr>
-                                    <?php
+                                            $("#error_vacio_asignado"+codigo_asignacion).fadeOut('300');
+                                            $('#error_vacio_asignado'+codigo_asignacion).html('');
                                         }
-                                    ?>
-                                    </table>
-                                </td>
-                            </tr>
-                            <!------------ sumas fuentes ------------->
-                            <script type="text/javascript">
-                                function totales_solicitud<?php echo $poa_codigo; ?>(){
-                                    var valor_solicitado = 0;
+                                        valor_solicitado = parseFloat(valor_solicitado) + parseFloat(fuente_cambio);
+                                    }
+                                });
+                                $('#suma_validacion<?php echo $cod_etp; ?>').val(valor_solicitado);
+                                $('#sumaValores<?php echo $cod_etp; ?>').html(numberWithCommas(valor_solicitado));
+                            }
+                        </script>
 
-                                    $("input[name='codigo_recurso<?php echo $poa_codigo; ?>[]']").each(function(indice, elemento) {
-                                        var codigo_asignacion = $(elemento).val();
-                                        var recurso_asignado = $('#recurso_asignado'+codigo_asignacion).val();
-                                        var fuente_cambio = $('#fuentes_asgnacion'+codigo_asignacion).val();
-                                        var cambio_valor = $('input:checkbox[name=checkCmbioval'+codigo_asignacion+']:checked').val();
-                                        
-                                        fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
-
-                                        if(!cambio_valor){
-                                            valor_solicitado = parseFloat(valor_solicitado) + parseFloat(recurso_asignado);
-                                        }
-                                        else{
-                                            if(fuente_cambio == ''){
-                                                $("#error_vacio_asignado"+codigo_asignacion).fadeIn('300');
-                                                $('#error_vacio_asignado'+codigo_asignacion).html('El campo no puede ir vacío');
-                                                return false;
-                                            }
-                                            else{
-                                                $("#error_vacio_asignado"+codigo_asignacion).fadeOut('300');
-                                                $('#error_vacio_asignado'+codigo_asignacion).html('');
-                                            }
-                                            valor_solicitado = parseFloat(valor_solicitado) + parseFloat(fuente_cambio);
-                                        }
-                                    });
-                                    $('#suma_validacion<?php echo $poa_codigo; ?>').val(valor_solicitado);
-                                    $('#sumaValores<?php echo $poa_codigo; ?>').html(numberWithCommas(valor_solicitado));
-                                }
-                            </script>
-                            <!-- .................................. -->
-
-        <?php
-                        }
-        ?>
-                        </table>
                     </div>
-        <?php
-                    }
-        ?>
-        <script type="text/javascript">
-            var select_info<?php echo $codigo_actividad; ?> = '';
-           
-            function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
-     
-                var data_info = data_info;
+                
+                    <script type="text/javascript">
+                        var select_info<?php echo $codigo_actividad; ?> = '';
+                    
+                        function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
+                
+                            var data_info = data_info;
 
-                $(data_info).remove();
-            }
+                            $(data_info).remove();
+                        }
 
-            var cantida_clasificador<?php echo $codigo_actividad; ?> = $('#num_ini<?php echo $codigo_actividad; ?>').val(); 
-            function getInput(type, activCode){
-                var activCode = activCode;
-                cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
-                var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
-                var select_options<?php echo $codigo_actividad; ?> = '<select name="selClasificador'+activCode+'[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
+                        var cantida_clasificador<?php echo $codigo_actividad; ?> = $('#num_ini<?php echo $codigo_actividad; ?>').val(); 
+                        function getInput(type, activCode){
+                            var activCode = activCode;
+                            cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
+                            var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
+                            var select_options<?php echo $codigo_actividad; ?> = '<select name="selClasificador'+activCode+'[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
 
-                var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
-                nombre_capa = '';
-                return dta;
-            }
+                            var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+                            nombre_capa = '';
+                            return dta;
+                        }
 
-            function append(className, nodoToAppend){
-                var nodo = document.getElementsByClassName(className)[0];
-                $('.'+className).append(nodoToAppend);
+                        function append(className, nodoToAppend){
+                            var nodo = document.getElementsByClassName(className)[0];
+                            $('.'+className).append(nodoToAppend);
 
-                $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
-                    liveSearch: true,
-                    maxOptions: 1
-                });
+                            $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
+                                liveSearch: true,
+                                maxOptions: 1
+                            });
 
-                $(".puntos_miles_valor").on({
-                    "focus": function (event) {
-                        $(event.target).select();
-                    },
-                    "keyup": function (event) {
-                        $(event.target).val(function (index, value ) {
-                            return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-                        });
-                    }
-                });
-            }
-            
-            function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
-                var activCode = activCode;
-                var nodo_clasificacion = getInput("text", activCode);
-                append("tablaClasificadores"+activCode, nodo_clasificacion);
-            }     
-        </script>
+                            $(".puntos_miles_valor").on({
+                                "focus": function (event) {
+                                    $(event.target).select();
+                                },
+                                "keyup": function (event) {
+                                    $(event.target).val(function (index, value ) {
+                                        return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                                    });
+                                }
+                            });
+                        }
+                        
+                        function Agregaitems<?php echo $codigo_actividad; ?>(activCode){
+                            var activCode = activCode;
+                            var nodo_clasificacion = getInput("text", activCode);
+                            append("tablaClasificadores"+activCode, nodo_clasificacion);
+                        }     
+                    </script>
         <?php
                 }
             }

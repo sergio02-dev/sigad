@@ -250,10 +250,11 @@ Class RsSolicitudCdp extends SolicitudCdp{
                                         poa_estado, poa_numero, 
                                         poa_vigencia, acp_codigo, 
                                         poa_logroejecutado
-                                FROM planaccion.poai
-                                WHERE acp_codigo IN($cdigo_actividad)
-                                AND poa_estado = '1'
-                                ORDER BY acp_codigo, poa_numero;";
+                                   FROM planaccion.poai
+                                  WHERE acp_codigo IN($cdigo_actividad)
+                                    AND poa_estado = '1'
+                                    AND poa_recurso > 0
+                                  ORDER BY acp_codigo, poa_numero ASC;";
 
         $resultado_etapas_actividad = $this->cnxion->ejecutar($sql_etapas_actividad);
 
