@@ -6,11 +6,13 @@
    
    include('crud/rs/pln_cmpras/pln_cmpras.php');
 
-  
-
    $datos_etapa = $objPlanCompras->datos_etapa($codigo_poai);
 
-    $url_guardar="registroplancompras";
+   $codigo_sede = $objPlanCompras->etapas_actividad_sede($codigo_poai);
+
+   $list_plan_cmpras = $objPlanCompras->list_plan_cmpras($codigo_accion, $codigo_sede);
+   
+    $url_guardar="modificarplancompras";
     $codigo_formulario = $codigo_poai;
     $tarea = "AGREGAR";
     $checkedA="checked";
@@ -47,40 +49,106 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">&nbsp;</div>
-        </div>
+            <div class="col-sm-12">
+                <table class="table table-striped table-bordered table-sm fuente_input_tabla">
+                    <tr>
+                        <th style="width: 3% "></th>
+                        <th style="width : 4%" > Sede</th>
+                        <th style="width: 23% ">Dependencia</th>
+                        <th style="width: 12% ">Area</th>
+                        <th style="width: 10% ">Planta fisica</th>
+                        <th style="width: 15% ">Caracteristica</th>
+                        <th style= "width: 10%"> Cantidad </th>
+                        <th style="width: 10% ">Valor unitario</th>
+                        <th style="width: 13% ">Valor total</th>
+                       
+                    <?php
+                        if($list_plan_cmpras){
+                            $num_datos = count($list_plan_cmpras);
+                            $num = 1;
+                            foreach($list_plan_cmpras as $dta_list_plan_cmpras){
+                                $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
+                                $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
+                                $pdi_sede = $dta_list_plan_cmpras['pdi_sede'];
+                                $pdi_dependencia = $dta_list_plan_cmpras['pdi_dependencia'];
+                                $pdi_area = $dta_list_plan_cmpras['pdi_area'];
+                                $pdi_plantafisica = $dta_list_plan_cmpras['pdi_plantafisica'];
+                                $pdi_equipodescripcion = $dta_list_plan_cmpras['pdi_equipodescripcion']; 
+                                $pdi_cantidad = $dta_list_plan_cmpras['pdi_cantidad'];
+                                $pdi_valorunitario = $dta_list_plan_cmpras['pdi_valorunitario'];
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="txtDescripcion" class="font-weight-bold">Descripci&oacute;n *</label>
-                    <textarea class="form-control caja_texto_sizer" rows="4" name="txtDescripcion" id="txtDescripcion" aria-describedby="textHelp" data-rule-required="true"  required><?php echo $poa_objeto; ?></textarea>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>
-        </div>
+                                $nombre_sede = $objPlanCompras->nombre_sede($pdi_sede);
+                                $nombre_dependencia = $objPlanCompras->nombre_dependencia($pdi_dependencia);
+                                $nombre_area = $objPlanCompras->nombre_area($pdi_area);
+                                $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
+                                $valor = $pdi_cantidad * $pdi_valorunitario;
+                    ?>
+                    <tr>   
+                        <td> <input  name="fuente[]" type="checkbox"  data-rule-required="true" required ></td>
+                        <td><?php echo $nombre_sede; ?></td>    
+                        <td>
+                            
+                            <?php echo $nombre_dependencia; ?>
+                        </td>
+                        <td>
+                            
+                            <?php echo $nombre_area; ?>
+                        </td>
+                        <td>
+                            
+                            <?php echo $pdi_plantafisica; ?>
+                        </td>
+                        <td>
+                            <?php echo $nombre_descripcionEquipo; ?>
+                        </td>
+                        <td>
+                           <?php echo $pdi_cantidad;?>
+                        </td>
+                        <td>
+                          <?php echo number_format($pdi_valorunitario,0,'','.'); ?>
+                        </td>
+                        <td>
+                            $ <span id="valorFinal<?php echo $num; ?>"><?php echo number_format($valor,0,'','.'); ?></span>
+                        </td>
+                    
+                    </tr>
+                    <script type="text/javascript">
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="txtCantidad" class="font-weight-bold">Cantidad *</label>
-                    <input type="number" class="form-control caja_texto_sizer sma" id="txtCantidad" name="txtCantidad" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $cantidad;?>" required>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="txtValorUnitario" class="font-weight-bold">Valor Unitario *</label>
-                    <input type="text" class="form-control caja_texto_sizer sma" id="txtValorUnitario" name="txtValorUnitario" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $valor_uni; ?>" required>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="txtValorTotal" class="font-weight-bold">Valor Total *</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtValorTotal" name="txtValorTotal" aria-describedby="textHelp" data-rule-required="false" value="<?php echo $poa_logroejecutado; ?>" readonly>
-                    <span class="help-block" id="error"></span>
-                </div>
+                        $("#txtValorUnitario<?php echo $num; ?>").on({
+                            "focus": function (event) {
+                                $(event.target).select();
+                            },
+                            "keyup": function (event) {
+                                $(event.target).val(function (index, value ) {
+                                    return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                                });
+                            }
+                        });
+
+                        function numberWithCommas(formatoNumero) {
+                            return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                        }
+
+                        $('.sma<?php echo $num; ?>').change(function(){
+                            var undades = $('#txtCantidad<?php echo $num; ?>').val();
+                            var str= $('#txtValorUnitario<?php echo $num; ?>').val();
+                            var valor_unidades = 0;
+
+                            valor_unidades = str.toString().replace(/\./g,'');
+        
+                            var total = undades * valor_unidades;
+
+                            $('#valorFinal<?php echo $num; ?>').html(numberWithCommas(total));
+                        });
+
+                    </script>
+                    <?php
+                                $num++;
+                                
+                            }
+                        }
+                    ?>
+                </table>
             </div>
         </div>
 
@@ -106,4 +174,3 @@
 
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/vldar_edtar_pln_cmpras.js"></script>
-
