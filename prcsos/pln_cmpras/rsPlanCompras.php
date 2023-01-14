@@ -142,6 +142,31 @@
             return $datalist_plan_cmpras;
         }
 
+        public function check_arreglo($codigo_plancompras){
+        
+            $sql_check_arreglo  = "SELECT COUNT(*) checkbox
+                                         FROM usco.plancompras_accion
+                                        WHERE pca_plancompras = $codigo_plancompras
+                                        AND pca_estado = 1;";
+            
+    
+            $resultado_check_arreglo  = $this->cnxion->ejecutar($sql_check_arreglo);
+    
+            $data_check_arreglo = $this->cnxion->obtener_filas($resultado_check_arreglo);
+    
+            $checkbox = $data_check_arreglo['checkbox'];
+    
+            if($checkbox == 0){
+                $checkear = "";
+            }
+            else{
+                $checkear = "checked";
+            }
+    
+            return $checkear;
+        }
+    
+
 
        
     }

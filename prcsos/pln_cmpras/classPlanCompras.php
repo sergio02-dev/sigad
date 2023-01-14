@@ -12,7 +12,7 @@
         private $valorUnitario;
         private $estado;
         private $personaSistema;
-        private $arrayDatos;
+        private $plancompras;
 
         public function PlanCompras(){ }
 
@@ -23,6 +23,16 @@
         public function setCodigoPlanCompras($codigoPlanCompras) {
             $this->codigoPlanCompras = $codigoPlanCompras;
         }
+
+        public function getPlancompras() {
+            return $this->plancompras;
+        }
+        public function setPlancompras($plancompras) {
+            $this->plancompras = $plancompras;
+        }
+
+
+
 
         public function getSede() {
             return $this->sede;

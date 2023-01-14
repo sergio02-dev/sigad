@@ -1,26 +1,29 @@
 function validar_plancompras(){
 	
+	var plancompras = new Array();
+
+		//Inicio Validación actividades
+		plancompras = $('[name="plancompras[]"]:checked').map(function () {
+			return this.value;
+		}).get();
+
+		 
+		cantidad_plancompra = plancompras.length;
+
+		if(cantidad_plancompra == 0){
+		$('#error_plancompras').html('Seleccione al menos un plan de compras');
+		return false;
+		}
+		else{
+		$('#error_plancompras').html('');
+		}
+
 	$("#editarplancompraform").validate({
-		rules: {
-			
-		},
-
-		messages:{
-			
-
-		},
-		errorPlacement : function(error, element) {
-				$(element).closest('.form-group').find('.help-block').html(error.html());
-		},
-		highlight : function(element) {
-				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-		},
-		unhighlight: function(element, errorClass, validClass) {
-				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-				$(element).closest('.form-group').find('.help-block').html('');
-		},
+		
+	
 		submitHandler: function(form){
 			var code_acccion=$('#codigo_accion').val();
+			var code_poai=$('#codigo_poai').val();
 			var codigo_formulario = $('#codigo_formulario').val();
 			var url_proceso = $('#url').val();
 			//alert(url_proceso);
@@ -30,18 +33,26 @@ function validar_plancompras(){
 				url: url_proceso,
 				data: $(form).serialize(),
 				success: function (data, status) {
-                    $('#frmModalEtapaEditar'+codigo_formulario).modal('hide');
-					$('#frmModalEtapaEditar'+codigo_formulario).modal({backdrop: false});
+                    $('#frmModalEtapaEditar'+codigo_formulario+code_poai).modal('hide');
+					$('#frmModalEtapaEditar'+codigo_formulario+code_poai).modal({backdrop: false});
 
                     $('#registroActividad'+code_acccion).load("datainfoaccion?codigo_accion="+code_acccion);
+					$('.modal-backdrop').remove();
+					
+				swal({
+					title: "Registro Exitoso",
+					text: "",
+					icon: "success",
+					button: "OK",
+				});
 
-				}
-			});
+			}
+		});
 
-			return false;
+		return false;
 
-		}
-	});
+	}
+});
 
 
 }

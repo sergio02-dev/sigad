@@ -8,6 +8,7 @@
     $codigo_poai = $_REQUEST['codigo_poai'];
     $estado = $_REQUEST['chkestado'];
     $nom_sede = $_REQUEST['nom_sede'];
+    $plancompras = $_REQUEST['plancompras'];
 
     $registroplancompras = new RgstroPlanCompras();
 
@@ -18,6 +19,7 @@
     $registroplancompras->setValorUnitario($txtValorUnitario);
     $registroplancompras->setPersonaSistema($personaSistema);
     $registroplancompras->setEstado($estado);
+    $registroplancompras->setPlancompras($plancompras);
 
     echo $registroplancompras->insertPlanCompras();
 ?>
