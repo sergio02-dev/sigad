@@ -117,11 +117,22 @@
 
         public function list_plan_cmpras($codigo_plan_cmpra, $codigo_sede){
 
+            if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+                $condicion="";
+            }
+            else{
+                $codigo_seesion = $_SESSION['idusuario'];
+                $condicion = "AND pdi_dependencia IN(SELECT DISTINCT vin_oficina
+                                                       FROM usco.vinculacion
+                                                      WHERE vin_persona = $codigo_seesion)";
+            }
+            
+
             $sql_list_plan_cmpras="SELECT pdi_codigo,pdi_sede, pdi_dependencia, pdi_area,pdi_plantafisica,
-                                          pdi_equipodescripcion, pdi_valorunitario, pdi_cantidad
-                                     FROM usco.formulariopdi
+                                          pdi_equipodescripcion, pdi_valorunitario, pdi_cantidad                                     FROM usco.formulariopdi
                                     WHERE pdi_accion = $codigo_plan_cmpra
                                       AND pdi_sede = $codigo_sede
+                                      $condicion
                                      ORDER BY pdi_equipodescripcion ASC;";
 
             $query_list_plan_cmpras=$this->cnxion->ejecutar($sql_list_plan_cmpras);
