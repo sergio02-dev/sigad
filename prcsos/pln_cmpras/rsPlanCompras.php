@@ -121,10 +121,10 @@
                 $condicion="";
             }
             else{
-                $codigo_seesion = $_SESSION['idusuario'];
+                $codigo_sesion = $_SESSION['idusuario'];
                 $condicion = "AND pdi_dependencia IN(SELECT DISTINCT vin_oficina
                                                        FROM usco.vinculacion
-                                                      WHERE vin_persona = $codigo_seesion)";
+                                                      WHERE vin_persona = $codigo_sesion)";
             }
             
 
