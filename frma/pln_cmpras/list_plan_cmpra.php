@@ -29,8 +29,15 @@
         max-height: calc(100vh - 210px);
         overflow-y: auto;
     }
+    .alert.alert-danger.alerta-forcliente{
+        display: none;
+        padding: 0;
+        color: red ;
+        font-weight: bold;
+    }
 
 </style>
+
 <form id="editarplancompraform" role="form">
     <div class="modal-header fondo-titulo">
         <h3 class="modal-title"><strong><?php echo $tarea; ?> PLAN DE COMPRAS</strong></h3>
@@ -52,7 +59,7 @@
             <div class="col-sm-12">
                 <table class="table table-striped table-bordered table-sm fuente_input_tabla">
                     <tr>
-                        <th style="width: 3% ">No</th>
+                        <th style="width : 3%" > ::</th>
                         <th style="width : 4%" > Sede</th>
                         <th style="width: 23% ">Dependencia</th>
                         <th style="width: 12% ">Area</th>
@@ -61,12 +68,13 @@
                         <th style= "width: 10%"> Cantidad </th>
                         <th style="width: 10% ">Valor unitario</th>
                         <th style="width: 13% ">Valor total</th>
-                    </tr>
+                       
                     <?php
                         if($list_plan_cmpras){
                             $num_datos = count($list_plan_cmpras);
                             $num = 1;
                             foreach($list_plan_cmpras as $dta_list_plan_cmpras){
+                                $pdi_codigo = $dta_list_plan_cmpras['pdi_codigo'];
                                 $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
                                 $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
                                 $pdi_sede = $dta_list_plan_cmpras['pdi_sede'];
@@ -82,36 +90,42 @@
                                 $nombre_area = $objPlanCompras->nombre_area($pdi_area);
                                 $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
                                 $valor = $pdi_cantidad * $pdi_valorunitario;
+                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo);
                     ?>
                     <tr>   
-                        <td><?php echo $num; ?></td>
-                        <td><?php echo $nombre_sede; ?></td>    
-                        <td>
+                        <td> 
+                            <input id="plancompras<?php echo $pdi_codigo; ?>" name="plancompras[]" type="checkbox" value="<?php echo $pdi_codigo; ?>" data-rule-required="true" required <?php echo $check_arreglo;?>>
                             
-                            <?php echo $nombre_dependencia; ?>
                         </td>
                         <td>
-                            
-                            <?php echo $nombre_area; ?>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $nombre_sede; ?></label>
+                        </td>    
+                        <td>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $nombre_dependencia; ?></label>
                         </td>
                         <td>
-                            
-                            <?php echo $pdi_plantafisica; ?>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $nombre_area; ?></label>
                         </td>
                         <td>
-                            <?php echo $nombre_descripcionEquipo; ?>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $pdi_plantafisica; ?></label>     
                         </td>
                         <td>
-                           <?php echo $pdi_cantidad;?>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $nombre_descripcionEquipo; ?></label>
                         </td>
                         <td>
-                          <?php echo number_format($pdi_valorunitario,0,'','.'); ?>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo $pdi_cantidad; ?></label>
                         </td>
                         <td>
-                            $ <span id="valorFinal<?php echo $num; ?>"><?php echo number_format($valor,0,'','.'); ?></span>
+                            <label for="plancompras<?php echo $pdi_codigo; ?>" class="caja_texto_sizer"><?php echo number_format($pdi_valorunitario,0,'','.');; ?></label>
+                        </td>
+                        <td>
+                            <span id="valorFinal<?php echo $num; ?>"><?php echo number_format($valor,0,'','.'); ?></span>
+                            <input type="hidden" name="checkPlancompras<?php echo $pdi_codigo; ?>" id="checkPlancompras<?php echo $pdi_codigo; ?>" value="0">
+                                 
                         </td>
                     
                     </tr>
+                                
                     <script type="text/javascript">
 
                         $("#txtValorUnitario<?php echo $num; ?>").on({
@@ -148,29 +162,31 @@
                             }
                         }
                     ?>
+                   
                 </table>
+               
             </div>
+            
         </div>
-
+        <span id="error_plancompras" style="color:#C2240B; font-weight: bold;"></span> 
+        
     <!-- ******************** FIN FORMULARIO ************************* -->
 
     </div>
+
     <div class="modal-footer">
         <input type="hidden" name="num_datos" id="num_datos" value="<?php echo $num_datos; ?>">
         <input type="hidden" name="codigo_formulario" id="codigo_formulario" value="<?php echo $codigo_formulario; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
         <input type="hidden" name="codigo_poai" id="codigo_poai" value="<?php echo $codigo_poai; ?>">
+        <input type="hidden" name="pco_etapa" id="pco_etapa" value="<?php echo $pco_etapa; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <?php
-            if($num_datos>0){
-        ?>
-        <button type="submit" class="btn btn-danger" onClick="validar_plancompras();"><i class="far fa-save"></i> Guardar</button>
-        <?php
-            }
-        ?>
+        <button type="submit" class="btn btn-danger" onclick="validar_plancompras();"><i class="far fa-save"></i> Guardar</button>
+      
     </div>
 </form>
 
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/vldar_edtar_pln_cmpras.js"></script>
+
