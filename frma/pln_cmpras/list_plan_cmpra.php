@@ -179,7 +179,6 @@
         <input type="hidden" name="codigo_formulario" id="codigo_formulario" value="<?php echo $codigo_formulario; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
         <input type="hidden" name="codigo_poai" id="codigo_poai" value="<?php echo $codigo_poai; ?>">
-        <input type="hidden" name="pco_etapa" id="pco_etapa" value="<?php echo $pco_etapa; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-danger" onclick="validar_plancompras();"><i class="far fa-save"></i> Guardar</button>

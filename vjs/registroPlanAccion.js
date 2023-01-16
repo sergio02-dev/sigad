@@ -10,20 +10,17 @@ function validar_formregistroactividad(){
 			recursoAccion:{
 				required: true,
 			},
-			logroAccion:{
-				required: true,
-			},
 			chkestado:{
 				required: true,
 			},
 			logroEjecutado:{
 				required: true,
-			}
-			/*txtDescripcionClasificador:{
-				required: function(element){
-					return parseFloat(recurso) > 0;
-				},
 			},
+			logroAccion:{
+				required: true,
+				min: 1,
+			}
+			/*
 			codigoClasificador:{
 				required: function(element){
 					return parseFloat(recurso) > 0;
@@ -39,15 +36,17 @@ function validar_formregistroactividad(){
 			recursoAccion:{
 				required: "Ingrese el Recurso",
 			},
-			logroAccion:{
-				required: "Ingrese el Logro",
-			},
 			chkestado:{
 				required: "Seleccione un Estado",
 			},
 			logroEjecutado:{
 				required: "Ingrese el Valor"
+			},
+			logroAccion:{
+                required: "Ingrese el peso de la etapa",
+				min: "El peso de la etapa debe ser mayor a 0"
 			}
+			
 			/*txtDescripcionClasificador:{
 				required: "Ingrese la Descripción"
 			},
@@ -109,6 +108,7 @@ function validar_formregistroactividad(){
 						$('#frmModalEtapaEditar'+codigo_formulario).modal({backdrop: false});
 
 						$('#registroActividad'+code_acccion).load("datainfoaccion?codigo_accion="+code_acccion);
+						$('.modal-backdrop').remove();
 					}
 
 				}
@@ -141,7 +141,6 @@ function validar_formregistroactividad(){
 			});
 		}
 	});
-
 
 }
 	

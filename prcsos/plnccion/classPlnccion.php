@@ -15,8 +15,17 @@ Class PlanAccion{
     private $descripcionClasificador;
     private $dane;
     private $planCompras;
+    private $totalPesoEtapas;
 
     public function PlanAccion(){}
+
+
+    public function getTotalPesoEtapas(){
+        return $this->totalPesoEtapas;
+    }
+    public function setTotalPesoEtapas($totalPesoEtapas){
+        $this->totalPesoEtapas=$totalPesoEtapas;
+    }
 
     public function getCodigoPoai(){
         return $this->codigo_poai;
