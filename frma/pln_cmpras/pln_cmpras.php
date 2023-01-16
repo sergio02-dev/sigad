@@ -185,4 +185,4 @@
 
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/vldar_edtar_pln_cmpras.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
