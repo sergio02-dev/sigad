@@ -144,9 +144,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="logroAccion" class="font-weight-bold">Peso de la Etapa % *</label>
-                    <input type="number" class="form-control caja_texto_sizer" id="logroAccion" name="logroAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_logro; ?>" required>
-                    <span class="help-block" id="error"></span>
-                    <span class="help-block" style="color:#F90909 " id="error_valor"></span>
+                    <input type="number" class="form-control caja_texto_sizer"  id="logroAccion" name="logroAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_logro; ?>" required>
+                    <span class="help-block" style="color:#F90909 " id="error_peso_etapa"></span>
                 </div>
             </div>
             <div class="col-md-6">

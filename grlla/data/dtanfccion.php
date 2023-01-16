@@ -121,8 +121,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <strong> <div style="display: <?php echo $visibilidad; ?>">Agregar Etapa <i class="fas fa-plus-circle" style="color: #BB0900;" title="Registrar Etapa" onclick="agregarPoai('<?php echo $acp_codigo; ?>','<?php echo $referenciaActividad; ?>', '<?php echo $acc_codigo; ?>');"></i> </div></strong>
-                    </td>
+                        <?php $suma=$objPlanAccion->suma($acp_codigo);?>
+                         <strong><div style="display: <?php echo $visibilidad; ?>">Agregar Etapa <i class="fas fa-plus-circle" style="color: #BB0900;" title="Registrar Etapa"  onclick="agregarPoai('<?php echo $acp_codigo; ?>','<?php echo $referenciaActividad; ?>', '<?php echo $acc_codigo; ?>', '<?php echo $suma; ?>');"></i> </div></strong>
+                       
+                     </td> 
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -308,14 +310,13 @@
         echo "<strong>No hay Actividades Registradas </strong>";
     }
 ?>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 
     function editarActiviad(codigo_actividad,referenciaAccion, codigo_accion){
         var codigo_actividad = codigo_actividad;
         var referenciaAccion = referenciaAccion;
-        var codigo_accion  = codigo_accion;
-
+     
         $('#frmModal'+codigo_actividad).modal({
             keyboard: true
         });
@@ -331,24 +332,37 @@
         });
     }
 
-    function agregarPoai(codigo_actividad, referenciaActividad, codigo_accion){
+    function agregarPoai(codigo_actividad, referenciaActividad, codigo_accion,sumaEtapa){
         var codigo_actividad = codigo_actividad;
         var referenciaAccion = referenciaAccion;
         var codigo_accion = codigo_accion;
-
-        $('#frmModalEtapa'+codigo_actividad).modal({
+        var sumaEtapa = sumaEtapa;
+       
+       
+        if(sumaEtapa==100){
+            
+            swal({
+                    title: "El peso de las etapas ya esta en 100%",
+                    text: "",
+                    icon: "error",
+                    button: "OK",
+                });
+        }else{
+            $('#frmModalEtapa'+codigo_actividad).modal({
             keyboard: true
-        });
-        $.ajax({
-            url:"formplanaccion",
-            type:"POST",
-            data:"codigo_actividad="+codigo_actividad+"&referenciaActividad="+referenciaActividad+'&codigo_accion='+codigo_accion,
-            async:true,
+             });
 
-            success: function(message){
-                $(".modal-contentEtapa"+codigo_actividad).empty().append(message);
-            }
-        });
+            $.ajax({
+                url:"formplanaccion",
+                type:"POST",
+                data:"codigo_actividad="+codigo_actividad+"&referenciaActividad="+referenciaActividad+'&codigo_accion='+codigo_accion,
+                async:true,
+
+                success: function(message){
+                    $(".modal-contentEtapa"+codigo_actividad).empty().append(message);
+                }
+            });
+        }
     }
 
     function editarEtapa(codigo_poai, referenciaActividad, codigo_actividad, codigo_accion){

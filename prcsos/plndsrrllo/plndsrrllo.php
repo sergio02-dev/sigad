@@ -1010,6 +1010,24 @@ class PlnDsrrllo extends PlanDesarrollo{
         return $datalist_autorizador;
     }
 
+    public function list_asignacionrecursos($codigo_nivel, $nivel){
+
+        $sql_list_autorizador="SELECT res_codigo, res_nivel, res_codigonivel, 
+                                       res_codigocargo, res_codigooficina, 
+                                       res_estado, res_personacreo
+                                  FROM usco.responsable
+                                 WHERE res_codigonivel = $codigo_nivel
+                                   AND res_nivel = $nivel
+                                   AND res_tiporesponsable = 4;";
+
+        $query_list_autorizador=$this->cnxion->ejecutar($sql_list_autorizador);
+
+        while($data_list_autorizador=$this->cnxion->obtener_filas($query_list_autorizador)){
+            $datalist_autorizador[] = $data_list_autorizador;
+        }
+        return $datalist_autorizador;
+    }
+
     public function nombre_oficina($codigo_oficina){
 
         $sql_nombre_oficina="SELECT ofi_codigo, ofi_nombre, ofi_estado

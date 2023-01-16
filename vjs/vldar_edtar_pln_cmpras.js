@@ -57,4 +57,3 @@ function validar_plancompras(){
 
 }
 	
-	
