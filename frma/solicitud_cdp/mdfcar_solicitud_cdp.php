@@ -197,7 +197,21 @@
                                     <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="<?php echo $prcs; ?>">
                                 </div> 
                             </div>
-                        </div>                       
+                        </div>
+                        <script type="text/javascript">
+                            $('#checkOtrval<?php echo $codigo_actividad; ?>').change(function(){
+                                var val_other = $('input:checkbox[name=checkOtrval<?php echo $codigo_actividad; ?>]:checked').val();
+                                
+                                if(val_other==1){
+                                    $('#text_valor<?php echo $codigo_actividad; ?>').fadeIn(100);
+                                    $('#control_valor_chek<?php echo $codigo_actividad; ?>').val(1);
+                                }
+                                else{
+                                    $('#text_valor<?php echo $codigo_actividad; ?>').fadeOut(100);
+                                    $('#control_valor_chek<?php echo $codigo_actividad; ?>').val(0);
+                                }
+                            });
+                        </script>                      
                     </div>
 
                     <div class="row">
@@ -571,8 +585,6 @@
     </div>
 </form>
 
-
-
 <script src="vjs/vldar_solicitud_cdp_mod.js"></script>
 
 <script type="text/javascript">
@@ -593,8 +605,6 @@
             }
         });
     });
-
-    
 
     $('.selectpicker').selectpicker({
         liveSearch: true,

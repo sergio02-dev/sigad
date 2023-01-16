@@ -956,5 +956,26 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $dataform_dta_etapa_solicitud;
     }
+
+    public function dtos_etpas($codigo_etapa){
+
+        $sql_dtos_etpas = "SELECT poa_codigo, poa_referencia, 
+                                  poa_numero, poa_objeto, poa_recurso
+                             FROM planaccion.poai
+                            WHERE poa_codigo = $codigo_etapa;";
+
+        $query_dtos_etpas = $this->cnxion->ejecutar($sql_dtos_etpas);
+
+        $data_dtos_etpas = $this->cnxion->obtener_filas($query_dtos_etpas);
+
+        $poa_referencia = $data_dtos_etpas['poa_referencia'];
+        $poa_numero = $data_dtos_etpas['poa_numero'];
+        $poa_objeto = $data_dtos_etpas['poa_objeto'];
+        $poa_recurso = $data_dtos_etpas['poa_recurso'];
+
+        $descr_etp = $poa_referencia.".".$poa_numero." ".$poa_objeto;
+
+        return array($descr_etp, $poa_recurso);
+    }
 }
 ?>
