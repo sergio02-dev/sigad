@@ -96,12 +96,5 @@
         public function setPersonaSistema($personaSistema) {
             $this->personaSistema = $personaSistema;
         }
-        
-        public function getArrayDatos() {
-            return $this->arrayDatos;
-        }
-        public function setArrayDatos($arrayDatos) {
-            $this->arrayDatos = $arrayDatos;
-        }
 
     }

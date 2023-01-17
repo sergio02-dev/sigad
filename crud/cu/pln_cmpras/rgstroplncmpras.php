@@ -1,3 +1,4 @@
+
 <?php
     include('prcsos/pln_cmpras/rgstroPlnCmpras.php');
 
@@ -21,5 +22,5 @@
     $registroplancompras->setEstado($estado);
     $registroplancompras->setPlancompras($plancompras);
 
-    echo $registroplancompras->insertPlanCompras();
+    $registroplancompras->insertPlanCompras();
 ?>
