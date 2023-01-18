@@ -77,6 +77,10 @@
         $url_guardar="modificarresponsable";
         $task = "MODIFICAR";
 
+        if($nivel == 2){
+            $capa_direccion = "#rsponsables_info".$codigo_nivel;
+            $url_direccion = "inforesponsable?codigo_nivel=".$codigo_nivel."&nivel=".$nivel;;
+        }
         if($nivel == 3){
             $capa_direccion = "#tabla_indicador";
             $url_direccion = "dataindicador?codigo_planDesarrollo=".$codigo_plan."&codigo_accion=".$codigo_nivel;
