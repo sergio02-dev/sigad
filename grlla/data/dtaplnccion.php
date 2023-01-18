@@ -39,32 +39,17 @@
 
 ?>		
 <div class="row">
-	<div class="col-sm-9" style=" display:<?php echo $excel_vista; ?>">
+	<div class="col-sm-9" style=" display:block;">
         <!--<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcel();"><i class="fas fa-file-excel"></i>&nbsp;Excel Plan Acci&oacute;n</a></span>-->
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_rcrso_poai_etpa('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Recursos Poai Etapa</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_asgnacion_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Asignacion de Recursos Plan Acci&oacute;n</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Plan Acci&oacute;n</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcelReponsable();"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Responsable Acci&oacute;n</strong></a></span>
 	</div>
-	<div class="col-sm-3" style=" display:<?php echo $excel_vista_responsables; ?>">
+	<div class="col-sm-3" style=" display:none">
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcelOtros();"><i class="fas fa-file-excel"></i>&nbsp;Excel Plan Acci&oacute;n</a></span>
 	</div>
-	<!--<div class="col-sm-3" style="display:<?php echo $excel_vista; ?>"> 
-		<div class="form-group">
-			<select name="selYearInicio" id="selYearInicio" class="form-control" data-rule-required="true" required>
-				<option value="0">Seleccione la Vigencia..</option>
-				<?php
-				for ($yinicio = $inicio; $yinicio <= $finmostrar; $yinicio++) {                            
-					echo "<option value=".$yinicio." ".$select_yinicio."> ".$yinicio."</option>";
-				}
-				?>
-			</select>
-		</div>
-	</div>
-	<div class="col-sm-3">
-		&nbsp;
-		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF;" class="btn btn-danger btn-sm" onclick="generarExcelPoai();"><i class="fas fa-file-excel"></i>&nbsp;Fuentes de Financiaci&oacute;n</a></span>
-	</div>-->
+
 	
 </div>
 

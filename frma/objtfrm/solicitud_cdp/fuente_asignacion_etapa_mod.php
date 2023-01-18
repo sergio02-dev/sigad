@@ -9,9 +9,9 @@
 <table class="table">
     
 <?php
-
+$valor_suma_fuentes = 0;
 if($fuente_asignada_etapa){
-    $valor_suma_fuentes = 0;
+    
 ?>
     <tbody>
 <?php
@@ -38,6 +38,7 @@ if($fuente_asignada_etapa){
     <tr>
         <td>
             <strong><?php echo $asre_vigenciarecurso." ".str_replace('INV -','', $ffi_nombre); ?></strong>
+            <br> <?php echo "valor ".$asre_recurso;?>
         </td>
         <td>
             <strong><?php echo "$ ".number_format($asre_recurso,0,'','.'); ?></strong><br>
@@ -182,10 +183,12 @@ else{
             $(event.target).select();
         },
         "keyup": function (event) {
-            $(event.target).val(function (index, value ) {
+            $(event.target).val(function (index, value) {
                 return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
             });
         }
     });
 </script>
-
+<?php
+    $valor_suma_fuentes = 0;
+?>

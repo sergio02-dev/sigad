@@ -147,7 +147,6 @@ function validar_solicitud_cdp(){
 		}
 
 		//Valor de la Discriminación 
-		alert('valor validar '+valor_validar+' valor clasificadores '+total_clsfcdor)
 		if(parseFloat(valor_validar) == parseFloat(total_clsfcdor)){
 			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
@@ -171,7 +170,6 @@ function validar_solicitud_cdp(){
 
 				fuente_cambio = fuente_cambio.toString().replace(/\./g,'');
 
-				//alert('Codigo Asignacion '+codigo_asignacion)
 				if(!cambio_valor){
 					valor_tomar_asignacion = parseFloat(valor_tomar_asignacion) + parseFloat(recurso_asignado);
 				}

@@ -21,7 +21,7 @@
     <div class="col-md-4">
         <div class="form-group" id="text_valor<?php echo $codigo_actividad; ?>" style="display: none;">
             <label for="valor<?php echo $codigo_actividad; ?>" class="font-weight-bold" >Valor </label>
-            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="<?php echo number_format($dscrpp,0,'','.'); ?>" required>
+            <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" min="0" id="valor<?php echo $codigo_actividad; ?>" name="valor<?php echo $codigo_actividad; ?>" aria-describedby="textHelp" value="<?php echo number_format($prcs,0,'','.'); ?>" required>
             <span id="error_valor_etpa<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
             <input type="hidden" name="valor_etapa<?php echo $codigo_actividad; ?>" id="valor_etapa<?php echo $codigo_actividad; ?>" value="<?php echo $prcs; ?>">
         </div> 

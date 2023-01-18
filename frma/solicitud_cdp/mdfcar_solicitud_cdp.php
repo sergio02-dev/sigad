@@ -34,7 +34,6 @@
         $checkedA = "";
         $checkedI = "checked";
     }
-    
 ?>
 <style>
     .alert.alert-danger.alerta-forcliente{
@@ -125,6 +124,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label style="font-size: 15px;"><?php echo $descripcion_actividad; ?></label>
+                            <input type="text" name="codigo_actividad[]" value="<?php echo $codigo_actividad; ?>">
                         </div>
                     </div>
                     
@@ -176,6 +176,35 @@
                                 <span id="error_etapa<?php echo $codigo_actividad; ?>" style="color:#C2240B; font-weight: bold;"></span>
                             </div>
                         </div>
+                        <script type="text/javascript">
+                            $('#etpass<?php echo $codigo_actividad; ?>').change(function(){
+                                var codigo_etapa = $(this).find(':selected').data('codigo_etapa');
+                                var codigo_solicitud = $('#codigo_solicitud').val();
+
+                                if(codigo_etapa > 0){
+                                    $.ajax({
+                                        url:"infoetapa",
+                                        type:"POST",
+                                        data:'codigo_etapa='+codigo_etapa+'&codigo_solicitud='+codigo_solicitud,
+                                        async:true,
+                                        success: function(message){
+                                            $(".informacion_etapa<?php echo $codigo_actividad; ?>").empty().append(message);
+                                        }
+                                    });
+
+                                    $.ajax({
+                                        url:"fuenteseditarsolicitud",
+                                        type:"POST",
+                                        data:'codigo_etapa='+codigo_etapa+'&codigo_solicitud='+codigo_solicitud,
+                                        async:true,
+                                        success: function(message){
+                                            $(".fuentes_etapa<?php echo $codigo_actividad; ?>").empty().append(message);
+                                        }
+                                    });
+                                }
+                                
+                            })
+                        </script>            
                     </div>
 
                     <div class="informacion_etapa<?php echo $codigo_actividad; ?>">
@@ -333,6 +362,7 @@
                                 </thead>
                                 <?php 
                                     $fuente_asignada_etapa = $objSolicitudCdp->fuente_asignada_etapa($cod_etp);
+                                    $valor_suma_fuentes = 0;
                                     if($fuente_asignada_etapa){
                                         $cant = 0;
                                 ?>
@@ -508,7 +538,6 @@
                         var select_info<?php echo $codigo_actividad; ?> = '';
                     
                         function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
-                
                             var data_info = data_info;
 
                             $(data_info).remove();

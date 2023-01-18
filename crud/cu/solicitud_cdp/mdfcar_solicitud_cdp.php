@@ -15,6 +15,7 @@
 
     $array_datos = array();
 
+    
     if($etapass){
         $cantidad = count($etapass);
         $num_etapas = 1;
