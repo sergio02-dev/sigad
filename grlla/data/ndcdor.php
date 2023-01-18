@@ -33,6 +33,9 @@
     $list_responsbles_gastos = $objRsPlanDesarrollo->list_responsbles_gastos($codigo_nivel, $nivel);
 
     $list_autorizador = $objRsPlanDesarrollo->list_autorizador($codigo_nivel, $nivel);
+
+    $list_asignacionrecursos = $objRsPlanDesarrollo->list_asignacionrecursos($codigo_nivel, $nivel);
+
 ?>
 <p>
     <div style="float: left; margin-bottom: 1px;">
@@ -228,6 +231,74 @@
 
     ?>
 </table></br>
+
+
+<p>
+    <div style="float: left; margin-bottom: 1px;">
+        <strong style="color: #930606db;">RESPONSABLE ASIGNACION DE RECURSOS  </strong> 
+        <i class="fas fa-plus-circle color_icono" title="Agregar Responsable Gastos Nivel Tres" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="responsable_asignacionrecursos('<?php echo $codigo_accion;?>','<?php echo $codigo_planDesarrollo; ?>')"></i>
+    </div>
+    <hr style="float: left; border: 1px solid #930606db; margin: 10px 0; width: 100%">
+</p>
+
+<table claas="table table-sm table-striped table-bordered">
+    <tr>
+        <th style="width: 5%">No.</th>
+        <th style="width: 50%">Oficina Responsable</th>
+        <th style="width: 30%">Cargo</th>
+        <th style="width: 10%">Estado</th>
+        <th style="width: 5%">::</th>
+    </tr>
+
+    <?php
+        if($list_asignacionrecursos){
+            $num_resp = 1;
+            foreach ($list_asignacionrecursos as $dta_asignacionrescursos) {
+                $res_codigo = $dta_asignacionrescursos['res_codigo'];
+                $res_nivel = $dta_asignacionrescursos['res_nivel'];
+                $res_codigonivel = $dta_asignacionrescursos['res_codigonivel'];
+                $res_codigocargo = $dta_asignacionrescursos['res_codigocargo'];
+                $res_codigooficina = $dta_asignacionrescursos['res_codigooficina'];
+                $res_estado = $dta_asignacionrescursos['res_estado'];
+
+                if($res_estado == 1){
+                    $nbre_estado = "ACTIVO";
+                }
+
+                if($res_estado == 0){
+                    $nbre_estado = "INACTIVO";
+                }
+
+                $nbre_oficina = $objRsPlanDesarrollo->nombre_oficina($res_codigooficina);
+
+                $nbre_cargo = $objRsPlanDesarrollo->nombre_cargo($res_codigocargo);
+            
+    ?>
+    <tr>
+        <td><?php echo $num_resp; ?></td>
+        <td><?php echo strtoupper(tildes($nbre_oficina)); ?></td>
+        <td><?php echo strtoupper(tildes($nbre_cargo)); ?></td>
+        <td><?php echo $nbre_estado; ?></td>
+        <td>
+            <div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Responsable" onclick="editar_asignacionrecursos('<?php echo $codigo_nivel ?>','<?php echo $nivel; ?>','<?php echo $res_codigo; ?>','<?php echo $codigo_planDesarrollo; ?>');"></i></div>
+        </td>
+    </tr>
+    <?php
+                $num_resp++;
+            }
+        }
+        else{
+    ?>
+    <tr>
+        <td colspan="5">No hay Responsables Registrados</td>
+    </tr>
+    <?php
+        }
+
+    ?>
+</table></br>
+
+
 <p>
     <div style="float: left; margin-bottom: 1px;">
         <strong style="color: #930606db;">INDICADORES</strong>
@@ -419,6 +490,29 @@
         });
     }
 
+
+    function responsable_asignacionrecursos(codigo_nivel, codigo_plan){
+        var codigo_nivel = codigo_nivel;
+        var codigo_plan = codigo_plan;
+        var nivel = 3;
+        var tipo_responsable = 4;
+        
+        $('#frmModal').modal({
+            keyboard: true
+        });
+        $.ajax({
+            url:"formresponsable",
+            type:"POST",
+            data:"codigo_nivel="+codigo_nivel+'&codigo_plan='+codigo_plan+'&nivel='+nivel+'&tipo_responsable='+tipo_responsable,
+            async:true,
+
+            success: function(message){
+                $(".modal-content").empty().append(message);
+            }
+        });
+    }
+
+
     function responsable_nivel(codigo_nivel, codigo_plan){
         var codigo_nivel = codigo_nivel;
         var codigo_plan = codigo_plan;
@@ -468,6 +562,28 @@
         var codigo_plan = codigo_plan;
         var nivel = 3;
         var tipo_responsable = 2;
+        
+        $('#frmModal').modal({
+            keyboard: true
+        });
+        $.ajax({
+            url:"formresponsable",
+            type:"POST",
+            data:"codigo_nivel="+codigo_nivel+'&codigo_responsable='+codigo_responsable+'&nivel='+nivel+'&codigo_plan='+codigo_plan+'&tipo_responsable='+tipo_responsable,
+            async:true,
+
+            success: function(message){
+                $(".modal-content").empty().append(message);
+            }
+        });
+    }
+
+    function editar_asignacionrecursos(codigo_nivel, nivel, codigo_responsable, codigo_plan){
+        var codigo_nivel = codigo_nivel;
+        var codigo_responsable = codigo_responsable;
+        var codigo_plan = codigo_plan;
+        var nivel = 3;
+        var tipo_responsable = 4;
         
         $('#frmModal').modal({
             keyboard: true

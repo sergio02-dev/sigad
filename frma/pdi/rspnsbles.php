@@ -23,6 +23,9 @@
         $tpo = "RESPONSABLE";
         $nombre_form = $objRsPlanDesarrollo->nombre_dos($codigo_nivel);
     }
+    if ($nivel == 3) {
+    $tpo = "RESPONSABLE";
+    }
 
     if($nivel == 3){
         if($tipo_responsable == 1){
@@ -31,9 +34,13 @@
         elseif($tipo_responsable == 2){
            $tpo = "ORDENADOR DEL GASTO";
         }
-        else{
+        else if ($tipo_responsable == 3){
             $tpo = "AUTORIZA EL GASTO";
         }
+        else {
+            $tpo = "ASIGNACION DE RECURSOS";
+        }
+        
         $nombre_form = $objRsPlanDesarrollo->nombre_tres($codigo_nivel);
         
     }

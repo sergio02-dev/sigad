@@ -3,7 +3,8 @@
    $codigo_actividad = $_REQUEST['codigo_actividad'];
    $referenciaActividad = $_REQUEST['referenciaActividad'];
    $codigo_poai = $_REQUEST['codigo_poai'];
-   $codigo_accion = $_REQUEST['codigo_accion'];                                                                                                                                                                                                                                                                                                                                                                                                                                         
+   $codigo_accion = $_REQUEST['codigo_accion'];
+   $codigo_sede = $_REQUEST['codigo_sede'];                                                                                                                                                                                                                                                                                                                                                                                                                        
 
    include('crud/rs/plnccion.php');
 
@@ -34,7 +35,7 @@
         }
 
         if($poa_estado=='1'){
-            $checkedA="checked";
+            $checkedA="checked";    
             $checkedI="";
         }
         if($poa_estado=='0') {
@@ -143,9 +144,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="logroAccion" class="font-weight-bold">Peso de la Etapa % *</label>
-                    <input type="number" class="form-control caja_texto_sizer" id="logroAccion" name="logroAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_logro; ?>" required>
-                    <span class="help-block" id="error"></span>
-                    <span class="help-block" style="color:#F90909 " id="error_valor"></span>
+                    <input type="number" class="form-control caja_texto_sizer"  id="logroAccion" name="logroAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_logro; ?>" required>
+                    <span class="help-block" style="color:#F90909 " id="error_peso_etapa"></span>
                 </div>
             </div>
             <div class="col-md-6">
@@ -196,13 +196,7 @@
                 </div>
             </div>
 
-            <!--<div class="col-md-4">
-                <div class="form-check">
-                    <br/>
-                    <input class="form-check-input" type="checkbox" value="1" id="checkedPlanCompras" name="checkedPlanCompras" <?php echo $planCmpras; ?>>
-                    <label class="form-check-label" for="checkedPlanCompras">Plan de Compras</label>
-                </div>
-            </div>-->
+         
 
             
             
@@ -317,6 +311,8 @@
         <input type="hidden" name="codigo_formulario" id="codigo_formulario" value="<?php echo $codigo_formulario; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
         <input type="hidden" name="avacanceActividad" id="avacanceActividad" value="<?php echo $poa_logro; ?>">
+        
+        <input type="hidden" name="codigo_sede" id="codigo_sede" value="<?php echo $codigo_sede; ?>">
         <input type="hidden" name="codigo_poai" id="codigo_poai" value="<?php echo $codigo_poai; ?>">
         <input type="hidden" name="codigoActividad" id="codigoActividad" value="<?php echo $codigo_actividad; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">

@@ -4,12 +4,15 @@
 
         private $codigoPlanCompras;
         private $codigoEtapa;
+        private $sede;
+        private $dependencia;
+        private $area;
         private $descripcion;
         private $cantidad;
         private $valorUnitario;
         private $estado;
         private $personaSistema;
-        private $arrayDatos;
+        private $plancompras;
 
         public function PlanCompras(){ }
 
@@ -19,6 +22,37 @@
         }
         public function setCodigoPlanCompras($codigoPlanCompras) {
             $this->codigoPlanCompras = $codigoPlanCompras;
+        }
+
+        public function getPlancompras() {
+            return $this->plancompras;
+        }
+        public function setPlancompras($plancompras) {
+            $this->plancompras = $plancompras;
+        }
+
+
+
+
+        public function getSede() {
+            return $this->sede;
+        }
+        public function setSede($sede) {
+            $this->sede = $sede;
+        }
+
+        public function getDependencia() {
+            return $this->dependencia;
+        }
+        public function setDependencia($dependencia) {
+            $this->dependencia = $dependencia;
+        }
+
+        public function getArea() {
+            return $this->area;
+        }
+        public function setArea($area) {
+            $this->area = $area;
         }
 
         public function getCodigoEtapa() {
@@ -61,13 +95,6 @@
         }
         public function setPersonaSistema($personaSistema) {
             $this->personaSistema = $personaSistema;
-        }
-        
-        public function getArrayDatos() {
-            return $this->arrayDatos;
-        }
-        public function setArrayDatos($arrayDatos) {
-            $this->arrayDatos = $arrayDatos;
         }
 
     }

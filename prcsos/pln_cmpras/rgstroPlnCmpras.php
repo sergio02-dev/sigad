@@ -4,41 +4,45 @@ include_once('classPlanCompras.php');
 class RgstroPlanCompras extends PlanCompras{
 
     private $sql_insert_plan_cmpras;
-    private $codigo_plan_cmpras;
+
 
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
-        $this->codigo_plan_cmpras =date('YmdHis').rand(99,99999);
     }
 
     public function insertPlanCompras(){
+
+        $plancompras = $this->getPlancompras();
+
+        for ($lista_plancompras=0; $lista_plancompras < count($plancompras); $lista_plancompras++) { 
+
+            $codigo_planComprasAccion[$lista_plancompras] = date('YmdHis').rand(99,99999);
         
-        $sql_insert_plan_cmpras="INSERT INTO usco.plan_compras(
-                                             pco_codigo, 
-                                             pco_etapa,
-                                             pco_descrpcion, 
-                                             pco_cantidad, 
-                                             pco_valorunitario, 
-                                             pco_estado, 
-                                             pco_fechacreo, 
-                                             pco_fechamodifico, 
-                                             pco_personacreo, 
-                                             pco_personamodifico)
-                                     VALUES (".$this->codigo_plan_cmpras.",
-                                             ".$this->getCodigoEtapa().",  
-                                             '".$this->getDescripcion()."', 
-                                             ".$this->getCantidad().", 
-                                             ".$this->getValorUnitario().", 
-                                             ".$this->getEstado().", 
-                                             NOW(), 
-                                             NOW(), 
-                                             ".$this->getPersonaSistema().", 
-                                             ".$this->getPersonaSistema().");";
+            $sql_insert_plan_cmpras_accion[$lista_plancompras]="INSERT INTO usco.plancompras_accion(pca_codigo, 
+                                                                                                    pca_etapa, 
+                                                                                                    pca_plancompras, 
+                                                                                                    pca_estado, 
+                                                                                                    pca_fechacreo, 
+                                                                                                    pca_fechamodifico, 
+                                                                                                    pca_personacreo, 
+                                                                                                    pca_personamodifico)
+                                                                                    VALUES (".$codigo_planComprasAccion[$lista_plancompras] .", 
+                                                                                            ".$this->getCodigoEtapa().",
+                                                                                            ".$plancompras[$lista_plancompras].", 
+                                                                                            1, 
+                                                                                            NOW(), 
+                                                                                            NOW(), 
+                                                                                            ".$this->getPersonaSistema().", 
+                                                                                            ".$this->getPersonaSistema().");";
+            
+            
+            
 
-        $this->cnxion->ejecutar($sql_insert_plan_cmpras);
+                 $this->cnxion->ejecutar($sql_insert_plan_cmpras_accion[$lista_plancompras]);
+        }
 
 
-        return $sql_insert_plan_cmpras;
+        return $sql_insert_plan_cmpras_accion;
 
     }
 }
