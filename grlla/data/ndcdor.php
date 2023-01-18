@@ -48,7 +48,7 @@
 <table claas="table table-sm table-striped table-bordered">
     <tr>
         <th style="width: 5%">No.</th>
-        <th style="width: 50%">Oficina Responsable</th>
+        <th style="width: 30%">Oficina Responsable</th>
         <th style="width: 30%">Cargo</th>
         <th style="width: 10%">Estado</th>
         <th style="width: 5%">::</th>
@@ -104,7 +104,7 @@
 
 <p>
     <div style="float: left; margin-bottom: 1px;">
-        <strong style="color: #930606db;">AUTORIZA EL GASTO  </strong> 
+        <strong style="color: #930606db;">AUTORIZA EL GASTO </strong> 
         <i class="fas fa-plus-circle color_icono" title="Autoriza el Gasto" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="responsable_nivel_autorizacion('<?php echo $codigo_accion;?>','<?php echo $codigo_planDesarrollo; ?>')"></i>
     </div>
     <hr style="float: left; border: 1px solid #930606db; margin: 10px 0; width: 100%">
@@ -113,9 +113,10 @@
 <table claas="table table-sm table-striped table-bordered">
     <tr>
         <th style="width: 5%">No.</th>
-        <th style="width: 50%">Oficina Responsable</th>
+        <th style="width: 30%">Oficina Responsable</th>
         <th style="width: 30%">Cargo</th>
         <th style="width: 10%">Estado</th>
+        <th style="width: 20%">Clasificacion</th>
         <th style="width: 5%">::</th>
     </tr>
 
@@ -129,6 +130,7 @@
                 $res_codigocargo = $dta_autorizador['res_codigocargo'];
                 $res_codigooficina = $dta_autorizador['res_codigooficina'];
                 $res_estado = $dta_autorizador['res_estado'];
+                $res_clasificacion = $dta_autorizador['res_clasificacion'];
 
                 if($res_estado == 1){
                     $nbre_estado = "ACTIVO";
@@ -141,6 +143,7 @@
                 $nbre_oficina = $objRsPlanDesarrollo->nombre_oficina($res_codigooficina);
 
                 $nbre_cargo = $objRsPlanDesarrollo->nombre_cargo($res_codigocargo);
+                $nbre_clasificacion = $objRsPlanDesarrollo->nombre_clasificacion($res_clasificacion);
             
     ?>
     <tr>
@@ -148,6 +151,7 @@
         <td><?php echo strtoupper(tildes($nbre_oficina)); ?></td>
         <td><?php echo strtoupper(tildes($nbre_cargo)); ?></td>
         <td><?php echo $nbre_estado; ?></td>
+        <td> <?php echo $nbre_clasificacion; ?></td>
         <td>
             <div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Responsable" onclick="editar_autorizador_gastos('<?php echo $codigo_nivel ?>','<?php echo $nivel; ?>','<?php echo $res_codigo; ?>','<?php echo $codigo_planDesarrollo; ?>');"></i></div>
         </td>
@@ -159,7 +163,7 @@
         else{
     ?>
     <tr>
-        <td colspan="5">No hay Responsables Registrados</td>
+        <td colspan="6">No hay Responsables Registrados</td>
     </tr>
     <?php
         }
@@ -453,8 +457,22 @@
         var codigo_plan = codigo_plan;
         var nivel = 3;
         var tipo_responsable = 3;
-        
-        $('#frmModal').modal({
+        if(nivel == 3){
+            $('#frmModal').modal({
+                keyboard: true
+            });
+            $.ajax({
+                url:"formresponsable",
+                type:"POST",
+                data:"codigo_nivel="+codigo_nivel+'&codigo_plan='+codigo_plan+'&nivel='+nivel+'&tipo_responsable='+tipo_responsable,
+                async:true,
+
+                success: function(message){
+                    $(".modal-content").empty().append(message);
+                }
+            });
+        }else if($nivel == 2){
+            $('#frmModal').modal({
             keyboard: true
         });
         $.ajax({
@@ -467,7 +485,9 @@
                 $(".modal-content").empty().append(message);
             }
         });
+        }
     }
+
     
     function responsable_nivel_gastos(codigo_nivel, codigo_plan){
         var codigo_nivel = codigo_nivel;

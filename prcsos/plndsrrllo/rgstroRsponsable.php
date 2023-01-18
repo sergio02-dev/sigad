@@ -24,7 +24,8 @@ class RgstroRspnsble extends Responsable{
                                         res_fechamodifico, 
                                         res_personacreo, 
                                         res_personamodifico, 
-                                        res_tiporesponsable)
+                                        res_tiporesponsable,
+                                        res_clasificacion)
                                 VALUES (".$this->codigo_responsable.", 
                                         ".$this->getNivel().", 
                                         ".$this->getCodigoNivel().",
@@ -35,7 +36,8 @@ class RgstroRspnsble extends Responsable{
                                         NOW(), 
                                         ".$this->getPersonaSistema().", 
                                         ".$this->getPersonaSistema().",
-                                        ".$this->getTipoResponsable().");";
+                                        ".$this->getTipoResponsable().",
+                                        ".$this->getClasificacion().");";
 
         $this->cnxion->ejecutar($inser_responsable);
 

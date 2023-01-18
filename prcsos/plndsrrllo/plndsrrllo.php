@@ -878,6 +878,21 @@ class PlnDsrrllo extends PlanDesarrollo{
         return $datalist_oficina;
     }
 
+    public function list_clasificacion(){
+
+        $sql_list_clasificacion="SELECT  cla_codigo, cla_nombre, cla_estado
+                                    FROM usco.clsficcion_autorizargsto
+                                   WHERE cla_estado = 1
+                                ORDER BY cla_nombre ASC;";
+
+        $query_list_clasificacion=$this->cnxion->ejecutar($sql_list_clasificacion);
+
+        while($data_list_clasificacion=$this->cnxion->obtener_filas($query_list_clasificacion)){
+            $datalist_clasificacion[]=$data_list_clasificacion;
+        }
+        return $datalist_clasificacion;
+    }
+
     public function list_cargo(){
 
         $sql_list_cargo="SELECT car_codigo, car_nombre, car_estado
@@ -943,7 +958,7 @@ class PlnDsrrllo extends PlanDesarrollo{
 
         $sql_form_responsable="SELECT res_codigo, res_nivel, res_codigonivel, 
                                       res_codigocargo, res_codigooficina, 
-                                      res_estado
+                                      res_estado, res_clasificacion
                                  FROM usco.responsable
                                 WHERE res_codigo = $codigo_responsable;";
 
@@ -996,7 +1011,7 @@ class PlnDsrrllo extends PlanDesarrollo{
 
         $sql_list_autorizador="SELECT res_codigo, res_nivel, res_codigonivel, 
                                        res_codigocargo, res_codigooficina, 
-                                       res_estado, res_personacreo
+                                       res_estado, res_personacreo, res_clasificacion
                                   FROM usco.responsable
                                  WHERE res_codigonivel = $codigo_nivel
                                    AND res_nivel = $nivel
@@ -1056,6 +1071,21 @@ class PlnDsrrllo extends PlanDesarrollo{
         $car_nombre = $data_nombre_cargo['car_nombre'];
 
         return $car_nombre;
+    }
+
+    public function nombre_clasificacion($codigo_clasificacion){
+
+        $sql_nombre_clasificacion="SELECT cla_codigo, cla_nombre, cla_estado
+                             FROM usco.clsficcion_autorizargsto
+                            WHERE cla_codigo = $codigo_clasificacion;";
+
+        $query_nombre_clasificacion=$this->cnxion->ejecutar($sql_nombre_clasificacion);
+
+        $data_nombre_clasificacion=$this->cnxion->obtener_filas($query_nombre_clasificacion);
+        
+        $cla_nombre = $data_nombre_clasificacion['cla_nombre'];
+
+        return $cla_nombre;
     }
 
     public function nombre_indicador($codigo_indicador){
