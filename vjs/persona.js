@@ -28,6 +28,12 @@ function validar_formpersona(){
 			},
 			chkestado:{
 				required: true,
+			},
+			selEntidad:{
+				selectEntidad: true,
+			},
+			selFacultad:{
+				selectFacultad: true,
 			}
 		},
 
@@ -35,6 +41,14 @@ function validar_formpersona(){
 			textIdentificacion:{
 				required: "Digite la identificación",
 				minlength:"debe ser mayor a 6 caracteres",
+			},
+			selEntidad:{
+				required: "Seleccione vicerrectoria",
+				
+			},
+			selFacultad:{
+				required: "Seleccione facultad",
+				
 			},
 			textNombres:{
 				required: "Digite los nombres",
@@ -86,5 +100,11 @@ function validar_formpersona(){
 	jQuery.validator.addMethod('selectTipoIdentificacion', function (value) {
 		return (value != '0');
 	}, "Seleccione el Tipo de Identificación");
+	jQuery.validator.addMethod('selectFacultad', function (value) {
+		return (value != '0');
+	}, "Seleccione una facultad");
+	jQuery.validator.addMethod('selectEntidad', function (value) {
+		return (value != '0');
+	}, "Seleccione una vicerrectoria");
 
 }
