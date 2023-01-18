@@ -33,6 +33,7 @@
             $poa_dane = $dataFormPoai['poa_dane'];
             $poa_plancompras = $dataFormPoai['poa_plancompras'];
         }
+        
 
         if($poa_estado=='1'){
             $checkedA="checked";    
@@ -145,7 +146,7 @@
                 <div class="form-group">
                     <label for="logroAccion" class="font-weight-bold">Peso de la Etapa % *</label>
                     <input type="number" class="form-control caja_texto_sizer"  id="logroAccion" name="logroAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_logro; ?>" required>
-                    <span class="help-block" style="color:#F90909 " id="error_peso_etapa"></span>
+                    <span class="help-block" style="color:#a70e06; font-size: 14 px; font-family: Arial, Helvetica, sans-serif; font-weight: bold" id="error_valor"></span>
                 </div>
             </div>
             <div class="col-md-6">
@@ -153,6 +154,7 @@
                     <label for="logroEjecutado" class="font-weight-bold">Avance Inicial de la Etapa % *</label>
                     <input type="number" class="form-control caja_texto_sizer" id="logroEjecutado" name="logroEjecutado" aria-describedby="textHelp" data-rule-required="false" value="<?php echo $poa_logroejecutado; ?>" >
                     <span class="help-block" id="error"></span>
+                    
                 </div>
             </div>
         </div>
@@ -192,7 +194,7 @@
                     </div>
 
                     <span class="help-block" id="error"></span>
-                    <span class="help-block" style="color:#F90909 " id="error_valor_etapas"></span>
+
                 </div>
             </div>
 

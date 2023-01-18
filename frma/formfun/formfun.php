@@ -218,9 +218,7 @@
                             <span class="help-block" id="error"></span>
                         </div>
                     </div>
-                    <div class="col-sm-2 pt-5">
-                        <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
-                    </div>
+                    
                 </div>
         
 

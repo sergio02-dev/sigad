@@ -75,8 +75,6 @@
                             $num = 1;
                             foreach($list_plan_cmpras as $dta_list_plan_cmpras){
                                 $pdi_codigo = $dta_list_plan_cmpras['pdi_codigo'];
-                                $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
-                                $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
                                 $pdi_sede = $dta_list_plan_cmpras['pdi_sede'];
                                 $pdi_dependencia = $dta_list_plan_cmpras['pdi_dependencia'];
                                 $pdi_area = $dta_list_plan_cmpras['pdi_area'];
@@ -84,13 +82,13 @@
                                 $pdi_equipodescripcion = $dta_list_plan_cmpras['pdi_equipodescripcion']; 
                                 $pdi_cantidad = $dta_list_plan_cmpras['pdi_cantidad'];
                                 $pdi_valorunitario = $dta_list_plan_cmpras['pdi_valorunitario'];
-
+                                
                                 $nombre_sede = $objPlanCompras->nombre_sede($pdi_sede);
                                 $nombre_dependencia = $objPlanCompras->nombre_dependencia($pdi_dependencia);
                                 $nombre_area = $objPlanCompras->nombre_area($pdi_area);
                                 $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
                                 $valor = $pdi_cantidad * $pdi_valorunitario;
-                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo);
+                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo,$codigo_poai);
                     ?>
                     <tr>   
                         <td> 

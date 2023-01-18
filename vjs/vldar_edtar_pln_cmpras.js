@@ -14,9 +14,7 @@ function validar_plancompras(){
 		$('#error_plancompras').html('Seleccione al menos un plan de compras');
 		return false;
 		}
-		else{
-		$('#error_plancompras').html('');
-		}
+		
 
 	$("#editarplancompraform").validate({
 		

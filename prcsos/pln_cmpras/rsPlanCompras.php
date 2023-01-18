@@ -27,6 +27,7 @@
             
             return $descripcion;
         }
+        
 
         public function nombre_area($codigo_area){
         
@@ -117,6 +118,8 @@
 
         public function list_plan_cmpras($codigo_plan_cmpra, $codigo_sede){
 
+            
+
             if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
                 $condicion="";
             }
@@ -142,12 +145,15 @@
             return $datalist_plan_cmpras;
         }
 
-        public function check_arreglo($codigo_plancompras){
-        
+        public function check_arreglo($codigo_plancompras,$codigo_etapa){
+            
+            
+
             $sql_check_arreglo  = "SELECT COUNT(*) checkbox
                                          FROM usco.plancompras_accion
                                         WHERE pca_plancompras = $codigo_plancompras
-                                        AND pca_estado = 1;";
+                                        AND pca_estado = 1
+                                        AND pca_etapa = $codigo_etapa;";
             
     
             $resultado_check_arreglo  = $this->cnxion->ejecutar($sql_check_arreglo);
