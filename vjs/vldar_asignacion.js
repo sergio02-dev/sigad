@@ -50,6 +50,7 @@ function validar_asignacion(){
             }
             else{
                 $('.lista_asignacion').load(url_direccion);	
+                $('model-backdrop').remove();
             }
 		}
 	});

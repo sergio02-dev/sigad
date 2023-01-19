@@ -5,7 +5,7 @@
     $codigo_accion = $_REQUEST['codigo_accion'];
     $codigo_indicador = $_REQUEST['codigo_indicador'];
     $codigo_asignacion = $_REQUEST['codigo_asignacion'];
-
+    
     $vigencia_actividad = $objAsignacionRecursos->vigencia_actividad($codigo_poai);
 
 
