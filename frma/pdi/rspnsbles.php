@@ -24,14 +24,14 @@
         $nombre_form = $objRsPlanDesarrollo->nombre_dos($codigo_nivel);
     }
     if ($nivel == 3) {
-    $tpo = "RESPONSABLE";
+        $tpo = "RESPONSABLE";
     }
 
     if($nivel == 3){
         if($tipo_responsable == 1){
             $tpo = "RESPONSABLE";
         }
-        elseif($tipo_responsable == 2){
+        else if($tipo_responsable == 2){
            $tpo = "ORDENADOR DEL GASTO";
         }
         else if ($tipo_responsable == 3){
@@ -44,6 +44,8 @@
         $nombre_form = $objRsPlanDesarrollo->nombre_tres($codigo_nivel);
         
     }
+
+    $list_clasificacion = $objRsPlanDesarrollo->list_clasificacion();
 
     $list_oficina = $objRsPlanDesarrollo->list_oficina();
 
@@ -60,6 +62,7 @@
             $res_codigocargo = $dta_form_responsable['res_codigocargo'];
             $res_codigooficina = $dta_form_responsable['res_codigooficina'];
             $res_estado = $dta_form_responsable['res_estado'];
+            $res_clasificacion = $dta_form_responsable['res_clasificacion'];
 
             if($res_estado == 1){
                 $checkedA = "checked";
@@ -74,13 +77,13 @@
         $url_guardar="modificarresponsable";
         $task = "MODIFICAR";
 
+        if($nivel == 2){
+            $capa_direccion = "#rsponsables_info".$codigo_nivel;
+            $url_direccion = "inforesponsable?codigo_nivel=".$codigo_nivel."&nivel=".$nivel;;
+        }
         if($nivel == 3){
             $capa_direccion = "#tabla_indicador";
             $url_direccion = "dataindicador?codigo_planDesarrollo=".$codigo_plan."&codigo_accion=".$codigo_nivel;
-        }
-        else{
-            $capa_direccion = "#rsponsables_info".$codigo_nivel;
-            $url_direccion = "inforesponsable?codigo_nivel=".$codigo_nivel."&nivel=".$nivel;
         }
         
     }
@@ -90,6 +93,10 @@
         $checkedA = "checked";
         $checkedI = "";
 
+        if($nivel == 2){
+            $capa_direccion = "#rsponsables_info".$codigo_nivel;
+            $url_direccion = "inforesponsable?codigo_nivel=".$codigo_nivel."&nivel=".$nivel;;
+        }
         if($nivel == 3){
             $capa_direccion = "#registroIndicador".$codigo_nivel;
             $url_direccion = "indicador?codigo_planDesarrollo=".$codigo_plan."&codigo_accion=".$codigo_nivel;
@@ -161,7 +168,39 @@
                 </div>
             </div>
         </div>
-    
+        <?php 
+            if($tipo_responsable == 3){
+        ?>
+        <div class="row">
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <label for="selClasificacion" class="font-weight-bold"> Clasificacion*</label>
+                    <select name="selClasificacion" id="selClasificacion" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                        <?php
+                        foreach ($list_clasificacion as $data_clasificacion) {
+                            $cla_codigo = $data_clasificacion['cla_codigo'];
+                            $cla_nombre = $data_clasificacion['cla_nombre'];
+
+                            if($res_clasificacion == $cla_codigo){
+                                $selectClasificacion="selected";
+                            }
+                            else{
+                                $selectClasificacion="";
+                            }
+                        ?>
+                            <option value="<?php echo  $cla_codigo; ?>" <?php echo $selectClasificacion; ?>><?php echo $cla_nombre; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+        </div>
+        <?php
+            }
+        ?>
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">

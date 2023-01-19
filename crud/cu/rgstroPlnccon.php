@@ -53,10 +53,7 @@
 
   $numeroEtapas=$objPlanAccion->numeroEtapas();
 
-  /*if($numeroEtapas>=10){
-      $valoretapas=1;
-  }
-  else{*/
+
   $valoretapas=0;
   
   $suma=$objPlanAccion->suma();
@@ -72,7 +69,6 @@
     $valortotal=0;
   }
 
-//}
 
   echo $valoretapas.'-'.$valortotal;
 ?>

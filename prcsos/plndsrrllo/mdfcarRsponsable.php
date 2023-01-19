@@ -20,7 +20,8 @@ class MdfcarRspnsble extends Responsable{
                                    res_codigooficina = ".$this->getOficina().", 
                                    res_estado = ".$this->getEstado().", 
                                    res_fechamodifico = NOW(), 
-                                   res_personamodifico = ".$this->getPersonaSistema()."
+                                   res_personamodifico = ".$this->getPersonaSistema().",
+                                   res_clasificacion = ".$this->getClasificacion()."
                              WHERE res_codigo = ".$this->getCodigo().";";
 
         $this->cnxion->ejecutar($updte_responsable);

@@ -180,7 +180,7 @@
                                 }
                             ?>
                         </select>
-                        <span class="help-block" id="error"></span>
+                        <span class="help-block" id="error"></span>  
                     </div>
             </div>
         </div>
@@ -191,29 +191,31 @@
                             <select name="selAccion" id="selAccion" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                                 <option value="0">Seleccione...</option>
                             </select>
-                            <span class="help-block" id="error"></span>
+                            <span class="help-block" id="error"></span>  
                         </div>
             </div>
         </div>
-                                     
-        <div class="row">
-            <div class="col-sm-8 plantaFisica" style="display:none;">
-                <div class=" p-3 ">
-                    <label for="textPlantaFisica" class="font-weight-bold">Caracteristicas Planta Fisica </label> <i class="fas fa-info-circle" style="color: #BB0900"></i>
-                    <textarea type="text" class="form-control caja_texto_sizer" id="inputPlantaFisica" name="inputPlantaFisica" aria-describedby="textHelp"   data-rule-required="true" ></textarea>
-                    <span class="help-block" id="error"></span>
+        <div class="platafisicara" name="plantafisicara" id="plantafisicara">          
+            <div class="row" >
+                <div class="col-sm-8 plantaFisica" style="display: none" >
+                    <div class=" p-3 ">
+                        <label for="platafisicara"  class="font-weight-bold">Caracteristicas Planta Fisica </label> 
+                        <textarea type="text" class="form-control caja_texto_sizer" id="inputPlantaFisica" name="inputPlantaFisica" aria-describedby="textHelp"   data-rule-required="true" ></textarea>
+                        <span class="help-block" id="error"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-12 bg-light text-dark border pt-2 " style="display:none;">
-        <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
-    </div>
+  
     <div class= "border" > 
-        <div class =" productos"  style="display:none;">
+        <div class =" productos" name="productos" id="productos" style="display:none;" >
+            <div class="col-sm-12 bg-light text-dark border pt-2 ">
+                     <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
+            </div> 
             <div class="row ">
-            
+                     
                 <div class="col-sm-6" >
                         
                     <div class="form-group p-3">
@@ -256,9 +258,7 @@
                                 <span class="help-block" id="error"></span>
                             </div>
                 </div>
-                <div class="col-sm-2 pt-5">
-                        <i class="fas fa-plus-circle" style=" display: <?php echo $visibilidad; ?> color: #BB09002"  onclick="agregarEquipo();"></i>          
-                </div> 
+               
 
             </div>
 

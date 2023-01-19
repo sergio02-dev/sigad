@@ -12,6 +12,7 @@ function validar_formpdi(){
             },
 			selCantidad:{
 				required: true,
+				min: 1,
 			},
 			selSede:{
 				selectSede: true,
@@ -24,6 +25,12 @@ function validar_formpdi(){
 			},
 			selDependencia:{
 				selectDependencia: true,
+			},
+			selProyecto:{
+				selectProyecto: true,
+			},
+			selAccion:{
+				selectAccion: true,
 			},
 			selTipoArea:{
 				selectTipoArea: true,
@@ -69,6 +76,7 @@ function validar_formpdi(){
 			},
 			selCantidad:{
 				required:"Debe digitar este dato",
+				min:"Debe digitar un valor mayor a 1",
 			},
 			
 			
@@ -106,8 +114,10 @@ function validar_formpdi(){
 						$('#selEquipo').selectpicker('val', '0');
 						$('#selCaracteristicas').selectpicker('val', '0');
 						$('#selProyecto').selectpicker('val', '0');			
-						$('#selAccion').selectpicker('val', '0');		
+						$('#selAccion').selectpicker('val', '0');	
 					
+					
+						
 					swal({
 						title: "Registro Exitoso",
 						text: "",
@@ -115,6 +125,9 @@ function validar_formpdi(){
 						button: "OK",
 			
 					  });
+					  $('#productos').fadeOut('300');
+					  $('#plantafisicara').fadeInt('300');
+					  $('#plantafisicara').fadeOut('300');
                 }
             });
 			
@@ -141,6 +154,12 @@ function validar_formpdi(){
 	jQuery.validator.addMethod('selectCodigoPDI', function (value) {
 		return (value != '0');
 	}, "Seleccione el codigo pdi");
+	jQuery.validator.addMethod('selectProyecto', function (value) {
+		return (value != '0');
+	}, "Seleccione el proyecto");
+	jQuery.validator.addMethod('selectAccion', function (value) {
+		return (value != '0');
+	}, "Seleccione una accion");
 	jQuery.validator.addMethod('selectTipoAccion', function (value) {
 		return (value != '0');
 	}, "Seleccione una accion");

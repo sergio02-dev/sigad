@@ -75,8 +75,6 @@
                             $num = 1;
                             foreach($list_plan_cmpras as $dta_list_plan_cmpras){
                                 $pdi_codigo = $dta_list_plan_cmpras['pdi_codigo'];
-                                $pco_codigo = $dta_list_plan_cmpras['pco_codigo'];
-                                $pco_etapa = $dta_list_plan_cmpras['pco_etapa'];
                                 $pdi_sede = $dta_list_plan_cmpras['pdi_sede'];
                                 $pdi_dependencia = $dta_list_plan_cmpras['pdi_dependencia'];
                                 $pdi_area = $dta_list_plan_cmpras['pdi_area'];
@@ -84,13 +82,13 @@
                                 $pdi_equipodescripcion = $dta_list_plan_cmpras['pdi_equipodescripcion']; 
                                 $pdi_cantidad = $dta_list_plan_cmpras['pdi_cantidad'];
                                 $pdi_valorunitario = $dta_list_plan_cmpras['pdi_valorunitario'];
-
+                                
                                 $nombre_sede = $objPlanCompras->nombre_sede($pdi_sede);
                                 $nombre_dependencia = $objPlanCompras->nombre_dependencia($pdi_dependencia);
                                 $nombre_area = $objPlanCompras->nombre_area($pdi_area);
                                 $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
                                 $valor = $pdi_cantidad * $pdi_valorunitario;
-                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo);
+                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo,$codigo_poai);
                     ?>
                     <tr>   
                         <td> 
@@ -179,7 +177,6 @@
         <input type="hidden" name="codigo_formulario" id="codigo_formulario" value="<?php echo $codigo_formulario; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
         <input type="hidden" name="codigo_poai" id="codigo_poai" value="<?php echo $codigo_poai; ?>">
-        <input type="hidden" name="pco_etapa" id="pco_etapa" value="<?php echo $pco_etapa; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-danger" onclick="validar_plancompras();"><i class="far fa-save"></i> Guardar</button>

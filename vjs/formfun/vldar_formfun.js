@@ -4,6 +4,7 @@ function validar_formfun(){
 		rules: {
 			selCantidad:{
 				required: true,
+				min: 1,
 			},
 			selSede:{
 				selectSede: true,
@@ -44,6 +45,7 @@ function validar_formfun(){
 			},
 			selCantidad:{
 				required:"Debe digitar este dato",
+				min:"Debe digitar un valor mayor o igual a 1",
 			},
 			
 			

@@ -15,6 +15,7 @@ function validar_formregistroactividad(){
 			},
 			logroEjecutado:{
 				required: true,
+				max: 100,
 			},
 			logroAccion:{
 				required: true,
@@ -40,7 +41,8 @@ function validar_formregistroactividad(){
 				required: "Seleccione un Estado",
 			},
 			logroEjecutado:{
-				required: "Ingrese el Valor"
+				required: "Ingrese el Valor",
+				max: "El valor sobrepasa el  total del avance de las etapas."
 			},
 			logroAccion:{
                 required: "Ingrese el peso de la etapa",
@@ -87,15 +89,13 @@ function validar_formregistroactividad(){
 
 					var valor = data.split('-');
 
-					var valorEtapas=  (valor[0]);
+					var valorEtapas =  (valor[0]);
 					var valortotal=  (valor[1]);
 					
 					var mensaje="El valor sobrepasa el 100% del total de las actividades.";
 					var mensajeestapas="El valor sobrepasa el  total de las etapas permitidas.";
-					if(valorEtapas==1){
-						document.getElementById('error_valor_etapas').innerHTML = mensajeestapas;
-					}
-					else if(valortotal==1){
+					
+					if(valortotal==1){
 						document.getElementById('error_valor').innerHTML = mensaje;
 					}
 					else{

@@ -59,7 +59,7 @@ function validar_niveldos(){
 					$('#frmModal').modal('hide');
 					$('.modal-backdrop').remove();
 
-					$("#tablaNivelDos").load("dataniveldos?codigoPlanDesarrollo="+codigo_planDesarrollo);
+					$("#tablaNivelDos").load("inforesponsable?codigoPlanDesarrollo="+codigo_planDesarrollo);
 				},
 				error:{
 

@@ -217,7 +217,7 @@
         <input type="hidden" id="per_codigo" name="per_codigo" value="<?php echo $per_codigo; ?>">
         <button type="button" class="btn btn-secondary caja_texto_sizer" data-dismiss="modal"><strong>Cerrar</strong></button>
         <button type="submit" class="btn btn-danger caja_texto_sizer" onClick="validar_formpersona();"><i class="far fa-save"></i> <strong>Guardar</strong> </button>
-    </div>
+    </div> 
 </form>
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/persona.js"></script>

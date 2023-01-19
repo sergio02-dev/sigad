@@ -29,7 +29,7 @@
         $('#frmModalEtapaEditar'+codigo_form).modal('hide');
         $('#frmModalEtapaEditar'+codigo_form).modal({backdrop: false});
 
-        //$('.modal-backdrop').remove();
+        $('.modal-backdrop').remove();
         $('#registroActividad'+codigo_capa).load("datainfoaccion?codigo_accion="+codigo_capa);
     }
   

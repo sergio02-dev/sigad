@@ -13,6 +13,7 @@
     $codigo_plan = $_REQUEST['codigo_plan'];
     $nivel = $_REQUEST['nivel'];
     $codigo_responsable = $_REQUEST['codigo_responsable']; 
+    $tipo_responsable = $_REQUEST['tipo_responsable'];
 
     $nombre_form = $objRsPlanDesarrollo->nombre_indicador($codigo_nivel);
 
@@ -137,6 +138,7 @@
         <!-- ******************** FIN FORMULARIO ************************* -->
     </div>
     <div class="modal-footer">
+        <input type="hidden" name="tipo_responsable" id="tipo_responsable" value="<?php echo $tipo_responsable; ?>">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
         <input type="hidden" name="nivel" id="nivel" value="<?php echo $nivel; ?>">

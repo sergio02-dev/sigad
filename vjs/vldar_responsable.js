@@ -8,6 +8,9 @@ function validar_responsable(){
             selResponsable:{
                 selectResponsable: true,
             },
+			selClasificacion:{
+				selectClasificacion: true,
+            },
 			chkestado:{
 				required: true,
 			},
@@ -60,5 +63,8 @@ function validar_responsable(){
     jQuery.validator.addMethod('selectResponsable', function (value) {
 		return (value != '0');
 	}, "Seleccione un Responsable");
+	jQuery.validator.addMethod('selectClasificacion', function (value) {
+		return (value != '0');
+	}, "Seleccione una Clasificacion");
 }
 

@@ -5,9 +5,19 @@
         private $codigoNivel;
         private $oficina;
         private $cargo;
+        private $clasificacion;
         private $estado;
         private $personaSistema;
         private $tipoResponsable;
+
+
+        
+        public function getClasificacion(){
+            return $this->clasificacion;
+        }
+        public function setClasificacion($clasificacion){
+            $this->clasificacion = $clasificacion;
+        } 
 
         public function getCodigo(){
             return $this->codigo;
