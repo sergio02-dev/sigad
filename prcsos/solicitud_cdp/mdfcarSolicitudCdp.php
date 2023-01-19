@@ -26,7 +26,45 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
         return $datadata_etapa;
     }
 
-    
+    public function cod_etpa_slctud(){
+
+        $sql_cod_etpa_slctud="SELECT MAX(aes_codigo) AS cod_etpslcclass
+                                FROM cdp.actividad_etapa_solicitud;";
+
+        $query_cod_etpa_slctud=$this->cnxion->ejecutar($sql_cod_etpa_slctud);
+
+        $data_cod_etpa_slctud=$this->cnxion->obtener_filas($query_cod_etpa_slctud);
+
+        $cod_etpslcclass = $data_cod_etpa_slctud['cod_etpslcclass'];
+
+        if($cod_etpslcclass){
+            $cod_etplcclass = $cod_etpslcclass + 1;
+        }
+        else{
+            $cod_etplcclass = 1;
+        }
+        return $cod_etplcclass;
+    }
+
+    public function cod_clasf(){
+
+        $sql_cod_clasf="SELECT MAX(esc_codigo) AS cod_clss
+                        FROM cdp.etapa_solicitud_clasificador;";
+
+        $query_cod_clasf=$this->cnxion->ejecutar($sql_cod_clasf);
+
+        $data_cod_clasf=$this->cnxion->obtener_filas($query_cod_clasf);
+
+        $cod_clss = $data_cod_clasf['cod_clss'];
+
+        if($cod_clss){
+            $cod_classf = $cod_clss + 1;
+        }
+        else{
+            $cod_classf = 1;
+        }
+        return $cod_classf;
+    }
 
     public function mdfcarSolicitud(){
 
@@ -56,7 +94,7 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                 $codigo_clasificador = $dta_etapas['codigo_clasificador'];
                 $asignaciones_solicitud = $dta_etapas['asignaciones_solicitud'];
 
-                $codigo_etapa_solicitud = date('YmdHis').rand(99,99999);
+                $codigo_etapa_solicitud = $this->cod_etpa_slctud();
 
                 $insert_etpas = "INSERT INTO cdp.actividad_etapa_solicitud(
                                              aes_codigo, 
