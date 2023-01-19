@@ -57,7 +57,6 @@
                 if($cambio_valor == 1){
                     $verificar_cambio = $cambio_valor;
                     $valor_cambio = $fuentes_asgnacion;
-
                 }
                 else{
                     $verificar_cambio = 0;
@@ -78,8 +77,6 @@
                                    'codigo_clasificador'=> $array_clasificador,
                                    'asignaciones_solicitud'=> $array_fuente_valor
                                 );
-
-
         }
 
     }

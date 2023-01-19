@@ -157,12 +157,8 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                          AND tpo_indicador = $codigo_indicador
                                          $condicion_dos
                                        GROUP BY fuente_financiacion, vigencia_recurso
-<<<<<<< HEAD
-	                                   ORDER BY vigencia_recurso, fuente_financiacion;";       
-=======
 	                                   ORDER BY vigencia_recurso, fuente_financiacion
                                        ;";       
->>>>>>> sebas
 
         $query_fuentes_vigencia_accion=$this->cnxion->ejecutar($sql_fuentes_vigencia_accion);
 
