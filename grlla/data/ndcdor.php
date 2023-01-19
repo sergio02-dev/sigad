@@ -668,6 +668,7 @@
         var codigo_accion = codigo_accion;
         var codigo_plan = codigo_plan;
         var nivel = 4;
+        var tipo_responsable = 0;
         
         $('#frmModal').modal({
             keyboard: true
@@ -675,7 +676,7 @@
         $.ajax({
             url:"formresponsableindicador",
             type:"POST",
-            data:"codigo_nivel="+codigo_nivel+'&codigo_accion='+codigo_accion+'&codigo_plan='+codigo_plan+'&nivel='+nivel,
+            data:"codigo_nivel="+codigo_nivel+'&codigo_accion='+codigo_accion+'&codigo_plan='+codigo_plan+'&nivel='+nivel+'&tipo_responsable='+tipo_responsable,
             async:true,
 
             success: function(message){
@@ -691,6 +692,7 @@
         var codigo_plan = codigo_plan;
         var codigo_responsable = codigo_responsable;
         var nivel = 4;
+        var tipo_responsable = 0;
         
         $('#frmModal').modal({
             keyboard: true
@@ -698,7 +700,7 @@
         $.ajax({
             url:"formresponsableindicador",
             type:"POST",
-            data:"codigo_nivel="+codigo_nivel+'&codigo_accion='+codigo_accion+'&codigo_plan='+codigo_plan+'&codigo_responsable='+codigo_responsable+'&nivel='+nivel,
+            data:"codigo_nivel="+codigo_nivel+'&codigo_accion='+codigo_accion+'&codigo_plan='+codigo_plan+'&codigo_responsable='+codigo_responsable+'&nivel='+nivel+'&tipo_responsable='+tipo_responsable,
             async:true,
 
             success: function(message){

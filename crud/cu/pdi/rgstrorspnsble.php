@@ -1,9 +1,8 @@
 <?php
     include('prcsos/plndsrrllo/rgstroRsponsable.php');
+    $tpo_responsable =$_REQUEST['tipo_responsable'];
 
-    $tipo_responsable = $_REQUEST['tipo_responsable'];
-
-    if($tipo_responsable == 3){
+    if($tpo_responsable == 3){
         $personaSistema = $_SESSION['idusuario'];
         $nivel = $_REQUEST['nivel'];
         $codigo_nivel = $_REQUEST['codigo_nivel'];
@@ -21,7 +20,6 @@
         $selResponsable = $_REQUEST['selResponsable'];
         $selClasificacion = 0;
         $estado = $_REQUEST['chkestado'];
-
         
     }
 
@@ -34,7 +32,7 @@
     $registroresponsablepdi->setClasificacion($selClasificacion);
     $registroresponsablepdi->setEstado($estado);
     $registroresponsablepdi->setPersonaSistema($personaSistema);
-    $registroresponsablepdi->setTipoResponsable($tipo_responsable);
+    $registroresponsablepdi->setTipoResponsable($tpo_responsable);
 
     echo $registroresponsablepdi->insertResponsable();
 ?>
