@@ -706,7 +706,7 @@ class PlnDsrrllo extends PlanDesarrollo{
 
         $sqlindicadorForm="SELECT ind_codigo, ind_unidadmedida, ind_lineabase, ind_metaresultado, 
                                     ind_accion, ind_estado, ind_fechacreo, ind_fechamodifico, ind_personacreo, 
-                                    ind_personamodifico, ind_tipocomportamiento, ind_tendencia
+                                    ind_personamodifico, ind_tipocomportamiento, ind_tendencia,ind_sede
                             FROM plandesarrollo.indicador
                             WHERE ind_codigo=$codigoInidicador;";
 
@@ -1074,7 +1074,7 @@ class PlnDsrrllo extends PlanDesarrollo{
     }
 
     public function nombre_clasificacion($codigo_clasificacion){
-
+        
         $sql_nombre_clasificacion="SELECT cla_codigo, cla_nombre, cla_estado
                              FROM usco.clsficcion_autorizargsto
                             WHERE cla_codigo = $codigo_clasificacion;";

@@ -59,7 +59,7 @@
 
     }
 
-    echo $rcrsos_trasladar;
+    
 
     $capa_direccion = ".capa_poai";
     $url_direccion = "dtapoai?codigo_plandesarrollo=".$codigo_plan;

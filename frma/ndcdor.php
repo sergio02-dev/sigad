@@ -33,6 +33,7 @@
             $ind_accion=$dataIndicador['ind_accion'];
             $ind_tipocomportamiento=$dataIndicador['ind_tipocomportamiento'];
             $ind_tendencia=$dataIndicador['ind_tendencia'];
+            $ind_sede = $dataIndicador['ind_sede'];
         }
         $url_guardar="crudupdateindicador"; 
         $task = "MODIFICAR";   
@@ -148,7 +149,7 @@
                                 $sed_codigo = $data_sedes['sed_codigo'];
                                 $sed_nombre = $data_sedes['sed_nombre'];
 
-                                if($ind_tendencia==$sed_codigo){
+                                if($ind_sede==$sed_codigo){
                                     $select_sde="selected";
                                 }
                                 else{

@@ -19,6 +19,7 @@ function validar_formActividadPoai(){
 			},
 			txtUnidad:{
 				required: true,
+				min: 1,
 			}
 		},
 
@@ -34,7 +35,8 @@ function validar_formActividadPoai(){
 				required: "Digite el Objetivo de la Actividad",
 			},
 			txtUnidad:{
-				required: "Ingrese la Unidad"
+				required: "Ingrese la Unidad",
+				min: "Debe ser mayor a 1 unidad"
 			}
 
 
@@ -68,8 +70,11 @@ function validar_formActividadPoai(){
 						$('#frmModal'+codigoActividad).modal('hide');
 						$('#frmModal'+codigoActividad).modal({backdrop: false});
 						$('#registroActividad'+code_acccion).load("datainfoaccion?codigo_accion="+code_acccion);
+						$('.modal-backdrop').remove();
 					}
+					
                 }
+
             });
 
             return false;

@@ -9,6 +9,7 @@ function validar_formregistroactividad(){
 			},
 			recursoAccion:{
 				required: true,
+				min: 1,
 			},
 			chkestado:{
 				required: true,
@@ -36,6 +37,7 @@ function validar_formregistroactividad(){
 			},
 			recursoAccion:{
 				required: "Ingrese el Recurso",
+				min: "Debe ser mayor a 1 el recurso",
 			},
 			chkestado:{
 				required: "Seleccione un Estado",
