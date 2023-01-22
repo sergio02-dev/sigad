@@ -91,7 +91,7 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                 $codigo_actividad = $dta_etapas['codigo_actividad'];
                 $recurso = $dta_etapas['recurso'];
                 $other_value = $dta_etapas['other_value'];
-                $codigo_clasificador = $dta_etapas['codigo_clasificador'];
+                $cdgo_clasificador = $dta_etapas['codigo_clasificador'];
                 $asignaciones_solicitud = $dta_etapas['asignaciones_solicitud'];
 
                 $codigo_etapa_solicitud = $this->cod_etpa_slctud();
@@ -126,31 +126,37 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                                 
                 $this->cnxion->ejecutar($dlte_clsfcdor_cdp);
 
-                for ($clasfcadorEtpa=0; $clasfcadorEtpa < count($codigo_clasificador) ; $clasfcadorEtpa++) { 
-                    
-                    $cdg[$clasfcadorEtpa] = date('YmdHis').rand(99,99999);
+                if($cdgo_clasificador){
+                    foreach ($cdgo_clasificador as $dta_clasificadores) {
+                        $codigo_clasificador = $dta_clasificadores['codigo_clasificador'];
+                        $valor_clasificador = $dta_clasificadores['valor_clasificador'];
 
-                    $sql_insrt_clsfcdor[$clasfcadorEtpa] = "INSERT INTO cdp.etapa_solicitud_clasificador(
-                                                                        esc_codigo, 
-                                                                        esc_solicitud, 
-                                                                        esc_etapa, 
-                                                                        esc_solitudetapa, 
-                                                                        esc_clasificador, 
-                                                                        esc_personacreo, 
-                                                                        esc_personamodifico, 
-                                                                        esc_fechacreo, 
-                                                                        esc_fechamodifico)
-                                                                VALUES ($cdg[$clasfcadorEtpa], 
-                                                                        ".$this->getCodigo().", 
-                                                                        $codigo_etapa, 
-                                                                        $codigo_etapa_solicitud, 
-                                                                        '".strtoupper($codigo_clasificador[$clasfcadorEtpa])."', 
-                                                                        ".$this->getPersonaSistema().", 
-                                                                        ".$this->getPersonaSistema().", 
-                                                                        NOW(), 
-                                                                        NOW());";
+                        $cod_clasf = $this->cod_clasf();
+
+                        $sql_insrt_clsfcdor = "INSERT INTO cdp.etapa_solicitud_clasificador(
+                                                           esc_codigo, 
+                                                           esc_solicitud, 
+                                                           esc_etapa, 
+                                                           esc_solitudetapa, 
+                                                           esc_clasificador, 
+                                                           esc_personacreo, 
+                                                           esc_personamodifico, 
+                                                           esc_fechacreo, 
+                                                           esc_fechamodifico,
+                                                           esc_valor)
+                                                   VALUES ($cod_clasf, 
+                                                          ".$this->getCodigo().", 
+                                                          $codigo_etapa, 
+                                                          $codigo_etapa_solicitud, 
+                                                          '".$codigo_clasificador."', 
+                                                          ".$this->getPersonaSistema().", 
+                                                          ".$this->getPersonaSistema().", 
+                                                          NOW(), 
+                                                          NOW(),
+                                                          ".$valor_clasificador.");";
                                                                         
-                    $this->cnxion->ejecutar($sql_insrt_clsfcdor[$clasfcadorEtpa]);
+                        $this->cnxion->ejecutar($sql_insrt_clsfcdor);
+                    }
                 }
 
                 //fuentes recrsos 

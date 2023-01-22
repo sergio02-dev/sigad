@@ -163,8 +163,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
 
         return $sub_codigo;
     }
-
-    
+ 
     public function ofi_cargo($codigo_nivel, $nivel){
 
         $sql_ofi_cargo="SELECT vin_codigo, vin_persona, vin_oficina, vin_cargo, vin_estado, res_codigonivel, res_nivel
@@ -352,9 +351,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
             $cod_asgnc = 1;
         }
         return $cod_asgnc;
-    }
-
-    
+    } 
 
     public function oficina_cargo(){
 
@@ -466,26 +463,26 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                         $cod_clasf = $this->cod_clasf();
 
                         $sql_insrt_clsfcdor = "INSERT INTO cdp.etapa_solicitud_clasificador(
-                                                                        esc_codigo, 
-                                                                        esc_solicitud, 
-                                                                        esc_etapa, 
-                                                                        esc_solitudetapa, 
-                                                                        esc_clasificador, 
-                                                                        esc_personacreo, 
-                                                                        esc_personamodifico, 
-                                                                        esc_fechacreo, 
-                                                                        esc_fechamodifico,
-                                                                        esc_valor)
-                                                                VALUES ($cod_clasf, 
-                                                                        ".$this->codigoSolicitud.", 
-                                                                        $codigo_etapa, 
-                                                                        $codigo_etapa_solicitud, 
-                                                                        '".$codigo_clasificador."', 
-                                                                        ".$this->getPersonaSistema().", 
-                                                                        ".$this->getPersonaSistema().", 
-                                                                        NOW(), 
-                                                                        NOW(),
-                                                                        ".$valor_clasificador.");";
+                                                           esc_codigo, 
+                                                           esc_solicitud, 
+                                                           esc_etapa, 
+                                                           esc_solitudetapa, 
+                                                           esc_clasificador, 
+                                                           esc_personacreo, 
+                                                           esc_personamodifico, 
+                                                           esc_fechacreo, 
+                                                           esc_fechamodifico,
+                                                           esc_valor)
+                                                   VALUES ($cod_clasf, 
+                                                          ".$this->codigoSolicitud.", 
+                                                          $codigo_etapa, 
+                                                          $codigo_etapa_solicitud, 
+                                                          '".$codigo_clasificador."', 
+                                                          ".$this->getPersonaSistema().", 
+                                                          ".$this->getPersonaSistema().", 
+                                                          NOW(), 
+                                                          NOW(),
+                                                          ".$valor_clasificador.");";
                                                                         
                         $this->cnxion->ejecutar($sql_insrt_clsfcdor);
                     }
