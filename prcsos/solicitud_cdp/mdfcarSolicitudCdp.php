@@ -86,6 +86,16 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                         
             $this->cnxion->ejecutar($dlte_actvdad_slctud);
 
+            $dlte_clsfcdor_cdp ="DELETE FROM cdp.etapa_solicitud_clasificador
+                                           WHERE esc_solicitud = ".$this->getCodigo().";";
+                                
+            $this->cnxion->ejecutar($dlte_clsfcdor_cdp);
+
+            $dlte_asignacion_cdp ="DELETE FROM cdp.asignacion_solicitud
+                                    WHERE aso_solicitud = ".$this->getCodigo().";";
+
+            $this->cnxion->ejecutar($dlte_asignacion_cdp);
+
             foreach ($datos_etapa as $dta_etapas) {
                 $codigo_etapa = $dta_etapas['codigo_etapa'];
                 $codigo_actividad = $dta_etapas['codigo_actividad'];
@@ -121,10 +131,6 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                 $this->cnxion->ejecutar($insert_etpas);
 
                 //Clasificadores etapas
-                $dlte_clsfcdor_cdp ="DELETE FROM cdp.etapa_solicitud_clasificador
-                                           WHERE esc_solicitud = ".$this->getCodigo().";";
-                                
-                $this->cnxion->ejecutar($dlte_clsfcdor_cdp);
 
                 if($cdgo_clasificador){
                     foreach ($cdgo_clasificador as $dta_clasificadores) {
@@ -160,11 +166,6 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
                 }
 
                 //fuentes recrsos 
-
-                $dlte_asignacion_cdp ="DELETE FROM cdp.asignacion_solicitud
-                                        WHERE aso_solicitud = ".$this->getCodigo().";";
-                            
-                $this->cnxion->ejecutar($dlte_asignacion_cdp);
 
                 foreach ($asignaciones_solicitud as $dta_asignacion) {
                     $codigo_etapa = $dta_asignacion['codigo_etapa'];

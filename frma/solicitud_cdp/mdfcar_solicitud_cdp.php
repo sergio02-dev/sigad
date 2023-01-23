@@ -79,6 +79,7 @@
         <?php 
             $actividades_solicitud = $objSolicitudCdp->actividades_solicitud($codigo_solicitud);
             if($actividades_solicitud){
+                $num_actividades = 0;
                 foreach ($actividades_solicitud as $dat_actvdades_slctud) {
                     $codigo_actividad = $dat_actvdades_slctud['aes_actividad'];
                     $acp_referencia = $dat_actvdades_slctud['acp_referencia'];
@@ -124,7 +125,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label style="font-size: 15px;"><?php echo $descripcion_actividad; ?></label>
-                            <input type="text" name="codigo_actividad[]" value="<?php echo $codigo_actividad; ?>">
+                            <input type="hidden" name="codigo_actividad[]" value="<?php echo $codigo_actividad; ?>">
+                            <input type="hidden" name="codigo_actividad<?php echo $num_actividades; ?>" id="codigo_actividad<?php echo $num_actividades; ?>" value="<?php echo $codigo_actividad; ?>">
                         </div>
                     </div>
                     
@@ -215,7 +217,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <br>
-                                <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="0">
+                                <input type="hidden" id="control_valor_chek<?php echo $codigo_actividad; ?>" value="<?php echo $other_val;?>">
                                 <input type="checkbox" name="checkOtrval<?php echo $codigo_actividad; ?>" id="checkOtrval<?php echo $codigo_actividad; ?>" value="1" <?php echo $check_otro_valor; ?>> &nbsp;Otro valor
                             </div>
                             <div class="col-md-4">
@@ -347,6 +349,9 @@
                                     }
                                 ?>
                             </table>
+                            <span id="error_clasificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+                            <span id="error_valor_clsificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+
                             <input type="hidden" name="num_ini<?php echo $codigo_actividad; ?>" id="num_ini<?php echo $codigo_actividad; ?>" value="<?php echo $nun_inicio; ?>">
                         </div>
                     </div>
@@ -539,7 +544,6 @@
                     
                         function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
                             var data_info = data_info;
-
                             $(data_info).remove();
                         }
 
@@ -550,7 +554,7 @@
                             var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
                             var select_options<?php echo $codigo_actividad; ?> = '<select name="selClasificador'+activCode+'[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
 
-                            var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+                            var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador'+activCode+'[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
                             nombre_capa = '';
                             return dta;
                         }
@@ -581,12 +585,20 @@
                             var nodo_clasificacion = getInput("text", activCode);
                             append("tablaClasificadores"+activCode, nodo_clasificacion);
                         }     
+
+                        $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
+                            liveSearch: true,
+                            maxOptions: 1
+                        });
                     </script>
         <?php
+                    
+                    $num_actividades++;
+                    $codigo_actividad = 0;
                 }
             }
         ?>
-
+        <input type="hidden" name="numero_actividades" id="numero_actividades" value="<?php echo $num_actividades; ?>">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">

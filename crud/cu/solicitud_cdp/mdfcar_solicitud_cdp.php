@@ -25,6 +25,7 @@
             $clasificadores = $_REQUEST['selClasificador'.$codigo_actividad];
             $valor_clasfcdor = $_REQUEST['valor_clasificador'.$codigo_actividad];
 
+
             $array_clasificador = array();
 
             for ($list_clasificadores=0; $list_clasificadores < count($clasificadores); $list_clasificadores++) { 
@@ -80,6 +81,8 @@
         }
 
     }
+
+    //print_r($array_datos);
 
     $modificarsolicitudcdp->setFecha($txtFechaSolicitud);
     $modificarsolicitudcdp->setCodigoSolicitud($txtNumeroSolicitud);

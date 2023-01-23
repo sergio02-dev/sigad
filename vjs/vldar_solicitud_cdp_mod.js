@@ -5,7 +5,7 @@ function validar_solicitud_cdp(){
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
 	var cod_actividades = new Array();
 
-	if(txtFechaSolicitud == '0'){
+	if(txtFechaSolicitud == ''){
         $("#error_fecha_solicitud").fadeIn('300');
         $("#error_fecha_solicitud").html('Seleccione una Fecha');
         document.getElementById("txtFechaSolicitud").focus();
@@ -46,16 +46,18 @@ function validar_solicitud_cdp(){
     }
 
 	//Inicio Validación actividades
+	var numero_actividades = $('#numero_actividades').val();
+	for (let datos_actvdd = 0; datos_actvdd < numero_actividades; datos_actvdd++) {
+		cod_actividades.push($('#codigo_actividad'+datos_actvdd).val())
+	}
 
-	$("input[name='codigo_actividad[]']").each(function(indice, elemento) { 
-		cod_actividades.push($(elemento).val())
-	});
+	var cantidad_actividades = cod_actividades.length;
 
 	//Inicio Validación Etapas
-	for (let countActivis = 0; countActivis < cod_actividades.length; countActivis++) {
+	for (let countActivis = 0; countActivis < cantidad_actividades; countActivis++) {
 		var codigo_etapa = $('#etpass'+cod_actividades[countActivis]).val();
 		var array_clasificadores = new Array();
-
+		
 		if(codigo_etapa == 0){
 			$('#error_etapa'+cod_actividades[countActivis]).html('Seleccione la Etapa');
 			return false;
@@ -85,7 +87,7 @@ function validar_solicitud_cdp(){
 			control_valor = 0;
 			valor_validar = valor_etapa;
 		}
-
+		
 		array_clasificadores = $('select[name="selClasificador'+cod_actividades[countActivis]+'[]"]').map(function () {
 			return this.value;
 		}).get();
@@ -126,7 +128,7 @@ function validar_solicitud_cdp(){
 				total_clsfcdor = parseFloat(total_clsfcdor) + parseFloat(valor_clsdcdor);
 			}
 		});
-
+		
 		if(dscrmncion_clsfcdor > 0){
 			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('Debe discriminar el valor por cada Clasificador');
@@ -209,6 +211,7 @@ function validar_solicitud_cdp(){
 		total_clsfcdor = 0;
 
 	}
+
 	//Fin Validacion Etapas y valores
 
 	var url_proceso = $('#url_proceso').val();
