@@ -50,8 +50,8 @@
 			if($list_cldfcadores){
 				foreach ($list_cldfcadores as $dta_clsfcdores) {
 					$cla_codigo = $dta_clsfcdores['K_RUBRO'];
-					$cla_nombre = $dta_clsfcdores['K_RUBRO'];
-					$cla_numero = $dta_clsfcdores['N_RUBRO'];
+					$cla_nombre = $dta_clsfcdores['N_RUBRO'];
+					$cla_numero = $dta_clsfcdores['K_RUBRO'];
 	
 					$rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
 										   'cla_nombre'=> $cla_nombre, 
