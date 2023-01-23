@@ -101,7 +101,7 @@ function validar_formregistroactividad(){
 						document.getElementById('error_valor').innerHTML = mensaje;
 					}
 					else if(valortotal==2){	
-						document.getElementById('error_etpa').innerHTML = mensajesumaetapa;
+						document.getElementById('error_etapa').innerHTML = mensajesumaetapa;
 					}
 					else{
 						$('#frmModalEtapa'+codigo_formulario).modal('hide');
