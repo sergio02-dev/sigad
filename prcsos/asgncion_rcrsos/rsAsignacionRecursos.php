@@ -93,6 +93,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
             $condicion_dos="";
         }
         else{
+            $codigo_session = $_SESSION['idusuario'];
             $condicion_uno = "AND poav_fuentefinanciacion IN(SELECT DISTINCT off_fuente
                                                                FROM usco.vinculacion, usco.oficinafuente
                                                              WHERE vin_persona = $codigo_session

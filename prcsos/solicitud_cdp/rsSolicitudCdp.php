@@ -250,10 +250,11 @@ Class RsSolicitudCdp extends SolicitudCdp{
                                         poa_estado, poa_numero, 
                                         poa_vigencia, acp_codigo, 
                                         poa_logroejecutado
-                                FROM planaccion.poai
-                                WHERE acp_codigo IN($cdigo_actividad)
-                                AND poa_estado = '1'
-                                ORDER BY acp_codigo, poa_numero;";
+                                   FROM planaccion.poai
+                                  WHERE acp_codigo IN($cdigo_actividad)
+                                    AND poa_estado = '1'
+                                    AND poa_recurso > 0
+                                  ORDER BY acp_codigo, poa_numero ASC;";
 
         $resultado_etapas_actividad = $this->cnxion->ejecutar($sql_etapas_actividad);
 
@@ -954,6 +955,27 @@ Class RsSolicitudCdp extends SolicitudCdp{
             $dataform_dta_etapa_solicitud[] = $data_form_dta_etapa_solicitud;
         }
         return $dataform_dta_etapa_solicitud;
+    }
+
+    public function dtos_etpas($codigo_etapa){
+
+        $sql_dtos_etpas = "SELECT poa_codigo, poa_referencia, 
+                                  poa_numero, poa_objeto, poa_recurso
+                             FROM planaccion.poai
+                            WHERE poa_codigo = $codigo_etapa;";
+
+        $query_dtos_etpas = $this->cnxion->ejecutar($sql_dtos_etpas);
+
+        $data_dtos_etpas = $this->cnxion->obtener_filas($query_dtos_etpas);
+
+        $poa_referencia = $data_dtos_etpas['poa_referencia'];
+        $poa_numero = $data_dtos_etpas['poa_numero'];
+        $poa_objeto = $data_dtos_etpas['poa_objeto'];
+        $poa_recurso = $data_dtos_etpas['poa_recurso'];
+
+        $descr_etp = $poa_referencia.".".$poa_numero." ".$poa_objeto;
+
+        return array($descr_etp, $poa_recurso);
     }
 }
 ?>
