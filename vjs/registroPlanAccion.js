@@ -93,12 +93,15 @@ function validar_formregistroactividad(){
 
 					var valorEtapas =  (valor[0]);
 					var valortotal=  (valor[1]);
-					
+
 					var mensaje="El valor sobrepasa el 100% del total de las actividades.";
 					var mensajeestapas="El valor sobrepasa el  total de las etapas permitidas.";
-					
+					var mensajesumaetapa = "No se puede modificar una etapa que ya tiene un recurso asignado.";
 					if(valortotal==1){
 						document.getElementById('error_valor').innerHTML = mensaje;
+					}
+					else if(valortotal==2){	
+						document.getElementById('error_etpa').innerHTML = mensajesumaetapa;
 					}
 					else{
 						$('#frmModalEtapa'+codigo_formulario).modal('hide');

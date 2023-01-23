@@ -54,12 +54,15 @@
     $sumaMod=$suma-$avacanceActividad;
     $valorTotal=$sumaMod+$logroAccion;
 
-
+    $sumaAsignacion = $objPlanAccion->sumaAsignacion();
+    
     $numero=3;
     if($valorTotal>100){
         $valor=1;
     }
-    else{
+    else if($sumaAsignacion >= $recursoAccion ){
+        $valor=2;
+    }else{
         echo $objPlanAccion->updateActividadPoai();
         $valor=0;
     }

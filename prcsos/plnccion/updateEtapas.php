@@ -22,6 +22,19 @@ class PlnAccon extends PlanAccion{
       return $numeroSuma;
     }
 
+    public function sumaAsignacion(){
+      $sqlnumero="SELECT SUM(asre_recurso) AS sumaetapa
+                         FROM planaccion.asignacion_recuersos_etapa
+                         WHERE asre_etapa=".$this->getCodigoPoai()."
+                         AND asre_estado = '1';";
+      $querynumero=$this->cnxion->ejecutar($sqlnumero);
+      $data_numero=$this->cnxion->obtener_filas($querynumero);
+
+      $sumaetapa=$data_numero['sumaetapa'];
+
+      return $sumaetapa;
+    }
+
     public function updateActividadPoai(){
 
         $sqlupdateEtapas=" UPDATE planaccion.poai
