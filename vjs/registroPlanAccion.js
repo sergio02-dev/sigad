@@ -96,7 +96,7 @@ function validar_formregistroactividad(){
 
 					var mensaje="El valor sobrepasa el 100% del total de las actividades.";
 					var mensajeestapas="El valor sobrepasa el  total de las etapas permitidas.";
-					var mensajesumaetapa = "No se puede modificar una etapa que ya tiene un recurso asignado.";
+					var mensajesumaetapa = "No se puede registrar un recuerso menor al recurso asignado";
 					if(valortotal==1){
 						document.getElementById('error_valor').innerHTML = mensaje;
 					}

@@ -8,4 +8,6 @@
     $rs_TipoIdentificacion=$objRsPersona->dataIdentificacion(); 
     
 
+    
+
 ?>

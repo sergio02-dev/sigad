@@ -14,4 +14,5 @@
     $modificarfacultades->setCodigo($codigo_facultades);
 
     $modificarfacultades->updateFacultades();
+
 ?>
