@@ -1,5 +1,9 @@
 
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('prcsos/pln_cmpras/rgstroPlnCmpras.php');
 
     $personaSistema = $_SESSION['idusuario'];

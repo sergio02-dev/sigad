@@ -1,4 +1,8 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('crud/rs/resolucionpersona/resolucionpersona.php');
     $codigo_persona = $_REQUEST['codigo_persona'];
     $codigo_resolucion = $_REQUEST['codigo_resolucion'];

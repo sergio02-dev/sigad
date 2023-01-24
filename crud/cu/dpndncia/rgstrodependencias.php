@@ -1,4 +1,8 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('prcsos/dpndncia/rgstroDependencia.php');
 
     $personaSistema = $_SESSION['idusuario'];

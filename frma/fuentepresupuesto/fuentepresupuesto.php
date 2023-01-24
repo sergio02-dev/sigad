@@ -2,24 +2,27 @@
 /**
  * Juan sebastian Romero y
  * Sergio Sánchez Salazar
+ * 24 de enero 2023 15:41pm
+ * Clase Fuente presupuesto
  */
-    include('crud/rs/dpndncia/dpndncia.php'); 
+    include('crud/rs/fuentepresupuesto/fuentepresupuesto.php'); 
 
-    $codigo_dependencia = $_REQUEST['codigo_dependencia'];
+    $codigo_fuentepresupuesto = $_REQUEST['codigo_fuentepresupuesto'];
 
-    if($codigo_dependencia){
-        $url_guardar="modificardependencia";
-        $task = "MODIFICAR DEPENDENCIA";
+    if($codigo_fuentepresupuesto){
+        $url_guardar="modificarfuentepresupuesto";
+        $task = "MODIFICAR FUENTE PRESUPUESTO";
 
-        $form_dependencia = $objDependencias->form_dependencia($codigo_dependencia);
+        $form_fuente_presupuesto = $objFuentePresupuesto->form_fuente_presupuesto($codigo_fuentepresupuesto);
 
-        foreach ($form_dependencia as $dat_dpndncias) {
-            $ofi_codigo = $dat_dpndncias['ofi_codigo'];
-            $ofi_nombre = $dat_dpndncias['ofi_nombre'];
-            $ofi_estado = $dat_dpndncias['ofi_estado'];
+        foreach ($form_fuente_presupuesto as $dat_fuente_presupuesto) {
+            $fup_codigo = $dat_fuente_presupuesto['fup_codigo'];
+            $fup_linix = $dat_fuente_presupuesto['fup_linix'];
+            $fup_nombre = $dat_fuente_presupuesto['fup_nombre'];
+            $fup_estado = $dat_fuente_presupuesto['fup_estado'];
         }
         
-        if($ofi_estado == 1){
+        if($fup_estado == 1){
             $checkedA = "checked";
             $checkedI = "";
         }
@@ -30,17 +33,17 @@
         
     }
     else{
-        $url_guardar="registrodepenencias";
-        $task = "REGISTRAR DEPENDENCIA";
+        $url_guardar="registrofuentepresupuesto";
+        $task = "REGISTRAR FUENTE PRESUPUESTO";
         $checkedA = "checked";
         $checkedI = "";
     }
 
-    $capa_direccion = "#dtaDependencia";
-    $url_direccion = "dtadependencia";
+    $capa_direccion = "#dtaFuentePresupuesto";
+    $url_direccion = "dtafuentepresupuesto";
     
 ?>
-<form id="dependenciafrm" role="form">
+<form id="fuentepresupuestofrm" role="form">
     <div class="modal-header fondo-titulo">
         <h4 class="modal-title"><strong><?php echo $task; ?></strong></h4>
 
@@ -55,8 +58,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label for="txtCodigoLinix" class="font-weight-bold">Codigo Linix *</label>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtCodigoLinix" name="txtCodigoLinix" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $fup_linix; ?>" required>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label for="txtNombre" class="font-weight-bold">Nombre *</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $ofi_nombre; ?>" required>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtNombre" name="txtNombre" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $fup_nombre; ?>" required>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
@@ -81,17 +93,14 @@
     <div class="modal-footer">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
-        <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_dependencia; ?>">
+        <input type="hidden" name="codigo_fuentepresupuesto" id="codigo_fuentepresupuesto" value="<?php echo $codigo_fuentepresupuesto; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-danger" onclick="validar_dependencia();"><i class="far fa-save"></i> Guardar</button>
+        <button type="submit" class="btn btn-danger" onclick="validar_fuentepresupuesto();"><i class="far fa-save"></i> Guardar</button>
     </div>
 </form>
 
-
-
 <script src="js/jquery.validate.min.js"></script>
-<script src="vjs/dpndncia/vldar_dependencias.js"></script>
 
-
+<script src="vjs/fuentepresupuesto/vldar_fuente_presupuesto.js"></script>
 

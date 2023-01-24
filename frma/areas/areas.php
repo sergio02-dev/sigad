@@ -1,4 +1,8 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('crud/rs/areas/areas.php'); 
 
     $codigo_areas = $_REQUEST['codigo_areas'];

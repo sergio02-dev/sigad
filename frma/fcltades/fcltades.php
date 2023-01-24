@@ -1,4 +1,8 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('crud/rs/fcltades/fcltades.php'); 
 
     $codigo_facultades = $_REQUEST['codigo_facultades'];

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('prcsos/formfun/rgtroFormfun.php');
 
     $personaSistema = $_SESSION['idusuario'];

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ * 24 de enero 2023 15:41pm
+ * Clase Fuente presupuesto
+ */
 include('classResolucionpersona.php');
 class RsResolucionPersona extends ResolucionPersona
 {
@@ -19,8 +25,7 @@ class RsResolucionPersona extends ResolucionPersona
                                             rep_fecharesolucion, 
                                             rep_estado
                                         FROM usco.resolucion_persona
-                                        WHERE rep_persona = $codigo_persona
-                                        AND rep_estado = 1;";
+                                        WHERE rep_persona = $codigo_persona;";
 
         $query_list_resolucion_persona = $this->cnxion->ejecutar($sql_list_resolucion_persona);
 

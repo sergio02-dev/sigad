@@ -10,6 +10,10 @@
 <!-- **********************          Fin Modal Forma       *********************************** -->
 
 <?php
+/**
+ * Juan sebastian Romero y
+ * Sergio Sánchez Salazar
+ */
     include('crud/rs/formpdi/formpdi.php');
     $visibilidad=$_SESSION['visibilidadBotones']; 
     $codigo_formpdi = $_REQUEST['codigo_formpdi'];
