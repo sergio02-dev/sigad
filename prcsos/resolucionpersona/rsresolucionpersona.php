@@ -43,8 +43,7 @@ class RsResolucionPersona extends ResolucionPersona
                                         rep_fecharesolucion, 
                                         rep_estado
                                     FROM usco.resolucion_persona
-                                    WHERE rep_codigo = $codigo_resolucion
-                                    AND rep_estado = 1;";
+                                    WHERE rep_codigo = $codigo_resolucion;";
 
         $resultado_form_resolucion_persona = $this->cnxion->ejecutar($sql_form_resolucion_persona);
 
