@@ -17,6 +17,7 @@ function validar_formActividadPoai(){
 			chkestado:{
 				required: true,
 			},
+			//minimo una unidad
 			txtUnidad:{
 				required: true,
 				min: 1,
