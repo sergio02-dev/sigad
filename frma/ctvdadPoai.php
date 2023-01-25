@@ -136,7 +136,7 @@ else{
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="txtUnidad" class="font-weight-bold"># Unidad *</label>
-                    <input type="number" class="form-control caja_texto_sizer" id="txtUnidad" name="txtUnidad" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $acp_unidad;?>" required>
+                    <input type="number" min="1" class="form-control caja_texto_sizer" id="txtUnidad" name="txtUnidad" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $acp_unidad;?>" required>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
