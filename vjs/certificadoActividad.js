@@ -2,7 +2,7 @@ function validar_formActividad(){
 	
 	var maximo_admitido = parseInt($('#summaa').val());
 	var txtOtroValor = parseInt($('#txtOtroValor').val());
-	
+	//prueba
 	$("#formcertificados").validate({
 		rules: {
 			fechaExpedicion:{
