@@ -20,6 +20,7 @@ function validar_formActividadPoai(){
 			//minimo una unidad
 			txtUnidad:{
 				required: true,
+				min : 1
 			}
 		},
 
@@ -35,7 +36,8 @@ function validar_formActividadPoai(){
 				required: "Digite el Objetivo de la Actividad",
 			},
 			txtUnidad:{
-				required: "Ingrese la Unidad"
+				required: "Ingrese la Unidad", 
+				min: "debe ser minimo 1"
 			}
 
 
