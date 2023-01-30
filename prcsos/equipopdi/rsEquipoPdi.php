@@ -21,19 +21,6 @@ Class RsEquipoPdi extends EquipoPdi{
         return $datalist_linea;
     }
 
-    public function codigo_linea(){
-        
-        $sql_codigo_linea = "SELECT lin_codigo
-                                FROM inventario.linea;";
-
-        $resultado_codigo_linea= $this->cnxion->ejecutar($sql_codigo_linea);
-
-        $data_codigo_linea= $this->cnxion->obtener_filas($resultado_codigo_linea);
-        
-        $lin_codigo = $data_codigo_linea['lin_codigo'];
-        
-        return $lin_codigo;
-    }
 
 
     public function list_sublinea($codigo_linea){
