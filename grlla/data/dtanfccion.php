@@ -229,7 +229,11 @@
                                             <div style="display: <?php echo $visibilidad; ?>"><i  class="fas fa-edit" style="color: #BB0900;" title="Editar Etapa" onclick="editarEtapa('<?php echo $poa_codigo; ?>','<?php echo $poa_referencia; ?>','<?php echo $acp_codigo; ?>', '<?php echo $acc_codigo; ?>');"></i></div>
                                            
                                           
-                                            <?php 
+                                            <?php
+                                            
+                                            
+                                            if($poa_recurso > 0){
+
                                                 $plan_accion_compras = $objPlanAccion->plan_accion_compras($accion_code);
                                                 if($plan_accion_compras > 0){
 
@@ -239,6 +243,7 @@
                                             <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $nombre_sede; ?>');"></i>
                                             <?php 
                                                 }
+                                            }
                                             ?>
                                     
                                         </td>

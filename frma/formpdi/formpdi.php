@@ -255,7 +255,12 @@
             <div class ="row">
                 <div class="col-sm-10">
                             <div class="form-group p-3 equipo">
-                                <label for="textEquipo" class="font-weight-bold"> Equipo</label> 
+                                <div style="float: left; margin-bottom: 1px;">
+                                    <strong class="font-weight-bold" for="textEquipo">Equipo</strong> 
+                                    <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo('<?php echo $lin_codigo;?>')"></i>
+                                </div>
+                                
+                                
                                 <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                                     <option value="0">Seleccione...</option>
                                 </select>
@@ -396,14 +401,13 @@
 
 
 
-
     function agregarEquipo(){
 
         $('#frmModal').modal({
             keyboard: true
         });
         $.ajax({
-            url:"form",
+            url:"formequiopopdi",
             type:"POST",
             data:"",
             async:true,
@@ -413,6 +417,7 @@
             }
         });
     }
+    
 </script>
 
 

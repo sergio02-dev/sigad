@@ -94,9 +94,12 @@ function validar_formregistroactividad(){
 					
 					var mensaje="El valor sobrepasa el 100% del total de las actividades.";
 					var mensajeestapas="El valor sobrepasa el  total de las etapas permitidas.";
-					
+					var mensajesumaetapa = "No se puede registrar un recurso menor al asignado";
+				
 					if(valortotal==1){
 						document.getElementById('error_valor').innerHTML = mensaje;
+					}else if(valortotal==2){	
+						document.getElementById('error_valor').innerHTML = mensajesumaetapa;
 					}
 					else{
 						$('#frmModalEtapa'+codigo_formulario).modal('hide');

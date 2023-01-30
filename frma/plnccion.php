@@ -137,8 +137,7 @@
                 <div class="form-group">
                     <label for="recursoAccion" class="font-weight-bold">Recursos *</label>
                     <input type="number" class="form-control caja_texto_sizer recursodisponible" id="recursoAccion" name="recursoAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_recurso;?>" required>
-                    <span class="help-block" style="color:#a70e06; font-size: 14 px; font-family: Arial, Helvetica, sans-serif; font-weight: bold" id="error_etapa"></span>
-                    
+                    <span class="help-block" style="color:#a70e06; font-size: 14 px; font-family: Arial, Helvetica, sans-serif; font-weight: bold" id="error_valor"></span>
                 </div>
             </div>
         </div>

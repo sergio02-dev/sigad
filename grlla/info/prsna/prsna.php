@@ -68,7 +68,7 @@
 
 <p>
     <div style="float: left; margin-bottom: 1px;">
-        <strong style="color: #930606db;">RESOLUCION PERSONA  </strong> 
+        <strong style="color: #930606db;">ORDENADOR DEL GASTO  </strong> 
         <i class="fas fa-plus-circle color_icono" title="Agregar Resolucion Persona" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="resolucion_persona('<?php echo $codigo_persona;?>')"></i>
     </div>
     <hr style="float: left; border: 1px solid #930606db; margin: 10px 0; width: 100%">
