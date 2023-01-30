@@ -257,7 +257,7 @@
                             <div class="form-group p-3 equipo">
                                 <div style="float: left; margin-bottom: 1px;">
                                     <strong class="font-weight-bold" for="textEquipo">Equipo</strong> 
-                                    <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo('<?php echo $lin_codigo;?>')"></i>
+                                    <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo()"></i>
                                 </div>
                                 
                                 
@@ -402,21 +402,24 @@
 
 
     function agregarEquipo(){
-
+        
+    
         $('#frmModal').modal({
             keyboard: true
         });
-        $.ajax({
-            url:"formequiopopdi",
-            type:"POST",
-            data:"",
-            async:true,
+        
+            $.ajax({
+                    url:"formequiopopdi",
+                    type:"POST",
+                    data:"",
+                    async:true,
 
-            success: function(message){
-                $(".modal-content").empty().append(message);
-            }
-        });
-    }
+                    success: function(message){
+                        $(".modal-content").empty().append(message);
+                    }
+            });
+    
+    };
     
 </script>
 

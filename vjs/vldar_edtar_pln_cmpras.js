@@ -8,12 +8,12 @@ function validar_plancompras(){
 		}).get();
 
 		 
-		cantidad_plancompra = plancompras.length;
+		//cantidad_plancompra = plancompras.length;
 
-		if(cantidad_plancompra == 0){
+		/*if(cantidad_plancompra == 0){
 		$('#error_plancompras').html('Seleccione al menos un plan de compras');
 		return false;
-		}
+		}*/
 		
 
 	$("#editarplancompraform").validate({

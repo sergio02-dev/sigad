@@ -6,6 +6,7 @@ $list_linea = $objEquipoPdi->list_linea();
 
 
 
+
 $cantidad = 0;
 $valor_uni = 0;
 
@@ -59,16 +60,17 @@ $url_direccion = "dtaformpdi";
                 <div class="col-sm-12">
                         <div class="form-group pr-4 p-2 pl-4 subLinea">
                             <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                            <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0" data-codigo_sublinea="0">Seleccione...</option>
+                            <select name="selSublineaEquipo" id="selSublineaEquipo" value = "<?php echo $selSublineaEquipo; ?>" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                            <option  value="0">Seleccione...</option>
+                             
                                 <?php
-                                    
-                                    $list_sublinea = $objEquipoPdi->list_sublinea($lin_codigo);
+                                     
+                                    $list_sublinea = $objEquipoPdi->list_sublinea($selSublineaEquipo);
                                     foreach ($list_sublinea as $data_sublinea) {
                                         $slin_codigo=$data_sublinea['slin_codigo'];
                                         $slin_nombre=$data_sublinea['slin_nombre'];
                                 ?>
-                                    <option value="<?php echo  $slin_codigo; ?>"data-codigo_sublinea="<?php echo $slin_codigo; ?>"<?php echo $select_sublinea; ?>><?php echo $slin_nombre; ?></option>
+                                    <option value="<?php echo  $slin_codigo; ?>"<?php echo $select_sublinea; ?>><?php echo $slin_nombre; ?></option>
                                 <?php
                                     }
                                 ?>
@@ -125,5 +127,11 @@ $url_direccion = "dtaformpdi";
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
+    });
+
+    $('#selLineaEquipo').change(function(){
+        var codigo_linea = $(this).find(':selected').data('codigo_linea');
+
+        $('#selSublineaEquipo').val(codigo_linea);
     });
 </script>

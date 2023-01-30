@@ -17,7 +17,7 @@
    
     $url_guardar="modificarplancompras";
     $codigo_formulario = $codigo_poai;
-    $tarea = "LISTADO";
+    $tarea = "";
     $checkedA="checked";
     $checkedI="";
     $valor_uni = 0;
@@ -95,7 +95,7 @@
                     ?>
                     <tr>   
                         <td> 
-                            <input id="plancompras<?php echo $pdi_codigo; ?>" name="plancompras[]" type="checkbox" value="<?php echo $pdi_codigo; ?>" data-rule-required="true" required <?php echo $check_arreglo;?>>
+                            <input id="plancompras<?php echo $pdi_codigo; ?>" name="plancompras[]" type="checkbox" value="<?php echo $pdi_codigo; ?>" <?php echo $check_arreglo;?>>
                             
                         </td>
                         <td>
