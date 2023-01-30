@@ -45,7 +45,7 @@ function validar_asignacion(){
 		success: function (data) {
             if(data == 1){
                 $("#error_asignacion").fadeIn('300');
-                $("#error_asignacion").html('Sobre pasa el valor de la Etapa');
+                $("#error_asignacion").html('Sobrepasa el valor de la Etapa');
                 return false;
             }
             else{
