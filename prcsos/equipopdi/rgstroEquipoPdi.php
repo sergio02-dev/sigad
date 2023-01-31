@@ -3,7 +3,8 @@ include_once('classEquipoPdi.php');
 
 class RgstroEquipoPdi extends EquipoPdi {
 
-    private $sql_insertformpdi;
+    private $sql_insertEquipo;
+    private $sql_insertCaracteristicas;
     private $codigo_equipoPdi;
     private $codigo_caracteristica;
 
@@ -13,51 +14,51 @@ class RgstroEquipoPdi extends EquipoPdi {
         $this->codigo_caracteristica =date('YmdHis').rand(99,99999);
     }
 
-    public function insertFormpdi(){
+    public function insertEquipoPdi(){
         
-        $sql_insertformpdi="INSERT INTO usco.formulariopdi(
-                            pdi_codigo, 
-                            pdi_sede, 
-                            pdi_vicerrectoria, 
-                            pdi_facultad, 
-                            pdi_dependencia, 
-                            pdi_area,  
-                            pdi_accion, 
-                            pdi_plantafisica, 
-                            pdi_linea, 
-                            pdi_sublinea, 
-                            pdi_equipo, 
-                            pdi_equipodescripcion, 
-                            pdi_valorunitario, 
-                            pdi_cantidad, 
-                            pdi_fechacreo, 
-                            pdi_fechamodifico, 
-                            pdi_personacreo, 
-                            pdi_personamodifico,
-                            pdi_estado)
-                            VALUES (".$this->codigo_formpdi.",
-                                    ".$this->getSede().",
-                                    ".$this->getVicerrectoria().",
-                                    ".$this->getFacultad().",
-                                    ".$this->getDependencia().",
-                                    ".$this->getArea().",
-                                    ".$this->getAccion().",
-                                    '".$this->getPlantafisica()."',
-                                    ".$this->getLineaequipo().",
-                                    ".$this->getSublineaequipo().",
-                                    ".$this->getEquipo().",
-                                    ".$this->getCaracteristicas().",
-                                    ".$this->getValorunitario().",
-                                    ".$this->getCantidad().",
-                                    NOW(),
-                                    NOW(),
-                                    ".$this->getPersonaSistema().",
-                                    ".$this->getPersonaSistema().",
-                                      1)";
+        $sql_insertEquipo="INSERT INTO inventario.equipo(equi_codigo, 
+                                                         equi_sublinea, 
+                                                         equi_nombre, 
+                                                         equi_estado, 
+                                                         equi_fechacreo, 
+                                                         equi_fechamodifico, 
+                                                         equi_personacreo, 
+                                                         equi_personamodifico, 
+                                                         equi_codigoctic)
+                                                 VALUES (".$this->codigo_equipoPdi.", 
+                                                         ".$this->getCodigoSublinea().", 
+                                                         '".$this->getEquipoNombre()."', 
+                                                         1,
+                                                         NOW(), 
+                                                         NOW(), 
+                                                         ".$this->getPersonaSistema().", 
+                                                         ".$this->getPersonaSistema().", 
+                                                         0);";
+        $this->cnxion->ejecutar($sql_insertEquipo);
 
-        $this->cnxion->ejecutar($sql_insertformpdi);
+        $sql_insertCaracteristicas ="INSERT INTO inventario.descripcion_equipo(deq_codigo, 
+                                                                               deq_equipo, 
+                                                                               deq_descripcion, 
+                                                                               deq_valor, 
+                                                                               deq_estado, 
+                                                                               deq_fechacreo, 
+                                                                               deq_fechamodifico, 
+                                                                               deq_personacreo, 
+                                                                               deq_personamodifico, 
+                                                                               deq_codigoctic)
+                                                                       VALUES (".$this->codigo_caracteristica.", 
+                                                                               ".$this->codigo_equipoPdi.", 
+                                                                               '".$this->getCaracteristicaNombre()."', 
+                                                                               ".$this->getValorunitario().", 
+                                                                               1, 
+                                                                               NOW(), 
+                                                                               NOW(), 
+                                                                               ".$this->getPersonaSistema().", 
+                                                                               ".$this->getPersonaSistema().", 
+                                                                                0);";
+        $this->cnxion->ejecutar($sql_insertCaracteristicas);
 
-        return $sql_insertformpdi;
+        return $sql_insertEquipo;
 
     }
 }
