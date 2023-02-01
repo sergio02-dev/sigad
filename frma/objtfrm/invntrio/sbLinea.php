@@ -2,7 +2,7 @@
     include('crud/rs/formpdi/formpdi.php');
 
     $codigo_linea = $_REQUEST['codigo_linea'];
-
+    
     $list_sublinea = $objFormpdi->list_sublinea($codigo_linea);
 ?>
 <label for="selSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>

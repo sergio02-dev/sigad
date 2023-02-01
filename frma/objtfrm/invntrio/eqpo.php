@@ -2,7 +2,7 @@
     include('crud/rs/formpdi/formpdi.php');
 
     $codigo_sublinea = $_REQUEST['codigo_sublinea'];
-
+    
     $list_equipo = $objFormpdi->list_equipo($codigo_sublinea);
 ?>
 
@@ -10,7 +10,7 @@
 <label for="selEquipo" class="font-weight-bold"> Equipo</label> 
 <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
     <option value="0" data-codigo_equipo="0">Seleccione el equipo</option>
-    <?php
+     <?php
         foreach ($list_equipo as $data_equipo) {
             $equi_codigo=$data_equipo['equi_codigo'];
             $equi_nombre=$data_equipo['equi_nombre'];
@@ -53,4 +53,7 @@
             });
         }
     });
+
+    
+   
 </script>
