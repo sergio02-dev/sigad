@@ -1,5 +1,6 @@
 <?php
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
+    include('crud/rs/solicitud_cdp/clsfcdres_linix.php');
 
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
 
@@ -20,7 +21,8 @@
 
     $plan_accion_consulta = $objSolicitudCdp->plan_accion_consulta($codigo_plan);
 
-    $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
+    //$list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
+    $list_cldfcadores = $objConsultaLinix->list_cldfcadores();
     
     $url_guardar="modificarsolicitudcdp";
     $task = "MODIFICAR SOLICITUD CDP";
