@@ -7,7 +7,16 @@ Class EquipoPdi {
     private $codigoSublinea;
     private $personaSistema;
     private $codigoCtic;
+    private $valorunitario;
 
+    
+    public function getValorunitario(){
+        return $this->valorunitario;
+    } 
+    public function setValorunitario($valorunitario){
+        $this->valorunitario=$valorunitario;
+    }
+    
     public function getCodigoCtic(){
         return $this->codigoCtic;
     } 

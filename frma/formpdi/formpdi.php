@@ -359,6 +359,7 @@
 
                 success: function(message){
                     $(".subLinea").empty().append(message);
+                    $("")
                 }
             });
         }
@@ -378,6 +379,7 @@
 
                 success: function(message){
                     $(".Accion").empty().append(message);
+
                 }
             });
         }
@@ -416,6 +418,7 @@
 
                     success: function(message){
                         $(".modal-content").empty().append(message);
+                        
                     }
             });
     
