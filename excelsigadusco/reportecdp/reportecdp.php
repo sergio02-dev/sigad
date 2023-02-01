@@ -4,6 +4,7 @@ $fecha_generar=date('Y-m-d_H:i:s');
 
 /** Incluir la libreria PHPExcel */
 require_once 'Classes/PHPExcel.php';
+require_once 'Classes\PHPExcel\Worksheet\Drawing.php';
 //$persona_entidad=$_SESSION['entidad_persona'];
 // Crea un nuevo objeto PHPExcel
 $objPHPExcel = new PHPExcel();
@@ -129,6 +130,32 @@ $titulo_left = array(
       ),
   );
 
+  $cuerpoExcelSinBoldpeque = array(
+    'font'  => array(
+        'color' => array('rgb' => '000000'),
+        'size'  => 8,
+        'name'  => 'Arial'
+      ),
+    
+      'alignment' => array(
+        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+        'wrap' => true
+      ),
+  );
+
+  $letrapeque = array(
+    'font'  => array(
+        'color' => array('rgb' => '000000'),
+        'size'  => 8,
+        'name'  => 'Arial'
+      ),
+    
+      'alignment' => array(
+        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+        'wrap' => true
+      ),
+  );
+
   $cuerpoExcelSinBorder = array(
     'font'  => array(
         'bold'  => true,
@@ -236,8 +263,8 @@ $titulo_left = array(
   ->setCellValue('AC4', 'PAGINA')
   ->setCellValue('AI4','1 DE 1');
 
-
-
+  
+   
 
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle('A4')->applyFromArray($enunciadoInformacion);
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle('C4')->applyFromArray($informacionHoja);
@@ -419,42 +446,43 @@ $titulo_left = array(
   $sheet->mergeCells("I24:N24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('I24',"VALOR");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I24:N24")->applyFromArray($cuerpoExcelSinBold);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I24:N24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("P24:W24");
+  $sheet->mergeCells("P24:X24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('P24',"CODIGO PRESUPUESTAL");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("P24:W24")->applyFromArray($cuerpoExcelSinBold);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("P24:X24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("X24:Y24");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('X24',"CODIGO DANE");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("X24:Y24")->applyFromArray($cuerpoExcelSinBold);
+  
 
-  $sheet->mergeCells("AA24:AG24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('AA24',"FUENTE DE FINANCIACIÓN");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AA24:AG24")->applyFromArray($cuerpoExcelSinBold);
+  ->setCellValue('Y24', 'CODIGO DANE');
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle('Y24')->applyFromArray($letrapeque);
+
+  $sheet->mergeCells("Z24:AG24");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('Z24',"FUENTE DE FINANCIACIÓN");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("Z24:AG24")->applyFromArray($letrapeque);
 
   $sheet->mergeCells("AH24:AI24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('AH24',"ETAPA DE LA ACTIVIDAD No.");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AH24:AI24")->applyFromArray($cuerpoExcelSinBold);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AH24:AI24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("A51:H51");
+  $sheet->mergeCells("A70:N70");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('A51',"PROYECTO FONDO ESPECIAL");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A51:H51")->applyFromArray($cuerpoExcelSinBorder);
+  ->setCellValue('A70',"PROYECTO FONDO ESPECIAL");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A70:N70")->applyFromArray($cuerpoExcelSinBorder);
 
   $sheet->mergeCells("A71:H71");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A71',"OTROS CONCEPTOS");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A71:H71")->applyFromArray($cuerpoExcelSinBorder);
 
-  $sheet->mergeCells("A72:H72");
+  $sheet->mergeCells("A72:L72");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A72',"VALOR TOTAL SOLICITADO");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A72:H72")->applyFromArray($cuerpoExcelSinBorder);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A72:L72")->applyFromArray($cuerpoExcelSinBorder);
 
   
   $sheet->mergeCells("A75:H75");
@@ -472,22 +500,22 @@ $titulo_left = array(
   ->setCellValue('AE75',"31/12/2023");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AE75:AI75")->applyFromArray($cuerpoExcelSinBold);
 
-  $sheet->mergeCells("A77:H77");
+  $sheet->mergeCells("A77:J77");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A77',"Firma Ordenador del Gasto");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A75:H75")->applyFromArray($cuerpoExcelSinBold);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A77:J77")->applyFromArray($letrapeque);
 
   
   $sheet->mergeCells("A78:H78");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('A78',"Proyectó");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A78:H78")->applyFromArray($cuerpoExcelSinBold);
+  ->setCellValue('A78',"Proyectó:");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A78:H78")->applyFromArray($cuerpoExcelSinBoldpeque);
 
-  $sheet->mergeCells("A79:AJ79");
+  $sheet->mergeCells("A79:AJ80");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A79',"Vigilada Mineducación
   La versión vigente y controlada de este documento, solo podrá ser consultada a través del sitio web Institucional  www.usco.edu.co, link Sistema Gestión de Calidad. La copia o impresión diferente a la publicada, será considerada como documento no controlado y su uso indebido no es de responsabilidad de la Universidad Surcolombiana.");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A79:AJ79")->applyFromArray($cuerpoExcelSinBold);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A79:AJ80")->applyFromArray($letrapeque);
 
   
 
@@ -507,42 +535,42 @@ $titulo_left = array(
 
 
 
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('A')->setWidth(8,56);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('B')->setWidth(2.22);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('C')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('D')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('E')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('F')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('G')->setWidth(1.33);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('H')->setWidth(2.11);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('I')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('J')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('K')->setWidth(2.22);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('L')->setWidth(1.33);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('M')->setWidth(3.56);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('N')->setWidth(1.78);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('O')->setWidth(0.63);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('P')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Q')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('R')->setWidth(2.22);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('S')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('T')->setWidth(1.22);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('U')->setWidth(2.56);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('V')->setWidth(0.75);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('W')->setWidth(3.67);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('X')->setWidth(3.67);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Y')->setWidth(21.11);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Z')->setWidth(1.11);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AA')->setWidth(0.19);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AB')->setWidth(0);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AC')->setWidth(3.56);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AD')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AE')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AF')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AG')->setWidth(1.89);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AH')->setWidth(0.88);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AI')->setWidth(17.22);
-    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AJ')->setWidth(1.89);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('A')->setWidth(9);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('B')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('C')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('D')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('E')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('F')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('G')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('H')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('I')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('J')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('K')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('L')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('M')->setWidth(4);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('N')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('O')->setWidth(1);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('P')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Q')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('R')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('S')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('T')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('U')->setWidth(3);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('V')->setWidth(1);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('W')->setWidth(4);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('X')->setWidth(4);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Y')->setWidth(22);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('Z')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AA')->setWidth(1);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AB')->setWidth(1);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AC')->setWidth(4);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AD')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AE')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AF')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AG')->setWidth(2);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AH')->setWidth(1);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AI')->setWidth(18);
+    $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('AJ')->setWidth(2);
 
  
     $objPHPExcel->getActiveSheet($numero_excel)->getRowDimension($numero_ingresos)->setRowHeight(18);
