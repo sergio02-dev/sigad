@@ -4,7 +4,6 @@ $fecha_generar=date('Y-m-d_H:i:s');
 
 /** Incluir la libreria PHPExcel */
 require_once 'Classes/PHPExcel.php';
-require_once 'Classes\PHPExcel\Worksheet\Drawing.php';
 //$persona_entidad=$_SESSION['entidad_persona'];
 // Crea un nuevo objeto PHPExcel
 $objPHPExcel = new PHPExcel();
@@ -126,32 +125,6 @@ $titulo_left = array(
     
       'alignment' => array(
         'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-        'wrap' => true
-      ),
-  );
-
-  $cuerpoExcelSinBoldpeque = array(
-    'font'  => array(
-        'color' => array('rgb' => '000000'),
-        'size'  => 8,
-        'name'  => 'Arial'
-      ),
-    
-      'alignment' => array(
-        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
-        'wrap' => true
-      ),
-  );
-
-  $letrapeque = array(
-    'font'  => array(
-        'color' => array('rgb' => '000000'),
-        'size'  => 8,
-        'name'  => 'Arial'
-      ),
-    
-      'alignment' => array(
-        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
         'wrap' => true
       ),
   );
@@ -495,7 +468,7 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('I24',"VALOR");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I24:N24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("P24:X24");
+  $sheet->mergeCells("P24:W24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('P24',"CODIGO PRESUPUESTAL");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("P24:W24")->applyFromArray($letrapeque);
@@ -505,6 +478,7 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('X24',"CODIGO DANE");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("X24:Y24")->applyFromArray($letrapeque);
 
+  $sheet->mergeCells("AA24:AG24");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('AA24',"FUENTE DE FINANCIACIÓN");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AA24:AG24")->applyFromArray($letrapeque);
@@ -514,20 +488,20 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('AH24',"ETAPA DE LA ACTIVIDAD No.");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AH24:AI24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("A70:N70");
+  $sheet->mergeCells("A51:H51");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('A70',"PROYECTO FONDO ESPECIAL");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A70:N70")->applyFromArray($cuerpoExcelSinBorder);
+  ->setCellValue('A51',"PROYECTO FONDO ESPECIAL");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A51:H51")->applyFromArray($cuerpoExcelSinBorder);
 
   $sheet->mergeCells("A71:H71");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A71',"OTROS CONCEPTOS");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A71:H71")->applyFromArray($cuerpoExcelSinBorder);
 
-  $sheet->mergeCells("A72:L72");
+  $sheet->mergeCells("A72:H72");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A72',"VALOR TOTAL SOLICITADO");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A72:L72")->applyFromArray($cuerpoExcelSinBorder);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A72:H72")->applyFromArray($cuerpoExcelSinBorder);
 
   $sheet->mergeCells("A75:H75");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -548,7 +522,7 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('AE75',"31/12/2023");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AE75:AI75")->applyFromArray($cuerpoExcelSinBold);
 
-  $sheet->mergeCells("A77:J77");
+  $sheet->mergeCells("A77:H77");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A77',"Firma Ordenador del Gasto");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A75:H75")->applyFromArray($letrapeque);
@@ -556,10 +530,10 @@ $sheet->mergeCells("A4:B4");
 
   $sheet->mergeCells("A78:H78");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('A78',"Proyectó:");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A78:H78")->applyFromArray($cuerpoExcelSinBoldpeque);
+  ->setCellValue('A78',"Proyectó");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A78:H78")->applyFromArray($cuerpoExcelSinBold);
 
-  $sheet->mergeCells("A79:AJ80");
+  $sheet->mergeCells("A79:AJ79");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A79',"Vigilada Mineducación
   La versión vigente y controlada de este documento, solo podrá ser consultada a través del sitio web Institucional  www.usco.edu.co, link Sistema Gestión de Calidad. La copia o impresión diferente a la publicada, será considerada como documento no controlado y su uso indebido no es de responsabilidad de la Universidad Surcolombiana.");
