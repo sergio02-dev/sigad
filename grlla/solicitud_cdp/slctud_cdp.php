@@ -41,7 +41,7 @@
 					<?php $visibilidad=$_SESSION['visibilidadBotones']; ?>
 
 					<span class="d-inline-block" tabindex="0"  title="Registro de Solicitud CDP"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="agregar();"><i class="fas fa-plus"></i>&nbsp;<strong>Registro Solicitud CDP</strong></button></span>
-
+					
                     <div class="col-sm-12" id="dataSolicitud">
                         <?php 
                             include('grlla/data/solicitud_cdp/slctud_cdp.php');
