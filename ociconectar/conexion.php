@@ -1,27 +1,7 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
-	/*
-	// parameters
-	$dsn = 'oci:host=172.16.1.81;port=1521;dbname=LINIX';
-	$username = 'SIGAD';
-	$password = 'ANDRESMORECO';
-	$options = [];
-
-	$pdo = new PDO($dsn, $username, $password, $options);
-	*/
-	/*
-	$db = "(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP) (HOST = 172.16.1.81) (PORT = 1521)) )
-	(CONNECT_DATA = (SERVICE_NAME=LINIX)))";
-	$conn = oci_connect('SIGAD', 'ANDRESMORECO', $db);
-	if (!$conn) {
-		$e = oci_error();
-		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-	}
-	else{
-		echo "conectado a Oracle";
-	}
-	*/
+	
     require 'cnxnoci/cnfgoci_db.php';
     require 'cnxnoci/cnfoci_class.php';
 
@@ -66,19 +46,45 @@
 			}
 			return $datClasificadores;
 		}
+
+		public function list_cldfcadores(){
+			$list_cldfcadores = $this->clasificadores();
+			if($list_cldfcadores){
+				foreach ($list_cldfcadores as $dta_clsfcdores) {
+					$cla_codigo = $dta_clsfcdores['K_RUBRO'];
+					$cla_nombre = $dta_clsfcdores['N_RUBRO'];
+					$cla_numero = $dta_clsfcdores['K_RUBRO'];
+	
+					$rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
+										   'cla_nombre'=> $cla_nombre, 
+										   'cla_numero'=> $cla_numero
+										);
+	
+				}
+				$datClasificadores = $rsClsfcdres;
+			}
+			else{
+				$datClasificadores = array();
+			}
+			return $datClasificadores;
+		}
+
+		public function nmbre_clsfcdor($numero_clasificador){
+
+			$sql_nmbre_clsfcdor="SELECT K_RUBRO,N_RUBRO FROM PS070MRUBRO
+								  WHERE K_RUBRO = '$numero_clasificador'";
+
+			$resulatdo_nmbre_clsfcdor=$this->cnxionoci->ejecutaroci($sql_nmbre_clsfcdor);
+
+			$data_nmbre_clsfcdor =$this->cnxionoci->obtener_filasoci($resulatdo_nmbre_clsfcdor);
+
+			$numero = $data_nmbre_clsfcdor['K_RUBRO'];
+			$nombre = $data_nmbre_clsfcdor['N_RUBRO'];
+
+			return array($nombre, $numero);
+		}
 		
 	}
 
-	/*$objConsultaLinix = new ConsultaLinix();	
-	$rs_clasificadores = $objConsultaLinix->clasificadores();
 	
-	$numeroItem=1;
-	foreach ($rs_clasificadores as $dta_listaClasificadores) {
-		$clasificador_codigo = $dta_listaClasificadores['K_RUBRO'];
-		$clasificador_nombre = $dta_listaClasificadores['N_RUBRO'];
-		
-		echo $numeroItem.". ".$clasificador_codigo." ".$clasificador_nombre."<br>";
-		$numeroItem++;
-	}*/
-
 ?>
