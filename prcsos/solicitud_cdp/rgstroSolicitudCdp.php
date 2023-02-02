@@ -376,6 +376,41 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         return array($oficina_guardar, $cargo_guardar);
     }
 
+    public function resolucionPersona(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+
+        return $rep_resolucion;
+ 
+    }
+
+    
+    public function resolucionFecha(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+
+        return $rep_fecharesolucion;
+ 
+    }
+
     public function insertSolicitud(){
 
         list($ofis, $cargs) = $this->oficina_cargo();
@@ -401,10 +436,13 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            scdp_personacreo, 
                                            scdp_personamodifico, 
                                            scdp_fechacreo, 
-                                           scdp_fechamodifico)
+                                           scdp_fechamodifico,
+                                           scdp_resolucion, 
+                                           scdp_fecharesolucion, 
+                                           scdp_objeto)
                                    VALUES (".$this->codigoSolicitud.", 
                                            '".$this->getFecha()."', 
-                                           ".$this->getCodigoSolicitud().", 
+                                           10000000, 
                                            ".$this->getAccion().", 
                                            $ofis, 
                                            $cargs, 
@@ -413,7 +451,10 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            ".$this->getPersonaSistema().", 
                                            ".$this->getPersonaSistema().", 
                                            NOW(), 
-                                           NOW());";
+                                           NOW(),
+                                           '".$this->getResolucion()."',
+                                           '".$this->getFechaResolucion()."',
+                                           '".$this->getObjeto()."');";
                                                                                    
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 

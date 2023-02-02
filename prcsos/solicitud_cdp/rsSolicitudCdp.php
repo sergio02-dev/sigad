@@ -977,5 +977,41 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         return array($descr_etp, $poa_recurso);
     }
+
+
+    public function resolucionPersona(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+
+        return $rep_resolucion;
+ 
+    }
+
+    
+    public function resolucionFecha(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+
+        return $rep_fecharesolucion;
+ 
+    }
 }
 ?>
