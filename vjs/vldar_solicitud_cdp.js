@@ -230,7 +230,7 @@ function validar_solicitud_cdp(){
 	var url_proceso = $('#url_proceso').val();
 	var data_enviar = $('#solicitudcdpform').serialize();
 	
-	alert(data_enviar);
+	
 	$.ajax({
 		type: "POST",
 		url: url_proceso,
