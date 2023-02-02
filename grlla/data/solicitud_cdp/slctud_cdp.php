@@ -1,6 +1,9 @@
 <?php 
     $visibilidad=$_SESSION['visibilidadBotones'];  
+
 ?>
+
+</div>
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -61,9 +64,11 @@
                             //return '<div class="d-inline-block"><i class="fas fa-fax fa-lg color_icono" title="CDP Expedido" style="display:<?php echo $visibilidad; ?>;" onclick="cdp_expedido(\''+full["codigo_cdp"]+'\');"></i></div> &nbsp;&nbsp; ';
                             return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; ';
 
+             
+
                         }
                         else{
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; ';
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="glyphicon glyphicon-search"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;  ';
                         }
                     }
                 },
@@ -195,6 +200,12 @@
                 $(".modal-content").empty().append(message);
             }
         });
+    }
+
+    
+	function rprte_cdp(codigo_cdp){
+        var codigo_cdp = codigo_cdp
+        window.location.href = 'reportecdp?codigo_cdp='+codigo_cdp;
     }
 
 </script>

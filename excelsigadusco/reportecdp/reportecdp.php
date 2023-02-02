@@ -2,6 +2,7 @@
 set_time_limit(1800000000);
 $fecha_generar=date('Y-m-d_H:i:s');
 
+
 /** Incluir la libreria PHPExcel */
 require_once 'Classes/PHPExcel.php';
 //$persona_entidad=$_SESSION['entidad_persona'];
@@ -224,14 +225,29 @@ $titulo_left = array(
       ),
   );
 
+  function tildes($palabra){
+    $no_admitidas = array("á","é","í","ó","ú");
+    $admitidas = array("Á", "É", "Í", "Ó", "Ú");
+    $texto = str_replace($no_admitidas, $admitidas ,$palabra);
+    return $texto;
+  }
   
+  function tldes_minuscula($palabra){
+    $no_admitidas = array("Á", "É", "Í", "Ó", "Ú");
+    $admitidas = array("á","é","í","ó","ú");
+    $texto = str_replace($no_admitidas, $admitidas ,$palabra);
+    return $texto;
+  }
+  
+
+  
+  $codigo_cdp = $_REQUEST['codigo_cdp'];
   $numero_registro=0;
   $numero_excel=0;
   $numero_ingresos=1;
 
   $objPHPExcel->getActiveSheet()->setTitle('Reporte CDP');
  
-
   $sheet = $objPHPExcel->getActiveSheet();
   
 
@@ -250,6 +266,14 @@ $titulo_left = array(
  
 
 // INICIO Filas titulos
+ $sheet->mergeCells("AK4:AM4");
+        $objPHPExcel->setActiveSheetIndex($numero_registro)
+        ->setCellValue('AK4', $codigo_cdp);
+
+$sheet->mergeCells("A4:B4");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('A4','CODIGO');
+
 $sheet->mergeCells("A4:B4");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A4','CODIGO');
@@ -547,7 +571,42 @@ $sheet->mergeCells("A4:B4");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AC14')->applyFromArray($cuerpoExcelSinBold);
 
 
+  //insert datos 
+  include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
+  $people = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
+  
 
+  $sheet->mergeCells("C7:M7");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('C7', strtoupper(tildes($people)));
+
+
+  $car_nombre = $objRprteSlctudCdp->cargoPersona($codigo_cdp);
+
+  
+  $sheet->mergeCells("C8:M8");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('C8', strtoupper(tildes($car_nombre)));
+
+  $scdp_resolucion =  $objRprteSlctudCdp->numeroResolucion($codigo_cdp);
+
+  $sheet->mergeCells("W9:Z9");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('W9', strtoupper(tildes($scdp_resolucion)));
+
+  $scdp_fecharesolucion =  $objRprteSlctudCdp->fechaResolucion($codigo_cdp);
+
+  $sheet->mergeCells("C10:M10");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('C10', $scdp_fecharesolucion);
+
+  $scdp_objeto =  $objRprteSlctudCdp->objetoCDP($codigo_cdp);
+
+  $sheet->mergeCells("C18:AI18");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('C18', strtoupper(tildes($scdp_objeto)));
+
+  //fin insert datos
 
   
  // Fin de Registros //
