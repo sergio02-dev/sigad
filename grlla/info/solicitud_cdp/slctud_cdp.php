@@ -1,5 +1,7 @@
 <?php
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
+    //include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
+
 
     $codigo_cdp = $_REQUEST['codigo_cdp'];
 
@@ -55,7 +57,8 @@
                         $esc_clasificador = $dta_clsfcdres['esc_clasificador'];
                         $esc_valor = $dta_clsfcdres['esc_valor'];
 
-
+                        
+                        //list($nombre, $numero) = $objConsultaLinix->nmbre_clsfcdor($esc_clasificador);
                         list($nombre, $numero) = $objSolicitudCdp->nmbre_clsfcdor($esc_clasificador);
             ?>
                 <tr>

@@ -6,6 +6,10 @@
  */
 Class SolicitudCdp {
     private $codigo;
+    private $resolucion;
+    private $fecharesolucion;
+    private $objeto;
+    private $consecutivo;
     private $fecha;
     private $codigoSolicitud;
     private $accion;
@@ -22,6 +26,30 @@ Class SolicitudCdp {
     } 
     public function setCodigo($codigo){
         $this->codigo=$codigo;
+    }
+
+     
+    public function getResolucion(){
+        return $this->resolucion;
+    } 
+    public function setResolucion($resolucion){
+        $this->resolucion=$resolucion;
+    }
+
+     
+    public function getFechaResolucion(){
+        return $this->fecharesolucion;
+    } 
+    public function setFechaResolucion($fecharesolucion){
+        $this->fecharesolucion=$fecharesolucion;
+    }
+
+     
+    public function getObjeto(){
+        return $this->objeto;
+    } 
+    public function setObjeto($objeto){
+        $this->objeto=$objeto;
     }
 
     public function setFecha($fecha){

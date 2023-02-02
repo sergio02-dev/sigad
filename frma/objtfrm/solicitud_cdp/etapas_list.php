@@ -83,7 +83,9 @@
                 </td>
                 <td style="width: 30%">
                     <div class="form-label-group form-group">
-                        <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                       
+                    <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
+                    <span id="error_valor_clsificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
                     </div> 
                 </td>
                 <td style="width: 5%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
