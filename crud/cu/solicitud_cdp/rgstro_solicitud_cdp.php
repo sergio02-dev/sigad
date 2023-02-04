@@ -12,7 +12,6 @@
     $txtFechaResolucion = $_REQUEST['txtFechaResolucion'];
     $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
    
-    echo "Rresolucion --Z ".$txtResolucion;
     $registrosolicitudcdp = new RgstroSolicitudCdp();
 
     $array_datos = array();
@@ -95,6 +94,6 @@
     $registrosolicitudcdp->setFechaResolucion($txtFechaResolucion);
     $registrosolicitudcdp->setObjeto($txtObjetoCDP);
 
-    $registrosolicitudcdp->insertSolicitud();
+    echo $registrosolicitudcdp->insertSolicitud();
     
 ?>

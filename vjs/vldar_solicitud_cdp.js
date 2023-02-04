@@ -1,13 +1,31 @@
 function validar_solicitud_cdp(){
 	var selAccion = $('#selAccion').val();
+	var txtObjetoCDP = $('#txtObjetoCDP').val();
     var chkestado = $('input:radio[name=chkestado]:checked').val();
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
 	var cod_actividades = new Array();
 
 
-	
 
+	//validacion objeto
+	if(txtObjetoCDP == ''){
+        $("#error_objeto_solicitud").fadeIn('300');
+        $("#error_objeto_solicitud").html('Ingrese el objeto de Solicitud');
+        document.getElementById("txtObjetoCDP").focus();
+        return false;
+    }
+	else if (txtObjetoCDP.length < 10){
+		$("#error_objeto_solicitud").fadeIn('300');
+		$("#error_objeto_solicitud").html('Ingrese minimo diez caracteres');
+		document.getElementById("txtObjetoCDP").focus();
+        return false;
+	}
+	else{
+        $("#error_objeto_solicitud").fadeOut('300');
+    }
+	
+	//-------------------------------
 	if(txtFechaSolicitud == '0'){
         $("#error_fecha_solicitud").fadeIn('300');
         $("#error_fecha_solicitud").html('Seleccione una Fecha');
@@ -127,12 +145,15 @@ function validar_solicitud_cdp(){
 		//Validación Valor Clasificador
 		var dscrmncion_clsfcdor = 0;
 		var total_clsfcdor = 0;
+		var uno_min = 0;
 		$("input[name='valor_clasificador"+cod_actividades[countActivis]+"[]']").each(function(indice, elemento) {
 			var valor_clsdcdor = $(elemento).val();
 			valor_clsdcdor = valor_clsdcdor.toString().replace(/\./g,'');
 
 			if(valor_clsdcdor == ''){
 				dscrmncion_clsfcdor++;
+			}else if(valor_clsdcdor == 0){
+				uno_min++;	
 			}
 			else{
 				total_clsfcdor = parseFloat(total_clsfcdor) + parseFloat(valor_clsdcdor);
@@ -144,6 +165,13 @@ function validar_solicitud_cdp(){
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('Debe discriminar el valor por cada Clasificador');
 			return false;
 		}
+		else if (uno_min>0){
+			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeIn('300');
+			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('El valor debe ser minimo uno');
+			return false;
+			
+		}
+
 		else{
 			$("#error_valor_clsificador"+cod_actividades[countActivis]).fadeOut('300');
 			$('#error_valor_clsificador'+cod_actividades[countActivis]).html('');
@@ -231,10 +259,17 @@ function validar_solicitud_cdp(){
 		type: "POST",
 		url: url_proceso,
 		data: data_enviar,
+		
 		success: function (data) {
+			var valor = data
 			$('#frmModal').modal('hide');
 			$('.modal-backdrop').remove();
-			$('#dataSolicitud').load("dtasolicitudcdp");   
+			$('#dataSolicitud').load("dtasolicitudcdp");  
+			swal({
+				title: "Registro exitoso codigo de solicitud: "+valor,
+				icon: "success",
+				button: "OK",
+			}); 
 		}
 	});
 	return false;

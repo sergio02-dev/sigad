@@ -74,7 +74,7 @@
                 <div class="form-group">
                     <label for="txtObjetoCDP" class="font-weight-bold">Objeto </label>
                     <textarea class="form-control caja_texto_sizer" name="txtObjetoCDP" id="txtObjetoCDP" aria-describedby="textHelp" data-rule-required="false"></textarea>
-                    <span class="help-block" id="error"></span>
+                    <div class="alert alert-danger alerta-forcliente" id="error_objeto_solicitud" role="alert"></div>
               
                 </div>
             </div>
@@ -184,6 +184,7 @@
 
 <script src="js/jquery.validate.min.js"></script>
 <script src="vjs/vldar_solicitud_cdp.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
     $('.selectpicker').selectpicker({
