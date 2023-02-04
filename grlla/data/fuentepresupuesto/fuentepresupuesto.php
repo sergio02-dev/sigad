@@ -70,8 +70,8 @@
             },
             "order": [[0, 'asc']],
             "columnDefs": [
-                { "width": "45%", "targets": 0 },
-                { "width": "45%", "targets": 1 },
+                { "width": "10%", "targets": 0 },
+                { "width": "80%", "targets": 1 },
                 { "width": "5%", "targets": 2 },
                 { "width": "5%", "targets": 3 },
             ],
