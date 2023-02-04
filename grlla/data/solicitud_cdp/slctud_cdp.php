@@ -3,7 +3,7 @@
 
 ?>
 
-</div>
+
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -57,21 +57,20 @@
                 { data: 'descripcion_accion', title: 'NIVEL TRES'},
                 { data: 'valor_cdp', title: 'VALOR'},
                 { data: 'nombre_fuente', title: 'FUENTES'},
-                {
+                
+                    {
                     data: null, 
                     render: function (data, type, full, meta){
                         if(full["scdp_proceso"] == 2){
-                            //return '<div class="d-inline-block"><i class="fas fa-fax fa-lg color_icono" title="CDP Expedido" style="display:<?php echo $visibilidad; ?>;" onclick="cdp_expedido(\''+full["codigo_cdp"]+'\');"></i></div> &nbsp;&nbsp; ';
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; ';
-
-             
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div>';
 
                         }
                         else{
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="glyphicon glyphicon-search"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;  ';
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div>';
                         }
                     }
                 },
+                
                 {
 					"className":      'details-control',
 					"orderable":      false,

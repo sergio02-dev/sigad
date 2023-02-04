@@ -266,9 +266,7 @@ $titulo_left = array(
  
 
 // INICIO Filas titulos
- $sheet->mergeCells("AK4:AM4");
-        $objPHPExcel->setActiveSheetIndex($numero_registro)
-        ->setCellValue('AK4', $codigo_cdp);
+
 
 $sheet->mergeCells("A4:B4");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -396,6 +394,7 @@ $sheet->mergeCells("A4:B4");
 
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('AC14', 'X');
+  
 
   
   $sheet->mergeCells("A6:K6");
@@ -432,13 +431,13 @@ $sheet->mergeCells("A4:B4");
 
   $sheet->mergeCells("U12:AD12");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('U12',"SOLICITUD No.:");
+  ->setCellValue('U12',"SOLICITUD No.");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("U12:AD12")->applyFromArray($cuerpoExcelSinBorder);
 
-  $sheet->mergeCells("A14:AF14");
+  $sheet->mergeCells("A14:G14");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('A14',"EXPEDIDO POR: ");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A14:AF14")->applyFromArray($cuerpoExcelSinBorder);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A14:G14")->applyFromArray($cuerpoExcelSinBorder);
 
 
 
@@ -535,6 +534,11 @@ $sheet->mergeCells("A4:B4");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('I75',"TENER EN CUENTA LA VIGENCIA DE LOS CONVENIOS");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I75:AD75")->applyFromArray($cuerpoExcelSinBold);
+
+  $sheet->mergeCells("I14:S14");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('I14',"JEFE DE PRESUPUESTO");
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I14:S14")->applyFromArray($cuerpoExcelSinBold);
   
 
 
@@ -598,20 +602,20 @@ $sheet->mergeCells("A4:B4");
 
   if($scdp_consecutivo <10){
     $ceros = '0000';
-    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-  }else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
-    $ceros = '000';
-    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-  }else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
-    $ceros = '00';
-    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-  }else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
-    $ceros = '0';
-    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-  }else{
-    $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
   }
-
+  else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
+    $ceros = '000';
+  }
+  else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
+    $ceros = '00';
+  }
+  else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
+    $ceros = '0';
+    
+  }else{
+    $ceros = '';
+  }
+  $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
 
   $sheet->mergeCells("AE12:AI12");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -750,7 +754,7 @@ $objPHPExcel->getActiveSheet($numero_excel)->getRowDimension('79')->setRowHeight
 
   // Se modifican los encabezados del HTTP para indicar que se envia un archivo de Excel.
   header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  header('Content-Disposition: attachment;filename="ResponsableAccion'.$fecha_generar.'.xlsx"');
+  header('Content-Disposition: attachment;filename="SolicitudCDP'.$fecha_generar.'.xlsx"');
   header('Cache-Control: max-age=0');
   $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
   // incluir o gráfico no ficheiro que vamos gerar
