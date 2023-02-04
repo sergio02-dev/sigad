@@ -441,10 +441,7 @@ $sheet->mergeCells("A4:B4");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A14:AF14")->applyFromArray($cuerpoExcelSinBorder);
 
 
-  $sheet->mergeCells("AE12:AI12");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('AE12',"2023-00001");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AE12:AI12")->applyFromArray($cuerpoExcelSinBorder);
+
 
   $sheet->mergeCells("C18:AI18");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -573,38 +570,101 @@ $sheet->mergeCells("A4:B4");
 
   //insert datos 
   include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
-  $people = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
+  
+  list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero) = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
   
 
   $sheet->mergeCells("C7:M7");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C7', strtoupper(tildes($people)));
 
-
-  $car_nombre = $objRprteSlctudCdp->cargoPersona($codigo_cdp);
-
-  
   $sheet->mergeCells("C8:M8");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C8', strtoupper(tildes($car_nombre)));
-
-  $scdp_resolucion =  $objRprteSlctudCdp->numeroResolucion($codigo_cdp);
 
   $sheet->mergeCells("W9:Z9");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('W9', strtoupper(tildes($scdp_resolucion)));
 
-  $scdp_fecharesolucion =  $objRprteSlctudCdp->fechaResolucion($codigo_cdp);
-
   $sheet->mergeCells("C10:M10");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C10', $scdp_fecharesolucion);
 
-  $scdp_objeto =  $objRprteSlctudCdp->objetoCDP($codigo_cdp);
-
   $sheet->mergeCells("C18:AI18");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C18', strtoupper(tildes($scdp_objeto)));
+
+  $ceros = '';
+
+  if($scdp_consecutivo <10){
+    $ceros = '0000';
+    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+  }else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
+    $ceros = '000';
+    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+  }else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
+    $ceros = '00';
+    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+  }else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
+    $ceros = '0';
+    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+  }else{
+    $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
+  }
+
+
+  $sheet->mergeCells("AE12:AI12");
+  $objPHPExcel->setActiveSheetIndex($numero_registro)
+  ->setCellValue('AE12',$numero_solicitudCDP);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AE12:AI12")->applyFromArray($cuerpoExcelSinBorder);
+
+
+
+
+
+  //inicio foreach lista etapas
+
+  $lista_poai = $objRprteSlctudCdp->poai($codigo_cdp);
+  $num_registro=25;
+  $id_registro=1;
+  if($lista_poai){
+    foreach ($lista_poai as $data_lista_etapa) {
+      $poa_referencia = $data_lista_etapa['poa_referencia'];
+      $poa_numero = $data_lista_etapa['poa_numero'];
+      $esc_valor = $data_lista_etapa['esc_valor'];
+      $esc_clasificador = $data_lista_etapa['esc_clasificador'];
+      
+      $str = $esc_clasificador;
+      $numero_caracteres = strlen($str); 
+      $desde = $numero_caracteres - 2;
+      $ultimos_caracteres= substr($str,$desde,2);
+
+      $fuente = $objRprteSlctudCdp->fuentes_financiacionCDP($ultimos_caracteres);
+      
+      $poa_etapa = $poa_referencia." ".$poa_numero;
+      
+
+      $objPHPExcel->setActiveSheetIndex($numero_registro)
+      ->setCellValue('AI'.$num_registro, $poa_etapa);
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AI'.$num_registro)->applyFromArray($letrapeque);
+      
+      $sheet->mergeCells("I".($num_registro).":N".($num_registro))
+      ->setCellValue("I".$num_registro, $esc_valor);
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('I'.$num_registro)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
+
+      $sheet->mergeCells("AA".($num_registro).":AG".($num_registro))
+      ->setCellValue('AA'.$num_registro, $fuente);
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AA'.$num_registro)->getNumberFormat();
+
+      $num_registro++;
+    }
+  }
+  $num_registro=$num_registro;
+
+  //fin
+
+
+
 
   //fin insert datos
 

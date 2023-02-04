@@ -7,89 +7,78 @@
         } 
 
         public function nombrePersona($codigo_cdp){
-            $sql_nombrePersona="SELECT scdp_resolucion, per_nombre, per_primerapellido, per_segundoapellido
+            $sql_nombrePersona="SELECT scdp_resolucion, per_nombre, per_primerapellido, per_segundoapellido, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo
                                   FROM cdp.solicitud_cdp
-                                  INNER JOIN usco.resolucion_persona ON scdp_resolucion = rep_resolucion
-                                  INNER JOIN principal.persona ON rep_persona = per_codigo
-                                  WHERE scdp_codigo = $codigo_cdp;";
+                            INNER JOIN principal.persona ON scdp_personacreo = per_codigo
+                                 WHERE scdp_codigo = $codigo_cdp;";
 
             $query_nombrePersona=$this->cnxion->ejecutar($sql_nombrePersona);
 
             $data_nombrePersona=$this->cnxion->obtener_filas($query_nombrePersona);
 
-            $per_nombre=$data_nombrePersona['per_nombre'];
-            $per_primerapellido=$data_nombrePersona['per_primerapellido'];
-            $per_segundoapellido=$data_nombrePersona['per_segundoapellido'];
-
-            $people=$per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
-            return $people;
-
-        }
-
-        public function cargoPersona($codigo_cdp){
             $sql_cargoPersona="SELECT car_nombre
-                                  FROM cdp.solicitud_cdp
-                                  INNER JOIN usco.cargo ON scdp_cargo = car_codigo
-                                  WHERE scdp_codigo = $codigo_cdp;";
+                                 FROM cdp.solicitud_cdp
+                           INNER JOIN usco.cargo ON scdp_cargo = car_codigo
+                                WHERE scdp_codigo = $codigo_cdp;";
 
             $query_cargoPersona=$this->cnxion->ejecutar($sql_cargoPersona);
 
             $data_cargoPersona=$this->cnxion->obtener_filas($query_cargoPersona);
 
             $car_nombre=$data_cargoPersona['car_nombre'];
+            $per_nombre=$data_nombrePersona['per_nombre'];
+            $per_primerapellido=$data_nombrePersona['per_primerapellido'];
+            $per_segundoapellido=$data_nombrePersona['per_segundoapellido'];
+            $scdp_resolucion = $data_nombrePersona['scdp_resolucion'];
+            $scdp_fecharesolucion = $data_nombrePersona['scdp_fecharesolucion'];
+            $scdp_objeto = $data_nombrePersona['scdp_objeto'];
+            $scdp_numero = $data_nombrePersona['scdp_numero'];
+            $scdp_consecutivo = $data_nombrePersona['scdp_consecutivo'];
+            
 
-            return $car_nombre;
+            $people=$per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
 
-        }
-
-        public function numeroResolucion($codigo_cdp){
-            $sql_numeroResolucion="SELECT scdp_resolucion
-                                  FROM cdp.solicitud_cdp
-                                  WHERE scdp_codigo = $codigo_cdp;";
-
-            $query_numeroResolucion=$this->cnxion->ejecutar($sql_numeroResolucion);
-
-            $data_numeroResolucion=$this->cnxion->obtener_filas($query_numeroResolucion);
-
-            $scdp_resolucion=$data_numeroResolucion['scdp_resolucion'];
-
-            return $scdp_resolucion;
+            return array($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero);
 
         }
 
-        public function fechaResolucion($codigo_cdp){
-            $sql_fechaResolucion="SELECT scdp_fecharesolucion
-                                  FROM cdp.solicitud_cdp
-                                  WHERE scdp_codigo = $codigo_cdp;";
+       
 
-            $query_fechaResolucion=$this->cnxion->ejecutar($sql_fechaResolucion);
+        public function poai($codigo_cdp){
 
-            $data_fechaResolucion=$this->cnxion->obtener_filas($query_fechaResolucion);
+            $sql_poai="SELECT poa_referencia, poa_numero , esc_valor, esc_clasificador
+                                  FROM cdp.etapa_solicitud_clasificador
+                                  INNER JOIN planaccion.poai ON esc_etapa = poa_codigo
+                                  WHERE esc_solicitud = $codigo_cdp
+                                  ORDER BY poa_referencia,poa_numero;";
+            
+            
+    
+            $resultado_poai=$this->cnxion->ejecutar($sql_poai);
+    
+            while ($data_poai = $this->cnxion->obtener_filas($resultado_poai)){
+                $datapoai[] = $data_poai;
+            }
+            return $datapoai;
+        }
+        
+        public function fuentes_financiacionCDP($ultimos_caracteres){
 
-            $scdp_fecharesolucion=$data_fechaResolucion['scdp_fecharesolucion'];
+            $sql_fuentes_financiacionCDP="SELECT fup_nombre
+                                    FROM usco.fuentes_presupuesto 
+                                   WHERE fup_linix = $ultimos_caracteres;  ";
 
-            return $scdp_fecharesolucion;
+            $resultado_fuentes_financiacionCDP = $this->cnxion->ejecutar($sql_fuentes_financiacionCDP);
+    
+            $data_fuentes_financiacionCDP = $this->cnxion->obtener_filas($resultado_fuentes_financiacionCDP);
 
+            $pde_fuentes_financiacionCDP = $data_fuentes_financiacionCDP['fup_nombre'];
+
+            return $pde_fuentes_financiacionCDP;
         }
 
-        public function objetoCDP($codigo_cdp){
-            $sql_objetoCDP="SELECT scdp_objeto
-                                  FROM cdp.solicitud_cdp
-                                  WHERE scdp_codigo = $codigo_cdp;";
 
-            $query_objetoCDP=$this->cnxion->ejecutar($sql_objetoCDP);
-
-            $data_objetoCDP=$this->cnxion->obtener_filas($query_objetoCDP);
-
-            $scdp_objeto=$data_objetoCDP['scdp_objeto'];
-
-            return $scdp_objeto;
-
-        }
-
-
-
-
+        
 
 
 

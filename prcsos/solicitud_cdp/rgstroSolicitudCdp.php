@@ -4,11 +4,13 @@ class RgstroSolicitudCdp extends SolicitudCdp{
 
     private $insert_solicitud_cdp;
     private $codigoSolicitud;
+    private $scdp_numero;
 
     
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
         $this->codigoSolicitud = date('YmdHis').rand(99,99999);
+        
     }
 
     public function data_etapa($codigo_etapa){
@@ -411,9 +413,40 @@ class RgstroSolicitudCdp extends SolicitudCdp{
  
     }
 
+
+    
+    public function numeroConsecutivo(){
+        $this->scdp_numero = date('Y');
+
+        $sql_numeroConsecutivo="SELECT MAX(scdp_consecutivo) AS num_consecutivo
+                        FROM cdp.solicitud_cdp
+                        WHERE scdp_numero = $this->scdp_numero;";
+
+        $query_numeroConsecutivo=$this->cnxion->ejecutar($sql_numeroConsecutivo);
+
+        $data_numeroConsecutivo=$this->cnxion->obtener_filas($query_numeroConsecutivo);
+
+        $num_consecutivo = $data_numeroConsecutivo['num_consecutivo'];
+
+        if($num_consecutivo){
+            $num_consecutivo = $num_consecutivo + 1;
+        }
+        else{
+            $num_consecutivo= 1;
+        }
+        return $num_consecutivo;
+    }
+
+    
+
+
+
     public function insertSolicitud(){
 
+
         list($ofis, $cargs) = $this->oficina_cargo();
+        $numeroConsecutivo = $this->numeroConsecutivo();
+    
 
         if($ofis && $cargs){
             $ofis = $ofis;
@@ -439,10 +472,11 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            scdp_fechamodifico,
                                            scdp_resolucion, 
                                            scdp_fecharesolucion, 
-                                           scdp_objeto)
+                                           scdp_objeto,
+                                           scdp_consecutivo)
                                    VALUES (".$this->codigoSolicitud.", 
                                            '".$this->getFecha()."', 
-                                           10000000, 
+                                           '".$this->scdp_numero."', 
                                            ".$this->getAccion().", 
                                            $ofis, 
                                            $cargs, 
@@ -454,7 +488,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            NOW(),
                                            '".$this->getResolucion()."',
                                            '".$this->getFechaResolucion()."',
-                                           '".$this->getObjeto()."');";
+                                           '".$this->getObjeto()."',
+                                            $numeroConsecutivo);";
                                                                                    
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 
