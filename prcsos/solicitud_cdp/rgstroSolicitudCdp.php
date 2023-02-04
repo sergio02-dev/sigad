@@ -4,11 +4,13 @@ class RgstroSolicitudCdp extends SolicitudCdp{
 
     private $insert_solicitud_cdp;
     private $codigoSolicitud;
+    private $scdp_numero;
 
     
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
         $this->codigoSolicitud = date('YmdHis').rand(99,99999);
+        
     }
 
     public function data_etapa($codigo_etapa){
@@ -376,9 +378,75 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         return array($oficina_guardar, $cargo_guardar);
     }
 
+    public function resolucionPersona(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+
+        return $rep_resolucion;
+ 
+    }
+
+    
+    public function resolucionFecha(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+
+        return $rep_fecharesolucion;
+ 
+    }
+
+
+    
+    public function numeroConsecutivo(){
+        $this->scdp_numero = date('Y');
+
+        $sql_numeroConsecutivo="SELECT MAX(scdp_consecutivo) AS num_consecutivo
+                        FROM cdp.solicitud_cdp
+                        WHERE scdp_numero = $this->scdp_numero;";
+
+        $query_numeroConsecutivo=$this->cnxion->ejecutar($sql_numeroConsecutivo);
+
+        $data_numeroConsecutivo=$this->cnxion->obtener_filas($query_numeroConsecutivo);
+
+        $num_consecutivo = $data_numeroConsecutivo['num_consecutivo'];
+
+        if($num_consecutivo){
+            $num_consecutivo = $num_consecutivo + 1;
+        }
+        else{
+            $num_consecutivo= 1;
+        }
+        return $num_consecutivo;
+    }
+
+    
+
+
+
     public function insertSolicitud(){
 
+
         list($ofis, $cargs) = $this->oficina_cargo();
+        $numeroConsecutivo = $this->numeroConsecutivo();
+    
 
         if($ofis && $cargs){
             $ofis = $ofis;
@@ -401,10 +469,14 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            scdp_personacreo, 
                                            scdp_personamodifico, 
                                            scdp_fechacreo, 
-                                           scdp_fechamodifico)
+                                           scdp_fechamodifico,
+                                           scdp_resolucion, 
+                                           scdp_fecharesolucion, 
+                                           scdp_objeto,
+                                           scdp_consecutivo)
                                    VALUES (".$this->codigoSolicitud.", 
                                            '".$this->getFecha()."', 
-                                           ".$this->getCodigoSolicitud().", 
+                                           '".$this->scdp_numero."', 
                                            ".$this->getAccion().", 
                                            $ofis, 
                                            $cargs, 
@@ -413,7 +485,11 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            ".$this->getPersonaSistema().", 
                                            ".$this->getPersonaSistema().", 
                                            NOW(), 
-                                           NOW());";
+                                           NOW(),
+                                           '".$this->getResolucion()."',
+                                           '".$this->getFechaResolucion()."',
+                                           '".$this->getObjeto()."',
+                                            $numeroConsecutivo);";
                                                                                    
         $this->cnxion->ejecutar($insert_solicitud_cdp);
 

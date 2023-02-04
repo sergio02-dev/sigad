@@ -8,11 +8,15 @@
     $selAccion = $_REQUEST['selAccion'];
     $actvddes = $_REQUEST['actvddes'];
     $chkestado = $_REQUEST['chkestado'];
+    $txtResolucion = $_REQUEST['txtResolucion'];
+    $txtFechaResolucion = $_REQUEST['txtFechaResolucion'];
+    $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
    
+    echo "Rresolucion --Z ".$txtResolucion;
     $registrosolicitudcdp = new RgstroSolicitudCdp();
 
     $array_datos = array();
-
+   
     if($actvddes){
         $num_activs = count($actvddes);
         for ($array_etpas=0; $array_etpas < $num_activs; $array_etpas++) { 
@@ -87,6 +91,9 @@
     $registrosolicitudcdp->setEstado($chkestado);
     $registrosolicitudcdp->setPersonaSistema($personaSistema);
     $registrosolicitudcdp->setArrayDatos($array_datos);
+    $registrosolicitudcdp->setResolucion($txtResolucion);
+    $registrosolicitudcdp->setFechaResolucion($txtFechaResolucion);
+    $registrosolicitudcdp->setObjeto($txtObjetoCDP);
 
     $registrosolicitudcdp->insertSolicitud();
     

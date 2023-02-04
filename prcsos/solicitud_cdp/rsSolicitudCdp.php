@@ -268,7 +268,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_list_solicitudes="SELECT scdp_codigo, scdp_fecha, scdp_accion, 
                                       scdp_oficina, scdp_cargo, scdp_numero,
-                                      scdp_proceso
+                                      scdp_proceso, scdp_consecutivo
                                  FROM cdp.solicitud_cdp ;";
 
         $query_list_solicitudes=$this->cnxion->ejecutar($sql_list_solicitudes);
@@ -442,6 +442,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
                 $scdp_fecha = $dta_solicitud['scdp_fecha'];
                 $scdp_accion = $dta_solicitud['scdp_accion'];
                 $scdp_numero = $dta_solicitud['scdp_numero'];
+                $scdp_consecutivo = $dta_solicitud['scdp_consecutivo'];
                 $scdp_proceso = $dta_solicitud['scdp_proceso'];
 
                 if($scdp_proceso == 2){
@@ -464,13 +465,31 @@ Class RsSolicitudCdp extends SolicitudCdp{
                         $ffi_nombre = $dta_fuents_solctud['ffi_nombre'];
 
                         $fntes = $fntes.$asre_vigenciarecurso." ".str_replace('INV -','', $ffi_nombre)." <br>";
+
                     }
                 }
+                $ceros = '';
+
+                    if($scdp_consecutivo <10){
+                        $ceros = '0000';
+                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                    }else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
+                        $ceros = '000';
+                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                    }else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
+                        $ceros = '00';
+                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                    }else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
+                        $ceros = '0';
+                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                    }else{
+                        $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
+                    }
 
     
                 $rsRslciones[] = array('scdp_codigo'=> $scdp_codigo, 
                                        'scdp_fecha'=> $scdp_fecha, 
-                                       'scdp_numero'=> $scdp_numero,
+                                       'scdp_numero'=> $numero_solicitudCDP,
                                        'descripcion_accion'=> $descripcion_accion,
                                        'valor_cdp'=> "$ ".number_format($suma_valor_solicitud,0,'','.'),
                                        'nombre_fuente'=> $fntes,
@@ -976,6 +995,42 @@ Class RsSolicitudCdp extends SolicitudCdp{
         $descr_etp = $poa_referencia.".".$poa_numero." ".$poa_objeto;
 
         return array($descr_etp, $poa_recurso);
+    }
+
+
+    public function resolucionPersona(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+
+        return $rep_resolucion;
+ 
+    }
+
+    
+    public function resolucionFecha(){
+
+        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     AND rep_estado = 1;";
+
+        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+
+        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+
+        return $rep_fecharesolucion;
+ 
     }
 }
 ?>
