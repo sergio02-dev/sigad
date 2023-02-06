@@ -12,7 +12,6 @@
     $txtFechaResolucion = $_REQUEST['txtFechaResolucion'];
     $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
    
-    echo "Rresolucion --Z ".$txtResolucion;
     $registrosolicitudcdp = new RgstroSolicitudCdp();
 
     $array_datos = array();
@@ -27,15 +26,21 @@
             $poa_recurso = $_REQUEST['valor_etapa'.$codigo_actividad];
             $clasificadores = $_REQUEST['selClasificador'.$codigo_actividad];
             $valor_clasfcdor = $_REQUEST['valor_clasificador'.$codigo_actividad];
+            $codigo_dane = $_REQUEST['codigo_dane'.$codigo_actividad];
+            $descripcion_dane = $_REQUEST['descripcion_dane'.$codigo_actividad];
 
             $array_clasificador = array();
 
             for ($list_clasificadores=0; $list_clasificadores < count($clasificadores); $list_clasificadores++) { 
                 $codigo_clasificador = $clasificadores[$list_clasificadores];
                 $valor_clasificador = str_replace('.','',$valor_clasfcdor[$list_clasificadores]);
+                $codigo_dane = $codigo_dane[$list_clasificadores];
+                $descripcion_dane = $descripcion_dane[$list_clasificadores];
 
                 $array_clasificador[] = array('codigo_clasificador'=> $codigo_clasificador, 
-                                              'valor_clasificador'=> $valor_clasificador);
+                                              'valor_clasificador'=> $valor_clasificador,
+                                               'codigo_dane'=>$codigo_dane,
+                                               'descripcion_dane'=>$descripcion_dane);
             }
 
             if($otro_valor == 1){
@@ -94,6 +99,7 @@
     $registrosolicitudcdp->setResolucion($txtResolucion);
     $registrosolicitudcdp->setFechaResolucion($txtFechaResolucion);
     $registrosolicitudcdp->setObjeto($txtObjetoCDP);
+
 
     $registrosolicitudcdp->insertSolicitud();
     

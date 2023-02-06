@@ -69,33 +69,50 @@
     </div>
 </div>
 
+
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
     <div class="col-md-12">
         <table class="table tablaClasificadores<?php echo $codigo_actividad; ?>">
             <tr>
-                <th colspan="3">Codigo Casificador</th>
+                <th colspan="4">Codigo Casificador</th>
             </tr>
             <tr>
-                <td style="width: 65%">
+                <td colspan ="7" style="width: 95%">
                     <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
                         
                     </div> 
                 </td>
-                <td style="width: 30%">
+                <td rowspan="2" style="width: 5%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i>
+                </td>
+            </tr>
+            <tr>
+                <td  colspan="2" style="width: 30%">
                     <div class="form-label-group form-group">
-                       
-                    <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
-                    <span id="error_valor_clsificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
+                        <label><strong>Valor</strong></label>
+                        <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> 
                     </div> 
                 </td>
-                <td style="width: 5%"><i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i></td>
+                <td colspan="2" style="width: 30%">
+                   
+                    <div class="form-label-group form-group">
+                        <label><strong>Codigo Dane</strong></label>
+                        <input type="text" class="form-control caja_texto_sizer"  name="codigo_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required>    
+                    </div> 
+                </td>
+                <td colspan="3" style="width:40%">
+                   
+                    <div class="form-label-group form-group" >
+                        <label><strong>Descripci&oacute;n Dane</strong></label>
+                        <textarea class="form-control caja_texto_sizer" name="descripcion_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></textarea> 
+                    </div>
+                </td>
             </tr>
         </table>
         <span id="error_clasificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
         <span id="error_valor_clsificador<?php echo $codigo_actividad; ?>" style="color:red; font-weight: bold;"></span>
-
     </div>
 </div>
+
 
 <div class="row datosEtapa<?php echo $codigo_actividad; ?>" style="display:none;">
     <div class="col-md-12">
@@ -196,7 +213,8 @@
         cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
         var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
       
-        var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+        var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td colspan="7" style="width: 95%"><div class="form-label-group form-group">'+select_info<?php echo $codigo_actividad; ?>+'</div></td><tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td colspan="2" style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td colspan="2" style="width: 25%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Dane" name="codigo_dane" aria-describedby="textHelp" value="" required> </div></td><td colspan="3"  style="width:40%"><div form-label-group form-group" ><textarea class="form-control caja_texto_sizer" placeholder="Descripcion" name="descripcion_dane" aria-describedby="textHelp" value="" required></textarea></div></td><td rowspan="2"style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+        
         nombre_capa = '';
         return dta;
     }

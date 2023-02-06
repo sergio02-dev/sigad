@@ -535,7 +535,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                     foreach ($cdgo_clasificador as $dta_clasificadores) {
                         $codigo_clasificador = $dta_clasificadores['codigo_clasificador'];
                         $valor_clasificador = $dta_clasificadores['valor_clasificador'];
-
+                        $codigo_dane = $dta_clasificadores['codigo_dane'];
+                        $descripcion_dane = $dta_clasificadores['descripcion_dane'];
+                        
                         $cod_clasf = $this->cod_clasf();
 
                         $sql_insrt_clsfcdor = "INSERT INTO cdp.etapa_solicitud_clasificador(
@@ -548,7 +550,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                            esc_personamodifico, 
                                                            esc_fechacreo, 
                                                            esc_fechamodifico,
-                                                           esc_valor)
+                                                           esc_valor,
+                                                           esc_dane,
+                                                           esc_deq)
                                                    VALUES ($cod_clasf, 
                                                           ".$this->codigoSolicitud.", 
                                                           $codigo_etapa, 
@@ -558,7 +562,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                           ".$this->getPersonaSistema().", 
                                                           NOW(), 
                                                           NOW(),
-                                                          ".$valor_clasificador.");";
+                                                          ".$valor_clasificador.",
+                                                            '".$codigo_dane."',
+                                                            '".$descripcion_dane."');";
                                                                         
                         $this->cnxion->ejecutar($sql_insrt_clsfcdor);
                     }
