@@ -26,21 +26,23 @@
             $poa_recurso = $_REQUEST['valor_etapa'.$codigo_actividad];
             $clasificadores = $_REQUEST['selClasificador'.$codigo_actividad];
             $valor_clasfcdor = $_REQUEST['valor_clasificador'.$codigo_actividad];
-            $codigo_dane = $_REQUEST['codigo_dane'.$codigo_actividad];
-            $descripcion_dane = $_REQUEST['descripcion_dane'.$codigo_actividad];
+            $cdgdane = $_REQUEST['codigo_dane'.$codigo_actividad];
+            $dscrpcondane = $_REQUEST['descripcion_dane'.$codigo_actividad];
+
+            
 
             $array_clasificador = array();
 
             for ($list_clasificadores=0; $list_clasificadores < count($clasificadores); $list_clasificadores++) { 
                 $codigo_clasificador = $clasificadores[$list_clasificadores];
                 $valor_clasificador = str_replace('.','',$valor_clasfcdor[$list_clasificadores]);
-                $codigo_dane = $codigo_dane[$list_clasificadores];
-                $descripcion_dane = $descripcion_dane[$list_clasificadores];
+                $codigo_dane = $cdgdane[$list_clasificadores];
+                $descripcion_dane = $dscrpcondane[$list_clasificadores];
 
                 $array_clasificador[] = array('codigo_clasificador'=> $codigo_clasificador, 
                                               'valor_clasificador'=> $valor_clasificador,
-                                               'codigo_dane'=>$codigo_dane,
-                                               'descripcion_dane'=>$descripcion_dane);
+                                              'codigo_dane'=>$codigo_dane,
+                                              'descripcion_dane'=>$descripcion_dane);
             }
 
             if($otro_valor == 1){

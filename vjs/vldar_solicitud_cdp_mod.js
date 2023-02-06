@@ -2,8 +2,27 @@ function validar_solicitud_cdp(){
 	var selAccion = $('#selAccion').val();
     var chkestado = $('input:radio[name=chkestado]:checked').val();
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
+	var txtObjetoCDP = $('#txtObjetoCDP').val();
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
 	var cod_actividades = new Array();
+
+	
+	//validacion objeto
+	if(txtObjetoCDP == ''){
+        $("#error_objeto_solicitud").fadeIn('300');
+        $("#error_objeto_solicitud").html('Ingrese el objeto de Solicitud');
+        document.getElementById("txtObjetoCDP").focus();
+        return false;
+    }
+	else if (txtObjetoCDP.length < 10){
+		$("#error_objeto_solicitud").fadeIn('300');
+		$("#error_objeto_solicitud").html('Ingrese minimo diez caracteres');
+		document.getElementById("txtObjetoCDP").focus();
+        return false;
+	}
+	else{
+        $("#error_objeto_solicitud").fadeOut('300');
+    }
 
 	if(txtFechaSolicitud == ''){
         $("#error_fecha_solicitud").fadeIn('300');

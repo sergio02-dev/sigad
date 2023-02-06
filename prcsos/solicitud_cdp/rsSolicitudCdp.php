@@ -439,7 +439,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         if($rs_solicitudes){
             foreach ($rs_solicitudes as $dta_solicitud) {
                 $scdp_codigo = $dta_solicitud['scdp_codigo'];
-                $scdp_fecha = $dta_solicitud['scdp_fecha'];
+                $scdp_fecha = date('d/m/Y',strtotime($dta_solicitud['scdp_fecha']));
                 $scdp_accion = $dta_solicitud['scdp_accion'];
                 $scdp_numero = $dta_solicitud['scdp_numero'];
                 $scdp_consecutivo = $dta_solicitud['scdp_consecutivo'];
@@ -510,7 +510,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_form_solicitud_cdp="SELECT scdp_codigo, scdp_fecha, 
                                         scdp_numero, scdp_accion, 
-                                        scdp_estado, scdp_proceso
+                                        scdp_estado, scdp_proceso, scdp_objeto
                                    FROM cdp.solicitud_cdp
                                   WHERE scdp_codigo = $codigo_solicitud;";
 
@@ -649,7 +649,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_codigos_clasificadores_etapas="SELECT esc_codigo, esc_solicitud, 
                                                    esc_etapa, esc_solitudetapa, 
-                                                   esc_clasificador, esc_valor
+                                                   esc_clasificador, esc_valor, esc_dane, esc_deq
                                               FROM cdp.etapa_solicitud_clasificador
                                              WHERE esc_solicitud = $codigo_solicitud
                                                AND esc_etapa = $codigo_etapa

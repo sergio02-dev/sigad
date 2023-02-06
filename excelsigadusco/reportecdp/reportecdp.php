@@ -1,6 +1,6 @@
 <?php
 set_time_limit(1800000000);
-$fecha_generar=date('Y-m-d_H:i:s');
+$fecha_generar=date('d-m-Y_H:i:s');
 
 
 /** Incluir la libreria PHPExcel */
@@ -206,6 +206,18 @@ $titulo_left = array(
     ),
     'alignment' => array(
       'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+      'wrap' => true
+    )
+  );
+
+  $objeto =array(
+    'font' => array(
+        'color' => array('rgb' => '000000'),
+        'size' => 8,
+        'name' => 'Arial'
+    ),
+    'alignment' => array(
+      'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
       'wrap' => true
     )
   );
@@ -575,8 +587,12 @@ $sheet->mergeCells("A4:B4");
   //insert datos 
   include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
   
-  list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero) = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
-  
+  list($people,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero,$valor_cdp) = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
+  $car_nombre= $objRprteSlctudCdp->cargo_nombre($codigo_cdp);
+
+  $sheet->mergeCells("I72:N72")
+  ->setCellValue('I72',$valor_cdp);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I72")->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
 
   $sheet->mergeCells("C7:M7");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -597,6 +613,7 @@ $sheet->mergeCells("A4:B4");
   $sheet->mergeCells("C18:AI18");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C18', strtoupper(tildes($scdp_objeto)));
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("C18:AI18")->applyFromArray($objeto);
 
   $ceros = '';
 
@@ -637,6 +654,8 @@ $sheet->mergeCells("A4:B4");
       $poa_numero = $data_lista_etapa['poa_numero'];
       $esc_valor = $data_lista_etapa['esc_valor'];
       $esc_clasificador = $data_lista_etapa['esc_clasificador'];
+      $esc_dane = $data_lista_etapa['esc_dane'];
+      $esc_deq = $data_lista_etapa['esc_deq'];
       
       $str = $esc_clasificador;
       $numero_caracteres = strlen($str); 
@@ -656,9 +675,20 @@ $sheet->mergeCells("A4:B4");
       ->setCellValue("I".$num_registro, $esc_valor);
       $objPHPExcel->getActiveSheet($numero_registro)->getStyle('I'.$num_registro)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
 
+      
+      
+
       $sheet->mergeCells("AA".($num_registro).":AG".($num_registro))
       ->setCellValue('AA'.$num_registro, $fuente);
-      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AA'.$num_registro)->getNumberFormat();
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AA'.$num_registro)->applyFromArray($letrapeque);
+
+      $sheet->mergeCells("X".($num_registro).":Y".($num_registro))
+      ->setCellValue('X'.$num_registro, $esc_dane, PHPExcel_Cell_DataType::TYPE_STRING);
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('X'.$num_registro)->applyFromArray($letrapeque)->getNumberFormat();
+
+      $sheet->mergeCells("P".($num_registro).":W".($num_registro))
+      ->setCellValueExplicit('P'.$num_registro, $esc_clasificador,PHPExcel_Cell_DataType::TYPE_STRING);
+      $objPHPExcel->getActiveSheet($numero_registro)->getStyle('P'.$num_registro)->applyFromArray($letrapeque)->getNumberFormat();
 
       $num_registro++;
     }
@@ -689,7 +719,7 @@ $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('H')->setWidth(3
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('I')->setWidth(2);
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('J')->setWidth(2);
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('K')->setWidth(2);
-$objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('L')->setWidth(2);
+$objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('L')->setWidth(3);
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('M')->setWidth(4);
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('N')->setWidth(2);
 $objPHPExcel->getActiveSheet($numero_excel)->getColumnDimension('O')->setWidth(1);
