@@ -101,6 +101,7 @@
     $registrosolicitudcdp->setObjeto($txtObjetoCDP);
 
 
-    $registrosolicitudcdp->insertSolicitud();
+
+    echo $registrosolicitudcdp->insertSolicitud();
     
 ?>

@@ -446,7 +446,25 @@ class RgstroSolicitudCdp extends SolicitudCdp{
 
         list($ofis, $cargs) = $this->oficina_cargo();
         $numeroConsecutivo = $this->numeroConsecutivo();
-    
+        
+        $ceros = '';
+        if($numeroConsecutivo <10){
+            $ceros = '0000';
+          }
+          else if ($numeroConsecutivo > 9 && $numeroConsecutivo <100){
+            $ceros = '000';
+          }
+          else if( $numeroConsecutivo >99 && $numeroConsecutivo <1000){
+            $ceros = '00';
+          }
+          else if( $numeroConsecutivo >999 && $numeroConsecutivo <10000){
+            $ceros = '0';
+            
+          }else{
+            $ceros = '';
+          }
+        
+          $numero_solicitudCDP = $this->scdp_numero.'-'.$ceros.$numeroConsecutivo;
 
         if($ofis && $cargs){
             $ofis = $ofis;
@@ -606,7 +624,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
             }
         }
         
-        return $insert_solicitud_cdp;
+    
+        return $numero_solicitudCDP;
     }
 }
 ?>
