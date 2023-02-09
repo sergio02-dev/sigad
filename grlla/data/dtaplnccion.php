@@ -45,7 +45,6 @@
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_asgnacion_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Asignacion de Recursos Plan Acci&oacute;n</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Plan Acci&oacute;n</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcelReponsable();"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Responsable Acci&oacute;n</strong></a></span>
-		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_cdp();"><i class="fas fa-file-excel"></i>&nbsp;<strong>Reporte CDP</strong></a></span>
 	
 	</div>
 	<div class="col-sm-3" style=" display:none">
@@ -189,11 +188,6 @@
 		var codigo_planDesarrollo=$('#codigo_planDesarrollo').val();
 
 		window.location.href = 'excelplanaccion?codigo_planDesarrollo='+codigo_planDesarrollo;
-	}
-
-	function rprte_cdp(){
-
-		window.location.href = 'reportecdp';
 	}
 
 
