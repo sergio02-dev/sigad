@@ -7,11 +7,15 @@
 
     $plan_accion_consulta = $objSolicitudCdp->plan_accion_consulta($codigo_plan);
 
-    $resolucionPersona = $objSolicitudCdp->resolucionPersona();
+    
 
-    $resolucionFecha = $objSolicitudCdp->resolucionFecha();
+    // $resolucionFecha = $objSolicitudCdp->resolucionFecha();
 
+  
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
+
+    
+
 
 
     $url_guardar="registrosolicitudcdp";
@@ -39,34 +43,28 @@
     <div class="modal-body">
         <!-- ******************** INICIO FORMULARIO ************************* -->
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
-                    <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
-              
-                </div>
-            </div>
-    
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
-                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
-                    <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
-                </div>
-            </div>
-        </div>
+        
 
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="txtFechaSolicitud" class="font-weight-bold">Fecha de Solicitud </label>
                     <input type="date" class="form-control caja_texto_sizer" id="txtFechaSolicitud" name="txtFechaSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $fecha_solicitud ; ?>" required>
                     <div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>
                 </div>
             </div>
+        
+
+        
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtnumero" class="font-weight-bold">Numero de solicitud </label>
+                    <input type="number" class="form-control caja_texto_sizer" id="txtnumero" name="txtnumero" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $numero_consecutivo ; ?>" required>
+                    <!--<div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>-->
+                </div>
+            </div>
+        
         </div>
         
         <div class="row">

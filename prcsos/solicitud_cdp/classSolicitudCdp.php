@@ -30,6 +30,13 @@ Class SolicitudCdp {
         $this->codigo=$codigo;
     }
 
+    public function getConsecutivo(){
+        return $this->consecutivo;
+    } 
+    public function setConsecutivo($consecutivo){
+        $this->consecutivo=$consecutivo;
+    }
+
     public function getDane(){
         return $this->dane;
     } 

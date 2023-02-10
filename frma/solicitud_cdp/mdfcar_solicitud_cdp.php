@@ -12,6 +12,7 @@
         $scdp_accion = $dta_form_solicitud_cdp['scdp_accion'];
         $scdp_estado = $dta_form_solicitud_cdp['scdp_estado'];
         $scdp_objeto = $dta_form_solicitud_cdp['scdp_objeto'];
+        $scdp_consecutivo = $dta_form_solicitud_cdp['scdp_consecutivo'];
     }
 
     $codigo_plan = $objSolicitudCdp->codigo_plan_accion($scdp_accion);
@@ -24,9 +25,13 @@
 
     $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
 
-    $resolucionPersona = $objSolicitudCdp->resolucionPersona();
+    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona();
 
-    $resolucionFecha = $objSolicitudCdp->resolucionFecha();
+
+    //$resolucionFecha = $objSolicitudCdp->resolucionFecha();
+
+    
+
 
     //$list_cldfcadores = $objConsultaLinix->list_cldfcadores();
     
@@ -83,11 +88,19 @@
 
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="txtFechaSolicitud" class="font-weight-bold">Fecha de Solicitud </label>
                     <input type="date" class="form-control caja_texto_sizer" id="txtFechaSolicitud" name="txtFechaSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $fecha_solicitud ; ?>" readonly>
                     <div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtnumero" class="font-weight-bold">Numero de solicitud </label>
+                    <input type="number" class="form-control caja_texto_sizer" id="txtnumero" name="txtnumero" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $scdp_consecutivo ; ?>" required>
+                    <!--<div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>-->
                 </div>
             </div>
         </div>

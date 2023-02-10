@@ -510,7 +510,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_form_solicitud_cdp="SELECT scdp_codigo, scdp_fecha, 
                                         scdp_numero, scdp_accion, 
-                                        scdp_estado, scdp_proceso, scdp_objeto
+                                        scdp_estado, scdp_proceso, scdp_objeto, scdp_consecutivo
                                    FROM cdp.solicitud_cdp
                                   WHERE scdp_codigo = $codigo_solicitud;";
 
@@ -997,7 +997,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
-
     public function resolucionPersona(){
 
         $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
@@ -1010,27 +1009,27 @@ Class RsSolicitudCdp extends SolicitudCdp{
         $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
 
         $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
 
-        return $rep_resolucion;
+        return array($rep_resolucion,$rep_fecharesolucion);
  
     }
 
     
-    public function resolucionFecha(){
+    public function numeroConsecutivo(){
+       
 
-        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
-                                     FROM usco.resolucion_persona
-                                     WHERE rep_persona = ".$_SESSION['idusuario']."
-                                     AND rep_estado = 1;";
+        $sql_numeroConsecutivo="SELECT scdp_consecutivo 
+                        FROM cdp.solicitud_cdp
+                        WHERE scdp_codigo = $this->codigoSolicitud;";
 
-        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+        $query_numeroConsecutivo=$this->cnxion->ejecutar($sql_numeroConsecutivo);
 
-        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+        $data_numeroConsecutivo=$this->cnxion->obtener_filas($query_numeroConsecutivo);
 
-        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+        $scdp_consecutivo = $data_numeroConsecutivo['scdp_consecutivo'];
 
-        return $rep_fecharesolucion;
- 
+        return $scdp_consecutivo;
     }
 }
 ?>

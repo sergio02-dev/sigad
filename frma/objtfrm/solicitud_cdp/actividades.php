@@ -5,10 +5,28 @@
     $codigo_accion = $_REQUEST['codigo_accion'];
 
     $activity_list = $objSolicitudCdp->actividades_accion($codigo_accion);
+    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona();
 
 ?>
 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
+            <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
+            <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
+        
+        </div>
+    </div>
 
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
+            <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
+            <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
+        </div>
+    </div>
+</div>
 <label class="font-weight-bold">Actividades * </label>
 <div class="bg">
     <table class="table table-sm">

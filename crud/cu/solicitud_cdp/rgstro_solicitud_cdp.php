@@ -11,7 +11,7 @@
     $txtResolucion = $_REQUEST['txtResolucion'];
     $txtFechaResolucion = $_REQUEST['txtFechaResolucion'];
     $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
-   
+    $txtnumero = $_REQUEST['txtnumero'];
     $registrosolicitudcdp = new RgstroSolicitudCdp();
 
     $array_datos = array();
@@ -101,6 +101,7 @@
     $registrosolicitudcdp->setResolucion($txtResolucion);
     $registrosolicitudcdp->setFechaResolucion($txtFechaResolucion);
     $registrosolicitudcdp->setObjeto($txtObjetoCDP);
+    $registrosolicitudcdp->setConsecutivo($txtnumero);
 
 
 

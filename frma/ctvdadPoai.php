@@ -136,8 +136,8 @@ else{
             </div>
             
             
-        </div>
-        <div class="bg">
+        
+        <!--<div class="bg">
                 <table class="table table-sm">
                     <tr>
                         <th>Sede - Indicador</th>
@@ -166,7 +166,7 @@ else{
                             <td>
                                     <div class="col-md-8">
                                             <div class="form-group">
-                                                <input type="number" min="1" class="form-control caja_texto_sizer" name="<?php echo $ind_codigo; ?>" aria-describedby="textHelp"  value="<?php echo $acp_unidad;?>" >
+                                                <input type="number" id="txtUnidad" min="1" class="form-control caja_texto_sizer" name="txtUnidad<?php echo $ind_codigo; ?>" aria-describedby="textHelp"  value="<?php echo $acp_unidad;?>" >
                                                 <span class="help-block" id="error"></span>
                                             </div>
                                     </div>
@@ -177,11 +177,47 @@ else{
                         ?>
 
                 </table>
-
+        </div>-->
 
         <div class="col-md-4">
-                
+                <div class="form-group">
+                    <label for="selSedes" class="font-weight-bold"> Sede *</label>
+                    <select name="selSedes" id="selSedes" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                    <option value="0">Seleccione...</option>
+                        <?php
+                            foreach ($list_sedes as $data_sede) {
+                                $ind_codigo = $data_sede['ind_codigo'];
+                                $ind_unidadmedida = $data_sede['ind_unidadmedida'];
+                                $sed_nombre = $data_sede['sed_nombre'];
+
+                                $dscrpcion = $sed_nombre." - ".$ind_unidadmedida;
+
+                                if($acp_sedeindicador==$ind_codigo){
+                                    $selected_sede = "selected";
+                                }
+                                else{
+                                    $selected_sede = "";
+                                }
+                        ?>
+                            <option value="<?php echo $ind_codigo; ?>" <?php echo $selected_sede; ?>> <?php echo $dscrpcion; ?> </option>;
+                        <?php       
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="txtUnidad" class="font-weight-bold"># Unidad *</label>
+                    <input type="number" min="1" class="form-control caja_texto_sizer" id="txtUnidad" name="txtUnidad" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $acp_unidad;?>" required>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+        </div>    
+            
+        
+
 
         <div class="row">
             <div class="col-md-4">
