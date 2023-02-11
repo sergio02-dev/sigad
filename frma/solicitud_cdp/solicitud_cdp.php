@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label for="txtnumero" class="font-weight-bold">Numero de solicitud </label>
                     <input type="number" class="form-control caja_texto_sizer" id="txtnumero" name="txtnumero" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $numero_consecutivo ; ?>" required>
-                    <!--<div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>-->
+                    <div class="alert alert-danger alerta-forcliente" id="error_numero_solicitud" role="alert"></div>
                 </div>
             </div>
         

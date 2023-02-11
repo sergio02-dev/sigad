@@ -997,27 +997,23 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
-    public function resolucionPersona($codigo_poai){
-
-       /* $sql_responsable = "SELECT res_codigooficina
-                                FROM usco.responsable
-                                INNER JOIN  usco.vinculacion ON vin_persona = ".$_SESSION['idusuario']." 
-                                WHERE res_nivel = 3
-                                AND res_codigonivel = $codigo_poai
-                                AND res_codigooficina = vin_oficina;";
-
-        $resultado_responsable = $this->cnxion->ejecutar($sql_responsable);*/
-        
+    public function resolucionPersona($codigo_poai){        
 
         $sql_resolucionPersona = "SELECT rep_persona, rep_resolucion, rep_fecharesolucion
-                                     FROM usco.resolucion_persona
-                                     INNER JOIN usco.vinculacion ON vin_persona = ".$_SESSION['idusuario']."
-                                     INNER JOIN usco.responsable ON vin_oficina = res_codigooficina
-                                     
-                                     WHERE res_nivel = 3
-                                     AND res_codigonivel = $codigo_poai
-                                     AND res_tiporesponsable = 2
-                                     AND rep_estado = 1;";
+                                    FROM usco.resolucion_persona
+                                    INNER JOIN usco.vinculacion ON rep_persona = vin_persona
+                                    INNER JOIN usco.responsable ON vin_oficina = res_codigooficina
+                                    WHERE res_codigooficina IN( SELECT vin_oficina 
+                                                                FROM usco.vinculacion 
+                                                                WHERE vin_persona = ".$_SESSION['idusuario']."
+                                                                AND vin_estado = 1 )
+                                    AND rep_estado = 1
+                                    AND vin_estado = 1
+                                    AND res_nivel = 3
+                                    AND res_tiporesponsable = 2
+                                    AND res_codigonivel = $codigo_poai    
+                                    ;";
+    
 
         $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
 

@@ -3,10 +3,43 @@ function validar_solicitud_cdp(){
 	var txtObjetoCDP = $('#txtObjetoCDP').val();
     var chkestado = $('input:radio[name=chkestado]:checked').val();
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
-	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
+	var txtNumeroSolicitud = $('#txtnumero').val();
+	var txtResolucion =$('#txtResolucion').val();
+	var txtFechaResolucion =$('#txtFechaResolucion').val();
 	var cod_actividades = new Array();
+	
+	if(txtNumeroSolicitud == ''){
+        $("#error_numero_solicitud").fadeIn('300');
+        $("#error_numero_solicitud").html('Ingrese el Número de Solicitud');
+        document.getElementById("txtNumeroSolicitud").focus();
+        return false;
+    }else if(txtNumeroSolicitud == 0){
+		$("#error_numero_solicitud").fadeIn('300');
+        $("#error_numero_solicitud").html('El numero debe ser mayor a 0');
+        document.getElementById("txtNumeroSolicitud").focus();
+        return false;
+	}
+    else{
+        $("#error_numero_solicitud").fadeOut('300');
+    }
 
 
+
+	if(txtFechaResolucion == ''){
+        $("#error_resolucion").fadeIn('300');
+        $("#error_resolucion").html('No hay resolución');
+        document.getElementById("txtFechaResolucion").focus();
+        return false;
+    }else if(txtResolucion == ''){
+        $("#error_resolucion").fadeIn('300');
+        $("#error_resolucion").html('No hay resolución');
+        document.getElementById("txtResolucion").focus();
+        return false;
+	}else{
+        $("#error_resolucion").fadeOut('300');
+    }
+
+	
 
 	//validacion objeto
 	if(txtObjetoCDP == ''){
@@ -36,15 +69,7 @@ function validar_solicitud_cdp(){
         $("#error_fecha_solicitud").fadeOut('300');
     }
 
-	if(txtNumeroSolicitud == ''){
-        $("#error_numero_solicitud").fadeIn('300');
-        $("#error_numero_solicitud").html('Ingrese el Número de Solicitud');
-        document.getElementById("txtNumeroSolicitud").focus();
-        return false;
-    }
-    else{
-        $("#error_numero_solicitud").fadeOut('300');
-    }
+
 
 	if(selAccion == 0){
         $("#error_accion").fadeIn('300');
