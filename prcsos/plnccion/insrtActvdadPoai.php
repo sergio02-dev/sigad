@@ -5,6 +5,8 @@ class CtvdadPoai extends ActividadPoai{
 
   private $sqlInsertAcc;
   private $codigoaccion;
+  private $codigoActividad;
+  private $sql_unidad_indicador;
 
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
@@ -57,7 +59,7 @@ class CtvdadPoai extends ActividadPoai{
     public function codigo_subsistema($codigo_proyecto){
 
       $sql_codigo_subsistema="SELECT pro_codigo, pro_descripcion, sub_codigo
-                                FROM plandesarrollo.proyecto
+                                  FROM plandesarrollo.proyecto
                               WHERE pro_codigo = $codigo_proyecto;";
 
       $query_codigo_subsistema=$this->cnxion->ejecutar($sql_codigo_subsistema);
@@ -140,6 +142,8 @@ class CtvdadPoai extends ActividadPoai{
     }
 
     public function insertRegistroActividadPoai(){
+      
+     
 
       $codigoccion=$this->getCodigoAccion();
 
@@ -183,6 +187,43 @@ class CtvdadPoai extends ActividadPoai{
                                                            ".$this->getUnidad().");";
 
       $this->cnxion->ejecutar($sqlInsertAcc);
+
+      /*$datos_indicadores = $this->getArrayIndicadores();
+
+    if ($datos_indicadores) {
+      foreach ($datos_indicadores as $dta_indicadores) {
+        $codigo_indicador = $dta_indicadores['codigo_indicador'];
+        $unidad_indicador = $dta_indicadores['unidad_indicador'];
+
+        $codigo_unidad_indicador = date('YmdHis') . rand(99, 99999);
+
+        $sql_unidad_indicador = "INSERT INTO planaccion.actividad_indicador(
+                                                                                                      ain_codigo, 
+                                                                                                      ain_actividad, 
+                                                                                                      ain_indicador, 
+                                                                                                      ain_estado, 
+                                                                                                      ain_fechacreo, 
+                                                                                                      ain_fechamodifico, 
+                                                                                                      ain_personacre, 
+                                                                                                      ain_personamodifico,
+                                                                                                      ain_unidad)
+                                                                                               VALUES (" . $codigo_unidad_indicador . ",
+                                                                                                        " . $this->codigoActividad . ",
+                                                                                                        $codigo_indicador,
+                                                                                                        " . $this->getEstado() . ",
+                                                                                                          NOW(), 
+                                                                                                          NOW(), 
+                                                                                                          " . $this->getPersonaSistema() . ",
+                                                                                                          " . $this->getPersonaSistema() . ", 
+                                                                                                          $unidad_indicador);";
+
+
+        echo $sql_unidad_indicador;
+        $this->cnxion->ejecutar($sql_unidad_indicador);
+      }
+    }*/
+
+      
 
 
       return $sqlInsertAcc;

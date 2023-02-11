@@ -9,6 +9,7 @@
     $actvddes = $_REQUEST['codigo_actividad'];
     $chkestado = $_REQUEST['chkestado'];
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
+    $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
    
     $modificarsolicitudcdp = new MdfcarSolicitudCdp();
 
@@ -24,6 +25,8 @@
             $poa_recurso = $_REQUEST['valor_etapa'.$codigo_actividad];
             $clasificadores = $_REQUEST['selClasificador'.$codigo_actividad];
             $valor_clasfcdor = $_REQUEST['valor_clasificador'.$codigo_actividad];
+            $cdgo_dane = $_REQUEST['codigo_dane'.$codigo_actividad];
+            $dscrpcion_dane = $_REQUEST['descripcion_dane'.$codigo_actividad];
 
 
             $array_clasificador = array();
@@ -31,9 +34,13 @@
             for ($list_clasificadores=0; $list_clasificadores < count($clasificadores); $list_clasificadores++) { 
                 $codigo_clasificador = $clasificadores[$list_clasificadores];
                 $valor_clasificador = str_replace('.','',$valor_clasfcdor[$list_clasificadores]);
+                $codigo_dane = $cdgo_dane[$list_clasificadores];
+                $descripcion_dane = $dscrpcion_dane[$list_clasificadores];
 
                 $array_clasificador[] = array('codigo_clasificador'=> $codigo_clasificador, 
-                                              'valor_clasificador'=> $valor_clasificador);
+                                              'valor_clasificador'=> $valor_clasificador,
+                                              'codigo_dane'=>$codigo_dane,
+                                              'descripcion_dane'=>$descripcion_dane);
             }
 
             if($otro_valor == 1){
@@ -91,6 +98,7 @@
     $modificarsolicitudcdp->setPersonaSistema($personaSistema);
     $modificarsolicitudcdp->setArrayDatos($array_datos);
     $modificarsolicitudcdp->setCodigo($codigo_solicitud);
+    $modificarsolicitudcdp->setObjeto($txtObjetoCDP);
 
     $modificarsolicitudcdp->mdfcarSolicitud();
     

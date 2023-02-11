@@ -439,7 +439,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         if($rs_solicitudes){
             foreach ($rs_solicitudes as $dta_solicitud) {
                 $scdp_codigo = $dta_solicitud['scdp_codigo'];
-                $scdp_fecha = $dta_solicitud['scdp_fecha'];
+                $scdp_fecha = date('d/m/Y',strtotime($dta_solicitud['scdp_fecha']));
                 $scdp_accion = $dta_solicitud['scdp_accion'];
                 $scdp_numero = $dta_solicitud['scdp_numero'];
                 $scdp_consecutivo = $dta_solicitud['scdp_consecutivo'];
@@ -510,7 +510,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_form_solicitud_cdp="SELECT scdp_codigo, scdp_fecha, 
                                         scdp_numero, scdp_accion, 
-                                        scdp_estado, scdp_proceso
+                                        scdp_estado, scdp_proceso, scdp_objeto, scdp_consecutivo
                                    FROM cdp.solicitud_cdp
                                   WHERE scdp_codigo = $codigo_solicitud;";
 
@@ -649,7 +649,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_codigos_clasificadores_etapas="SELECT esc_codigo, esc_solicitud, 
                                                    esc_etapa, esc_solitudetapa, 
-                                                   esc_clasificador, esc_valor
+                                                   esc_clasificador, esc_valor, esc_dane, esc_deq
                                               FROM cdp.etapa_solicitud_clasificador
                                              WHERE esc_solicitud = $codigo_solicitud
                                                AND esc_etapa = $codigo_etapa
@@ -997,40 +997,50 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
+    public function resolucionPersona($codigo_poai){        
 
-    public function resolucionPersona(){
-
-        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
-                                     FROM usco.resolucion_persona
-                                     WHERE rep_persona = ".$_SESSION['idusuario']."
-                                     AND rep_estado = 1;";
+        $sql_resolucionPersona = "SELECT rep_persona, rep_resolucion, rep_fecharesolucion
+                                    FROM usco.resolucion_persona
+                                    INNER JOIN usco.vinculacion ON rep_persona = vin_persona
+                                    INNER JOIN usco.responsable ON vin_oficina = res_codigooficina
+                                    WHERE res_codigooficina IN( SELECT vin_oficina 
+                                                                FROM usco.vinculacion 
+                                                                WHERE vin_persona = ".$_SESSION['idusuario']."
+                                                                AND vin_estado = 1 )
+                                    AND rep_estado = 1
+                                    AND vin_estado = 1
+                                    AND res_nivel = 3
+                                    AND res_tiporesponsable = 2
+                                    AND res_codigonivel = $codigo_poai    
+                                    ;";
+    
 
         $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
 
         $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
 
         $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
+        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
 
-        return $rep_resolucion;
+        return array($rep_resolucion,$rep_fecharesolucion);
  
     }
 
     
-    public function resolucionFecha(){
+    public function numeroConsecutivo(){
+       
 
-        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
-                                     FROM usco.resolucion_persona
-                                     WHERE rep_persona = ".$_SESSION['idusuario']."
-                                     AND rep_estado = 1;";
+        $sql_numeroConsecutivo="SELECT scdp_consecutivo 
+                        FROM cdp.solicitud_cdp
+                        WHERE scdp_codigo = $this->codigoSolicitud;";
 
-        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+        $query_numeroConsecutivo=$this->cnxion->ejecutar($sql_numeroConsecutivo);
 
-        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+        $data_numeroConsecutivo=$this->cnxion->obtener_filas($query_numeroConsecutivo);
 
-        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+        $scdp_consecutivo = $data_numeroConsecutivo['scdp_consecutivo'];
 
-        return $rep_fecharesolucion;
- 
+        return $scdp_consecutivo;
     }
 }
 ?>

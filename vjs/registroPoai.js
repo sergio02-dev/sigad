@@ -5,11 +5,15 @@ function validar_formActividadPoai(){
 				required: true,
 				minlength:3,
 			},
+
+
 			vigenciaActividad:{
 				selectvigenciaActividad: true,
 			},
 			textObjetivo:{
 				required: true,
+				minlength:10,
+				maxlength:150,
 			},
 			selSedes:{
 				selectSede: true,
@@ -29,17 +33,22 @@ function validar_formActividadPoai(){
                 required: "Digite la Descripción de la Actividad",
                 minlength:"Debe ser mayor a 3 letras",
 			},
-			chkestado:{
-                required: "Seleccione un Estado",
-			},
 			textObjetivo:{
 				required: "Digite el Objetivo de la Actividad",
+				minlength:"Debe ser mayor a 10 letras",
+				maxlength: "Debe ser menor a 150 letras",
+			},
+			chkestado:{
+                required: "Seleccione un Estado",
 			},
 			txtUnidad:{
 				required: "Ingrese la Unidad", 
 				min: "debe ser minimo 1"
 			}
 
+
+
+			
 
 		},
 		errorPlacement : function(error, element) {
@@ -56,6 +65,8 @@ function validar_formActividadPoai(){
 			var url_proceso=$('#url').val();
 			var code_acccion=$('#codigo_accion').val();
 			var codigoActividad = $('#codigoActividad').val();
+			
+			
 
 			$.ajax({
                 type: "POST",

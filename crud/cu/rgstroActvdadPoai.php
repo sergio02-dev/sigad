@@ -15,6 +15,21 @@
     $textObjetivo = $_REQUEST['textObjetivo'];
     $selSedes = $_REQUEST['selSedes'];
     $txtUnidad = $_REQUEST['txtUnidad'];
+    /*$array_indicadores = array();
+
+    for ($list_sedes=0; $list_sedes < count($selSedes); $list_sedes++){
+      $codigo_indicador = $selSedes[$list_sedes];
+
+      $unidad_indicador = $_REQUEST['txtUnidad'.$codigo_indicador];
+
+      echo $codigo_indicador." <--- unidad indicador " .$_REQUEST[$codigo_indicador];
+
+      $array_indicadores[] = array(
+        'codigo_indicador' => $codigo_indicador,
+        'unidad_indicador' => $unidad_indicador
+      );
+
+    }*/
 
     $objPlanAccion = new CtvdadPoai();
 
@@ -30,6 +45,7 @@
     $objPlanAccion->setObjetivo($textObjetivo);
     $objPlanAccion->setSede($selSedes);
     $objPlanAccion->setUnidad($txtUnidad);
+    //$objPlanAccion->setArrayIndicadores($array_indicadores);
 
     $numeroActividad=$objPlanAccion->numeroActividades($codigoAccion, $personaSistema);
 
@@ -38,9 +54,10 @@
     //}
     //else{
         echo $objPlanAccion->insertRegistroActividadPoai();
-        $valor=0;
+        //print_r($array_indicadores);
+
     //}
 
-    echo $valor;
+ 
 
 ?>

@@ -390,32 +390,31 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
 
         $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
-
-        return $rep_resolucion;
- 
-    }
-
-    
-    public function resolucionFecha(){
-
-        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
-                                     FROM usco.resolucion_persona
-                                     WHERE rep_persona = ".$_SESSION['idusuario']."
-                                     AND rep_estado = 1;";
-
-        $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
-
-        $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
-
         $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
 
-        return $rep_fecharesolucion;
+        return array($rep_resolucion,$rep_fecharesolucion);
  
     }
 
-
     
-    public function numeroConsecutivo(){
+    /*public function numeroConsecutivo($codigo_solicitudcdp){
+       
+
+        $sql_numeroConsecutivo="SELECT scdp_consecutivo 
+                        FROM cdp.solicitud_cdp
+                        WHERE scdp_codigo = $codigo_solicitudcdp;";
+
+        $query_numeroConsecutivo=$this->cnxion->ejecutar($sql_numeroConsecutivo);
+
+        $data_numeroConsecutivo=$this->cnxion->obtener_filas($query_numeroConsecutivo);
+
+        $scdp_consecutivo = $data_numeroConsecutivo['scdp_consecutivo'];
+
+        return $scdp_consecutivo;
+    }*/
+
+
+    /*public function numeroConsecutivo(){
         $this->scdp_numero = date('Y');
 
         $sql_numeroConsecutivo="SELECT MAX(scdp_consecutivo) AS num_consecutivo
@@ -436,35 +435,35 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         }
         return $num_consecutivo;
     }
-
+*/
     
 
 
 
     public function insertSolicitud(){
-
+        $this->scdp_numero = date('Y');
 
         list($ofis, $cargs) = $this->oficina_cargo();
-        $numeroConsecutivo = $this->numeroConsecutivo();
+        //$numeroConsecutivo = $this->numeroConsecutivo();
         
         $ceros = '';
-        if($numeroConsecutivo <10){
+        if($this->getConsecutivo() <10){
             $ceros = '0000';
           }
-          else if ($numeroConsecutivo > 9 && $numeroConsecutivo <100){
+          else if ($this->getConsecutivo() > 9 && $this->getConsecutivo() <100){
             $ceros = '000';
           }
-          else if( $numeroConsecutivo >99 && $numeroConsecutivo <1000){
+          else if( $this->getConsecutivo() >99 && $this->getConsecutivo() <1000){
             $ceros = '00';
           }
-          else if( $numeroConsecutivo >999 && $numeroConsecutivo <10000){
+          else if( $this->getConsecutivo() >999 && $this->getConsecutivo() <10000){
             $ceros = '0';
             
           }else{
             $ceros = '';
           }
         
-          $numero_solicitudCDP = $this->scdp_numero.'-'.$ceros.$numeroConsecutivo;
+          $numero_solicitudCDP = $this->scdp_numero.'-'.$ceros.$this->getConsecutivo();
 
         if($ofis && $cargs){
             $ofis = $ofis;
@@ -507,10 +506,11 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            '".$this->getResolucion()."',
                                            '".$this->getFechaResolucion()."',
                                            '".$this->getObjeto()."',
-                                            $numeroConsecutivo);";
-                                                                                   
+                                           ".$this->getConsecutivo().");";
+         
+                         
         $this->cnxion->ejecutar($insert_solicitud_cdp);
-
+        
         $datos_etapa = $this->getArrayDatos();
 
         if($datos_etapa){
@@ -553,7 +553,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                     foreach ($cdgo_clasificador as $dta_clasificadores) {
                         $codigo_clasificador = $dta_clasificadores['codigo_clasificador'];
                         $valor_clasificador = $dta_clasificadores['valor_clasificador'];
-
+                        $codigo_dane = $dta_clasificadores['codigo_dane'];
+                        $descripcion_dane = $dta_clasificadores['descripcion_dane'];
+                        
                         $cod_clasf = $this->cod_clasf();
 
                         $sql_insrt_clsfcdor = "INSERT INTO cdp.etapa_solicitud_clasificador(
@@ -566,7 +568,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                            esc_personamodifico, 
                                                            esc_fechacreo, 
                                                            esc_fechamodifico,
-                                                           esc_valor)
+                                                           esc_valor,
+                                                           esc_dane,
+                                                           esc_deq)
                                                    VALUES ($cod_clasf, 
                                                           ".$this->codigoSolicitud.", 
                                                           $codigo_etapa, 
@@ -576,7 +580,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                           ".$this->getPersonaSistema().", 
                                                           NOW(), 
                                                           NOW(),
-                                                          ".$valor_clasificador.");";
+                                                          ".$valor_clasificador.",
+                                                            '".$codigo_dane."',
+                                                            '".$descripcion_dane."');";
                                                                         
                         $this->cnxion->ejecutar($sql_insrt_clsfcdor);
                     }

@@ -11,6 +11,8 @@
         $scdp_fecha = $dta_form_solicitud_cdp['scdp_fecha'];
         $scdp_accion = $dta_form_solicitud_cdp['scdp_accion'];
         $scdp_estado = $dta_form_solicitud_cdp['scdp_estado'];
+        $scdp_objeto = $dta_form_solicitud_cdp['scdp_objeto'];
+        $scdp_consecutivo = $dta_form_solicitud_cdp['scdp_consecutivo'];
     }
 
     $codigo_plan = $objSolicitudCdp->codigo_plan_accion($scdp_accion);
@@ -22,6 +24,15 @@
     $plan_accion_consulta = $objSolicitudCdp->plan_accion_consulta($codigo_plan);
 
     $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
+
+    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona();
+
+
+    //$resolucionFecha = $objSolicitudCdp->resolucionFecha();
+
+    
+
+
     //$list_cldfcadores = $objConsultaLinix->list_cldfcadores();
     
     $url_guardar="modificarsolicitudcdp";
@@ -55,19 +66,52 @@
     </div>
     <div class="modal-body">
         <!-- ******************** INICIO FORMULARIO ************************* -->
+        
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
+                    <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
+              
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
+                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
+                    <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="txtFechaSolicitud" class="font-weight-bold">Fecha de Solicitud </label>
-                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaSolicitud" name="txtFechaSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $fecha_solicitud ; ?>" required>
+                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaSolicitud" name="txtFechaSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $fecha_solicitud ; ?>" readonly>
                     <div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>
                 </div>
             </div>
-            <div class="col-sm-4">
+
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="txtNumeroSolicitud" class="font-weight-bold">N&uacute;mero de Solicitud </label>
-                    <input type="number" class="form-control caja_texto_sizer" id="txtNumeroSolicitud" name="txtNumeroSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $scdp_numero ; ?>" required>
-                    <div class="alert alert-danger alerta-forcliente" id="error_numero_solicitud" role="alert"></div>
+                    <label for="txtnumero" class="font-weight-bold">Numero de solicitud </label>
+                    <input type="number" class="form-control caja_texto_sizer" id="txtnumero" name="txtnumero" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $scdp_consecutivo ; ?>" required>
+                    <!--<div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="txtObjetoCDP" class="font-weight-bold">Objeto </label>
+                    <textarea class="form-control caja_texto_sizer" name="txtObjetoCDP" id="txtObjetoCDP" aria-describedby="textHelp" required><?php echo $scdp_objeto;?></textarea>
+                    <div class="alert alert-danger alerta-forcliente" id="error_objeto_solicitud" role="alert"></div>
+              
                 </div>
             </div>
         </div>
@@ -251,7 +295,7 @@
                         <div class="col-md-12">
                             <table class="table tablaClasificadores<?php echo $codigo_actividad; ?>">
                                 <tr>
-                                    <th colspan="3">Codigo Casificador</th>
+                                    <th colspan="4">Codigo Casificador</th>
                                 </tr>
                                 <?php 
                                     $codigos_clasificadores_etapas = $objSolicitudCdp->codigos_clasificadores_etapas($codigo_solicitud, $cod_etp);
@@ -264,12 +308,14 @@
                                             $esc_solitudetapa = $dta_clsfcador['esc_solitudetapa'];
                                             $esc_clasificador = $dta_clsfcador['esc_clasificador'];
                                             $esc_valor = $dta_clsfcador['esc_valor'];
+                                            $esc_dane = $dta_clsfcador['esc_dane'];
+                                            $esc_deq = $dta_clsfcador['esc_deq'];
 
 
                                             if($num_control == 0){
                                 ?>
                                 <tr>
-                                    <td style="width: 65%">
+                                    <td colspan ="7" style="width: 95%">
                                         <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
                                             <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8">
                                                 <option value="0">Seleccione...</option>
@@ -295,13 +341,28 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td style="width: 30%">
+                                    <td rowspan="2" style="width: 5%">
+                                        <i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%">
                                         <div class="form-label-group form-group">
+                                            <label><strong>Valor</strong></label>
                                             <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo number_format($esc_valor,0,'','.'); ?>" required> 
                                         </div>
                                     </td>
-                                    <td style="width: 5%">
-                                        <i class="fas fa-plus fa-lg color_icono" onclick="Agregaitems<?php echo $codigo_actividad; ?>('<?php echo $codigo_actividad; ?>')"></i>
+                                    <td  colspan="2" style="width: 30%">
+                                        <div class="form-label-group form-group">
+                                            <label><strong>Codigo Dane</strong></label>
+                                            <input type="text" class="form-control caja_texto_sizer"  name="codigo_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo $esc_dane; ?>" required>    
+                                        </div> 
+                                    </td>
+                                    <td colspan="3" style="width: 30%">
+                                    <div class="form-label-group form-group" >
+                                        <label><strong>Descripci&oacute;n Dane</strong></label>
+                                        <textarea class="form-control caja_texto_sizer" name="descripcion_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp"  required><?php echo $esc_deq; ?></textarea> 
+                                    </div>
                                     </td>
                                 </tr>
                                 <?php
@@ -309,7 +370,7 @@
                                             else{
                                 ?>
                                 <tr class="<?php echo $codigo_actividad.$num_control; ?>">
-                                    <td style="width: 65%">
+                                    <td colspan ="7" style="width: 95%">
                                         <div class="form-label-group form-group" id="dtaClasificador<?php echo $codigo_actividad;?>">
                                             <select name="selClasificador<?php echo $codigo_actividad;?>[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8">
                                                 <option value="0">Seleccione...</option>
@@ -335,13 +396,29 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td style="width: 30%">
+                                    
+                                    <td rowspan ="2"style="width: 5%">
+                                        <i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>('.<?php echo $codigo_actividad.$num_control; ?>')"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="width: 30%">
                                         <div class="form-label-group form-group">
+                                            <label><strong>Valor</strong></label>
                                             <input type="text" class="form-control caja_texto_sizer puntos_miles_etapa" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo number_format($esc_valor,0,'','.'); ?>" required> 
                                         </div>
                                     </td>
-                                    <td style="width: 5%">
-                                        <i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>('.<?php echo $codigo_actividad.$num_control; ?>')"></i>
+                                    <td  colspan="2" style="width: 30%">
+                                        <div class="form-label-group form-group">
+                                            <label><strong>Codigo Dane</strong></label>
+                                            <input type="text" class="form-control caja_texto_sizer"  name="codigo_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="<?php echo $esc_dane; ?>" required>    
+                                        </div> 
+                                    </td>
+                                    <td colspan="3" style="width: 30%">
+                                        <div class="form-label-group form-group" >
+                                            <label><strong>Descripci&oacute;n Dane</strong></label>
+                                            <textarea class="form-control caja_texto_sizer" name="descripcion_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp"  required><?php echo $esc_deq; ?></textarea> 
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php
@@ -542,21 +619,19 @@
                     </div>
                 
                     <script type="text/javascript">
-                        var select_info<?php echo $codigo_actividad; ?> = '';
+                       /* var select_info<?php echo $codigo_actividad; ?> = '';*/
                     
-                        function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
-                            var data_info = data_info;
-                            $(data_info).remove();
-                        }
+                     
 
                         var cantida_clasificador<?php echo $codigo_actividad; ?> = $('#num_ini<?php echo $codigo_actividad; ?>').val(); 
                         function getInput(type, activCode){
                             var activCode = activCode;
                             cantida_clasificador<?php echo $codigo_actividad; ?> = cantida_clasificador<?php echo $codigo_actividad; ?> +1;
                             var nombre_capa = '.'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>;
+
                             var select_options<?php echo $codigo_actividad; ?> = '<select name="selClasificador'+activCode+'[]" class="form-control caja_texto_sizer selectpicker<?php echo $codigo_actividad;?>" data-size="8"><option value="0">Seleccione...</option>'+lista_opciones+'</select>';
 
-                            var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td style="width: 65%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><td style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador'+activCode+'[]" aria-describedby="textHelp" value="" required></div></td><td style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
+                            var dta = '<tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td colspan="7" style="width: 95%"><div class="form-label-group form-group">'+select_options<?php echo $codigo_actividad; ?>+'</div></td><tr class="'+activCode+cantida_clasificador<?php echo $codigo_actividad; ?>+'"><td colspan="2" style="width: 30%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer puntos_miles_valor" placeholder="$......." name="valor_clasificador<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required></div></td><td colspan="2" style="width: 25%"><div class="form-label-group form-group"><input type="text" class="form-control caja_texto_sizer" placeholder="Codigo Dane" name="codigo_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" value="" required> </div></td><td colspan="3"  style="width:40%"><div form-label-group form-group" ><textarea class="form-control caja_texto_sizer"  name="descripcion_dane<?php echo $codigo_actividad; ?>[]" aria-describedby="textHelp" required></textarea></div></td><td rowspan="2"style="width: 5%"><i class="fas fa-minus fa-lg color_icono" onclick="eliminar_clasificador<?php echo $codigo_actividad; ?>(\''+nombre_capa+'\')"></i><td></tr>'
                             nombre_capa = '';
                             return dta;
                         }
@@ -586,7 +661,12 @@
                             var activCode = activCode;
                             var nodo_clasificacion = getInput("text", activCode);
                             append("tablaClasificadores"+activCode, nodo_clasificacion);
-                        }     
+                        }  
+                        
+                        function eliminar_clasificador<?php echo $codigo_actividad; ?>(data_info){
+                            var data_info = data_info;
+                            $(data_info).remove();
+                        }
 
                         $('.selectpicker<?php echo $codigo_actividad;?>').selectpicker({
                             liveSearch: true,

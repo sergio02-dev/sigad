@@ -95,29 +95,6 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 accordion-container">
-                <div class="container">
-                    <div id="accordion" class="accordion">
-                        <div class="card mb-0">
-
-                            <div class="card-header collapsed acoIndicadores" data-codigo_accion="<?php echo $codigo_accion; ?>" data-toggle="collapse" href="#collapse" >
-                                <a class="card-title">
-                                    <strong>INDICADORES </strong>
-                                </a>
-                            </div>
-                            <div id="collapse" class="card-body collapse acccionactividad" data-parent="#accordion" >
-                                <p>
-                                    Cargando...
-                                </p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
             <div class="col-sm-12">&nbsp;</div>
         </div>
 
@@ -373,21 +350,4 @@
         maxOptions: 1
     });
 
-    $(".acoIndicadores").click(function(){
-        var codigo_accion = $(this).data("codigo_accion");
-
-        $.ajax({
-            url: "infoindicadoresetapa",
-            type:"POST",
-            data:{
-                    codigo_accion:codigo_accion,
-                },
-            async:true,
-
-            success: function(message){
-                $(".acccionactividad").empty().append(message);
-            }
-        });
-
-    });
 </script>

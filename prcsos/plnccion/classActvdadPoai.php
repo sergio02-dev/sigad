@@ -13,6 +13,14 @@ Class ActividadPoai{
     private $objetivo;
     private $sede;
     private $unidad;
+    private $arrayIndicadores;
+
+    public function setArrayIndicadores($arrayIndicadores){
+        $this->arrayIndicadores=$arrayIndicadores;
+    }
+    public function getArrayIndicadores(){
+        return $this->arrayIndicadores;
+    } 
 
     public function ActividadPoai(){}
 

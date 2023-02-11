@@ -65,11 +65,40 @@ else{
             
         </div>
 
+
+
+        <div class="row">
+            <div class="col-md-12 accordion-container">
+                <div class="container">
+                    <div id="accordion" class="accordion">
+                        <div class="card mb-0">
+
+                            <div class="card-header collapsed acoIndicadores" data-codigo_accion="<?php echo $codigo_accion; ?>" data-toggle="collapse" href="#collapse" >
+                                <a class="card-title">
+                                    <strong>INDICADORES </strong>
+                                </a>
+                            </div>
+                            <div id="collapse" class="card-body collapse acccionactividad" data-parent="#accordion" >
+                                <p>
+                                    Cargando...
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">&nbsp;</div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="textActividad" class="font-weight-bold"> Actividad *</label>
-                    <textarea class="form-control caja_texto_sizer" name="textActividad" id="textActividad" aria-describedby="textHelp" data-rule-required="true"  required><?php echo $acp_descripcion; ?></textarea>
+                    <textarea class="form-control caja_texto_sizer" name="textActividad" id="textActividad" aria-describedby="textHelp" data-rule-required="true" required><?php echo $acp_descripcion; ?></textarea>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
@@ -105,7 +134,52 @@ else{
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            
+            
+        
+        <!--<div class="bg">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Sede - Indicador</th>
+                        <th>Unidad</th>
+                    </tr>
+                        <?php
+                        foreach ($list_sedes as $data_sede) {
+                            $ind_codigo = $data_sede['ind_codigo'];
+                            $ind_unidadmedida = $data_sede['ind_unidadmedida'];
+                            $sed_nombre = $data_sede['sed_nombre'];
+
+                            $dscrpcion = $sed_nombre . " - " . $ind_unidadmedida;
+
+                    
+
+                        ?>
+                        <tr>
+                            <td>
+                                <div class="chiller_cb">
+                                    <input id="selSedes<?php echo $ind_codigo;?>" name="selSedes[]" type="checkbox" value="<?php echo $ind_codigo; ?> " data-rule-required="true" required >
+                                    <label for="selSedes<?php echo $ind_codigo; ?>" class="caja_texto_sizer"> <?php echo $dscrpcion;?></label>    
+                                    <span></span>
+                                   
+                                </div>
+                            </td>
+                            <td>
+                                    <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="number" id="txtUnidad" min="1" class="form-control caja_texto_sizer" name="txtUnidad<?php echo $ind_codigo; ?>" aria-describedby="textHelp"  value="<?php echo $acp_unidad;?>" >
+                                                <span class="help-block" id="error"></span>
+                                            </div>
+                                    </div>
+                            </td>
+                        </tr>
+                        <?php
+                            }//if Menu
+                        ?>
+
+                </table>
+        </div>-->
+
+        <div class="col-md-4">
                 <div class="form-group">
                     <label for="selSedes" class="font-weight-bold"> Sede *</label>
                     <select name="selSedes" id="selSedes" class="form-control caja_texto_sizer" data-rule-required="true" required>
@@ -140,9 +214,10 @@ else{
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
+        </div>    
             
-            
-        </div>
+        
+
 
         <div class="row">
             <div class="col-md-4">
@@ -188,6 +263,24 @@ else{
     $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
+
+    });
+
+    $(".acoIndicadores").click(function(){
+        var codigo_accion = $(this).data("codigo_accion");
+
+        $.ajax({
+            url: "infoindicadoresetapa",
+            type:"POST",
+            data:{
+                    codigo_accion:codigo_accion,
+                },
+            async:true,
+
+            success: function(message){
+                $(".acccionactividad").empty().append(message);
+            }
+        });
 
     });
 </script>

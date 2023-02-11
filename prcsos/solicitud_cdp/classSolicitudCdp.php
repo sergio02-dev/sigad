@@ -19,6 +19,8 @@ Class SolicitudCdp {
     private $arrayDatos;
     private $fuentesFinanciacion;
     private $codigoPresupuesto;
+    private $dane;
+    private $descripcionDane;
     private $personaSistema;
     
     public function getCodigo(){
@@ -26,6 +28,27 @@ Class SolicitudCdp {
     } 
     public function setCodigo($codigo){
         $this->codigo=$codigo;
+    }
+
+    public function getConsecutivo(){
+        return $this->consecutivo;
+    } 
+    public function setConsecutivo($consecutivo){
+        $this->consecutivo=$consecutivo;
+    }
+
+    public function getDane(){
+        return $this->dane;
+    } 
+    public function setDane($dane){
+        $this->dane=$dane;
+    }
+
+    public function getDescripcionDane(){
+        return $this->descripcionDane;
+    } 
+    public function setDescripcionDane($descripcionDane){
+        $this->descripcionDane=$descripcionDane;
     }
 
      
