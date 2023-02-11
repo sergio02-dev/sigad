@@ -997,11 +997,26 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
-    public function resolucionPersona(){
+    public function resolucionPersona($codigo_poai){
 
-        $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+       /* $sql_responsable = "SELECT res_codigooficina
+                                FROM usco.responsable
+                                INNER JOIN  usco.vinculacion ON vin_persona = ".$_SESSION['idusuario']." 
+                                WHERE res_nivel = 3
+                                AND res_codigonivel = $codigo_poai
+                                AND res_codigooficina = vin_oficina;";
+
+        $resultado_responsable = $this->cnxion->ejecutar($sql_responsable);*/
+        
+
+        $sql_resolucionPersona = "SELECT rep_persona, rep_resolucion, rep_fecharesolucion
                                      FROM usco.resolucion_persona
-                                     WHERE rep_persona = ".$_SESSION['idusuario']."
+                                     INNER JOIN usco.vinculacion ON vin_persona = ".$_SESSION['idusuario']."
+                                     INNER JOIN usco.responsable ON vin_oficina = res_codigooficina
+                                     
+                                     WHERE res_nivel = 3
+                                     AND res_codigonivel = $codigo_poai
+                                     AND res_tiporesponsable = 2
                                      AND rep_estado = 1;";
 
         $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
