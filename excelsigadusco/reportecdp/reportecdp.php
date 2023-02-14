@@ -683,7 +683,7 @@ $sheet->mergeCells("A4:B4");
       $objPHPExcel->getActiveSheet($numero_registro)->getStyle('AA'.$num_registro)->applyFromArray($letrapeque);
 
       $sheet->mergeCells("X".($num_registro).":Y".($num_registro))
-      ->setCellValue('X'.$num_registro, $esc_dane, PHPExcel_Cell_DataType::TYPE_STRING);
+      ->setCellValueExplicit('X'.$num_registro, $esc_dane, PHPExcel_Cell_DataType::TYPE_STRING);
       $objPHPExcel->getActiveSheet($numero_registro)->getStyle('X'.$num_registro)->applyFromArray($letrapeque)->getNumberFormat();
 
       $sheet->mergeCells("P".($num_registro).":W".($num_registro))

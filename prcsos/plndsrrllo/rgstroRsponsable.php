@@ -4,11 +4,13 @@ class RgstroRspnsble extends Responsable{
 
     private $inser_responsable;
     private $codigo_responsable;
+    private $codigo_registro_ordenador;
 
     
     public function __construct(){
         $this->cnxion = Dtbs::getInstance();
         $this->codigo_responsable = date('YmdHis').rand(99,99999);
+        $this->codigo_registro_ordenador = date('YmdHis').rand(99,99999);
     }
 
     public function insertResponsable(){
@@ -41,6 +43,28 @@ class RgstroRspnsble extends Responsable{
 
         $this->cnxion->ejecutar($inser_responsable);
 
+        if($this->getTipoResponsable() == 1){
+            $inser_registro_ordenador="INSERT INTO usco.registro_ordenador(
+                                                    ror_codigo, 
+                                                    ror_registro, 
+                                                    ror_ordenador,
+                                                    ror_fechacreo, 
+                                                    ror_fechamodifico, 
+                                                    ror_personacreo, 
+                                                    ror_personamodifico)
+                                            VALUES (".$this->codigo_registro_ordenador.", 
+                                                ".$this->codigo_responsable.", 
+                                                    ".$this->getOrdenador().",
+                                                    NOW(), 
+                                                    NOW(), 
+                                                    ".$this->getPersonaSistema().", 
+                                                    ".$this->getPersonaSistema().");";
+
+            $this->cnxion->ejecutar($inser_registro_ordenador);
+
+        }
+
+        
         
         return $inser_responsable;
     }

@@ -4,7 +4,41 @@ function validar_solicitud_cdp(){
 	var txtFechaSolicitud = $('#txtFechaSolicitud').val();
 	var txtObjetoCDP = $('#txtObjetoCDP').val();
 	var txtNumeroSolicitud = $('#txtNumeroSolicitud').val();
+	var txtFechaResolucion =$('#txtFechaResolucion').val();
+	var txtResolucion =$('#txtResolucion').val();
 	var cod_actividades = new Array();
+
+
+	if(txtNumeroSolicitud == ''){
+        $("#error_numero_solicitud").fadeIn('300');
+        $("#error_numero_solicitud").html('Ingrese el Número de Solicitud');
+        document.getElementById("txtNumeroSolicitud").focus();
+        return false;
+    }else if(txtNumeroSolicitud == 0){
+		$("#error_numero_solicitud").fadeIn('300');
+        $("#error_numero_solicitud").html('El numero debe ser mayor a 0');
+        document.getElementById("txtNumeroSolicitud").focus();
+        return false;
+	}
+    else{
+        $("#error_numero_solicitud").fadeOut('300');
+    }
+
+
+
+	if(txtFechaResolucion == ''){
+        $("#error_resolucion").fadeIn('300');
+        $("#error_resolucion").html('No hay resolución');
+        document.getElementById("txtFechaResolucion").focus();
+        return false;
+    }else if(txtResolucion == ''){
+        $("#error_resolucion").fadeIn('300');
+        $("#error_resolucion").html('No hay resolución');
+        document.getElementById("txtResolucion").focus();
+        return false;
+	}else{
+        $("#error_resolucion").fadeOut('300');
+    }
 
 	
 	//validacion objeto
@@ -241,9 +275,15 @@ function validar_solicitud_cdp(){
 		url: url_proceso,
 		data: data_enviar,
 		success: function (data) {
+			var valor = data
 			$('#frmModal').modal('hide');
 			$('.modal-backdrop').remove();
 			$('#dataSolicitud').load("dtasolicitudcdp");   
+			swal({
+				title: "Modificacion exitosa codigo de solicitud: "+valor,
+				icon: "success",
+				button: "OK",
+			}); 
 		}
 	});
 	return false;

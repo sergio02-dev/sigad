@@ -1005,6 +1005,65 @@ class PlnDsrrllo extends PlanDesarrollo{
         }
         return $datalist_responsbles_gastos;
     }
+    public function list_responsbles($codigo_nivel, $nivel){
+
+        $sql_list_responsbles="SELECT res_codigo, res_nivel, res_codigonivel, 
+                                       res_codigocargo, res_codigooficina, 
+                                       res_estado, res_personacreo
+                                  FROM usco.responsable
+                                 WHERE res_codigonivel = $codigo_nivel
+                                   AND res_nivel = $nivel
+                                   AND res_estado = 1
+                                   AND res_tiporesponsable = 2;";
+
+        $query_list_responsbles=$this->cnxion->ejecutar($sql_list_responsbles);
+
+        while($data_list_responsbles=$this->cnxion->obtener_filas($query_list_responsbles)){
+            $datalist_responsbles[] = $data_list_responsbles;
+        }
+        return $datalist_responsbles;
+    }
+    
+    /*public function list_ordenador($codigo_registro){
+
+        $sql_list_ordenador="SELECT ror_codigo, ror_registro, ror_ordenador, 
+                                  FROM usco.registro_ordenador 
+                                 WHERE ror_ordenador = $codigo_registro;";
+
+        $query_list_ordenador=$this->cnxion->ejecutar($sql_list_ordenador);
+
+        $data_list_ordenador=$this->cnxion->obtener_filas($query_list_ordenador);
+        $ror_codigo = $data_list_ordenador['ror_codigo'];
+        
+        return $ror_codigo;
+    }*/
+
+    public function nombre_registro_ordenador($codigo_registro){
+
+        $sql_nombre_registro_ordenador="SELECT car_nombre, ofi_nombre 
+                                          FROM usco.registro_ordenador
+                                    INNER JOIN usco.responsable ON ror_registro = $codigo_registro
+                                    INNER JOIN usco.cargo ON res_codigocargo = car_codigo
+                                    INNER JOIN usco.oficina ON res_codigooficina = ofi_codigo
+                                        WHERE  res_codigo = ror_ordenador
+                                        AND res_estado=1;";
+
+
+                              
+
+        
+
+        $query_nombre_registro_ordenador=$this->cnxion->ejecutar($sql_nombre_registro_ordenador);
+
+        $data_nombre_registro_ordenador=$this->cnxion->obtener_filas($query_nombre_registro_ordenador);
+        
+        $car_nombre = $data_nombre_registro_ordenador['car_nombre'];
+        $ofi_nombre = $data_nombre_registro_ordenador['ofi_nombre'];
+
+        $ordenador = $ofi_nombre.'-'.$car_nombre;
+
+        return $ordenador;
+    }
 
     
     public function list_autorizador($codigo_nivel, $nivel){

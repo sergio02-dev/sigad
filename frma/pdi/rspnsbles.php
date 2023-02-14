@@ -7,6 +7,8 @@
     $codigo_plan = $_REQUEST['codigo_plan'];
     $tipo_responsable = $_REQUEST['tipo_responsable'];
 
+
+    $list_responsbles = $objRsPlanDesarrollo->list_responsbles($codigo_nivel, $nivel);
     function tildes($palabra){
         $no_admitidas = array("á","é","í","ó","ú","ñ");
         $admitidas = array("Á", "É", "Í", "Ó", "Ú","Ñ");
@@ -169,8 +171,51 @@
             </div>
         </div>
         <?php 
+            if($tipo_responsable == 1){
+        ?>
+        <div class="row">
+            <div class="col-sm-11">
+                <div class="form-group">
+                    <label for="selRegistroOrdenador" class="font-weight-bold"> Ordenador del gasto*</label>
+                    <select name="selRegistroOrdenador" id="selRegistroOrdenador" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                        <?php
+                        foreach ($list_responsbles as $data_responsbles_gastos) {
+                            $res_codigo = $data_responsbles_gastos['res_codigo'];
+                            $res_codigooficina = $data_responsbles_gastos['res_codigooficina'];
+                            $res_codigocargo = $data_responsbles_gastos['res_codigocargo'];
+                     
+
+                            if($res_ordenador == $res_codigo){
+                                $selectOrdenador="selected";
+                            }
+                            else{
+                                $selectOrdenador="";
+                            }
+                                        
+                            $nbre_oficina = $objRsPlanDesarrollo->nombre_oficina($res_codigooficina);
+
+                            $nbre_cargo = $objRsPlanDesarrollo->nombre_cargo($res_codigocargo);
+
+                            $ordenador = $nbre_oficina.'-'.$nbre_cargo;
+                        ?>
+                            <option value="<?php echo  $res_codigo; ?>" <?php echo $selectOrdenador; ?>><?php echo $ordenador; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+        </div>
+        <?php 
+            }
+        ?>
+        <?php 
             if($tipo_responsable == 3){
         ?>
+
+        
         <div class="row">
             <div class="col-sm-11">
                 <div class="form-group">
