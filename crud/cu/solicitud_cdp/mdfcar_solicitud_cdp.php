@@ -4,12 +4,13 @@
     $personaSistema = $_SESSION['idusuario'];
 
     $txtFechaSolicitud = $_REQUEST['txtFechaSolicitud'];
-    $txtNumeroSolicitud = $_REQUEST['txtNumeroSolicitud'];
+    //$txtNumeroSolicitud = $_REQUEST['txtNumeroSolicitud'];
     $scdp_accion = $_REQUEST['scdp_accion'];
     $actvddes = $_REQUEST['codigo_actividad'];
     $chkestado = $_REQUEST['chkestado'];
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
     $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
+    $txtNumeroSolicitud = $_REQUEST['txtNumeroSolicitud'];
    
     $modificarsolicitudcdp = new MdfcarSolicitudCdp();
 
@@ -92,14 +93,15 @@
     //print_r($array_datos);
 
     $modificarsolicitudcdp->setFecha($txtFechaSolicitud);
-    $modificarsolicitudcdp->setCodigoSolicitud($txtNumeroSolicitud);
+   // $modificarsolicitudcdp->setCodigoSolicitud($txtNumeroSolicitud);
     $modificarsolicitudcdp->setAccion($scdp_accion);
     $modificarsolicitudcdp->setEstado($chkestado);
     $modificarsolicitudcdp->setPersonaSistema($personaSistema);
     $modificarsolicitudcdp->setArrayDatos($array_datos);
     $modificarsolicitudcdp->setCodigo($codigo_solicitud);
     $modificarsolicitudcdp->setObjeto($txtObjetoCDP);
+    $modificarsolicitudcdp->setConsecutivo($txtNumeroSolicitud);
 
-    $modificarsolicitudcdp->mdfcarSolicitud();
+    echo  $modificarsolicitudcdp->mdfcarSolicitud();
     
 ?>

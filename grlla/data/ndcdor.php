@@ -35,6 +35,7 @@
     $list_autorizador = $objRsPlanDesarrollo->list_autorizador($codigo_nivel, $nivel);
 
     $list_asignacionrecursos = $objRsPlanDesarrollo->list_asignacionrecursos($codigo_nivel, $nivel);
+    //$list_ordenador = $objRsPlanDesarrollo->list_ordenador($codigo_nivel, $nivel);
 
 ?>
 <p>
@@ -48,8 +49,9 @@
 <table claas="table table-sm table-striped table-bordered">
     <tr>
         <th style="width: 5%">No.</th>
-        <th style="width: 30%">Oficina Responsable</th>
-        <th style="width: 30%">Cargo</th>
+        <th style="width: 25%">Oficina Responsable</th>
+        <th style="width: 25%">Cargo</th>
+        <th style="width: 25%">Ordenador</th>
         <th style="width: 10%">Estado</th>
         <th style="width: 5%">::</th>
     </tr>
@@ -64,7 +66,10 @@
                 $res_codigocargo = $dta_lsta_responsables['res_codigocargo'];
                 $res_codigooficina = $dta_lsta_responsables['res_codigooficina'];
                 $res_estado = $dta_lsta_responsables['res_estado'];
+                $res_ordenador = $dta_lsta_responsables['res_ordenador'];
+  
 
+          
                 if($res_estado == 1){
                     $nombre_estado = "ACTIVO";
                 }
@@ -76,12 +81,25 @@
                 $nombre_oficina = $objRsPlanDesarrollo->nombre_oficina($res_codigooficina);
 
                 $nombre_cargo = $objRsPlanDesarrollo->nombre_cargo($res_codigocargo);
+                
+                $nombre_registro_ordenador = $objRsPlanDesarrollo->nombre_registro_ordenador($res_codigo);
+         
+                
             
     ?>
     <tr>
         <td><?php echo $num; ?></td>
         <td><?php echo strtoupper(tildes($nombre_oficina)); ?></td>
         <td><?php echo strtoupper(tildes($nombre_cargo)); ?></td>
+        <td><?php
+    
+
+                     echo strtoupper(tildes($nombre_registro_ordenador));
+       
+        ?>
+        
+        </td>
+          
         <td><?php echo $nombre_estado; ?></td>
         <td>
             <div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Responsable" onclick="editar_responsable('<?php echo $codigo_nivel ?>','<?php echo $nivel; ?>','<?php echo $res_codigo; ?>','<?php echo $codigo_planDesarrollo; ?>');"></i></div>
@@ -94,7 +112,7 @@
         else{
     ?>
     <tr>
-        <td colspan="5">No hay Responsables Registrados</td>
+        <td colspan="6">No hay Responsables Registrados</td>
     </tr>
     <?php
         }

@@ -4,6 +4,7 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
 
     private $updte_solicitud_cdp;
     private $codigoSolicitud;
+    private $scdp_numero;
 
     
     public function __construct(){
@@ -68,12 +69,35 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
 
     public function mdfcarSolicitud(){
 
+        $this->scdp_numero = date('Y');
+
+        
+        $ceros = '';
+        if($this->getConsecutivo() <10){
+            $ceros = '0000';
+          }
+          else if ($this->getConsecutivo() > 9 && $this->getConsecutivo() <100){
+            $ceros = '000';
+          }
+          else if( $this->getConsecutivo() >99 && $this->getConsecutivo() <1000){
+            $ceros = '00';
+          }
+          else if( $this->getConsecutivo() >999 && $this->getConsecutivo() <10000){
+            $ceros = '0';
+            
+          }else{
+            $ceros = '';
+          }
+        
+          $numero_solicitudCDP = $this->scdp_numero.'-'.$ceros.$this->getConsecutivo();
+
         $updte_solicitud_cdp ="UPDATE cdp.solicitud_cdp
                                   SET scdp_fecha = '".$this->getFecha()."', 
                                       scdp_estado = ".$this->getEstado().", 
                                       scdp_personamodifico = ".$this->getPersonaSistema().", 
                                       scdp_fechamodifico = NOW(),
-                                      scdp_objeto = '".$this->getObjeto()."'
+                                      scdp_objeto = '".$this->getObjeto()."',
+                                      scdp_consecutivo = ".$this->getConsecutivo()."
                                 WHERE scdp_codigo = ".$this->getCodigo().";";
                       
         $this->cnxion->ejecutar($updte_solicitud_cdp);
@@ -209,7 +233,7 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
             }
         }
         
-        return $updte_solicitud_cdp;
+        return $numero_solicitudCDP;
     }
 }
 ?>

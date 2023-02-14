@@ -1,6 +1,7 @@
 <?php
     class Responsable{
         private $codigo;
+       // private $codigoOrdenador;
         private $nivel;
         private $codigoNivel;
         private $oficina;
@@ -9,9 +10,17 @@
         private $estado;
         private $personaSistema;
         private $tipoResponsable;
+        private $ordenador;
+    
 
 
-        
+        public function getOrdenador(){
+            return $this->ordenador;
+        }
+        public function setOrdenador($ordenador){
+            $this->ordenador = $ordenador;
+        } 
+
         public function getClasificacion(){
             return $this->clasificacion;
         }
@@ -25,6 +34,14 @@
         public function setCodigo($codigo){
             $this->codigo = $codigo;
         } 
+        
+       /* public function getCodigoOrdenador(){
+            return $this->codigoOrdenador;
+        }
+        public function setCodigoOrdenador($codigoOrdenador){
+            $this->codigoOrdenador = $codigoOrdenador;
+        }*/ 
+
 
         public function getNivel(){
             return $this->nivel;

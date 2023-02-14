@@ -15,6 +15,7 @@
         $scdp_consecutivo = $dta_form_solicitud_cdp['scdp_consecutivo'];
     }
 
+
     $codigo_plan = $objSolicitudCdp->codigo_plan_accion($scdp_accion);
 
     $nombre_nivel_tres = $objSolicitudCdp->nombre_nivel_tres($codigo_plan);
@@ -25,10 +26,9 @@
 
     $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
 
-    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona();
+    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($scdp_accion);
 
 
-    //$resolucionFecha = $objSolicitudCdp->resolucionFecha();
 
     
 
@@ -66,25 +66,7 @@
     </div>
     <div class="modal-body">
         <!-- ******************** INICIO FORMULARIO ************************* -->
-        
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
-                    <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
-              
-                </div>
-            </div>
-    
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
-                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
-                    <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
-                </div>
-            </div>
-        </div>
+
 
 
         <div class="row">
@@ -98,9 +80,9 @@
 
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="txtnumero" class="font-weight-bold">Numero de solicitud </label>
-                    <input type="number" class="form-control caja_texto_sizer" id="txtnumero" name="txtnumero" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $scdp_consecutivo ; ?>" required>
-                    <!--<div class="alert alert-danger alerta-forcliente" id="error_fecha_solicitud" role="alert"></div>-->
+                    <label for="txtNumeroSolicitud" class="font-weight-bold">Numero de solicitud </label>
+                    <input type="number" class="form-control caja_texto_sizer" id="txtNumeroSolicitud" name="txtNumeroSolicitud" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $scdp_consecutivo ; ?>" required>
+                    <div class="alert alert-danger alerta-forcliente" id="error_numero_solicitud" role="alert"></div>
                 </div>
             </div>
         </div>
@@ -122,6 +104,25 @@
             </div>
         </div>
 
+                
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
+                    <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
+                    <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
+              
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
+                    <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
+                    <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
+                </div>
+            </div>
+        </div>
         <?php 
             $actividades_solicitud = $objSolicitudCdp->actividades_solicitud($codigo_solicitud);
             if($actividades_solicitud){
@@ -709,6 +710,7 @@
 </form>
 
 <script src="vjs/vldar_solicitud_cdp_mod.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript">
     var select_data = '';

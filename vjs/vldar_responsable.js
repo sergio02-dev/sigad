@@ -14,6 +14,9 @@ function validar_responsable(){
 			chkestado:{
 				required: true,
 			},
+			selRegistroOrdenador:{
+				selectRegistroOrdenador: true,
+            },
 
 		},
 
@@ -66,5 +69,8 @@ function validar_responsable(){
 	jQuery.validator.addMethod('selectClasificacion', function (value) {
 		return (value != '0');
 	}, "Seleccione una Clasificacion");
+	jQuery.validator.addMethod('selectRegistroOrdenador', function (value) {
+		return (value != '0');
+	}, "Seleccione un ordenador del gasto");
 }
 

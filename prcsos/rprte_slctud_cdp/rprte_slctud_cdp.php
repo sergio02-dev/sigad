@@ -9,16 +9,14 @@
         public function nombrePersona($codigo_cdp){
             $sql_nombrePersona="SELECT  scdp_resolucion, per_nombre, per_primerapellido, per_segundoapellido, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo
                                   FROM cdp.solicitud_cdp
-                            INNER JOIN principal.persona ON scdp_personacreo = per_codigo
+                            INNER JOIN usco.resolucion_persona ON scdp_resolucion = rep_resolucion
+                            INNER JOIN usco.vinculacion ON rep_persona = vin_persona 
+                            INNER JOIN principal.persona ON vin_persona = per_codigo
                                           WHERE scdp_codigo = $codigo_cdp;";
 
             $query_nombrePersona=$this->cnxion->ejecutar($sql_nombrePersona);
 
             $data_nombrePersona=$this->cnxion->obtener_filas($query_nombrePersona);
-
-            
-
-
 
             $sql_suma_valor_solicitud="SELECT SUM(aso_valor) AS valor_cdp
             FROM cdp.asignacion_solicitud
@@ -50,10 +48,19 @@
         public function cargo_nombre($codigo_cdp){
 
             $sql_cargoPersona="SELECT car_nombre
-                                FROM cdp.solicitud_cdp
-                            INNER JOIN usco.cargo ON scdp_cargo = car_codigo
-                             WHERE scdp_codigo = $codigo_cdp;";
-
+                                 FROM cdp.solicitud_cdp
+                           INNER JOIN usco.responsable ON scdp_oficina = res_codigooficina
+                           INNER JOIN usco.vinculacion ON res_codigooficina = vin_oficina
+                           INNER JOIN usco.cargo ON vin_cargo = car_codigo 
+                           INNER JOIN usco.resolucion_persona ON vin_persona = rep_persona
+                                WHERE scdp_codigo = $codigo_cdp
+                                  AND scdp_accion = res_codigonivel
+                                  AND res_tiporesponsable = 2
+                                  AND res_nivel = 3
+                                  AND res_estado = 1
+                                  AND vin_estado =1
+                                  AND car_estado = 1;";
+            
             $query_cargoPersona=$this->cnxion->ejecutar($sql_cargoPersona);
 
             $data_cargoPersona=$this->cnxion->obtener_filas($query_cargoPersona);
