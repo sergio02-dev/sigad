@@ -1,7 +1,7 @@
 <?php
     include('prcsos/plndsrrllo/mdfcarRsponsable.php');
 
-    
+    $codigo_responsable = $_REQUEST['codigo_responsable'];
     $tipo_responsable = $_REQUEST['tipo_responsable'];
     if($tpo_responsable == 3){
         $selClasificacion = $_REQUEST['selClasificacion']; 
@@ -33,6 +33,7 @@
     $modificarresponsablepdi->setEstado($estado);
     $modificarresponsablepdi->setPersonaSistema($personaSistema);
     $modificarresponsablepdi->setOrdenador($selRegistroOrdenador);
+    $modificarresponsablepdi->setTipoResponsable($selRegistroOrdenador);
 
     echo $modificarresponsablepdi->updteResponsable();
 ?>
