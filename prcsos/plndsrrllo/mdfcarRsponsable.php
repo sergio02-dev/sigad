@@ -42,7 +42,7 @@ class MdfcarRspnsble extends Responsable{
                              WHERE res_codigo = ".$this->getCodigo().";";
 
         $this->cnxion->ejecutar($updte_responsable);
-
+        echo "tipo responsable".$this->getTipoResponsable();
         if($this->getTipoResponsable() == 1){
             if($this->responsable_ordenador()){
                 $inser_registro_ordenador="UPDATE usco.registro_ordenador
@@ -51,7 +51,8 @@ class MdfcarRspnsble extends Responsable{
                                                 ror_fechamodifico= NOW(), 
                                                 ror_personamodifico=".$this->getPersonaSistema()."
                                             WHERE ror_registro=".$this->getCodigo().";";
-
+                
+                echo $inser_registro_ordenador;
                 $this->cnxion->ejecutar($inser_registro_ordenador);
                 
             }
@@ -71,9 +72,11 @@ class MdfcarRspnsble extends Responsable{
                                     NOW(), 
                                     ".$this->getPersonaSistema().", 
                                     ".$this->getPersonaSistema().");";
-
+                echo $inser_registro_ordenador;
                 $this->cnxion->ejecutar($inser_registro_ordenador);
+             
             }
+      
             
 
         }

@@ -180,13 +180,15 @@
                     <select name="selRegistroOrdenador" id="selRegistroOrdenador" class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
                         <option value="0">Seleccione...</option>
                         <?php
+                        $ror_ordenador = $objRsPlanDesarrollo->codigo_registro_ordenador($res_codigo);
                         foreach ($list_responsbles as $data_responsbles_gastos) {
                             $res_codigo = $data_responsbles_gastos['res_codigo'];
                             $res_codigooficina = $data_responsbles_gastos['res_codigooficina'];
                             $res_codigocargo = $data_responsbles_gastos['res_codigocargo'];
+                            
                      
 
-                            if($res_ordenador == $res_codigo){
+                            if($ror_ordenador == $res_codigo){
                                 $selectOrdenador="selected";
                             }
                             else{

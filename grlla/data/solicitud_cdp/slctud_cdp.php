@@ -202,9 +202,10 @@
     }
 
     
-	function rprte_cdp(codigo_cdp){
+	function rprte_cdp(codigo_cdp,scdp_accion){
         var codigo_cdp = codigo_cdp
-        window.location.href = 'reportecdp?codigo_cdp='+codigo_cdp;
+        var scdp_accion = scdp_accion
+        window.location.href = 'reportecdp?codigo_cdp='+codigo_cdp+'&scdp_accion='+scdp_accion;
     }
 
 </script>

@@ -83,6 +83,7 @@
                 $nombre_cargo = $objRsPlanDesarrollo->nombre_cargo($res_codigocargo);
                 
                 $nombre_registro_ordenador = $objRsPlanDesarrollo->nombre_registro_ordenador($res_codigo);
+                $codigo_registro_ordenador = $objRsPlanDesarrollo->codigo_registro_ordenador($res_codigo);
          
                 
             
@@ -102,7 +103,7 @@
           
         <td><?php echo $nombre_estado; ?></td>
         <td>
-            <div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Responsable" onclick="editar_responsable('<?php echo $codigo_nivel ?>','<?php echo $nivel; ?>','<?php echo $res_codigo; ?>','<?php echo $codigo_planDesarrollo; ?>');"></i></div>
+            <div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Responsable" onclick="editar_responsable('<?php echo $codigo_nivel ?>','<?php echo $nivel; ?>','<?php echo $res_codigo; ?>','<?php echo $codigo_planDesarrollo; ?>','<?php echo $codigo_registro_ordenador; ?>');"></i></div>
         </td>
     </tr>
     <?php
@@ -638,10 +639,11 @@
         });
     }
 
-    function editar_responsable(codigo_nivel, nivel, codigo_responsable, codigo_plan){
+    function editar_responsable(codigo_nivel, nivel, codigo_responsable, codigo_plan, codigo_registro_ordenador){
         var codigo_nivel = codigo_nivel;
         var codigo_responsable = codigo_responsable;
         var codigo_plan = codigo_plan;
+        var codigo_registro_ordenador = codigo_registro_ordenador
         var nivel = 3;
         var tipo_responsable = 1;
         
@@ -651,7 +653,7 @@
         $.ajax({
             url:"formresponsable",
             type:"POST",
-            data:"codigo_nivel="+codigo_nivel+'&codigo_responsable='+codigo_responsable+'&nivel='+nivel+'&codigo_plan='+codigo_plan+'&tipo_responsable='+tipo_responsable,
+            data:"codigo_nivel="+codigo_nivel+'&codigo_responsable='+codigo_responsable+'&nivel='+nivel+'&codigo_plan='+codigo_plan+'&tipo_responsable='+tipo_responsable+'&codigo_registro_ordenador='+codigo_registro_ordenador,
             async:true,
 
             success: function(message){

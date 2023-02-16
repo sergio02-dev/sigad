@@ -49,23 +49,23 @@ class Dtbs{
    }
 
 
-	  public function ejecutar($consulta){
-		$this->total_consultas++;
-		$resultado = pg_query($this->link_cnxn,$consulta);
-		return $resultado;
-	  }
+   public function ejecutar($consulta){
+      $this->total_consultas++;
+      $resultado = pg_query($this->link_cnxn,$consulta);
+      return $resultado;
+   }
 
-	  public function obtener_filas($consulta){
-	   return pg_fetch_array($consulta);
-	  }
+   public function obtener_filas($consulta){
+      return pg_fetch_array($consulta);
+   }
 
-	  public function numero_filas($consulta){
-	   return pg_num_rows($consulta);
-	  }
+   public function numero_filas($consulta){
+      return pg_num_rows($consulta);
+   }
 
-	  public function getTotalConsultas(){
-	   return $this->total_consultas;
-	  }
+   public function getTotalConsultas(){
+      return $this->total_consultas;
+   }
 
 }
 

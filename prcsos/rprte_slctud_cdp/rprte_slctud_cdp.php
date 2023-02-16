@@ -6,8 +6,8 @@
             $this->cnxion = Dtbs::getInstance();
         } 
 
-        public function nombrePersona($codigo_cdp){
-            $sql_nombrePersona="SELECT  scdp_resolucion, per_nombre, per_primerapellido, per_segundoapellido, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo
+        /*public function nombrePersona($codigo_cdp){
+            $sql_nombrePersona="SELECT  scdp_resolucion, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo
                                   FROM cdp.solicitud_cdp
                             INNER JOIN usco.resolucion_persona ON scdp_resolucion = rep_resolucion
                             INNER JOIN usco.vinculacion ON rep_persona = vin_persona 
@@ -42,7 +42,7 @@
 
             return array($people,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero, $valor_cdp);
 
-        }
+        }*/
 
         
         public function cargo_nombre($codigo_cdp){
@@ -105,6 +105,89 @@
             return $pde_fuentes_financiacionCDP;
         }
 
+
+        public function resolucionPersona($codigo_cdp){        
+
+            $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 
+                                        FROM usco.responsable
+                                       WHERE res_codigo IN(SELECT ror_ordenador 
+                                                             FROM usco.responsable, usco.vinculacion, usco.registro_ordenador, cdp.solicitud_cdp
+
+                                                            WHERE res_codigo = ror_registro
+                                                             AND  vin_cargo = res_codigocargo
+                                                              AND vin_oficina = res_codigooficina
+                                                              AND res_nivel = 3
+                                                              AND res_tiporesponsable = 1
+                                                              AND res_codigonivel = scdp_accion
+                                                              AND vin_persona = ".$_SESSION['idusuario']."
+                                                              AND vin_estado = 1);";
+        
+    
+            $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
+    
+            $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
+    
+            $numero_filas= $this->cnxion->numero_filas($resultado_resolucionPersona);
+    
+            if($numero_filas == 0){
+                $res_codigooficina= 0;
+                $res_codigocargo = 0;
+            }
+            else{
+                $res_codigooficina= $data_resolucionPersona['res_codigooficina'];
+                $res_codigocargo = $data_resolucionPersona['res_codigocargo'];
+            }
+            
+           
+    
+            $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
+                                               per_nombre, per_primerapellido, per_segundoapellido ,
+                                               scdp_resolucion, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo,per_codigo, vin_cargo,car_nombre
+                                          FROM usco.vinculacion
+                                    INNER JOIN principal.persona ON vin_persona = per_codigo
+                                    INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
+                                    INNER JOIN cdp.solicitud_cdp ON  scdp_resolucion = rep_resolucion
+                                    INNER JOIN usco.cargo ON vin_cargo = car_codigo 
+                                         WHERE vin_cargo = $res_codigocargo
+                                           AND scdp_codigo = $codigo_cdp
+                                           AND vin_oficina = $res_codigooficina
+                                           AND rep_estado = 1;";
+    
+            $resultado_resolucionOrdenador = $this->cnxion->ejecutar($sql_resolucionOrdenador);
+    
+            $data_resolucionOrdenador= $this->cnxion->obtener_filas($resultado_resolucionOrdenador);
+
+            $sql_suma_valor_solicitud="SELECT SUM(aso_valor) AS valor_cdp
+            FROM cdp.asignacion_solicitud
+           WHERE aso_solicitud = $codigo_cdp;";
+
+
+            $query_suma_valor_solicitud=$this->cnxion->ejecutar($sql_suma_valor_solicitud);
+
+            $data_suma_valor_solicitud=$this->cnxion->obtener_filas($query_suma_valor_solicitud);
+
+            $valor_cdp = $data_suma_valor_solicitud['valor_cdp'];
+            
+            $scdp_resolucion = $data_resolucionOrdenador['scdp_resolucion'];
+            $scdp_fecharesolucion = date('d/m/Y',strtotime($data_resolucionOrdenador['scdp_fecharesolucion']));
+            $scdp_objeto = $data_resolucionOrdenador['scdp_objeto'];
+            $scdp_numero = $data_resolucionOrdenador['scdp_numero'];
+            $scdp_consecutivo = $data_resolucionOrdenador['scdp_consecutivo'];
+            
+
+            $per_nombre = $data_resolucionOrdenador['per_nombre'];
+            $per_primerapellido = $data_resolucionOrdenador['per_primerapellido'];
+            $per_segundoapellido = $data_resolucionOrdenador['per_segundoapellido'];
+            $car_nombre = $data_resolucionOrdenador['car_nombre'];
+
+
+         
+            $people=$per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
+           
+    
+            return array($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp);
+     
+        }
 
         
 

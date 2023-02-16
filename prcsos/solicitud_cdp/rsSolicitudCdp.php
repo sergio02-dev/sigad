@@ -490,6 +490,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
                 $rsRslciones[] = array('scdp_codigo'=> $scdp_codigo, 
                                        'scdp_fecha'=> $scdp_fecha, 
                                        'scdp_numero'=> $numero_solicitudCDP,
+                                       'scdp_accion' => $scdp_accion,
                                        'descripcion_accion'=> $descripcion_accion,
                                        'valor_cdp'=> "$ ".number_format($suma_valor_solicitud,0,'','.'),
                                        'nombre_fuente'=> $fntes,
@@ -999,32 +1000,61 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
     public function resolucionPersona($codigo_poai){        
 
-        $sql_resolucionPersona = "SELECT rep_persona, rep_resolucion, rep_fecharesolucion
-                                    FROM usco.resolucion_persona
-                                    INNER JOIN usco.vinculacion ON rep_persona = vin_persona
-                                    INNER JOIN usco.responsable ON vin_oficina = res_codigooficina
-                                    WHERE res_codigooficina IN( SELECT vin_oficina 
-                                                                FROM usco.vinculacion 
-                                                                WHERE vin_persona = ".$_SESSION['idusuario']."
-                                                                AND vin_estado = 1 )
-                                    AND rep_estado = 1
-                                    AND vin_estado = 1
-                                    AND res_nivel = 3
-                                    AND res_tiporesponsable = 2
-                                    AND res_codigonivel = $codigo_poai    
-                                    ;";
+        $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 
+                                    FROM usco.responsable
+                                   WHERE res_codigo IN(SELECT ror_ordenador 
+                                                         FROM usco.responsable, usco.vinculacion, usco.registro_ordenador
+                                                        WHERE res_codigo = ror_registro
+                                                         AND  vin_cargo = res_codigocargo
+                                                          AND vin_oficina = res_codigooficina
+                                                          AND res_nivel = 3
+                                                          AND res_tiporesponsable = 1
+                                                          AND res_codigonivel = $codigo_poai
+                                                          AND vin_persona = ".$_SESSION['idusuario']."
+                                                          AND vin_estado = 1);";
     
 
         $resultado_resolucionPersona = $this->cnxion->ejecutar($sql_resolucionPersona);
 
         $data_resolucionPersona= $this->cnxion->obtener_filas($resultado_resolucionPersona);
 
-        $rep_resolucion= $data_resolucionPersona['rep_resolucion'];
-        $rep_fecharesolucion= $data_resolucionPersona['rep_fecharesolucion'];
+        $numero_filas= $this->cnxion->numero_filas($resultado_resolucionPersona);
+
+        if($numero_filas == 0){
+            $res_codigooficina= 0;
+            $res_codigocargo = 0;
+        }
+        else{
+            $res_codigooficina= $data_resolucionPersona['res_codigooficina'];
+            $res_codigocargo = $data_resolucionPersona['res_codigocargo'];
+        }
+        
+       
+
+        $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
+                                           per_nombre, per_primerapellido, per_segundoapellido 
+                                      FROM usco.vinculacion
+                                INNER JOIN principal.persona ON vin_persona = per_codigo
+                                INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
+                                     WHERE vin_cargo = $res_codigocargo
+                                       AND vin_oficina = $res_codigooficina
+                                       AND rep_estado = 1;";
+
+        $resultado_resolucionOrdenador = $this->cnxion->ejecutar($sql_resolucionOrdenador);
+
+        $data_resolucionOrdenador= $this->cnxion->obtener_filas($resultado_resolucionOrdenador);
+
+        $rep_fecharesolucion= $data_resolucionOrdenador['rep_fecharesolucion'];
+        $rep_resolucion= $data_resolucionOrdenador['rep_resolucion'];
+     
+
+       
 
         return array($rep_resolucion,$rep_fecharesolucion);
  
     }
+
+
 
     
     public function numeroConsecutivo(){

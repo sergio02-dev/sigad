@@ -33,7 +33,7 @@
     $modificarresponsablepdi->setEstado($estado);
     $modificarresponsablepdi->setPersonaSistema($personaSistema);
     $modificarresponsablepdi->setOrdenador($selRegistroOrdenador);
-    $modificarresponsablepdi->setTipoResponsable($selRegistroOrdenador);
+    $modificarresponsablepdi->setTipoResponsable($tipo_responsable);
 
     echo $modificarresponsablepdi->updteResponsable();
 ?>

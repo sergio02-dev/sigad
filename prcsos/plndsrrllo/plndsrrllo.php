@@ -954,6 +954,7 @@ class PlnDsrrllo extends PlanDesarrollo{
         return $acc_descripcion;
     }
 
+
     public function form_responsable($codigo_responsable){
 
         $sql_form_responsable="SELECT res_codigo, res_nivel, res_codigonivel, 
@@ -1048,11 +1049,6 @@ class PlnDsrrllo extends PlanDesarrollo{
                                         WHERE  res_codigo = ror_ordenador
                                         AND res_estado=1;";
 
-
-                              
-
-        
-
         $query_nombre_registro_ordenador=$this->cnxion->ejecutar($sql_nombre_registro_ordenador);
 
         $data_nombre_registro_ordenador=$this->cnxion->obtener_filas($query_nombre_registro_ordenador);
@@ -1063,6 +1059,26 @@ class PlnDsrrllo extends PlanDesarrollo{
         $ordenador = $ofi_nombre.'-'.$car_nombre;
 
         return $ordenador;
+    }
+
+    public function codigo_registro_ordenador($codigo_registro){
+
+        $sql_codigo_registro_ordenador="SELECT ror_ordenador
+                                          FROM usco.registro_ordenador
+                                    INNER JOIN usco.responsable ON ror_registro = $codigo_registro
+                                        WHERE  res_codigo = ror_ordenador
+                                        AND res_estado=1;";
+                                        
+        $query_codigo_registro_ordenador=$this->cnxion->ejecutar($sql_codigo_registro_ordenador);
+
+        $data_codigo_registro_ordenador=$this->cnxion->obtener_filas($query_codigo_registro_ordenador);
+        
+        $ror_ordenador = $data_codigo_registro_ordenador['ror_ordenador'];
+  
+
+        $ror_ordenador;
+
+        return $ror_ordenador;
     }
 
     

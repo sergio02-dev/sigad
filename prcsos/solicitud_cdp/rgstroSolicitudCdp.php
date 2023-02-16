@@ -507,8 +507,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            '".$this->getFechaResolucion()."',
                                            '".$this->getObjeto()."',
                                            ".$this->getConsecutivo().");";
-         
-                         
+        
+                
         $this->cnxion->ejecutar($insert_solicitud_cdp);
         
         $datos_etapa = $this->getArrayDatos();
@@ -545,7 +545,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                              NOW(), 
                                              NOW(),
                                              $other_value);";
-
+                
+               
                 $this->cnxion->ejecutar($insert_etpas);
 
                 //Clasificadores etapas
@@ -583,7 +584,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                           ".$valor_clasificador.",
                                                             '".$codigo_dane."',
                                                             '".$descripcion_dane."');";
-                                                                        
+                                                                   
                         $this->cnxion->ejecutar($sql_insrt_clsfcdor);
                     }
                 }
@@ -618,7 +619,7 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                                           NOW(), 
                                                           ".$this->getPersonaSistema().", 
                                                           ".$this->getPersonaSistema().");";
-
+                
                     $this->cnxion->ejecutar($sql_fuentes_solicitud);
                 }
             }

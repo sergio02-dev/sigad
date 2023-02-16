@@ -254,6 +254,8 @@ $titulo_left = array(
 
   
   $codigo_cdp = $_REQUEST['codigo_cdp'];
+  
+
   $numero_registro=0;
   $numero_excel=0;
   $numero_ingresos=1;
@@ -315,7 +317,7 @@ $sheet->mergeCells("A4:B4");
 
   $sheet->mergeCells("Y4:AB4");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('Y4','2021');
+  ->setCellValue('Y4','2023');
 
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("Y4:AB4")->applyFromArray($informacionHoja);
 
@@ -480,10 +482,7 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('S22'," ");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("S22:T22")->applyFromArray($cuerpoExcelBorderNegro);
 
-  $sheet->mergeCells("W22:AI22");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('W22',"en caso de venir agun recursos de excedente marcar si");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("W22:AI22")->applyFromArray($cuerpoExcelSinBold);
+
 
   $sheet->mergeCells("A23:H23");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -520,10 +519,6 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('AH24',"ETAPA DE LA ACTIVIDAD No.");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("AH24:AI24")->applyFromArray($letrapeque);
 
-  $sheet->mergeCells("A51:H51");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('A51',"PROYECTO FONDO ESPECIAL");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A51:H51")->applyFromArray($cuerpoExcelSinBorder);
 
   $sheet->mergeCells("A71:H71");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -587,13 +582,9 @@ $sheet->mergeCells("A4:B4");
   //insert datos 
   include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
   
-  list($people,$scdp_resolucion,$scdp_fecharesolucion,$scdp_objeto,$scdp_consecutivo,$scdp_numero,$valor_cdp) = $objRprteSlctudCdp->nombrePersona($codigo_cdp);
   $car_nombre= $objRprteSlctudCdp->cargo_nombre($codigo_cdp);
-
-  $sheet->mergeCells("I72:N72")
-  ->setCellValue('I72',$valor_cdp);
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I72")->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
-
+  list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp) = $objRprteSlctudCdp->resolucionPersona($codigo_cdp);
+  
   $sheet->mergeCells("C7:M7");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('C7', strtoupper(tildes($people)));
@@ -604,7 +595,17 @@ $sheet->mergeCells("A4:B4");
 
   $sheet->mergeCells("W9:Z9");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('W9', strtoupper(tildes($scdp_resolucion)));
+  ->setCellValueExplicit('W9', strtoupper(tildes($scdp_resolucion)),PHPExcel_Cell_DataType::TYPE_STRING);
+
+  $sheet->mergeCells("I72:N72")
+  ->setCellValue('I72',$valor_cdp);
+  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("I72")->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD);
+
+
+
+
+
+ 
 
   $sheet->mergeCells("C10:M10");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
