@@ -461,26 +461,35 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('C18',"diligenciar por parte del usuario");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("C18:AI18")->applyFromArray($cuerpoExcelBorderNegro);
 
+
   $sheet->mergeCells("M22:N22");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('M22',"SI");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("M22:N22")->applyFromArray($cuerpoExcelBorderNegro);
 
-  $sheet->mergeCells("O22:P22");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('O22'," ");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("O22:P22")->applyFromArray($cuerpoExcelBorderNegro);
-
+ 
   
   $sheet->mergeCells("Q22:R22");
   $objPHPExcel->setActiveSheetIndex($numero_registro)
   ->setCellValue('Q22',"NO");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("Q22:R22")->applyFromArray($cuerpoExcelBorderNegro);
 
-  $sheet->mergeCells("S22:T22");
-  $objPHPExcel->setActiveSheetIndex($numero_registro)
-  ->setCellValue('S22'," ");
-  $objPHPExcel->getActiveSheet($numero_registro)->getStyle("S22:T22")->applyFromArray($cuerpoExcelBorderNegro);
+  $excedenteDeFacultad = $objRprteSlctudCdp->excedenteFacultad($codigo_cdp);
+
+  if($excedenteDeFacultad == 1){
+    $sheet->mergeCells("O22:P22");
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('O22',"X");
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("O22:P22")->applyFromArray($cuerpoExcelBorderNegro);
+  
+  }else{
+    
+    $sheet->mergeCells("S22:T22");
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('S22',"X");
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("S22:T22")->applyFromArray($cuerpoExcelBorderNegro);
+
+  }
 
 
 

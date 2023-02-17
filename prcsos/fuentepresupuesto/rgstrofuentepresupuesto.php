@@ -20,7 +20,8 @@ class RgstroFuentePresupuesto extends FuentePresupuesto{
                                                                             fup_personacreo, 
                                                                             fup_personamodifico, 
                                                                             fup_fechacreo, 
-                                                                            fup_fechamodifico)
+                                                                            fup_fechamodifico,
+                                                                            fup_excfacultad)
                                                                     VALUES (".$this->codigo_fuentepresupuesto.", 
                                                                             ".$this->getCodigoLinix().", 
                                                                             '".$this->getNombre()."', 
@@ -28,12 +29,14 @@ class RgstroFuentePresupuesto extends FuentePresupuesto{
                                                                             ".$this->getPersonaSistema().",
                                                                             ".$this->getPersonaSistema().",
                                                                             NOW(),
-                                                                            NOW());";
+                                                                            NOW(),
+                                                                            ".$this->getFacultad().");";
         
         $this->cnxion->ejecutar($sql_insert_fuentepresupuesto);
 
-
+        print_r($sql_insert_fuentepresupuesto);
         return $sql_insert_fuentepresupuesto;
+        
 
     }
 }

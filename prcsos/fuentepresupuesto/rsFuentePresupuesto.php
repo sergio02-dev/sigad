@@ -15,7 +15,7 @@ Class RsFuentePresupuesto extends FuentePresupuesto{
     public function list_fuente_presupuesto(){
 
         
-        $sql_list_fuente_presupuesto = "SELECT fup_codigo, fup_linix, fup_nombre, fup_estado
+        $sql_list_fuente_presupuesto = "SELECT fup_codigo, fup_linix, fup_nombre, fup_estado,fup_excfacultad
                                           FROM usco.fuentes_presupuesto;";
         
 
@@ -39,6 +39,8 @@ Class RsFuentePresupuesto extends FuentePresupuesto{
                 $fup_nombre = $dat_fuente_presupuesto['fup_nombre'];
                 $fup_estado = $dat_fuente_presupuesto['fup_estado'];
                 $fup_linix = $dat_fuente_presupuesto['fup_linix'];
+                $fup_excfacultad = $dat_fuente_presupuesto['fup_excfacultad'];
+
 
                 if($fup_estado == 1){
                     $estado = "Activo";
@@ -46,6 +48,7 @@ Class RsFuentePresupuesto extends FuentePresupuesto{
                 else{
                     $estado = "Inactivo";
                 }
+                
                
 
     
@@ -53,6 +56,7 @@ Class RsFuentePresupuesto extends FuentePresupuesto{
                                             'fup_linix'=> $fup_linix,
                                             'fup_nombre'=> $fup_nombre, 
                                             'estado'=> $estado,
+                                            'fup_excfacultad'=> $fup_excfacultad,
                                         );
     
             }
@@ -66,7 +70,7 @@ Class RsFuentePresupuesto extends FuentePresupuesto{
 
     public function form_fuente_presupuesto($codigo_fuentepresupuesto){
         
-        $sql_form_fuente_presupuesto = "SELECT fup_codigo, fup_linix, fup_nombre, fup_estado
+        $sql_form_fuente_presupuesto = "SELECT fup_codigo, fup_linix, fup_nombre, fup_estado, fup_excfacultad
                             FROM usco.fuentes_presupuesto
                            WHERE fup_codigo = $codigo_fuentepresupuesto;";
 

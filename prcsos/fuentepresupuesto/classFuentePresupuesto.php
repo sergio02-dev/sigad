@@ -11,6 +11,17 @@ Class FuentePresupuesto {
     private $codigoLinix;
     private $estado;
     private $personaSistema;
+    private $facultad;
+
+    public function getFacultad(){
+        return $this->facultad;
+    } 
+    public function setFacultad($facultad){
+        $this->facultad=$facultad;
+    }
+
+
+
     
     public function getCodigo(){
         return $this->codigo;

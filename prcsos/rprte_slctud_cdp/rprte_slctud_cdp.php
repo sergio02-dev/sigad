@@ -59,7 +59,7 @@
                                   AND res_nivel = 3
                                   AND res_estado = 1
                                   AND vin_estado =1
-                                  AND car_estado = 1;";
+                                  AND car_estado = 1;";      
             
             $query_cargoPersona=$this->cnxion->ejecutar($sql_cargoPersona);
 
@@ -187,6 +187,43 @@
     
             return array($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp);
      
+        }
+
+        public function excedenteFacultad($codigo_cdp){
+
+            $sql_excedenteFacultad = "SELECT  esc_clasificador
+                                        FROM cdp.etapa_solicitud_clasificador
+                                        WHERE esc_solicitud = $codigo_cdp;";
+            
+            $query_excedenteFacultad=$this->cnxion->ejecutar($sql_excedenteFacultad);
+
+            $data_excedenteFacultad=$this->cnxion->obtener_filas($query_excedenteFacultad);
+
+            
+
+            $numExecedente = 0;
+
+            foreach($data_excedenteFacultad as $dat_excedenteFacultad)
+                $esc_clasificador = $dat_excedenteFacultad['esc_clasificador'];
+
+                $str = $esc_clasificador;
+                $numero_caracteres = strlen($str); 
+                $desde = $numero_caracteres - 2;
+                $ultimos_caracteres= substr($str,$desde,2);
+
+                $sql_fuentePresupuesto = "SELECT fup_excfacultad
+                                            FROM usco.fuentes_presupuesto
+                                            WHERE fup_linix = $ultimos_caracteres;";
+
+                $query_fuentePresupuesto =$this->cnxion->ejecutar($sql_fuentePresupuesto );
+
+                $data_fuentePresupuesto =$this->cnxion->obtener_filas($query_fuentePresupuesto );
+
+                if($data_fuentePresupuesto == 1){
+                    $numExecedente++;
+                }
+     
+               return $numExecedente 
         }
 
         

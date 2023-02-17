@@ -22,7 +22,8 @@ class MdfcarFuentePresupuesto extends FuentePresupuesto{
                                               fup_nombre='".$this->getNombre()."', 
                                               fup_estado=".$this->getEstado().",  
                                               fup_personamodifico=".$this->getPersonaSistema().", 
-                                              fup_fechamodifico=NOW()
+                                              fup_fechamodifico=NOW(),
+                                              fup_excfacultad=".$this->getFacultad()."
                                         WHERE fup_codigo=".$this->getCodigo().";";
         
         $this->cnxion->ejecutar($sql_updte_fuentepresupuesto);

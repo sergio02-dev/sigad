@@ -20,6 +20,7 @@
             $fup_linix = $dat_fuente_presupuesto['fup_linix'];
             $fup_nombre = $dat_fuente_presupuesto['fup_nombre'];
             $fup_estado = $dat_fuente_presupuesto['fup_estado'];
+            $fup_excfacultad = $dat_fuente_presupuesto['fup_excfacultad'];  
         }
         
         if($fup_estado == 1){
@@ -29,7 +30,20 @@
         else{
             $checkedA = "";
             $checkedI = "checked";
+        
         }
+
+        
+
+        if($fup_excfacultad == 1){
+            $checkedFacultad = "checked";
+        }
+        else{
+            $checkedFacultad = "";
+        
+        }
+        
+            
         
     }
     else{
@@ -59,7 +73,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="txtCodigoLinix" class="font-weight-bold">Codigo Linix *</label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtCodigoLinix" name="txtCodigoLinix" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $fup_linix; ?>" required>
+                    <input type="number" class="form-control caja_texto_sizer" id="txtCodigoLinix" name="txtCodigoLinix" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $fup_linix; ?>" required>
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
@@ -73,6 +87,19 @@
                 </div>
             </div>
         </div>
+
+        
+      
+         
+        <div class="row">
+            <div class="col-sm-12">
+                    <div class="radio tipo1">
+                        <input type="checkbox"   id="check_facultad" name="checkFacultad" aria-describedby="textHelp"  data-rule-required="true" value="1" <?php echo $checkedFacultad; ?> />
+                        <label for="check_facultad"><span></span>Excedentes de Facultad</label>
+                    </div>
+            </div>
+        </div>
+
         <div class="row">  
             <div class="col-sm-12">
                 <div class="form-group">
