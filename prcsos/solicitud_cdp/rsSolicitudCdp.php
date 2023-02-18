@@ -263,13 +263,32 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $dataetapas_actividad;
     }
-    
+    public function ultimo_plan(){
+
+        $sql_ultimo_plan="SELECT pde_codigo, pde_nombre 
+                            FROM plandesarrollo.plan_desarrollo
+                           ORDER BY pde_yearinicio DESC
+                           LIMIT 1 OFFSET 0;";
+
+        $query_ultimo_plan=$this->cnxion->ejecutar($sql_ultimo_plan);
+
+        $data_ultimo_plan=$this->cnxion->obtener_filas($query_ultimo_plan);
+        
+        $pde_codigo = $data_ultimo_plan['pde_codigo'];
+
+        return $pde_codigo;
+    }
     public function list_solicitudes(){
 
+        $ultimo_plan = $this->ultimo_plan();
         $sql_list_solicitudes="SELECT scdp_codigo, scdp_fecha, scdp_accion, 
                                       scdp_oficina, scdp_cargo, scdp_numero,
                                       scdp_proceso, scdp_consecutivo
-                                 FROM cdp.solicitud_cdp ;";
+                                 FROM cdp.solicitud_cdp
+                          INNER JOIN  plandesarrollo.accion ON scdp_accion = acc_codigo
+                           INNER JOIN plandesarrollo.proyecto ON acc_proyecto = pro_codigo
+                           INNER JOIN plandesarrollo.subsistema ON plandesarrollo.proyecto.sub_codigo = plandesarrollo.subsistema.sub_codigo
+                                WHERE pde_codigo = $ultimo_plan;";
 
         $query_list_solicitudes=$this->cnxion->ejecutar($sql_list_solicitudes);
 
@@ -278,6 +297,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $datalist_solicitudes;
     }
+   
 
     public function fuentes_solctud($codigo_solicitud){
 
@@ -925,6 +945,9 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $dataclasificador_etapa_solicitud;
     }
+
+ 
+
 
     public function list_cldfcadores(){
 
