@@ -474,6 +474,8 @@ $sheet->mergeCells("A4:B4");
   ->setCellValue('Q22',"NO");
   $objPHPExcel->getActiveSheet($numero_registro)->getStyle("Q22:R22")->applyFromArray($cuerpoExcelBorderNegro);
 
+  include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
+
   $excedenteDeFacultad = $objRprteSlctudCdp->excedenteFacultad($codigo_cdp);
 
   if($excedenteDeFacultad == 1){
@@ -481,7 +483,13 @@ $sheet->mergeCells("A4:B4");
     $objPHPExcel->setActiveSheetIndex($numero_registro)
     ->setCellValue('O22',"X");
     $objPHPExcel->getActiveSheet($numero_registro)->getStyle("O22:P22")->applyFromArray($cuerpoExcelBorderNegro);
-  
+    
+    $sheet->mergeCells("S22:T22");
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('S22',"");
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("S22:T22")->applyFromArray($cuerpoExcelBorderNegro);
+
+    
   }else{
     
     $sheet->mergeCells("S22:T22");
@@ -489,6 +497,10 @@ $sheet->mergeCells("A4:B4");
     ->setCellValue('S22',"X");
     $objPHPExcel->getActiveSheet($numero_registro)->getStyle("S22:T22")->applyFromArray($cuerpoExcelBorderNegro);
 
+    $sheet->mergeCells("O22:P22");
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('O22',"");
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("O22:P22")->applyFromArray($cuerpoExcelBorderNegro);
   }
 
 
@@ -589,7 +601,7 @@ $sheet->mergeCells("A4:B4");
 
 
   //insert datos 
-  include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
+
   
   $car_nombre= $objRprteSlctudCdp->cargo_nombre($codigo_cdp);
   list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp) = $objRprteSlctudCdp->resolucionPersona($codigo_cdp);

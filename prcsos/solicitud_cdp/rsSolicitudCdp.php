@@ -300,6 +300,27 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $datafuentes_solctud;
     }
 
+    public function fuentes_solicitud($codigo_solicitud){
+
+        $sql_fuentes_solctud="SELECT ffi_codigo,
+                                     asre_vigenciarecurso, ffi_nombre
+                                FROM cdp.asignacion_solicitud
+                               INNER JOIN planaccion.asignacion_recuersos_etapa ON aso_asignacion = asre_codigo
+                               INNER JOIN planaccion.fuente_financiacion ON asre_fuente = ffi_codigo
+                               WHERE aso_solicitud = $codigo_solicitud
+                                 AND aso_valor > 0
+                                GROUP BY asre_vigenciarecurso,ffi_codigo,ffi_nombre
+                                ORDER BY asre_vigenciarecurso,ffi_codigo,ffi_nombre ASC";
+ 
+        $query_fuentes_solctud=$this->cnxion->ejecutar($sql_fuentes_solctud);
+
+        while($data_fuentes_solctud=$this->cnxion->obtener_filas($query_fuentes_solctud)){
+            $datafuentes_solctud[]=$data_fuentes_solctud;
+        }
+        return $datafuentes_solctud;
+    }
+
+
     public function gasto_asignacion($codigo_asignacion, $codigo_solicitud){
         if($codigo_solicitud){
             $sql_condicion = "AND aso_solicitud NOT IN($codigo_solicitud)";
@@ -456,7 +477,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
                 $descripcion_accion = $this->descripcion_accion($scdp_accion);
 
-                $fuentes_solctud = $this->fuentes_solctud($scdp_codigo);
+                $fuentes_solctud = $this->fuentes_solicitud($scdp_codigo);
                 $fntes = '';
                 if($fuentes_solctud){
                     foreach ($fuentes_solctud as $dta_fuents_solctud) {

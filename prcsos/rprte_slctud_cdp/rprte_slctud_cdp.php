@@ -189,6 +189,20 @@
      
         }
 
+        public function validar_excedentes_facultad($ultimos_caracteres){
+
+            $sql_validar_excedentes_facultad="SELECT fup_excfacultad
+                                                FROM usco.fuentes_presupuesto
+                                               WHERE fup_linix = $ultimos_caracteres;";
+
+            $resultado_validar_excedentes_facultad = $this->cnxion->ejecutar($sql_validar_excedentes_facultad);
+    
+            $data_validar_excedentes_facultad = $this->cnxion->obtener_filas($resultado_validar_excedentes_facultad);
+
+            $fup_excfacultad = $data_validar_excedentes_facultad['fup_excfacultad'];
+
+            return $fup_excfacultad;
+        }
         public function excedenteFacultad($codigo_cdp){
 
             $sql_excedenteFacultad = "SELECT  esc_clasificador
@@ -197,33 +211,25 @@
             
             $query_excedenteFacultad=$this->cnxion->ejecutar($sql_excedenteFacultad);
 
-            $data_excedenteFacultad=$this->cnxion->obtener_filas($query_excedenteFacultad);
-
-            
-
             $numExecedente = 0;
 
-            foreach($data_excedenteFacultad as $dat_excedenteFacultad)
-                $esc_clasificador = $dat_excedenteFacultad['esc_clasificador'];
+            while ($data_excedenteFacultad = $this->cnxion->obtener_filas($query_excedenteFacultad)){
+                $esc_clasificador = $data_excedenteFacultad['esc_clasificador'];
 
-                $str = $esc_clasificador;
+                $str = $esc_clasificador;   
                 $numero_caracteres = strlen($str); 
                 $desde = $numero_caracteres - 2;
                 $ultimos_caracteres= substr($str,$desde,2);
 
-                $sql_fuentePresupuesto = "SELECT fup_excfacultad
-                                            FROM usco.fuentes_presupuesto
-                                            WHERE fup_linix = $ultimos_caracteres;";
+                $validar_excedentes_facultad = $this->validar_excedentes_facultad($ultimos_caracteres);
 
-                $query_fuentePresupuesto =$this->cnxion->ejecutar($sql_fuentePresupuesto );
-
-                $data_fuentePresupuesto =$this->cnxion->obtener_filas($query_fuentePresupuesto );
-
-                if($data_fuentePresupuesto == 1){
+                if($validar_excedentes_facultad==1){
                     $numExecedente++;
                 }
-     
-               return $numExecedente 
+                
+            }
+            
+            return $numExecedente; 
         }
 
         
