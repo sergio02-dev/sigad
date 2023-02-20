@@ -290,11 +290,12 @@
             }
             $sql_actividadPoai="SELECT DISTINCT acp_codigo, acp_descripcion, acc_descripcion, pro_descripcion, acp_referencia,
                                                 acp_estado, acp_vigencia, acp_numero, sub_nombre,acp_fechacreo,acc_descripcion, 
-                                                plandesarrollo.accion.acc_codigo, acp_objetivo, acp_sedeindicador,
-                                                acp_unidad
-                                FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion
+                                                plandesarrollo.accion.acc_codigo, acp_objetivo, ain_indicador,
+                                                ain_unidad
+                                FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion,planaccion.actividad_indicador
                                 WHERE planaccion.actividad_poai.acp_proyecto=plandesarrollo.proyecto.pro_codigo
                                 AND plandesarrollo.proyecto.sub_codigo=plandesarrollo.subsistema.sub_codigo
+                                AND planaccion.actividad_indicador.ain_actividad=planaccion.actividad_poai.acp_codigo
                                 AND plandesarrollo.subsistema.pde_codigo=plandesarrollo.subsistema.pde_codigo
                                 AND plandesarrollo.accion.acc_proyecto=plandesarrollo.proyecto.pro_codigo
                                 AND plandesarrollo.accion.acc_codigo=planaccion.actividad_poai.acp_accion
@@ -648,7 +649,9 @@
 
             $resultado_nombre_sede=$this->cnxion->ejecutar($sql_nombre_sede);
 
-            $data_nombre_sede = $this->cnxion->obtener_filas($resultado_nombre_sede);
+            while ($data_nombre_sede = $this->cnxion->obtener_filas($resultado_nombre_sede)){
+                $data_nombre_sede[] = $data_nombre_sede;
+            };
 
             $sed_nombre = $data_nombre_sede['sed_nombre'];
 

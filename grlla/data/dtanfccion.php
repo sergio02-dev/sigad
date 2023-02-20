@@ -18,10 +18,10 @@
             $acc_codigo = $dta_activdades['acc_codigo'];
             $acc_descripcion = $dta_activdades['acc_descripcion'];
             $acp_objetivo = $dta_activdades['acp_objetivo'];
-            $acp_sedeindicador = $dta_activdades['acp_sedeindicador'];
-            $acp_unidad = $dta_activdades['acp_unidad'];
+            $ain_indicador = $dta_activdades['ain_indicador'];
+            $ain_unidad = $dta_activdades['ain_unidad'];
 
-            $nombre_sede = $objPlanAccion->sede_indicador($acp_sedeindicador);
+            $nombre_sede = $objPlanAccion->sede_indicador($ain_indicador);
 
             $referenciaActividad = $acp_referencia.'.'.$acp_numero;
 
@@ -104,7 +104,7 @@
                     </td>
                     <td>
                         <strong>Unidad: </strong><br>
-                        <?php echo $acp_unidad; ?>
+                        <?php echo $ain_unidad; ?>
                     </td>
                 </tr>
                 <tr>

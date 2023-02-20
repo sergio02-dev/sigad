@@ -23,8 +23,8 @@ if($codigo_actividad){
         $acp_estado = $dataformActividadPoai['acp_estado'];
         $acp_vigencia = $dataformActividadPoai['acp_vigencia'];
         $acp_objetivo = $dataformActividadPoai['acp_objetivo'];
-        $acp_sedeindicador = $dataformActividadPoai['acp_sedeindicador'];
-        $acp_unidad = $dataformActividadPoai['acp_unidad'];
+        $ain_indicador = $dataformActividadPoai['ain_indicador'];
+        $ain_unidad = $dataformActividadPoai['ain_unidad'];
     }
 
     if($acp_estado=='1'){
@@ -134,10 +134,10 @@ else{
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
-            
+        </div>    
             
         
-        <!--<div class="bg">
+        <div class="bg">
                 <table class="table table-sm">
                     <tr>
                         <th>Sede - Indicador</th>
@@ -157,19 +157,24 @@ else{
                         <tr>
                             <td>
                                 <div class="chiller_cb">
-                                    <input id="selSedes<?php echo $ind_codigo;?>" name="selSedes[]" type="checkbox" value="<?php echo $ind_codigo; ?> " data-rule-required="true" required >
+                                    <input id="selSedes<?php echo $ind_codigo;?>" 
+                                    class="sedes" 
+                                    name="selSedes[]"
+                                    type="checkbox"
+                                    value="<?php echo $ind_codigo; ?>"
+                                    data-rule-required="true" required > 
                                     <label for="selSedes<?php echo $ind_codigo; ?>" class="caja_texto_sizer"> <?php echo $dscrpcion;?></label>    
                                     <span></span>
-                                   
+                                    <input type="hidden" name="checkselSedes<?php echo $ind_codigo; ?>" id="checkselSedes<?php echo $ind_codigo; ?>" value="0">
                                 </div>
                             </td>
                             <td>
-                                    <div class="col-md-8">
-                                            <div class="form-group">
-                                                <input type="number" id="txtUnidad" min="1" class="form-control caja_texto_sizer" name="txtUnidad<?php echo $ind_codigo; ?>" aria-describedby="textHelp"  value="<?php echo $acp_unidad;?>" >
-                                                <span class="help-block" id="error"></span>
+                            <div class="row">
+                                            <div class="col-md-12 unidad<?php echo $ind_codigo;?>" >
+                                                 
+                                                
                                             </div>
-                                    </div>
+                            </div>
                             </td>
                         </tr>
                         <?php
@@ -177,9 +182,36 @@ else{
                         ?>
 
                 </table>
-        </div>-->
+        </div>
 
-        <div class="col-md-4">
+        <script type="text/javascript">
+            $('.sedes').change(function(){
+                var ind_codigo = this.value;
+                var check_sedes = $('#checkselSedes'+ind_codigo).val();
+
+                
+                if(check_sedes == 0){
+                    $('#checkselSedes'+ind_codigo).val(1);
+                    $.ajax({
+                        url:"unidadindicador",
+                        type:"POST",
+                        data:"ind_codigo="+ind_codigo,
+                        async:true,
+
+                        success: function(message){
+                            $(".unidad"+ind_codigo).empty().append(message);
+                        }
+                    }); 
+                }
+                else{
+                    $('#checkselSedes'+ind_codigo).val(0);
+                      $(".unidad"+ind_codigo).empty();              
+                }
+                
+            });
+        </script>
+
+        <!--<div class="col-md-4">
                 <div class="form-group">
                     <label for="selSedes" class="font-weight-bold"> Sede *</label>
                     <select name="selSedes" id="selSedes" class="form-control caja_texto_sizer" data-rule-required="true" required>
@@ -214,7 +246,7 @@ else{
                     <span class="help-block" id="error"></span>
                 </div>
             </div>
-        </div>    
+        </div>-->    
             
         
 
@@ -248,6 +280,7 @@ else{
         <input type="hidden" name="codigo_subsistema" id="codigo_subsistema" value="<?php echo $codigo_subsistema; ?>">
         <input type="hidden" name="codigo_proyecto" id="codigo_proyecto" value="<?php echo $codigo_proyecto; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
+                                           
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-danger" onClick="validar_formActividadPoai();"><i class="far fa-save"></i> Guardar</button>
