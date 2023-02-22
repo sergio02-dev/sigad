@@ -306,11 +306,11 @@
 
             $resultado_actividadPoai=$this->cnxion->ejecutar($sql_actividadPoai);
 
-            while ($data_actividadPoai = $this->cnxion->obtener_filas($resultado_actividadPoai)){
-                $dataActividadPoai[] = $data_actividadPoai;
-            }
+            $data_actividadPoai = $this->cnxion->obtener_filas($resultado_actividadPoai);
+            $acp_codigo = $data_actividadPoai['acp_codigo'];
+            
 
-            return $dataActividadPoai;
+            return $acp_codigo;
         }
 
         public function formUpdatePoai($codigo_poai){
@@ -659,11 +659,14 @@
         }
 
         public function sede_indicador($codigo_indicador){
+
+            $codigo_actividad = $this->actividadPoai($accion_code);
             
             $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida, ind_sede,
                                         sed_nombre
                                 FROM plandesarrollo.indicador
                                 INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                INNER JOIN planaccion.actividad_indicador ON ind_codigo = ain_indicador
                                 WHERE ind_codigo = $codigo_indicador";
 
             $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
@@ -674,6 +677,56 @@
 
             return $sed_nombre;
         }
+
+        public function datOficinafuente(){
+        
+            $list_sedes = $this->sede_indicador($codigo_indicador);
+    
+            if($list_sedes){
+                foreach ($list_sedes as $dat_sede) {
+                    $codigo_indicador = $dat_sede['ind_codigo'];
+                    $off_cargo = $dat_sede['off_cargo'];
+                    $off_codigo = $dat_oficinafuente['off_codigo'];
+                    $off_estado = $dat_oficinafuente['off_estado'];
+    
+                    
+    
+    
+                    $nombre_fuente = '';
+                    foreach($oficina_fuente as $dat_oficina_fuente){
+                        $ffi_nombre = $dat_oficina_fuente['ffi_nombre'];
+    
+                        $nombre_fuente = $nombre_fuente.$ffi_nombre.'<br/>';
+                    }
+                   
+                    if($off_estado == 1){
+                        $estado = "Activo";
+                    }
+                    else{
+                        $estado = "Inactivo";
+                    }
+                    
+    
+    
+        
+                    $rsOficinafuente[] = array('ofi_nombre'=> $nombre_oficina, 
+                                               'car_nombre'=> $nombre_cargo,
+                                               'off_fuente'=> $nombre_fuente,
+                                               'off_oficina' => $off_oficina,
+                                               'off_cargo'=> $off_cargo,
+                                               'off_codigo'=> $off_codigo,
+                                               'estado'=> $estado
+                                            );
+        
+                }
+                $dattOficinafuente=json_encode(array("data"=>$rsOficinafuente));
+            }
+            else{
+                $dattOficinafuente=json_encode(array("data"=>""));
+            } 
+            return $dattOficinafuente;
+        }
+
 
         public function indicadores_accion($codigo_accion){
 
