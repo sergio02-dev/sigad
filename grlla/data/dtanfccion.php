@@ -21,7 +21,7 @@
             $acp_sedeindicador = $dta_activdades['acp_sedeindicador'];
             $acp_unidad = $dta_activdades['acp_unidad'];
             
-            $sede_nombre = $objPlanAccion->sede_indicador($acp_sedeindicador);
+         
             $referenciaActividad = $acp_referencia.'.'.$acp_numero;
 
             if($acp_estado==1){
@@ -111,6 +111,7 @@
                         <tr>
                             
                             <td colspan="2">
+                           
                                 <strong>Sede:</strong><br>
                                 <?php echo $sed_nombre; ?>
                             </td>
@@ -128,6 +129,7 @@
                         <tr>
                             
                         <td colspan="2">
+                        <?php $sede_nombre = $objPlanAccion->sede_indicador($acp_sedeindicador); ?>
                             <strong>Sede:</strong><br>
                             <?php echo $sede_nombre; ?>
                         </td>

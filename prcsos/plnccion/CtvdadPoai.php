@@ -41,10 +41,9 @@
         public function formActividadPoai($codigo_actividad){
             $sql_formActividadPoai="SELECT DISTINCT acp_codigo, acp_descripcion, acc_descripcion, pro_descripcion, acp_referencia,
                                                     acp_estado, acp_vigencia, acp_numero, sub_nombre,acp_fechacreo,acc_codigo,
-                                                    acp_objetivo, ain_indicador,ain_unidad
-                                               FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion, planaccion.actividad_indicador
+                                                    acp_objetivo,acp_unidad 
+                                               FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion
                                               WHERE planaccion.actividad_poai.acp_proyecto=plandesarrollo.proyecto.pro_codigo
-                                              AND planaccion.actividad_indicador.ain_actividad = plandesarrollo.actividad_poai.acp_codigo
                                                 AND plandesarrollo.proyecto.sub_codigo=plandesarrollo.subsistema.sub_codigo
                                                 AND plandesarrollo.subsistema.pde_codigo=plandesarrollo.subsistema.pde_codigo
                                                 AND plandesarrollo.accion.acc_proyecto=plandesarrollo.proyecto.pro_codigo
@@ -58,6 +57,77 @@
 
             return $dataformActividadPoai;
         }
+
+        public function check_arreglo($codigo_actividad, $codigo_indicador){
+        
+            $sql_check_arreglo  = "SELECT COUNT(*) checkbox
+                                         FROM planaccion.actividad_indicador
+                                        WHERE ain_actividad = $codigo_actividad
+                                        AND ain_indicador = $codigo_indicador
+                                        AND ain_estado = 1;";
+            
+    
+            $resultado_check_arreglo  = $this->cnxion->ejecutar($sql_check_arreglo);
+    
+            $data_check_arreglo = $this->cnxion->obtener_filas($resultado_check_arreglo);
+    
+            $checkbox = $data_check_arreglo['checkbox'];
+    
+            if($checkbox == 0){
+                $checkear = "";
+            }
+            else{
+                $checkear = "checked";
+            }
+    
+            return $checkear;
+        }
+
+        public function check_sedeIndicador($codigo_actividad, $codigo_indicador){
+        
+            $sql_check_sedeIndicador  = "SELECT COUNT(*) checkbox
+                                         FROM planaccion.actividad_poai
+                                        WHERE acp_codigo = $codigo_actividad
+                                        AND acp_sedeindicador = $codigo_indicador
+                                        AND acp_estado = '1';";
+            
+    
+            $resultado_check_sedeIndicador  = $this->cnxion->ejecutar($sql_check_sedeIndicador);
+    
+            $data_check_sedeIndicador = $this->cnxion->obtener_filas($resultado_check_sedeIndicador);
+    
+            $checkbox = $data_check_sedeIndicador['checkbox'];
+    
+            if($checkbox == 0){
+                $checkear = "";
+            }
+            else{
+                $checkear = "checked";
+            }
+    
+            return $checkear;
+        }
+
+        public function unidad_sedeindicador($codigo_indicador,$codigo_actividad){
+            
+            $sql_unidad_sedeindicador="SELECT ain_unidad
+                                   FROM planaccion.actividad_indicador
+                                  WHERE ain_actividad = $codigo_actividad
+                                  AND ain_indicador = $codigo_indicador
+                                  AND ain_estado = 1";
+
+            $resultado_unidad_sedeindicador=$this->cnxion->ejecutar($sql_unidad_sedeindicador);
+
+            $data_unidad_sedeindicador = $this->cnxion->obtener_filas($resultado_unidad_sedeindicador);
+
+            $ain_unidad = $data_unidad_sedeindicador['ain_unidad'];
+
+            return $ain_unidad;
+        }
+
+
+
+
 
         public function acciones($codigo_planaccion){
 
