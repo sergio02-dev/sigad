@@ -18,11 +18,10 @@
             $acc_codigo = $dta_activdades['acc_codigo'];
             $acc_descripcion = $dta_activdades['acc_descripcion'];
             $acp_objetivo = $dta_activdades['acp_objetivo'];
-            $ain_indicador = $dta_activdades['ain_indicador'];
-            $ain_unidad = $dta_activdades['ain_unidad'];
-
-            $nombre_sede = $objPlanAccion->sede_indicador($ain_indicador);
-
+            $acp_sedeindicador = $dta_activdades['acp_sedeindicador'];
+            $acp_unidad = $dta_activdades['acp_unidad'];
+            
+            $sede_nombre = $objPlanAccion->sede_indicador($acp_sedeindicador);
             $referenciaActividad = $acp_referencia.'.'.$acp_numero;
 
             if($acp_estado==1){
@@ -97,16 +96,50 @@
                         ?>
                     </th>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <strong>Sede:</strong><br>
-                        <?php echo $nombre_sede; ?>
-                    </td>
-                    <td>
-                        <strong>Unidad: </strong><br>
-                        <?php echo $ain_unidad; ?>
-                    </td>
-                </tr>
+                <?php 
+                        $sedeIndicador = $objPlanAccion->sedeIndicador($acp_codigo);
+                        if($sedeIndicador){
+                            foreach($sedeIndicador as $data_sedeIndicador){
+                                $ain_indicador = $data_sedeIndicador['ain_indicador'];
+                                $ain_unidad = $data_sedeIndicador['ain_unidad'];
+                                $ain_actividad = $data_sedeIndicador['ain_actividad'];
+                                $sed_nombre = $data_sedeIndicador['sed_nombre'];
+                                
+                                
+                    
+                    ?>
+                        <tr>
+                            
+                            <td colspan="2">
+                                <strong>Sede:</strong><br>
+                                <?php echo $sed_nombre; ?>
+                            </td>
+                            <td>
+                                <strong>Unidad: </strong><br>
+                                <?php echo $ain_unidad; ?>
+                            </td>
+                          
+                        </tr>
+                        <?php 
+                            
+                        }
+                    }else{
+                        ?>
+                        <tr>
+                            
+                        <td colspan="2">
+                            <strong>Sede:</strong><br>
+                            <?php echo $sede_nombre; ?>
+                        </td>
+                        <td>
+                            <strong>Unidad: </strong><br>
+                            <?php echo $acp_unidad; ?>
+                        </td>
+                      
+                    </tr> 
+                    <?php   
+                    }
+                ?>
                 <tr>
                     <td colspan="3">
                         <strong>Actividad:</strong><br>

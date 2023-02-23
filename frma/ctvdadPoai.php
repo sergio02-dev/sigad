@@ -177,12 +177,16 @@ else{
                             </div>
                             </td>
                         </tr>
+                                   
+     
                         <?php
                             }//if Menu
                         ?>
 
                 </table>
+                
         </div>
+        <span id="error_selSedes" style="color:#C2240B; font-weight: bold;"></span>    
 
         <script type="text/javascript">
             $('.sedes').change(function(){

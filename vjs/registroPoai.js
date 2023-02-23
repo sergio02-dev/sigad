@@ -1,4 +1,23 @@
 function validar_formActividadPoai(){
+
+	var selSedes = new Array();
+
+	
+	 //Inicio Validación actividades
+	selSedes = $('[name="selSedes[]"]:checked').map(function () {
+		return this.value;
+	}).get();
+
+	cantidad_indicador = selSedes.length;
+
+	if(cantidad_indicador == 0){
+	$('#error_selSedes').html('Seleccione al menos un indicador');
+	return false;
+	}
+	else{
+	$('#error_selSedes').html('');
+	}
+
 	$("#actividaPoaiform").validate({
 		rules: {
 			textActividad:{
@@ -26,7 +45,11 @@ function validar_formActividadPoai(){
 				required: true,
 				min : 1
 			}
+
+			
 		},
+
+		
 
 		messages:{
 			textActividad:{

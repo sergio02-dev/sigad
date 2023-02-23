@@ -78,12 +78,9 @@
                               AND plandesarrollo.plan_desarrollo.pde_codigo=$codigo_planaccion
                               $condicion_encargado";
             $resultado_plan_accion=$this->cnxion->ejecutar($sql_plan_accion);
-
             while ($data_plan_accion = $this->cnxion->obtener_filas($resultado_plan_accion)){
                 $dataplan_accion[] = $data_plan_accion;
-
             }
-
             return $dataplan_accion;
         }*/
 
@@ -290,12 +287,11 @@
             }
             $sql_actividadPoai="SELECT DISTINCT acp_codigo, acp_descripcion, acc_descripcion, pro_descripcion, acp_referencia,
                                                 acp_estado, acp_vigencia, acp_numero, sub_nombre,acp_fechacreo,acc_descripcion, 
-                                                plandesarrollo.accion.acc_codigo, acp_objetivo, ain_indicador,
-                                                ain_unidad
-                                FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion,planaccion.actividad_indicador
+                                                plandesarrollo.accion.acc_codigo, acp_objetivo, acp_sedeindicador,
+                                                acp_unidad
+                                FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion
                                 WHERE planaccion.actividad_poai.acp_proyecto=plandesarrollo.proyecto.pro_codigo
                                 AND plandesarrollo.proyecto.sub_codigo=plandesarrollo.subsistema.sub_codigo
-                                AND planaccion.actividad_indicador.ain_actividad=planaccion.actividad_poai.acp_codigo
                                 AND plandesarrollo.subsistema.pde_codigo=plandesarrollo.subsistema.pde_codigo
                                 AND plandesarrollo.accion.acc_proyecto=plandesarrollo.proyecto.pro_codigo
                                 AND plandesarrollo.accion.acc_codigo=planaccion.actividad_poai.acp_accion
@@ -306,12 +302,34 @@
 
             $resultado_actividadPoai=$this->cnxion->ejecutar($sql_actividadPoai);
 
-            $data_actividadPoai = $this->cnxion->obtener_filas($resultado_actividadPoai);
-            $acp_codigo = $data_actividadPoai['acp_codigo'];
-            
+            while ($data_actividadPoai = $this->cnxion->obtener_filas($resultado_actividadPoai)){
+                $dataActividadPoai[] = $data_actividadPoai;
+            }
 
-            return $acp_codigo;
+            return $dataActividadPoai;
         }
+
+
+        // 22-02-2023
+        public function sedeIndicador($actividad_code){
+            $sql_sede_indicador = "SELECT  ain_indicador,ain_unidad,ain_actividad, sed_nombre
+                                                FROM planaccion.actividad_indicador
+
+                                INNER JOIN plandesarrollo.indicador ON ain_indicador =ind_codigo 
+                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                               WHERE ain_actividad = $actividad_code";
+
+            $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
+
+            while ($data_sede_indicador = $this->cnxion->obtener_filas($resultado_sede_indicador)){
+                $dataSedeIndicador[] = $data_sede_indicador;
+            }
+
+            return $dataSedeIndicador;
+
+        }
+
+    
 
         public function formUpdatePoai($codigo_poai){
             $sql_formPoai="SELECT poa_codigo, poa_referencia, poa_objeto, 
@@ -611,10 +629,8 @@
         /*public function activity_list($codigo_accion){
         
             $rs_actvty=$this->actividades_accion($codigo_accion);
-
             if($rs_actvty){
                 foreach ($rs_actvty as $data_rs_actvty) {
-
                     $acp_codigo = $data_rs_actvty['acp_codigo'];
                     $acp_descripcion = $data_rs_actvty['acp_descripcion'];
                     $acp_referencia = $data_rs_actvty['acp_referencia'];
@@ -622,7 +638,6 @@
                     $acp_vigencia = $data_rs_actvty['acp_vigencia'];
     
                     $referenciaActividad = $acp_referencia.".".$acp_numero;
-
                     $actividad_completa = $referenciaActividad." ".$referenciaActividad;
     
     
@@ -649,9 +664,7 @@
 
             $resultado_nombre_sede=$this->cnxion->ejecutar($sql_nombre_sede);
 
-            while ($data_nombre_sede = $this->cnxion->obtener_filas($resultado_nombre_sede)){
-                $data_nombre_sede[] = $data_nombre_sede;
-            };
+            $data_nombre_sede = $this->cnxion->obtener_filas($resultado_nombre_sede);
 
             $sed_nombre = $data_nombre_sede['sed_nombre'];
 
@@ -659,15 +672,13 @@
         }
 
         public function sede_indicador($codigo_indicador){
-
-            $codigo_actividad = $this->actividadPoai($accion_code);
             
             $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida, ind_sede,
                                         sed_nombre
-                                FROM plandesarrollo.indicador
-                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                INNER JOIN planaccion.actividad_indicador ON ind_codigo = ain_indicador
-                                WHERE ind_codigo = $codigo_indicador";
+                                   FROM plandesarrollo.indicador
+                             INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                             INNER JOIN planaccion.actividad_poai ON ind_codigo = acp_sedeindicador
+                                  WHERE ind_codigo = $codigo_indicador";
 
             $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
 
@@ -678,54 +689,6 @@
             return $sed_nombre;
         }
 
-        public function datOficinafuente(){
-        
-            $list_sedes = $this->sede_indicador($codigo_indicador);
-    
-            if($list_sedes){
-                foreach ($list_sedes as $dat_sede) {
-                    $codigo_indicador = $dat_sede['ind_codigo'];
-                    $off_cargo = $dat_sede['off_cargo'];
-                    $off_codigo = $dat_oficinafuente['off_codigo'];
-                    $off_estado = $dat_oficinafuente['off_estado'];
-    
-                    
-    
-    
-                    $nombre_fuente = '';
-                    foreach($oficina_fuente as $dat_oficina_fuente){
-                        $ffi_nombre = $dat_oficina_fuente['ffi_nombre'];
-    
-                        $nombre_fuente = $nombre_fuente.$ffi_nombre.'<br/>';
-                    }
-                   
-                    if($off_estado == 1){
-                        $estado = "Activo";
-                    }
-                    else{
-                        $estado = "Inactivo";
-                    }
-                    
-    
-    
-        
-                    $rsOficinafuente[] = array('ofi_nombre'=> $nombre_oficina, 
-                                               'car_nombre'=> $nombre_cargo,
-                                               'off_fuente'=> $nombre_fuente,
-                                               'off_oficina' => $off_oficina,
-                                               'off_cargo'=> $off_cargo,
-                                               'off_codigo'=> $off_codigo,
-                                               'estado'=> $estado
-                                            );
-        
-                }
-                $dattOficinafuente=json_encode(array("data"=>$rsOficinafuente));
-            }
-            else{
-                $dattOficinafuente=json_encode(array("data"=>""));
-            } 
-            return $dattOficinafuente;
-        }
 
 
         public function indicadores_accion($codigo_accion){
