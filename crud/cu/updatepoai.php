@@ -56,11 +56,12 @@
 
     $sumaAsignacion = $objPlanAccion->sumaAsignacion();
     
+    
     $numero=3;
     if($valorTotal>100){
         $valor=1;
     }
-    else if($sumaAsignacion >= $recursoAccion ){
+    else if($sumaAsignacion > $recursoAccion ){
         $valor=2;
     }else{
         echo $objPlanAccion->updateActividadPoai();
