@@ -317,7 +317,8 @@
 
                                 INNER JOIN plandesarrollo.indicador ON ain_indicador =ind_codigo 
                                 INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                               WHERE ain_actividad = $actividad_code";
+                                               WHERE ain_actividad = $actividad_code
+                                               AND ain_estado = 1";
 
             $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
 

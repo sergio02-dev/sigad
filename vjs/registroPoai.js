@@ -34,9 +34,7 @@ function validar_formActividadPoai(){
 				minlength:10,
 				maxlength:150,
 			},
-			selSedes:{
-				selectSede: true,
-			},
+			
 			chkestado:{
 				required: true,
 			},
@@ -105,6 +103,7 @@ function validar_formActividadPoai(){
 						$('#frmModal'+codigoActividad).modal('hide');
 						$('#frmModal'+codigoActividad).modal({backdrop: false});
 						$('#registroActividad'+code_acccion).load("datainfoaccion?codigo_accion="+code_acccion);
+						$('.modal-backdrop').remove();
 					}
                 }
             });
@@ -119,7 +118,5 @@ function validar_formActividadPoai(){
 		return (value != '0');
 	}, "Seleccione la Vigencia");
 	
-	jQuery.validator.addMethod('selectSede', function (value) {
-		return (value != '0');
-	}, "Seleccione la Sede");
+	
 }

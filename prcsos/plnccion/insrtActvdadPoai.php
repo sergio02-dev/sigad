@@ -173,7 +173,7 @@ class CtvdadPoai extends ActividadPoai{
                                                            acp_fechacreo, acp_fechamodifico, 
                                                            acp_personacreo, acp_personamodifico, 
                                                            acp_vigencia, acp_numero, acp_subsistema,
-                                                           acp_objetivo, acp_oficina, acp_cargo
+                                                           acp_objetivo, acp_sedeindicador, acp_oficina, acp_cargo, acp_unidad
                                                            )
                                                    VALUES (".$this->codigoActividad.", '".$this->getNombreActividad()."', 
                                                            ".$this->getCodigoAccion().",". $this->getCodigoProyecto().",
@@ -181,8 +181,8 @@ class CtvdadPoai extends ActividadPoai{
                                                            NOW(), NOW(),".$this->getPersonaSistema().", 
                                                            ".$this->getPersonaSistema().", ".$this->getVigenciaActividad().", 
                                                            ".$numero_Accion.",".$this->getCodigoSubsistema().",
-                                                           '".$this->getObjetivo()."', 
-                                                           $ofis, $cargs);";
+                                                           '".$this->getObjetivo()."', 0,
+                                                           $ofis, $cargs, 0);";
 
       $this->cnxion->ejecutar($sqlInsertAcc);
 
@@ -196,24 +196,24 @@ class CtvdadPoai extends ActividadPoai{
         $codigo_unidad_indicador = date('YmdHis') . rand(99, 99999);
 
         $sql_unidad_indicador = "INSERT INTO planaccion.actividad_indicador(
-                                                                                                      ain_codigo, 
-                                                                                                      ain_actividad, 
-                                                                                                      ain_indicador, 
-                                                                                                      ain_estado, 
-                                                                                                      ain_fechacreo, 
-                                                                                                      ain_fechamodifico, 
-                                                                                                      ain_personacre, 
-                                                                                                      ain_personamodifico,
-                                                                                                      ain_unidad)
-                                                                                               VALUES (" . $codigo_unidad_indicador . ",
-                                                                                                        " . $this->codigoActividad . ",
-                                                                                                        $codigo_indicador,
-                                                                                                        " . $this->getEstado() . ",
-                                                                                                          NOW(), 
-                                                                                                          NOW(), 
-                                                                                                          " . $this->getPersonaSistema() . ",
-                                                                                                          " . $this->getPersonaSistema() . ", 
-                                                                                                          $unidad_indicador);";
+                                                                            ain_codigo, 
+                                                                            ain_actividad, 
+                                                                            ain_indicador, 
+                                                                            ain_estado, 
+                                                                            ain_fechacreo, 
+                                                                            ain_fechamodifico, 
+                                                                            ain_personacre, 
+                                                                            ain_personamodifico,
+                                                                            ain_unidad)
+                                                                      VALUES (" . $codigo_unidad_indicador . ",
+                                                                              " . $this->codigoActividad . ",
+                                                                              $codigo_indicador,
+                                                                              " . $this->getEstado() . ",
+                                                                                NOW(), 
+                                                                                NOW(), 
+                                                                                " . $this->getPersonaSistema() . ",
+                                                                                " . $this->getPersonaSistema() . ", 
+                                                                                $unidad_indicador);";
 
 
        

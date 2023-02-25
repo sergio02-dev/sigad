@@ -24,12 +24,11 @@ if($codigo_actividad){
         $acp_vigencia = $dataformActividadPoai['acp_vigencia'];
         $acp_objetivo = $dataformActividadPoai['acp_objetivo'];
         $acp_unidad = $dataformActividadPoai['acp_unidad'];
+        $acp_sedeindicador = $dataformActividadPoai['acp_sedeindicador']; 
 
-     
-
-        
     }
-
+    
+ 
     if($acp_estado=='1'){
         $checkedA="checked";
         $checkedI="";
@@ -49,8 +48,7 @@ else{
     $tarea = "REGISTRAR";
     $acp_vigencia = 2022;
 }
-
- ?>
+?>
  
 
 <form id="actividaPoaiform" role="form">
@@ -148,67 +146,85 @@ else{
                         <th>Unidad</th>
                     </tr>
                         <?php
+                         
+                         
                         foreach ($list_sedes as $data_sede) {
                             $ind_codigo = $data_sede['ind_codigo'];
                             $ind_unidadmedida = $data_sede['ind_unidadmedida'];
                             $sed_nombre = $data_sede['sed_nombre'];
 
-                            $dscrpcion = $sed_nombre . " - " . $ind_unidadmedida;
 
-                            $check_sedeindicador =$objActividadPaoi->check_sedeIndicador($acp_codigo, $ind_codigo);
-                            $check_arreglo=$objActividadPaoi->check_arreglo($acp_codigo,$ind_codigo);
+                            $dscrpcion = $sed_nombre . " - " . $ind_unidadmedida;
+                            if($codigo_actividad){
+
                             
-                         
+                                if($acp_sedeindicador == 0){
+                                    list($checkedIndicador, $valor_unidad, $unidad, $campo_val) = $objActividadPaoi->check_sedes_indicador($acp_codigo,$ind_codigo);                                
+                                }
+                                else{ 
+                                    if($acp_sedeindicador == $ind_codigo){
+                                        $checkedIndicador = "checked";
+                                        $valor_unidad = "block";
+                                        $unidad = $acp_unidad;
+                                        $campo_val = 1;
+                                    }
+                                    else{
+                                        $checkedIndicador = "";
+                                        $valor_unidad = "none";
+                                        $unidad = 0;
+                                        $campo_val = 0;
+                                    }
+                                }
                             
-                            if($check_arreglo){
-                                $check_arreglo = $check_arreglo;
-                                
-                                
                             }
                             else{
-                               $check_arreglo = $check_sedeindicador;
-                                
+                                $checkedIndicador = "";
+                                $valor_unidad = "none";
+                                $campo_val = 0;
                             }
-
                         ?>
+                        
+                        
                         <tr>
                             <td>
-                                <div class="chiller_cb"  >
-                                    <input id="selSedes<?php echo $ind_codigo;?>" 
-                                    class="sedes " 
-                                    name="selSedes[]"
-                                    type="checkbox"
-                                    value="<?php echo $ind_codigo?>"
-                                    data-rule-required="true" required <?php echo $check_arreglo; ?>> 
-                                    <label for="selSedes<?php echo $ind_codigo; ?>" class="caja_texto_sizer"> <?php echo $dscrpcion;?></label>    
-                                    <span></span>
-                                    <input type="hidden" name="checkselSedes<?php echo $ind_codigo; ?>" id="checkselSedes<?php echo $ind_codigo; ?>" value="0">
+                                <div class="chiller_cb"   >
+                                    <input id="selSedes<?php echo $ind_codigo;?>" class="sedes " name="selSedes[]" type="checkbox"
+                                    value="<?php echo $ind_codigo?>"  data-rule-required="true" required <?php echo $checkedIndicador; ?>> 
+                                    <label for="selSedes<?php echo $ind_codigo; ?>" class="caja_texto_sizer"> <?php echo $dscrpcion;?></label>  
+                                    <span></span>  
+                                    <input type="hidden" name="checkselSedes<?php echo $ind_codigo; ?>" id="checkselSedes<?php echo $ind_codigo; ?>" value="<?php echo $campo_val; ?>">
                                     
                                 </div>
                             </td>
                             <td>
-                            <?php 
-                                $unidad_sedeindicador = $objActividadPaoi->unidad_sedeindicador($ind_codigo,$acp_codigo);
+                                <?php 
+                                    if($codigo_actividad){
 
-                                if($unidad_sedeindicador){
-                                    $unidad = $unidad_sedeindicador;
-                                }else{
-                                    $unidad = $acp_unidad;
-                                }
-                            ?>
-                            <div class="row">
-                                            <div class="col-md-12 unidad<?php echo $ind_codigo;?>">
-                                            
-                                                 
-                                            <input type="hidden" name="unidad" id="unidad" value="<?php echo $unidad; ?>">
-                                            </div>
-                            </div>
+                                ?>
+                                <div class="row" >
+                                    <div class="col-md-12 unidad<?php echo $ind_codigo;?>" id="capaUnidad<?php echo $ind_codigo;?>"  style="display:<?php echo $valor_unidad; ?>;"  >  
+                                        <input type="number" name="txtUnidad<?php echo $ind_codigo;?>" id="unidad<?php echo $ind_codigo;?>"  class="form-control caja_texto_sizer" value="<?php echo $unidad; ?>">
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                    else{
+                                ?>
+                                <div class="row" >
+                                    <div class="col-md-12 unidad<?php echo $ind_codigo;?>" id="capaUnidad<?php echo $ind_codigo;?>"  style="display:<?php echo $valor_unidad; ?>;"  >  
+                                     
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                ?>
                             </td>
                         </tr>
                                    
      
                         <?php
                             }//if Menu
+                            
                         ?>
 
                 </table>
@@ -220,15 +236,15 @@ else{
             $('.sedes').change(function(){
                 var ind_codigo = this.value;
                 var check_sedes = $('#checkselSedes'+ind_codigo).val();
-                var unidad = $('#unidad').val();
 
-                
                 if(check_sedes == 0){
                     $('#checkselSedes'+ind_codigo).val(1);
+                    $('#capaUnidad'+ind_codigo).fadeIn(1);
+                    
                     $.ajax({
                         url:"unidadindicador",
                         type:"POST",
-                        data:"ind_codigo="+ind_codigo+"&unidad="+unidad,
+                        data:"ind_codigo="+ind_codigo,
                         async:true,
 
                         success: function(message){
@@ -238,7 +254,7 @@ else{
                 }
                 else{
                     $('#checkselSedes'+ind_codigo).val(0);
-                      $(".unidad"+ind_codigo).empty();              
+                    $(".unidad"+ind_codigo).empty();              
                 }
                 
             });
@@ -313,7 +329,7 @@ else{
         <input type="hidden" name="codigo_subsistema" id="codigo_subsistema" value="<?php echo $codigo_subsistema; ?>">
         <input type="hidden" name="codigo_proyecto" id="codigo_proyecto" value="<?php echo $codigo_proyecto; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
-                                           
+        <input type="hidden" name="acp_sedeindicador" id="acp_sedeindicador" value="<?php echo $acp_sedeindicador; ?>">                           
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-danger" onClick="validar_formActividadPoai();"><i class="far fa-save"></i> Guardar</button>

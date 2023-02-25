@@ -17,9 +17,24 @@
     $estado=$_REQUEST['chkestado'];
     $textObjetivo = $_REQUEST['textObjetivo'];
     $selSedes = $_REQUEST['selSedes'];
-    $txtUnidad = $_REQUEST['txtUnidad'];
-
     $objPlanAccion = new CtvdadPoai();
+
+    for ($list_sedes=0; $list_sedes < count($selSedes); $list_sedes++){
+        $codigo_indicador = $selSedes[$list_sedes];
+        $unidad_indicador = $_REQUEST['txtUnidad'.$codigo_indicador];
+  
+  
+        $array_indicadores[] = array(
+          'codigo_indicador' => $codigo_indicador,
+          'unidad_indicador' => $unidad_indicador
+        );
+  
+      }
+  
+ 
+ 
+
+  
 
     $objPlanAccion->setCodigoActividad($codigoActividad);
     $objPlanAccion->setCodigoSubsistema($codigoSubsistema);
@@ -31,8 +46,8 @@
     $objPlanAccion->setEstado($estado);
     $objPlanAccion->setPersonaSistema($personaSistema);
     $objPlanAccion->setObjetivo($textObjetivo);
-    $objPlanAccion->setSede($selSedes);
-    $objPlanAccion->setUnidad($txtUnidad);
+    $objPlanAccion->setArrayIndicadores($array_indicadores);
+    
 
     echo $objPlanAccion->updateActividadPoai();
 

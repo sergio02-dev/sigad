@@ -41,7 +41,7 @@
         public function formActividadPoai($codigo_actividad){
             $sql_formActividadPoai="SELECT DISTINCT acp_codigo, acp_descripcion, acc_descripcion, pro_descripcion, acp_referencia,
                                                     acp_estado, acp_vigencia, acp_numero, sub_nombre,acp_fechacreo,acc_codigo,
-                                                    acp_objetivo,acp_unidad 
+                                                    acp_objetivo,acp_unidad, acp_sedeindicador
                                                FROM planaccion.actividad_poai,plandesarrollo.proyecto,plandesarrollo.subsistema,plandesarrollo.plan_desarrollo,plandesarrollo.accion
                                               WHERE planaccion.actividad_poai.acp_proyecto=plandesarrollo.proyecto.pro_codigo
                                                 AND plandesarrollo.proyecto.sub_codigo=plandesarrollo.subsistema.sub_codigo
@@ -83,6 +83,37 @@
             return $checkear;
         }
 
+        public function check_sedes_indicador($codigo_actividad, $codigo_indicador){
+        
+            $sql_check_arreglo  = "SELECT ain_indicador, ain_unidad
+                                     FROM planaccion.actividad_indicador
+                                    WHERE ain_actividad = $codigo_actividad
+                                      AND ain_indicador = $codigo_indicador
+                                      AND ain_estado = 1;";
+    
+            $resultado_check_arreglo  = $this->cnxion->ejecutar($sql_check_arreglo);
+
+            $numero_filas = $this->cnxion->numero_filas($resultado_check_arreglo);
+
+            if($numero_filas== 0){
+                $data_check_arreglo = $this->cnxion->obtener_filas($resultado_check_arreglo);
+                $checkedIndicador = "";
+                $valor_unidad = "none";
+                $unidad = 0;
+                $campo_val = 0;
+            }
+            else{
+                $data_check_arreglo = $this->cnxion->obtener_filas($resultado_check_arreglo);
+    
+                $checkedIndicador = "checked";
+                $valor_unidad = "block";
+                $unidad =  $data_check_arreglo['ain_unidad'];
+                $campo_val = 1;
+            }
+    
+            return array($checkedIndicador, $valor_unidad, $unidad, $campo_val);
+        }
+
         public function check_sedeIndicador($codigo_actividad, $codigo_indicador){
         
             $sql_check_sedeIndicador  = "SELECT COUNT(*) checkbox
@@ -114,7 +145,7 @@
                                    FROM planaccion.actividad_indicador
                                   WHERE ain_actividad = $codigo_actividad
                                   AND ain_indicador = $codigo_indicador
-                                  AND ain_estado = 1";
+                                  AND ain_estado = 1;";
 
             $resultado_unidad_sedeindicador=$this->cnxion->ejecutar($sql_unidad_sedeindicador);
 
@@ -123,6 +154,20 @@
             $ain_unidad = $data_unidad_sedeindicador['ain_unidad'];
 
             return $ain_unidad;
+        }
+
+        public function sedeIndicador($actividad_code){
+            $sql_sede_indicador = "SELECT  ain_indicador
+                                    WHERE ain_actividad = $actividad_code";
+
+            $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
+
+            $data_sede_indicador = $this->cnxion->obtener_filas($resultado_sede_indicador);
+            $ain_indicador = $data_sede_indicador['ain_indicador'];
+            
+
+            return $ain_indicador;
+
         }
 
 
