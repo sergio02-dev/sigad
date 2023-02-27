@@ -97,7 +97,7 @@ class MYPDF extends TCPDF {
         // imagen de la institución
         $this->SetFont('helvetica', ' ', 8);
         $this->MultiCell(40, 30, ' ', 1, 'C', 0, 1, '', '', true);			
-        $this->Image($image_escudocolombia, 167, 8, 25, 25, 'PNG', '', 'M', false, 140, '', false, false, 0, false, false, false);
+        $this->Image($image_escudocolombia, 167, 8, 25, 25, 'PNG', '', 'M', false, 120, '', false, false, 0, false, false, false);
         
         // informacion del formato
         $this->MultiCell(40, 14, 'Revisión: V.6', 1, 'C', 0, 0, '', 11, true, 0, false, true, 14, 'M');
