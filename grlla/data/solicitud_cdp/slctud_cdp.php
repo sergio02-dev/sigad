@@ -62,11 +62,11 @@
                     data: null, 
                     render: function (data, type, full, meta){
                         if(full["scdp_proceso"] == 2){
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div>';
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte solicitud cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
 
                         }
                         else{
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_cdp(\''+full["scdp_codigo"]+'\');"></i></div>';
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="d-inline-block"><i class="fas fa-lg fa-file-excel" title="Reporte solicitud  cdp" style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
                         }
                     }
                 },
@@ -202,10 +202,10 @@
     }
 
     
-	function rprte_cdp(codigo_cdp,scdp_accion){
+	function rprte_solicitudcdp(codigo_cdp,scdp_accion){
         var codigo_cdp = codigo_cdp
         var scdp_accion = scdp_accion
-        window.location.href = 'reportecdp?codigo_cdp='+codigo_cdp+'&scdp_accion='+scdp_accion;
+        window.location.href = 'pdfsolicitudcdp?codigo_cdp='+codigo_cdp+'&scdp_accion='+scdp_accion;
     }
 
 </script>
