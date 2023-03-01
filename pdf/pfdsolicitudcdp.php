@@ -64,9 +64,7 @@ class MYPDF extends TCPDF {
     
 	public function Header(){
        // Logo
-       $codigo="Código: FM-001";
-       $vigencia="Vigente desde: 01/04/2018";
-       $version="Versión: 2";
+    
        $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
        $image_logousco = 'img/logohtml.png';
        $this->setTextColor(0, 0, 0);
@@ -75,10 +73,7 @@ class MYPDF extends TCPDF {
        
        
        $this->SetFillColor(255, 255, 127);
-       
-       $version='GABC-GA-04-01';
-
-       $nombrecolegio='GIMNASIO AMERICANO ABC';
+      
 
        $fchaa = date('Y-m-d');
 
@@ -87,8 +82,7 @@ class MYPDF extends TCPDF {
        $dia_numm = substr($fchaa,8,2);
 
        $fchh = "Fecha: ".$dia_numm."/".$mes_numm."/".$year_numm;
-       
-       $DTOS = 'DIAGNOSTICO';
+    
        $codigo = 'CODIGO';
        $titulo_universidad = 'UNIVERSIDAD SURCOLOMBIANA';
        $titulo_cartera = 'GESTIÓN FINANCIERA Y DE RECURSOS FÍSICOS';
@@ -226,17 +220,17 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false)
 
 ///////////////////////////////////
 
-$codigo_cdp = $_REQUEST['codigo_cdp'];
 
 
 
 
 // set document information
+$nombreDocumento ="SOLICITUD CDP";
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('ABC');
+$pdf->SetAuthor('UNIVERSIDAD SURCOLOMBIANA');
 $pdf->SetTitle($nombreDocumento);
-$pdf->SetSubject('Impresión Diagnostico');
-$pdf->SetKeywords('Certificado, PDF, ABC, DIAGNOSTICO');
+$pdf->SetSubject('Impresión Solicitud CDP');
+$pdf->SetKeywords('Solicitud, PDF, UNIVERSIDAD SURCOLOMBIANA, CDP');
 
 // remove default header/footer
 //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
