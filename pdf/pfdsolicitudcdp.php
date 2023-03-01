@@ -1,12 +1,12 @@
 <?php
 
-use Mpdf\Tag\Center;
+//use Mpdf\Tag\Center;
 
-set_time_limit(1800000000);
+//set_time_limit(1800000000);
 require_once('tcpdf_hefo/config/lang/eng.php');
 require_once('tcpdf_hefo/tcpdf.php');
 
-function nombre_mes($numero_mes){
+/*function nombre_mes($numero_mes){
 
     switch ($numero_mes) {
         case 1:
@@ -56,7 +56,7 @@ function tildes($palabra){
     return $texto;
 }
 
-
+*/
 
 //////////////Yuliana 
 
@@ -65,7 +65,7 @@ class MYPDF extends TCPDF {
 	public function Header(){
        // Logo
     
-       $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
+      // $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
        $image_logousco = 'img/logohtml.png';
        $this->setTextColor(0, 0, 0);
        $this->SetDrawColor(0, 0, 0);
@@ -75,13 +75,13 @@ class MYPDF extends TCPDF {
        $this->SetFillColor(255, 255, 127);
       
 
-       $fchaa = date('Y-m-d');
+       /*$fchaa = date('Y-m-d');
 
        $year_numm = substr($fchaa,0,4);
        $mes_numm = substr($fchaa,5,2);
-       $dia_numm = substr($fchaa,8,2);
+       $dia_numm = substr($fchaa,8,2);*/
 
-       $fchh = "Fecha: ".$dia_numm."/".$mes_numm."/".$year_numm;
+      // $fchh = "Fecha: ".$dia_numm."/".$mes_numm."/".$year_numm;
     
        $codigo = 'CODIGO';
        $titulo_universidad = 'UNIVERSIDAD SURCOLOMBIANA';
@@ -191,7 +191,7 @@ class MYPDF extends TCPDF {
 	// Page footer
 	public function Footer() {
 
-        $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
+        //$style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
 
         // Position at 15 mm from bottom
         $this->SetY(-15);
@@ -220,15 +220,16 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false)
 
 ///////////////////////////////////
 
+$codigo_cdp = $_REQUEST['codigo_cdp'];
 
 
 
 
 // set document information
-$nombreDocumento ="SOLICITUD CDP";
+$nombreDocumento="SOLICITUD CDP No.";
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('UNIVERSIDAD SURCOLOMBIANA');
-$pdf->SetTitle($nombreDocumento);
+$pdf->SetTitle($nombreDocumento.$numero_solicitudCDP);
 $pdf->SetSubject('Impresión Solicitud CDP');
 $pdf->SetKeywords('Solicitud, PDF, UNIVERSIDAD SURCOLOMBIANA, CDP');
 
@@ -265,7 +266,29 @@ $pdf->AddPage();
 //echo '---->'.$codigo_acta;
 
 include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
+
+
+$codigo_cdp = $_REQUEST['codigo_cdp'];
 list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp) = $objRprteSlctudCdp->resolucionPersona($codigo_cdp);
+
+$ceros = '';
+
+  if($scdp_consecutivo <10){
+    $ceros = '0000';
+  }
+  else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
+    $ceros = '000';
+  }
+  else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
+    $ceros = '00';
+  }
+  else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
+    $ceros = '0';
+    
+  }else{
+    $ceros = '';
+  }
+  $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
 
 
 $html.='
@@ -293,30 +316,7 @@ $html.='
         </tr>
 
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
-';
 
-$ceros = '';
-
-  if($scdp_consecutivo <10){
-    $ceros = '0000';
-  }
-  else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
-    $ceros = '000';
-  }
-  else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
-    $ceros = '00';
-  }
-  else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
-    $ceros = '0';
-    
-  }else{
-    $ceros = '';
-  }
-  $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-
-
-$html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
     
         <tr nobr="true">
@@ -333,10 +333,7 @@ $html.='
         </tr>
       
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
-';
-
-$html.='
+    
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
     
         <tr nobr="true">
@@ -347,8 +344,7 @@ $html.='
             <td style="border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black;border-right:1px solid black; height: 80px; font-size:70%;">'.$scdp_objeto.'</td>
         </tr>
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
-';  
+';
 
 
 $excedenteDeFacultad = $objRprteSlctudCdp->excedenteFacultad($codigo_cdp);
@@ -371,7 +367,6 @@ $html.='
 
 
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
 ';
 }
 else{
@@ -392,9 +387,29 @@ else{
 
 
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
+
 ';
 }
+
+$html.='
+    <table nobr="true" style="padding-left: 5px; " cellpadding="2">
+
+    <tr nobr="true">
+        <td style="width: 337px; height: 40px; font-size:70%; text-align:center;"><strong></strong></td>
+    </tr>
+
+    <tr nobr="true">
+    
+        <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">'.$plan_accion.'<br>PLAN DE ACCIÓN:</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>VALOR</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>CODIGO PRESUPUESTAL</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>CODIGO DANE</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>FUENTE DE FINANCIACIÓN</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>ESTAPA DE LA ACTIVIDAD No.</th>
+    
+    </tr>
+    </table>
+';
 
 $lista_poai = $objRprteSlctudCdp->poai($codigo_cdp);
   $num_registro=25;
@@ -418,27 +433,10 @@ $lista_poai = $objRprteSlctudCdp->poai($codigo_cdp);
       $poa_etapa = $poa_referencia." ".$poa_numero;
 
 $html.='
+       
     <table nobr="true" style="padding-left: 5px; " cellpadding="2">
 
         <tr nobr="true">
-            <td style="width: 337px; height: 40px; font-size:70%; text-align:center;"><strong></strong></td>
-        </tr>
-    
-        <tr nobr="true">
-           
-            <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">'.$plan_accion.'<br>PLAN DE ACCIÓN:</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>VALOR</th>
-            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>CODIGO PRESUPUESTAL</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>CODIGO DANE</th>
-            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>FUENTE DE FINANCIACIÓN</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>ESTAPA DE LA ACTIVIDAD No.</th>
-           
-        </tr>
-
-       
-
-        <tr nobr="true">
-           
             <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br></th>
             <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>'.$esc_valor.'</th>
             <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>'.$esc_clasificador.'</th>
@@ -447,14 +445,7 @@ $html.='
             <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>'.$poa_etapa.'</th>
            
         </tr>
-        
-        <tr nobr="true">
-           
-    
-        </tr>
-      
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
 ';
   }
 }
@@ -485,49 +476,40 @@ $html.='
 
 
     </table>
-    <p style="font-size: 30px;"> &nbsp;</p>
 ';
 
 
-
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////------------------------------------------------------------
+///////////////////////////////////////////////////////------------------------------------------------------------
 $tagvs = array('p' => array(0 => array('h' => 0, 'n' => 0), 1 => array('h' => 0, 'n' => 0)));
 $pdf->setHtmlVSpace($tagvs);
 
-$pdf->setCellMargins(0, 0, 0, 0);
-$pdf->setCellPaddings(0, 0, 0, 0);
+//$pdf->setCellMargins(0, 0, 0, 0);
+//$pdf->setCellPaddings(0, 0, 0, 0);
 
 // output the HTML content
 $pdf->writeHTML($html, true, 0, true, 10);
 
 
-$y = $pdf->getY();
+//$y = $pdf->getY();
 
 
 // set color for background
-$pdf->SetFillColor(255, 255, 255);
+//$pdf->SetFillColor(255, 255, 255);
 
 // set color for text
-$pdf->SetTextColor(0, 0, 0);
+//$pdf->SetTextColor(0, 0, 0);
 
 // write the first column
-$pdf->writeHTMLCell(90, '', '', $y, $left_column, 0, 0, 0, true, 'J', true);
+//$pdf->writeHTMLCell(90, '', '', $y, $left_column, 0, 0, 0, true, 'J', true);
 
 // set color for background
-$pdf->SetFillColor(255, 255, 255);
+//$pdf->SetFillColor(255, 255, 255);
 
 // set color for text
-$pdf->SetTextColor(0, 0, 0);
+//$pdf->SetTextColor(0, 0, 0);
 
 // write the second column
-$pdf->writeHTMLCell(80, '', '', '', $right_column, 0, 0, 0, true, 'J', true);
+//$pdf->writeHTMLCell(80, '', '', '', $right_column, 0, 0, 0, true, 'J', true);
 
 
 
@@ -542,7 +524,8 @@ Resto del código que genera el PDF
 ob_end_clean();
 /* Finalmente generamos el PDF */
 //Close and output PDF document
-$pdf->Output($nombreDocumento.'.pdf', 'I');
+$pdf->SetTitle($nombreDocumento.' '.$numero_solicitudCDP);
+$pdf->Output($nombreDocumento.$numero_solicitudCDP.'.pdf');
 
 //-------------------------------------------------------------------------
 
