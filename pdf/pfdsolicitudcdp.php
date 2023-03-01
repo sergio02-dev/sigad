@@ -2,7 +2,7 @@
 
 //use Mpdf\Tag\Center;
 
-//set_time_limit(1800000000);
+set_time_limit(1800000000);
 require_once('tcpdf_hefo/config/lang/eng.php');
 require_once('tcpdf_hefo/tcpdf.php');
 
