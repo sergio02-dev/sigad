@@ -127,19 +127,19 @@ class MYPDF extends TCPDF {
        $this->SetFillColor(185, 33, 9);
        $this->setTextColor(255, 255, 255);
        $this->SetFont('dejavusans', 'B', 9);
-       $this->MultiCell(130, 7.5, $titulo_cartera, 0, 'C', 1, 2, '35', '12', true,0,false,true,5);
+       $this->MultiCell(130, 7.5, $titulo_cartera, 0, 'C', 1, 2, '35.2', '12', true,0,false,true,5);
 
        //TITULO FORMATO
        $this->SetFillColor(255, 255, 255);
        $this->setTextColor(0,0,0);
        $this->SetFont('dejavusans', 'B', 9);
-       $this->MultiCell(130, 7.5, $titulo_formato, 0, 'C', 1, 1, '35', '20', true,0,false,true,5);
+       $this->MultiCell(130, 7.5, $titulo_formato, 0, 'C', 1, 1, '35.2', '20', true,0,false,true,5);
 
        //SUBTITULO FORMATO
        $this->SetFillColor(255, 255, 255);
        $this->setTextColor(0,0,0);
        $this->SetFont('dejavusans', 'B', 9);
-       $this->MultiCell(130, 7.5, $subtitulo_formato, 0, 'C', 1, 1, '35', '27.2', true,0,false,true,5);
+       $this->MultiCell(130, 7.5, $subtitulo_formato, 0, 'C', 1, 1, '35.2', '27.2', true,0,false,true,5);
 
        //CODIGO FORMATO
        $this->SetFillColor(255, 255, 255);
