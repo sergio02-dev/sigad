@@ -1,10 +1,16 @@
 <?php
 
-//use Mpdf\Tag\Center;
+
+use Mpdf\Tag\Center;
 
 set_time_limit(1800000000);
 require_once('tcpdf_hefo/config/lang/eng.php');
 require_once('tcpdf_hefo/tcpdf.php');
+
+$cnxion = Dtbs::getInstance();
+
+
+$codigo_cdp = $_REQUEST['codigo_cdp'];
 
 /*function nombre_mes($numero_mes){
 
@@ -66,7 +72,7 @@ class MYPDF extends TCPDF {
        // Logo
     
       // $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
-       $image_logousco = 'img/logohtml.png';
+       $image_logousco = 'plantilla/img/logo2.png';
        $this->setTextColor(0, 0, 0);
        $this->SetDrawColor(0, 0, 0);
        $this->SetLineWidth(0.1);
@@ -179,7 +185,7 @@ class MYPDF extends TCPDF {
        $this->MultiCell(40, 7, $num_pagina, 1, 'C', 1, 1, '165', '35', true,0,false,true,5);
 
        //IMAGEN ISO CALIDAD
-       $image_calidad = 'plantilla/img/log.png';
+       $image_calidad = 'plantilla/img/logocalidad.png';
        $this->setTextColor(0, 0, 0);
        $this->SetDrawColor(0, 0, 0);
        $this->SetLineWidth(0.1);
@@ -215,18 +221,191 @@ class MYPDF extends TCPDF {
 	}
 
 }
+    $sql_poai="SELECT poa_referencia, poa_numero , esc_valor, esc_clasificador, esc_dane, esc_deq
+                 FROM cdp.etapa_solicitud_clasificador
+           INNER JOIN planaccion.poai ON esc_etapa = poa_codigo
+                WHERE esc_solicitud = $codigo_cdp
+             ORDER BY poa_referencia,poa_numero;";
+
+    $resultado_poai=$cnxion->ejecutar($sql_poai);
+
+    while ($data_poai = $cnxion->obtener_filas($resultado_poai)){
+    $datapoai[] = $data_poai;
+    }
+    
+
+    $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 
+                                FROM usco.responsable
+                                WHERE res_codigo IN(SELECT ror_ordenador 
+                                                      FROM usco.responsable, usco.vinculacion, usco.registro_ordenador, cdp.solicitud_cdp
+                                                     WHERE res_codigo = ror_registro
+                                                      AND  vin_cargo = res_codigocargo
+                                                       AND vin_oficina = res_codigooficina
+                                                       AND res_nivel = 3
+                                                       AND res_tiporesponsable = 1
+                                                       AND res_codigonivel = scdp_accion
+                                                       AND vin_persona = ".$_SESSION['idusuario']."
+                                                       AND vin_estado = 1);";
+        
+    $resultado_resolucionPersona = $cnxion->ejecutar($sql_resolucionPersona);
+    
+    $data_resolucionPersona= $cnxion->obtener_filas($resultado_resolucionPersona);
+
+    $numero_filas= $cnxion->numero_filas($resultado_resolucionPersona);
+
+    if($numero_filas == 0){
+        $res_codigooficina= 0;
+        $res_codigocargo = 0;
+    }
+    else{
+        $res_codigooficina= $data_resolucionPersona['res_codigooficina'];
+        $res_codigocargo = $data_resolucionPersona['res_codigocargo'];
+    }
+            
+           
+
+    $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
+                                       per_nombre, per_primerapellido, per_segundoapellido ,
+                                       scdp_resolucion, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo,per_codigo, vin_cargo,car_nombre
+                                  FROM usco.vinculacion
+                            INNER JOIN principal.persona ON vin_persona = per_codigo
+                            INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
+                            INNER JOIN cdp.solicitud_cdp ON  scdp_resolucion = rep_resolucion
+                            INNER JOIN usco.cargo ON vin_cargo = car_codigo 
+                                 WHERE vin_cargo = $res_codigocargo
+                                   AND scdp_codigo = $codigo_cdp
+                                   AND vin_oficina = $res_codigooficina
+                                   AND rep_estado = 1;";
+
+    $resultado_resolucionOrdenador = $cnxion->ejecutar($sql_resolucionOrdenador);
+
+    $data_resolucionOrdenador= $cnxion->obtener_filas($resultado_resolucionOrdenador);
+
+    $sql_suma_valor_solicitud="SELECT SUM(aso_valor) AS valor_cdp
+                                 FROM cdp.asignacion_solicitud
+                                WHERE aso_solicitud = $codigo_cdp;";
+
+
+    $query_suma_valor_solicitud=$cnxion->ejecutar($sql_suma_valor_solicitud);
+
+    $data_suma_valor_solicitud=$cnxion->obtener_filas($query_suma_valor_solicitud);
+
+    $valor_cdp = $data_suma_valor_solicitud['valor_cdp'];
+            
+    $scdp_resolucion = $data_resolucionOrdenador['scdp_resolucion'];
+    $scdp_fecharesolucion = date('d/m/Y',strtotime($data_resolucionOrdenador['scdp_fecharesolucion']));
+    $scdp_objeto = $data_resolucionOrdenador['scdp_objeto'];
+    $scdp_numero = $data_resolucionOrdenador['scdp_numero'];
+    $scdp_consecutivo = $data_resolucionOrdenador['scdp_consecutivo'];
+    
+
+    $per_nombre = $data_resolucionOrdenador['per_nombre'];
+    $per_primerapellido = $data_resolucionOrdenador['per_primerapellido'];
+    $per_segundoapellido = $data_resolucionOrdenador['per_segundoapellido'];
+    $car_nombre = $data_resolucionOrdenador['car_nombre'];
+
+
+    $people=$per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
+
+
+
+    $sql_ultimocaracteres= "SELECT  esc_clasificador
+                                FROM cdp.etapa_solicitud_clasificador
+                                WHERE esc_solicitud = $codigo_cdp;";
+
+    $query_ultimocaracteres=$cnxion->ejecutar($sql_ultimocaracteres);
+    $data_ultimocaracteres = $cnxion->obtener_filas($query_ultimocaracteres);
+    $esc_clasificador = $data_ultimocaracteres['esc_clasificador'];
+           
+    $str = $esc_clasificador;   
+    $numero_caracteres = strlen($str); 
+    $desde = $numero_caracteres - 2;
+    $ultimos_caracteres= substr($str,$desde,2);
+     
+
+    $sql_fuentes_financiacionCDP="SELECT fup_nombre
+                            FROM usco.fuentes_presupuesto 
+                            WHERE fup_linix = $ultimos_caracteres;  ";
+
+    $resultado_fuentes_financiacionCDP = $cnxion->ejecutar($sql_fuentes_financiacionCDP);
+
+    $data_fuentes_financiacionCDP = $cnxion->obtener_filas($resultado_fuentes_financiacionCDP);
+
+    $pde_fuentes_financiacionCDP = $data_fuentes_financiacionCDP['fup_nombre'];
+
+
+
+    $sql_excedenteFacultad = "SELECT  esc_clasificador
+                                FROM cdp.etapa_solicitud_clasificador
+                                WHERE esc_solicitud = $codigo_cdp;";
+
+    $query_excedenteFacultad=$cnxion->ejecutar($sql_excedenteFacultad);
+
+    $numExecedente = 0;
+
+    while ($data_excedenteFacultad = $cnxion->obtener_filas($query_excedenteFacultad)){
+    $esc_clasificador = $data_excedenteFacultad['esc_clasificador'];
+
+    $str = $esc_clasificador;   
+    $numero_caracteres = strlen($str); 
+    $desde = $numero_caracteres - 2;
+    $ultimos_caracteres= substr($str,$desde,2);
+
+    $validar_excedentes_facultad = "SELECT fup_excfacultad
+                                        FROM usco.fuentes_presupuesto
+                                    WHERE fup_linix = $ultimos_caracteres;";
+
+    $resultado_validar_excedentes_facultad = $cnxion->ejecutar($validar_excedentes_facultad);
+
+    $data_validar_excedentes_facultad = $cnxion->obtener_filas($resultado_validar_excedentes_facultad);
+
+    $fup_excfacultad = $data_validar_excedentes_facultad['fup_excfacultad'];
+
+
+    if($validar_excedentes_facultad==1){
+            $numExecedente++;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false);
 
 ///////////////////////////////////
 
-$codigo_cdp = $_REQUEST['codigo_cdp'];
 
 
 
 
 // set document information
-$nombreDocumento="SOLICITUD CDP No.";
+$nombreDocumento="SOLICITUD_CDP_No.";
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('UNIVERSIDAD SURCOLOMBIANA');
 $pdf->SetTitle($nombreDocumento.$numero_solicitudCDP);
@@ -265,11 +444,6 @@ $pdf->SetFont('helvetica', '', 15);
 $pdf->AddPage();
 //echo '---->'.$codigo_acta;
 
-include('crud/rs/rprte_slctud_cdp/rprte_slctud_cdp.php');
-
-
-$codigo_cdp = $_REQUEST['codigo_cdp'];
-list($people,$car_nombre,$scdp_resolucion,$scdp_fecharesolucion,$scdp_numero,$scdp_consecutivo,$scdp_objeto,$valor_cdp) = $objRprteSlctudCdp->resolucionPersona($codigo_cdp);
 
 $ceros = '';
 
@@ -347,9 +521,7 @@ $html.='
 ';
 
 
-$excedenteDeFacultad = $objRprteSlctudCdp->excedenteFacultad($codigo_cdp);
-
-if($excedenteDeFacultad==1){
+if($numExecedente==1){
 $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
         
@@ -411,7 +583,7 @@ $html.='
     </table>
 ';
 
-$lista_poai = $objRprteSlctudCdp->poai($codigo_cdp);
+$lista_poai = $datapoai;
   $num_registro=25;
   $id_registro=1;
   if($lista_poai){
@@ -422,13 +594,9 @@ $lista_poai = $objRprteSlctudCdp->poai($codigo_cdp);
       $esc_clasificador = $data_lista_etapa['esc_clasificador'];
       $esc_dane = $data_lista_etapa['esc_dane'];
       
-      
-      $str = $esc_clasificador;
-      $numero_caracteres = strlen($str); 
-      $desde = $numero_caracteres - 2;
-      $ultimos_caracteres= substr($str,$desde,2);
+    
 
-      $fuente = $objRprteSlctudCdp->fuentes_financiacionCDP($ultimos_caracteres);
+      $fuente = $pde_fuentes_financiacionCDP;
       
       $poa_etapa = $poa_referencia." ".$poa_numero;
 
@@ -447,7 +615,7 @@ $html.='
         </tr>
     </table>
 ';
-  }
+ }
 }
 
 $html.='
