@@ -1,59 +1,55 @@
 <?php
 
-use Mpdf\Tag\Select;
+
 
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
 
     $codigo_accion = $_REQUEST['codigo_accion'];
 
     $activity_list = $objSolicitudCdp->actividades_accion($codigo_accion);
-    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
+   list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
     //echo "CODIGO ACCION ->>".$codigo_accion
     
-?>
-
-
-<?php
 
     $codigo_session = $_SESSION['idusuario'];
     if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
 
-        $list_ordenadores = $objSolicitudCdp->list_ordenadores($codigo_accion);
+        $jsonOrdenadores= $objSolicitudCdp->jsonOrdenadores($codigo_accion);
+
 ?>
-    <div class="row " >
-                
-        <div class="col-sm-4" >
-                <div class="form-group p-3">
-                    <label for="selOrdenador" class="font-weight-bold">Ordenador</label>
-                    <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required <?php echo $disabled; ?>>
-                      <option value="0" data-codigo_ordenador="0">Seleccione...</option>
-                            <?php
-                            if($list_ordenadores){
-                                foreach ($list_ordenadores as $dat_ordenadores) {
-                                    $res_codigo = $dat_ordenadores['res_codigo'];
-                                    $per_nombre = $dat_ordenadores['per_nombre'];
-                                    $per_primerapellido = $dat_ordenadores['per_primerapellido'];
-                                    $per_segundoapellido = $dat_ordenadores['per_segundoapellido'];
-
-                                    $nombre_ordenadores = $per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
-                            ?>
-                                <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?>"><?php echo $nombre_ordenadores; ?></option>
-                            <?php
-                                }  
-                            }
-                            else{
-
-                             ?>
-                            <option value="0"> No hay ordenadores</option>
+<div class="row">          
+    <div class="col-sm-11" >
+        <div class="form-group ">
+                <label for="selOrdenador" class="font-weight-bold">Ordenador</label>
+                <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer">
+                    <option value="0" data-codigo_ordenador="0">Seleccione...</option>
                         <?php
-                            }
+                            if($jsonOrdenadores){
+                                foreach ($jsonOrdenadores as $dat_ordenadores) {
+                                    $res_codigo = $dat_ordenadores['res_codigo'];
+                                    $rep_resolucion = $dat_ordenadores['rep_resolucion'];
+                                    $rep_fecharesolucion = $dat_ordenadores['rep_fecharesolucion'];
+                                    $nombre_ordenadores = $dat_ordenadores['nombre_ordenadores'];
                         ?>
-                           
-                    </select>
-                <span class="help-block" id="error"></span>    
-            </div>
+                            <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?><?php echo $rep_fecharesolucion?><?php echo $rep_resolucion?>"><?php echo $nombre_ordenadores; ?></option>              
+                            
+                        <?php
+                            }  
+                        }
+                        else{
+
+                        ?>
+                        <option value="0"> No hay ordenadores</option>
+                    <?php
+                        }
+                    ?>
+                    
+                </select>
+            <span class="help-block" id="error"></span>    
         </div>
     </div>
+</div>  
+
 
 
 <?php  
@@ -130,6 +126,7 @@ use Mpdf\Tag\Select;
 
 <span id="error_solicitud" style="color:red; font-weight: bold;"></span>
 <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>>">
+
 
 <script type="text/javascript">
 
