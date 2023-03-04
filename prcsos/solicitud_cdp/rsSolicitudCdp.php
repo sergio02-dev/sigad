@@ -1042,6 +1042,26 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
+    public function list_ordenadores($codigo_accion){
+
+        $sql_list_ordenadores = "SELECT per_nombre,per_primerapellido,per_segundoapellido,res_codigo
+                                   FROM usco.responsable
+                             INNER JOIN usco.vinculacion ON vin_oficina = res_codigooficina
+                            INNER JOIN  principal.persona ON vin_persona = per_codigo
+                                  WHERE res_codigonivel = $codigo_accion
+                                    AND vin_cargo = res_codigocargo
+                                    AND res_tiporesponsable = 2
+                                    AND vin_estado = 1
+                                    AND res_estado = 1;";
+
+        $query_list_ordenadores = $this->cnxion->ejecutar($sql_list_ordenadores);
+
+        while($data_list_ordenadores=$this->cnxion->obtener_filas($query_list_ordenadores)){
+            $datalist_ordenadores[] = $data_list_ordenadores;
+        }
+        return $datalist_ordenadores;
+    }
+
     public function resolucionPersona($codigo_poai){        
 
         $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 

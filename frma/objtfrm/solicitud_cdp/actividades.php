@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use Mpdf\Tag\Select;
 
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
 
@@ -7,8 +9,56 @@
     $activity_list = $objSolicitudCdp->actividades_accion($codigo_accion);
     list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
     //echo "CODIGO ACCION ->>".$codigo_accion
+    
 ?>
 
+
+<?php
+
+    $codigo_session = $_SESSION['idusuario'];
+    if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+
+        $list_ordenadores = $objSolicitudCdp->list_ordenadores($codigo_accion);
+?>
+    <div class="row " >
+                
+        <div class="col-sm-4" >
+                <div class="form-group p-3">
+                    <label for="selOrdenador" class="font-weight-bold">Ordenador</label>
+                    <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required <?php echo $disabled; ?>>
+                      <option value="0" data-codigo_ordenador="0">Seleccione...</option>
+                            <?php
+                            if($list_ordenadores){
+                                foreach ($list_ordenadores as $dat_ordenadores) {
+                                    $res_codigo = $dat_ordenadores['res_codigo'];
+                                    $per_nombre = $dat_ordenadores['per_nombre'];
+                                    $per_primerapellido = $dat_ordenadores['per_primerapellido'];
+                                    $per_segundoapellido = $dat_ordenadores['per_segundoapellido'];
+
+                                    $nombre_ordenadores = $per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
+                            ?>
+                                <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?>"><?php echo $nombre_ordenadores; ?></option>
+                            <?php
+                                }  
+                            }
+                            else{
+
+                             ?>
+                            <option value="0"> No hay ordenadores</option>
+                        <?php
+                            }
+                        ?>
+                           
+                    </select>
+                <span class="help-block" id="error"></span>    
+            </div>
+        </div>
+    </div>
+
+
+<?php  
+    }
+?>
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group">
