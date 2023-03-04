@@ -136,6 +136,8 @@
             });
         </script>
 
+
+
         <div class="row">
             <div class="col-sm-12" >
                 <div class="form-group" id="actvdades_lista">
@@ -144,6 +146,8 @@
 
             </div>
         </div>
+
+
 
         <div class="row">
             <div class="col-sm-12" id="etpas_lista">
