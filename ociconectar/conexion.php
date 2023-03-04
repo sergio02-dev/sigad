@@ -83,6 +83,59 @@
 
 			return array($nombre, $numero);
 		}
+
+		public function list_cdp(){
+
+			$sql_clasificadores="SELECT K_NUMDOC, F_MOVIMI, F_CANCEL,
+										N_OBJECT, K_NUMDOC_CIA, F_VIGENCIA,
+										V_MONTO
+
+								   FROM PS070MRUBRO
+								  WHERE K_RUBRO LIKE '24%'";
+
+			$resulatdo_clasificadores=$this->cnxionoci->ejecutaroci($sql_clasificadores);
+
+			while($data_clasificadores =$this->cnxionoci->obtener_filasoci($resulatdo_clasificadores)){
+				$dataclasificadores[]=$data_clasificadores;
+			}
+			return $dataclasificadores;
+		}
+		
+		/*public function jsonCsfcdores(){
+			$list_cldfcadores = $this->clasificadores();
+			if($list_cldfcadores){
+				foreach ($list_cldfcadores as $dta_clsfcdores) {
+					$cla_codigo = $dta_clsfcdores['K_RUBRO'];
+					$cla_nombre = $dta_clsfcdores['N_RUBRO'];
+					$cla_numero = $dta_clsfcdores['K_RUBRO'];
+	
+					$rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
+										   'cla_nombre'=> $cla_nombre, 
+										   'cla_numero'=> $cla_numero
+										);
+	
+				}
+				$datClasificadores = json_encode(array("data"=>$rsClsfcdres));
+			}
+			else{
+				$datClasificadores = json_encode(array("data"=>""));
+			}
+			return $datClasificadores;
+		}*/
+
+
+		public function list_rp(){
+
+			$sql_clasificadores="SELECT K_RUBRO,N_RUBRO FROM PS070MRUBRO
+								  WHERE K_RUBRO LIKE '24%'";
+
+			$resulatdo_clasificadores=$this->cnxionoci->ejecutaroci($sql_clasificadores);
+
+			while($data_clasificadores =$this->cnxionoci->obtener_filasoci($resulatdo_clasificadores)){
+				$dataclasificadores[]=$data_clasificadores;
+			}
+			return $dataclasificadores;
+		}
 		
 	}
 

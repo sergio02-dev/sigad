@@ -370,32 +370,6 @@ class MYPDF extends TCPDF {
 
 
 
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false);
 
 ///////////////////////////////////
@@ -502,7 +476,7 @@ $html.='
         
         <tr nobr="true">
            
-            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">'.$expedido_por.'<br>EXPEDIDO POR:</td>
+            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; "><br>EXPEDIDO POR:</td>
             <td style="width: 200px; height: 10px; font-size:70%; text-align:left; "><br>JEFE DE PRESUPUESTO</td>
         </tr>
       
@@ -520,8 +494,15 @@ $html.='
     </table>
 ';
 
-
 if($numExecedente==1){
+    $excedente_si = "X";
+    $excedente_no = "";
+}
+else{
+    $excedente_si = "";
+    $excedente_no = "X";
+}
+
 $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
         
@@ -529,39 +510,18 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">'.$excedentes_facultad.'<br>EXCEDENTES DE FACULTAD:</td>
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;"><br>EXCEDENTES DE FACULTAD:</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">X</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_si.'</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center"></td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_no.'</td>
         
         </tr>
 
 
     </table>
 ';
-}
-else{
-    $html.='
-    <table nobr="true" style="padding-left: 5px;" cellpadding="2">
-        
-        <tr nobr="true">
-            <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
-        </tr>
-        <tr nobr="true">
-            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">'.$excedentes_facultad.'<br>EXCEDENTES DE FACULTAD:</td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center"></td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
-            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">X</td>
-        
-        </tr>
 
-
-    </table>
-
-';
-}
 
 $html.='
     <table nobr="true" style="padding-left: 5px; " cellpadding="2">
@@ -605,12 +565,12 @@ $html.='
     <table nobr="true" style="padding-left: 5px; " cellpadding="2">
 
         <tr nobr="true">
-            <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br></th>
-            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>'.$esc_valor.'</th>
-            <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>'.$esc_clasificador.'</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>'. $esc_dane.'</th>
-            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>'.$fuente.'</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>'.$poa_etapa.'</th>
+            <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "></th>
+            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.number_format($esc_valor,0,'','.').'</th>
+            <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$esc_clasificador.'</th>
+            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'. $esc_dane.'</th>
+            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente.'</th>
+            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$poa_etapa.'</th>
            
         </tr>
     </table>
