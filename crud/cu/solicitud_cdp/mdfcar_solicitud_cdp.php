@@ -11,6 +11,8 @@
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
     $txtObjetoCDP = $_REQUEST['txtObjetoCDP'];
     $txtNumeroSolicitud = $_REQUEST['txtNumeroSolicitud'];
+    $txtResolucion = $_REQUEST['txtResolucion'];
+    $txtFechaResolucion = $_REQUEST['txtFechaResolucion'];
    
     $modificarsolicitudcdp = new MdfcarSolicitudCdp();
 
@@ -101,6 +103,8 @@
     $modificarsolicitudcdp->setCodigo($codigo_solicitud);
     $modificarsolicitudcdp->setObjeto($txtObjetoCDP);
     $modificarsolicitudcdp->setConsecutivo($txtNumeroSolicitud);
+    $modificarsolicitudcdp->setResolucion($txtResolucion);
+    $modificarsolicitudcdp->setFechaResolucion($txtFechaResolucion);
 
     echo  $modificarsolicitudcdp->mdfcarSolicitud();
     

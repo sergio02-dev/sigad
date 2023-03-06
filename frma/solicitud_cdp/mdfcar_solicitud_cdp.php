@@ -157,7 +157,7 @@
         <div class="form-group">
             <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
             <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo  $resolucionPersona; ?>" readonly>
-           
+            <input type="hidden" name="txtResolucion" id="txtResolucion2" value="<?php  echo $resolucionPersona ; ?>">
         </div>
     </div>
 
@@ -165,7 +165,7 @@
         <div class="form-group">
             <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
             <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo  $resolucionFecha ; ?>" readonly >
-     
+            <input type="hidden" name="txtFechaResolucion" id="txtFechaResolucion2" value="<?php  echo $resolucionFecha ; ?>">
         </div>
     </div>  
 </div>
@@ -846,6 +846,8 @@
         
         $('#txtFechaResolucion').val(codigo_fecharesolucion);
         $('#txtResolucion').val(codigo_resolucion);
+        $('#txtFechaResolucion2').val(codigo_fecharesolucion);
+        $('#txtResolucion2').val(codigo_resolucion);
 
     });
     

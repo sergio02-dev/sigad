@@ -389,9 +389,9 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         $data_codigoresolucion= $this->cnxion->obtener_filas($resultado_codigoresolucion);
 
         $rep_codigo= $data_codigoresolucion['rep_codigo'];
-
+        
         return $rep_codigo;
- 
+       
     }
 
     public function resolucionPersona(){
@@ -525,12 +525,12 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            '".$this->getResolucion()."',
                                            '".$this->getFechaResolucion()."',
                                            '".$this->getObjeto()."',
-                                           ".$this->getConsecutivo()."
+                                           ".$this->getConsecutivo().",
                                            $codigoresolucion);";
         
                 
-        $this->cnxion->ejecutar($insert_solicitud_cdp);
-        
+         $this->cnxion->ejecutar($insert_solicitud_cdp);
+
         $datos_etapa = $this->getArrayDatos();
 
         if($datos_etapa){
