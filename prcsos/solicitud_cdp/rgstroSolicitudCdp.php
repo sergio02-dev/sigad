@@ -378,6 +378,22 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         return array($oficina_guardar, $cargo_guardar);
     }
 
+    public function codigoresolucion(){
+
+        $sql_codigoresolucion = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_resolucion = '".$this->getResolucion()."';";
+
+        $resultado_codigoresolucion = $this->cnxion->ejecutar($sql_codigoresolucion);
+
+        $data_codigoresolucion= $this->cnxion->obtener_filas($resultado_codigoresolucion);
+
+        $rep_codigo= $data_codigoresolucion['rep_codigo'];
+
+        return $rep_codigo;
+ 
+    }
+
     public function resolucionPersona(){
 
         $sql_resolucionPersona = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
@@ -474,6 +490,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
             $cargs = 0;
         }
 
+        $codigoresolucion = $this->codigoresolucion();
+
         $insert_solicitud_cdp="INSERT INTO cdp.solicitud_cdp(
                                            scdp_codigo, 
                                            scdp_fecha, 
@@ -490,7 +508,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            scdp_resolucion, 
                                            scdp_fecharesolucion, 
                                            scdp_objeto,
-                                           scdp_consecutivo)
+                                           scdp_consecutivo,
+                                           scdp_codigoresolucion)
                                    VALUES (".$this->codigoSolicitud.", 
                                            '".$this->getFecha()."', 
                                            '".$this->scdp_numero."', 
@@ -506,7 +525,8 @@ class RgstroSolicitudCdp extends SolicitudCdp{
                                            '".$this->getResolucion()."',
                                            '".$this->getFechaResolucion()."',
                                            '".$this->getObjeto()."',
-                                           ".$this->getConsecutivo().");";
+                                           ".$this->getConsecutivo()."
+                                           $codigoresolucion);";
         
                 
         $this->cnxion->ejecutar($insert_solicitud_cdp);
