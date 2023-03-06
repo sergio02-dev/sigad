@@ -277,9 +277,9 @@ class MYPDF extends TCPDF {
 
 
 
-    $sql_ultimocaracteres= "SELECT  esc_clasificador
-                                FROM cdp.etapa_solicitud_clasificador
-                                WHERE esc_solicitud = $codigo_cdp;";
+        $sql_ultimocaracteres= "SELECT  esc_clasificador
+                                    FROM cdp.etapa_solicitud_clasificador
+                                    WHERE esc_solicitud = $codigo_cdp;";
 
     $query_ultimocaracteres=$cnxion->ejecutar($sql_ultimocaracteres);
     $data_ultimocaracteres = $cnxion->obtener_filas($query_ultimocaracteres);
@@ -330,7 +330,7 @@ class MYPDF extends TCPDF {
     $fup_excfacultad = $data_validar_excedentes_facultad['fup_excfacultad'];
 
 
-    if($validar_excedentes_facultad==1){
+    if($fup_excfacultad==1){
             $numExecedente++;
         }
 
@@ -405,23 +405,23 @@ $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
     
         <tr nobr="true">
-            <td style="width: 336px; height: 40px; font-size:70%; text-align:left;"><strong>'.$ordenador_gasto.'<br>ORDENADOR DEL GASTO:</strong></td>
+            <td style="width: 336px; height: 40px; font-size:70%; text-align:left;"><strong><br>ORDENADOR DEL GASTO:</strong></td>
          
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left; text-transform: uppercase;">'.$nombreordenador_gasto.'<br>NOMBRE:&nbsp;'.$people.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left; text-transform: uppercase;">NOMBRE:&nbsp;'.$people.'</td>
             
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$cargoordenador_gasto.'<br>CARGO:&nbsp;'.$car_nombre.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">CARGO:&nbsp;'.$car_nombre.'</td>
             
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$resolucionordenador_gasto.'<br>RESOLUCION ORDENACIÓN DEL GASTO No:&nbsp;'.$scdp_resolucion.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">RESOLUCION ORDENACIÓN DEL GASTO No:&nbsp;'.$scdp_resolucion.'</td>
       
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$fechaordenador_gasto.'<br>FECHA:&nbsp;'.$scdp_fecharesolucion.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">FECHA:&nbsp;'.$scdp_fecharesolucion.'</td>
        
         </tr>
 
@@ -431,15 +431,15 @@ $html.='
     
         <tr nobr="true">
            
-            <td style="width: 450px; height: 10px; font-size:70%; text-align:right; left:50;">'.$solicitud_numero.'<br>SOLICITUD No:&nbsp;'.$numero_solicitudCDP.'</td>
+            <td style="width: 450px; height: 10px; font-size:70%; text-align:right; left:50;">SOLICITUD No:&nbsp;'.$numero_solicitudCDP.'</td>
 
             <td style="width: 337px; height: 40px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         
         <tr nobr="true">
            
-            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">'.$expedido_por.'<br>EXPEDIDO POR:</td>
-            <td style="width: 200px; height: 10px; font-size:70%; text-align:left; "><br>JEFE DE PRESUPUESTO</td>
+            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">EXPEDIDO POR:</td>
+            <td style="width: 200px; height: 10px; font-size:70%; text-align:left; ">JEFE DE PRESUPUESTO</td>
         </tr>
       
     </table>
@@ -450,8 +450,8 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 100px; height: 10px; font-size:70%; text-align:left;">'.$objeto.'<br>OBJETO:&nbsp;</td>
-            <td style="border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black;border-right:1px solid black; height: 80px; font-size:70%;">'.$scdp_objeto.'</td>
+            <td style="width: 100px; height: 10px; font-size:70%; text-align:left;">OBJETO:&nbsp;</td>
+            <td style="border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black;border-right:1px solid black; height: 80px; font-size:50%;">'.$scdp_objeto.'</td>
         </tr>
     </table>
 ';
@@ -472,7 +472,7 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">'.$excedentes_facultad.'<br>EXCEDENTES DE FACULTAD:</td>
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">EXCEDENTES DE FACULTAD:</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$checkexcedentesi.'</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
@@ -494,12 +494,12 @@ $html.='
 
     <tr nobr="true">
     
-        <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">'.$plan_accion.'<br>PLAN DE ACCIÓN:</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>VALOR</th>
-        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>CODIGO PRESUPUESTAL</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>CODIGO DANE</th>
-        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>FUENTE DE FINANCIACIÓN</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>ESTAPA DE LA ACTIVIDAD No.</th>
+        <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">PLAN DE ACCIÓN:</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">VALOR</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">CODIGO PRESUPUESTAL</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">CODIGO DANE</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">FUENTE DE FINANCIACIÓN</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">ETAPA DE LA ACTIVIDAD No.</th>
     
     </tr>
     </table>
@@ -527,12 +527,12 @@ $html.='
     <table nobr="true" style="padding-left: 5px; " cellpadding="2">
 
         <tr nobr="true">
-            <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br></th>
-            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>'.$esc_valor.'</th>
-            <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>'.$esc_clasificador.'</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>'. $esc_dane.'</th>
-            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>'.$fuente.'</th>
-            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>'.$poa_etapa.'</th>
+            <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "></th>
+            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "> '."$".number_format($esc_valor,0,'','.').'</th>
+            <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$esc_clasificador.'</th>
+            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'. $esc_dane.'</th>
+            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente.'</th>
+            <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$poa_etapa.'</th>
            
         </tr>
     </table>
@@ -547,21 +547,21 @@ $html.='
             <td style="width: 337px; height: 100px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 2px; font-size:70%; text-align:left;">'.$otros_conceptos.'<br><strong>OTROS CONCEPTOS:</strong></td>
+            <td style="width: 200px; height: 2px; font-size:70%; text-align:left;"><strong>OTROS CONCEPTOS:</strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">'.$valor_total.'<br><strong>VALOR TOTAL SOLICITADO:</strong></td>
-            <td style="width: 200px; height: 40px; font-size:60%; text-align:left;">'.$valor_total.'<br>'.$valor_cdp.'</td>
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;"><strong>VALOR TOTAL SOLICITADO:</strong></td>
+            <td style="width: 200px; height: 40px; font-size:60%; text-align:left;">'."$".number_format($valor_cdp,0,'','.').'</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 300px; height: 20px; font-size:60%; text-align:center;">'.$vigencia_cdp.'<br><strong>VIGENCIA DEL CDP:</strong></td>
-            <td style="width: 350px; height: 80px; font-size:60%; text-align:rigth;">'.$vigencia_fecha.'<br>31/12/2023</td>
+            <td style="width: 300px; height: 20px; font-size:60%; text-align:center;"><strong>VIGENCIA DEL CDP:</strong></td>
+            <td style="width: 350px; height: 80px; font-size:60%; text-align:rigth;">31/12/2023</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">'.$firma_ordenador.'<br>Firma Ordenador del Gasto</td>
+            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">Firma Ordenador del Gasto</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">'.$proyecto.'<br>Proyectó</td>
+            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">Proyectó</td>
         </tr>
 
 
