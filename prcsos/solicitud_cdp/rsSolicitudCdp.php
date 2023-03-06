@@ -1045,7 +1045,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
     public function list_ordenadores($codigo_poai){
 
-        $sql_list_ordenadores = "SELECT per_nombre,per_primerapellido,per_segundoapellido,res_codigo,res_codigonivel
+        $sql_list_ordenadores = "SELECT per_nombre,per_primerapellido,per_segundoapellido,res_codigo,res_codigonivel,per_codigo
                                    FROM usco.responsable
                              INNER JOIN usco.vinculacion ON vin_oficina = res_codigooficina
                             INNER JOIN  principal.persona ON vin_persona = per_codigo
@@ -1063,19 +1063,19 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $datalist_ordenadores;
     }
 
-    public function resolucion($codigo_poai,$codigo_responsable){        
+    public function resolucion($codigo_poai,$codigo_responsable,$codigo_persona){        
 
         $sql_resolucion = "SELECT res_codigo, res_codigooficina, res_codigocargo 
                                     FROM usco.responsable
                                    WHERE res_codigo IN(SELECT ror_ordenador 
-                                                         FROM usco.responsable, usco.vinculacion, usco.registro_ordenador
-                                                        WHERE ror_registro = $codigo_responsable
+                                                         FROM usco.responsable, usco.vinculacion, usco.registro_ordenador,principal.persona
+                                                        WHERE ror_ordenador = $codigo_responsable
                                                          AND  vin_cargo = res_codigocargo
                                                           AND vin_oficina = res_codigooficina
                                                           AND res_nivel = 3
-                                                          AND res_tiporesponsable = 1
+                                                          AND res_tiporesponsable = 2
                                                           AND res_codigonivel = $codigo_poai
-                                                          AND vin_persona = ".$_SESSION['idusuario']."
+                                                          AND vin_persona = $codigo_persona
                                                           AND vin_estado = 1);";
     
 
@@ -1097,7 +1097,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
        
 
         $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
-                                           per_nombre, per_primerapellido, per_segundoapellido 
+                                           per_nombre, per_primerapellido, per_segundoapellido
                                       FROM usco.vinculacion
                                 INNER JOIN principal.persona ON vin_persona = per_codigo
                                 INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
@@ -1127,10 +1127,11 @@ Class RsSolicitudCdp extends SolicitudCdp{
                 $per_nombre = $dta_ordenadores['per_nombre'];
                 $per_primerapellido = $dta_ordenadores['per_primerapellido'];
                 $per_segundoapellido = $dta_ordenadores['per_segundoapellido'];
+                $per_codigo = $dta_ordenadores['per_codigo'];
                 $nombre_ordenadores = $per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
                 
                 
-                list($rep_resolucion,$rep_fecharesolucion) = $this->resolucion($res_codigonivel,$res_codigo);
+                list($rep_resolucion,$rep_fecharesolucion) = $this->resolucion($res_codigonivel,$res_codigo,$per_codigo);
                 $rsOrdenadores[] = array('res_codigo'=> $res_codigo,
                                         'rep_resolucion'=> $rep_resolucion,
                                         'rep_fecharesolucion' => $rep_fecharesolucion,

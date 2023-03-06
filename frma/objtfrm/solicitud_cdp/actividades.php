@@ -21,7 +21,7 @@
     <div class="col-sm-11" >
         <div class="form-group ">
                 <label for="selOrdenador" class="font-weight-bold">Ordenador</label>
-                <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer">
+                <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer selectpicker">
                     <option value="0" data-codigo_ordenador="0">Seleccione...</option>
                         <?php
                             if($jsonOrdenadores){
@@ -31,7 +31,7 @@
                                     $rep_fecharesolucion = $dat_ordenadores['rep_fecharesolucion'];
                                     $nombre_ordenadores = $dat_ordenadores['nombre_ordenadores'];
                         ?>
-                            <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?><?php echo $rep_fecharesolucion?><?php echo $rep_resolucion?>"><?php echo $nombre_ordenadores; ?></option>              
+                            <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?>" data-codigo_fecharesolucion="<?php echo $rep_fecharesolucion?>" data-codigo_resolucion="<?php echo $rep_resolucion;?>"><?php echo $nombre_ordenadores?></option>              
                             
                         <?php
                             }  
@@ -45,15 +45,37 @@
                     ?>
                     
                 </select>
+
             <span class="help-block" id="error"></span>    
         </div>
     </div>
-</div>  
+</div>
 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
+            <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  $rep_resolucion; ?>" readonly>
+           
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
+            <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php   $rep_fecharesolucion ; ?>" readonly >
+     
+        </div>
+    </div>  
+</div>
+<div class="alert alert-danger alerta-forcliente" id="error_resolucion" role="alert"></div>
+    
+ 
 
 
 <?php  
     }
+    else{
 ?>
 <div class="row">
     <div class="col-sm-6">
@@ -61,8 +83,6 @@
             <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
             <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionPersona ; ?>" readonly>
             <input type="hidden" name="txtResolucion" value="<?php  echo $resolucionPersona ; ?>">
-         
-        
         </div>
     </div>
 
@@ -71,13 +91,13 @@
             <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
             <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo $resolucionFecha ; ?>" readonly >
             <input type="hidden" name="txtFechaResolucion" value="<?php  echo $resolucionFecha ; ?>">
-       
         </div>
-    </div>
-
-    
+    </div>  
 </div>
 <div class="alert alert-danger alerta-forcliente" id="error_resolucion" role="alert"></div>
+<?php 
+}
+?>
 <label class="font-weight-bold">Actividades * </label>
 <div class="bg">
     <table class="table table-sm">
@@ -152,6 +172,21 @@
             $(".etapasActividad"+codigo_actividad).empty();
         }
         
+    });
+
+    $('#selOrdenador').change(function(){
+        var codigo_ordenador = $(this).find(':selected').data('codigo_ordenador');
+        var codigo_resolucion = $(this).find(':selected').data('codigo_resolucion');
+        var codigo_fecharesolucion = $(this).find(':selected').data('codigo_fecharesolucion');
+        
+        $('#txtFechaResolucion').val(codigo_fecharesolucion);
+        $('#txtResolucion').val(codigo_resolucion);
+
+    });
+    
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
     });
 
     
