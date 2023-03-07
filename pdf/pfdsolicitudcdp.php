@@ -234,52 +234,20 @@ class MYPDF extends TCPDF {
     }
     
 
-    $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 
-                                FROM usco.responsable
-                                WHERE res_codigo IN(SELECT ror_ordenador 
-                                                      FROM usco.responsable, usco.vinculacion, usco.registro_ordenador, cdp.solicitud_cdp
-                                                     WHERE res_codigo = ror_registro
-                                                      AND  vin_cargo = res_codigocargo
-                                                       AND vin_oficina = res_codigooficina
-                                                       AND res_nivel = 3
-                                                       AND res_tiporesponsable = 1
-                                                       AND res_codigonivel = scdp_accion
-                                                       AND vin_persona = ".$_SESSION['idusuario']."
-                                                       AND vin_estado = 1);";
-        
-    $resultado_resolucionPersona = $cnxion->ejecutar($sql_resolucionPersona);
-    
-    $data_resolucionPersona= $cnxion->obtener_filas($resultado_resolucionPersona);
+    $sql_resolucionPersona = " SELECT rep_codigo, rep_persona, 
+                                    rep_resolucion, rep_fecharesolucion,
+                                    rep_estado,scdp_objeto,scdp_numero,scdp_consecutivo, per_nombre,
+                                    per_primerapellido, per_segundoapellido, car_nombre
+                                FROM usco.resolucion_persona,cdp.solicitud_cdp, principal.persona, usco.vinculacion ,usco.cargo
+                                WHERE rep_codigo = scdp_codigoresolucion
+                                AND scdp_codigo = $codigo_cdp
+                                AND rep_persona = per_codigo
+                                AND per_codigo = vin_persona
+                                AND vin_cargo = car_codigo;";
 
-    $numero_filas= $cnxion->numero_filas($resultado_resolucionPersona);
+    $query_resolucionPersona=$cnxion->ejecutar($sql_resolucionPersona);
 
-    if($numero_filas == 0){
-        $res_codigooficina= 0;
-        $res_codigocargo = 0;
-    }
-    else{
-        $res_codigooficina= $data_resolucionPersona['res_codigooficina'];
-        $res_codigocargo = $data_resolucionPersona['res_codigocargo'];
-    }
-            
-           
-
-    $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
-                                       per_nombre, per_primerapellido, per_segundoapellido ,
-                                       scdp_resolucion, scdp_fecharesolucion, scdp_resolucion,scdp_objeto, scdp_numero,scdp_consecutivo,per_codigo, vin_cargo,car_nombre
-                                  FROM usco.vinculacion
-                            INNER JOIN principal.persona ON vin_persona = per_codigo
-                            INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
-                            INNER JOIN cdp.solicitud_cdp ON  scdp_resolucion = rep_resolucion
-                            INNER JOIN usco.cargo ON vin_cargo = car_codigo 
-                                 WHERE vin_cargo = $res_codigocargo
-                                   AND scdp_codigo = $codigo_cdp
-                                   AND vin_oficina = $res_codigooficina
-                                   AND rep_estado = 1;";
-
-    $resultado_resolucionOrdenador = $cnxion->ejecutar($sql_resolucionOrdenador);
-
-    $data_resolucionOrdenador= $cnxion->obtener_filas($resultado_resolucionOrdenador);
+    $data_resolucionPersona=$cnxion->obtener_filas($query_resolucionPersona);                          
 
     $sql_suma_valor_solicitud="SELECT SUM(aso_valor) AS valor_cdp
                                  FROM cdp.asignacion_solicitud
@@ -292,26 +260,26 @@ class MYPDF extends TCPDF {
 
     $valor_cdp = $data_suma_valor_solicitud['valor_cdp'];
             
-    $scdp_resolucion = $data_resolucionOrdenador['scdp_resolucion'];
-    $scdp_fecharesolucion = date('d/m/Y',strtotime($data_resolucionOrdenador['scdp_fecharesolucion']));
-    $scdp_objeto = $data_resolucionOrdenador['scdp_objeto'];
-    $scdp_numero = $data_resolucionOrdenador['scdp_numero'];
-    $scdp_consecutivo = $data_resolucionOrdenador['scdp_consecutivo'];
+    $scdp_resolucion = $data_resolucionPersona['rep_resolucion'];
+    $scdp_fecharesolucion = date('d/m/Y',strtotime($data_resolucionPersona['rep_fecharesolucion']));
+    $scdp_objeto = $data_resolucionPersona['scdp_objeto'];
+    $scdp_numero = $data_resolucionPersona['scdp_numero'];
+    $scdp_consecutivo = $data_resolucionPersona['scdp_consecutivo'];
     
 
-    $per_nombre = $data_resolucionOrdenador['per_nombre'];
-    $per_primerapellido = $data_resolucionOrdenador['per_primerapellido'];
-    $per_segundoapellido = $data_resolucionOrdenador['per_segundoapellido'];
-    $car_nombre = $data_resolucionOrdenador['car_nombre'];
+    $per_nombre = $data_resolucionPersona['per_nombre'];
+    $per_primerapellido = $data_resolucionPersona['per_primerapellido'];
+    $per_segundoapellido = $data_resolucionPersona['per_segundoapellido'];
+    $car_nombre = $data_resolucionPersona['car_nombre'];
 
 
     $people=$per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
 
 
 
-    $sql_ultimocaracteres= "SELECT  esc_clasificador
-                                FROM cdp.etapa_solicitud_clasificador
-                                WHERE esc_solicitud = $codigo_cdp;";
+        $sql_ultimocaracteres= "SELECT  esc_clasificador
+                                    FROM cdp.etapa_solicitud_clasificador
+                                    WHERE esc_solicitud = $codigo_cdp;";
 
     $query_ultimocaracteres=$cnxion->ejecutar($sql_ultimocaracteres);
     $data_ultimocaracteres = $cnxion->obtener_filas($query_ultimocaracteres);
@@ -362,21 +330,20 @@ class MYPDF extends TCPDF {
     $fup_excfacultad = $data_validar_excedentes_facultad['fup_excfacultad'];
 
 
-    if($validar_excedentes_facultad==1){
+    if($fup_excfacultad==1){
             $numExecedente++;
         }
 
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> sergio
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false);
 
 ///////////////////////////////////
-
-
-
-
 
 // set document information
 $nombreDocumento="SOLICITUD_CDP_No.";
@@ -443,23 +410,23 @@ $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
     
         <tr nobr="true">
-            <td style="width: 336px; height: 40px; font-size:70%; text-align:left;"><strong>'.$ordenador_gasto.'<br>ORDENADOR DEL GASTO:</strong></td>
+            <td style="width: 336px; height: 40px; font-size:70%; text-align:left;"><strong><br>ORDENADOR DEL GASTO:</strong></td>
          
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left; text-transform: uppercase;">'.$nombreordenador_gasto.'<br>NOMBRE:&nbsp;'.$people.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left; text-transform: uppercase;">NOMBRE:&nbsp;'.$people.'</td>
             
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$cargoordenador_gasto.'<br>CARGO:&nbsp;'.$car_nombre.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">CARGO:&nbsp;'.$car_nombre.'</td>
             
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$resolucionordenador_gasto.'<br>RESOLUCION ORDENACIÓN DEL GASTO No:&nbsp;'.$scdp_resolucion.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">RESOLUCION ORDENACIÓN DEL GASTO No:&nbsp;'.$scdp_resolucion.'</td>
       
         </tr>
         <tr nobr="true">
-            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">'.$fechaordenador_gasto.'<br>FECHA:&nbsp;'.$scdp_fecharesolucion.'</td>
+            <td style="width: 336px; height: 10px; font-size:70%; text-align:left;">FECHA:&nbsp;'.$scdp_fecharesolucion.'</td>
        
         </tr>
 
@@ -469,15 +436,20 @@ $html.='
     
         <tr nobr="true">
            
-            <td style="width: 450px; height: 10px; font-size:70%; text-align:right; left:50;">'.$solicitud_numero.'<br>SOLICITUD No:&nbsp;'.$numero_solicitudCDP.'</td>
+            <td style="width: 450px; height: 10px; font-size:70%; text-align:right; left:50;">SOLICITUD No:&nbsp;'.$numero_solicitudCDP.'</td>
 
             <td style="width: 337px; height: 40px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         
         <tr nobr="true">
            
+<<<<<<< HEAD
             <td style="width: 150px; height: 10px; font-size:70%; text-align:left; "><br>EXPEDIDO POR:</td>
             <td style="width: 200px; height: 10px; font-size:70%; text-align:left; "><br>JEFE DE PRESUPUESTO</td>
+=======
+            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">EXPEDIDO POR:</td>
+            <td style="width: 200px; height: 10px; font-size:70%; text-align:left; ">JEFE DE PRESUPUESTO</td>
+>>>>>>> sergio
         </tr>
       
     </table>
@@ -488,13 +460,14 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 100px; height: 10px; font-size:70%; text-align:left;">'.$objeto.'<br>OBJETO:&nbsp;</td>
-            <td style="border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black;border-right:1px solid black; height: 80px; font-size:70%;">'.$scdp_objeto.'</td>
+            <td style="width: 100px; height: 10px; font-size:70%; text-align:left;">OBJETO:&nbsp;</td>
+            <td style="border-left:1px solid black;border-bottom:1px solid black;border-top:1px solid black;border-right:1px solid black; height: 80px; font-size:50%;">'.$scdp_objeto.'</td>
         </tr>
     </table>
 ';
 
 if($numExecedente==1){
+<<<<<<< HEAD
     $excedente_si = "X";
     $excedente_no = "";
 }
@@ -503,6 +476,15 @@ else{
     $excedente_no = "X";
 }
 
+=======
+    $checkexcedentesi = "X";
+    $checkexcedenteno = "";
+}
+else{
+    $checkexcedentesi = "";
+    $checkexcedenteno = "X";
+}
+>>>>>>> sergio
 $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
         
@@ -510,11 +492,19 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
+<<<<<<< HEAD
             <td style="width: 200px; height: 40px; font-size:70%; text-align:left;"><br>EXCEDENTES DE FACULTAD:</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_si.'</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_no.'</td>
+=======
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">EXCEDENTES DE FACULTAD:</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$checkexcedentesi.'</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$checkexcedenteno.'</td>
+>>>>>>> sergio
         
         </tr>
 
@@ -532,12 +522,12 @@ $html.='
 
     <tr nobr="true">
     
-        <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">'.$plan_accion.'<br>PLAN DE ACCIÓN:</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$valor.'<br>VALOR</th>
-        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_presupuestal.'<br>CODIGO PRESUPUESTAL</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$codigo_dane.'<br>CODIGO DANE</th>
-        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente_financiacion.'<br>FUENTE DE FINANCIACIÓN</th>
-        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$etapa_actividad.'<br>ESTAPA DE LA ACTIVIDAD No.</th>
+        <th style="width: 160px; height: 10px; font-size:70%; text-align:left;">PLAN DE ACCIÓN:</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">VALOR</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">CODIGO PRESUPUESTAL</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">CODIGO DANE</th>
+        <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">FUENTE DE FINANCIACIÓN</th>
+        <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">ETAPA DE LA ACTIVIDAD No.</th>
     
     </tr>
     </table>
@@ -566,7 +556,7 @@ $html.='
 
         <tr nobr="true">
             <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "></th>
-            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.number_format($esc_valor,0,'','.').'</th>
+            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "> '."$".number_format($esc_valor,0,'','.').'</th>
             <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$esc_clasificador.'</th>
             <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'. $esc_dane.'</th>
             <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente.'</th>
@@ -585,21 +575,21 @@ $html.='
             <td style="width: 337px; height: 100px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 2px; font-size:70%; text-align:left;">'.$otros_conceptos.'<br><strong>OTROS CONCEPTOS:</strong></td>
+            <td style="width: 200px; height: 2px; font-size:70%; text-align:left;"><strong>OTROS CONCEPTOS:</strong></td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">'.$valor_total.'<br><strong>VALOR TOTAL SOLICITADO:</strong></td>
-            <td style="width: 200px; height: 40px; font-size:60%; text-align:left;">'.$valor_total.'<br>'.$valor_cdp.'</td>
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;"><strong>VALOR TOTAL SOLICITADO:</strong></td>
+            <td style="width: 200px; height: 40px; font-size:60%; text-align:left;">'."$".number_format($valor_cdp,0,'','.').'</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 300px; height: 20px; font-size:60%; text-align:center;">'.$vigencia_cdp.'<br><strong>VIGENCIA DEL CDP:</strong></td>
-            <td style="width: 350px; height: 80px; font-size:60%; text-align:rigth;">'.$vigencia_fecha.'<br>31/12/2023</td>
+            <td style="width: 300px; height: 20px; font-size:60%; text-align:center;"><strong>VIGENCIA DEL CDP:</strong></td>
+            <td style="width: 350px; height: 80px; font-size:60%; text-align:rigth;">31/12/2023</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">'.$firma_ordenador.'<br>Firma Ordenador del Gasto</td>
+            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">Firma Ordenador del Gasto</td>
         </tr>
         <tr nobr="true">
-            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">'.$proyecto.'<br>Proyectó</td>
+            <td style="width: 200px; height:20px; font-size:60%; text-align:left;">Proyectó</td>
         </tr>
 
 

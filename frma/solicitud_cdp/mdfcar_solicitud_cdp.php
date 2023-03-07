@@ -1,6 +1,6 @@
 <?php
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
-    include('crud/rs/solicitud_cdp/clsfcdres_linix.php');
+    //include('crud/rs/solicitud_cdp/clsfcdres_linix.php');
 
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
 
@@ -13,6 +13,7 @@
         $scdp_estado = $dta_form_solicitud_cdp['scdp_estado'];
         $scdp_objeto = $dta_form_solicitud_cdp['scdp_objeto'];
         $scdp_consecutivo = $dta_form_solicitud_cdp['scdp_consecutivo'];
+        $scdp_codigoresolucion = $dta_form_solicitud_cdp['scdp_codigoresolucion'];
     }
 
 
@@ -24,11 +25,11 @@
 
     $plan_accion_consulta = $objSolicitudCdp->plan_accion_consulta($codigo_plan);
 
-    //$list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
+    $list_cldfcadores = $objSolicitudCdp->list_cldfcadores();
 
-    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($scdp_accion);
-
-    $list_cldfcadores = $objConsultaLinix->list_cldfcadores();
+    list($resolucionPersona,$resolucionFecha,$codigo_ordenador) = $objSolicitudCdp->datosResolucion($scdp_codigoresolucion);
+    
+    //$list_cldfcadores = $objConsultaLinix->list_cldfcadores();
     
     $url_guardar="modificarsolicitudcdp";
     $task = "MODIFICAR SOLICITUD CDP";
@@ -98,6 +99,85 @@
                 <label style="font-size: 15px;"><?php echo "<strong>".$nombre_nivel_tres.":</strong><br> ".$datos_accion; ?></label>
             </div>
         </div>
+        <?php
+        $codigo_session = $_SESSION['idusuario'];
+    if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+
+        $jsonOrdenadores= $objSolicitudCdp->jsonOrdenadores($scdp_accion);
+
+?>
+<div class="row">          
+    <div class="col-sm-11" >
+        <div class="form-group ">
+                <label for="selOrdenador" class="font-weight-bold">Ordenador</label>
+                <select name="selOrdenador" id="selOrdenador" class="form-control caja_texto_sizer selectpicker">
+                    <option value="<?php echo $nombre ?>" data-codigo_ordenador="0">Seleccione...</option>
+                        <?php
+                            if($jsonOrdenadores){
+                                foreach ($jsonOrdenadores as $dat_ordenadores) {
+                                    $res_codigo = $dat_ordenadores['res_codigo'];
+                                    $rep_resolucion = $dat_ordenadores['rep_resolucion'];
+                                    $rep_fecharesolucion = $dat_ordenadores['rep_fecharesolucion'];
+                                    $nombre_ordenadores = $dat_ordenadores['nombre_ordenadores'];
+                                    $per_codigo = $dat_ordenadores['per_codigo'];
+
+                                    if($codigo_ordenador == $per_codigo){
+                                        $selectordenador = "selected";
+
+                                    }
+                                    else{
+                                        $selectordenador = "";
+                                    }
+
+                                    
+
+                        ?>
+                            <option value="<?php echo  $res_codigo; ?>" <?php echo  $selectordenador?> data-codigo_ordenador="<?php echo  $res_codigo; ?>" data-codigo_fecharesolucion="<?php echo $rep_fecharesolucion?>" data-codigo_resolucion="<?php echo $rep_resolucion;?>"><?php echo $nombre_ordenadores?></option>              
+                            
+                        <?php
+                            }  
+                        }
+                        else{
+
+                        ?>
+                        <option value="0"> No hay ordenadores</option>
+                    <?php
+                        }
+                    ?>
+                    
+                </select>
+
+            <span class="help-block" id="error"></span>    
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtResolucion" class="font-weight-bold">Resolucion </label>
+            <input type="text" class="form-control caja_texto_sizer" id="txtResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo  $resolucionPersona; ?>" readonly>
+            <input type="hidden" name="txtResolucion" id="txtResolucion2" value="<?php  echo $resolucionPersona ; ?>">
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="txtFechaResolucion" class="font-weight-bold">Fecha de Resolucion </label>
+            <input type="date" class="form-control caja_texto_sizer" id="txtFechaResolucion" aria-describedby="textHelp" data-rule-required="true" value="<?php  echo  $resolucionFecha ; ?>" readonly >
+            <input type="hidden" name="txtFechaResolucion" id="txtFechaResolucion2" value="<?php  echo $resolucionFecha ; ?>">
+        </div>
+    </div>  
+</div>
+<div class="alert alert-danger alerta-forcliente" id="error_resolucion" role="alert"></div>
+    
+ 
+
+
+<?php  
+    }
+    else{
+?>
 
                 
         <div class="row">
@@ -118,7 +198,9 @@
                 </div>
             </div>
         </div>
+
         <?php 
+        }
             $actividades_solicitud = $objSolicitudCdp->actividades_solicitud($codigo_solicitud);
             if($actividades_solicitud){
                 $num_actividades = 0;
@@ -756,5 +838,19 @@
             });
         }
     });
+
+    $('#selOrdenador').change(function(){
+        var codigo_ordenador = $(this).find(':selected').data('codigo_ordenador');
+        var codigo_resolucion = $(this).find(':selected').data('codigo_resolucion');
+        var codigo_fecharesolucion = $(this).find(':selected').data('codigo_fecharesolucion');
+        
+        $('#txtFechaResolucion').val(codigo_fecharesolucion);
+        $('#txtResolucion').val(codigo_resolucion);
+        $('#txtFechaResolucion2').val(codigo_fecharesolucion);
+        $('#txtResolucion2').val(codigo_resolucion);
+
+    });
+    
+  
 </script>
 

@@ -67,6 +67,22 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
         return $cod_classf;
     }
 
+
+    public function codigoresolucion(){
+
+        $sql_codigoresolucion = "SELECT rep_codigo, rep_persona, rep_resolucion, rep_fecharesolucion, rep_estado
+                                     FROM usco.resolucion_persona
+                                     WHERE rep_resolucion = '".$this->getResolucion()."';";
+
+        $resultado_codigoresolucion = $this->cnxion->ejecutar($sql_codigoresolucion);
+
+        $data_codigoresolucion= $this->cnxion->obtener_filas($resultado_codigoresolucion);
+
+        $rep_codigo= $data_codigoresolucion['rep_codigo'];
+        
+        return $rep_codigo;
+       
+    }
     public function mdfcarSolicitud(){
 
         $this->scdp_numero = date('Y');
@@ -91,16 +107,22 @@ class MdfcarSolicitudCdp extends SolicitudCdp{
         
           $numero_solicitudCDP = $this->scdp_numero.'-'.$ceros.$this->getConsecutivo();
 
+          $codigoresolucion = $this->codigoresolucion();
+
         $updte_solicitud_cdp ="UPDATE cdp.solicitud_cdp
                                   SET scdp_fecha = '".$this->getFecha()."', 
                                       scdp_estado = ".$this->getEstado().", 
                                       scdp_personamodifico = ".$this->getPersonaSistema().", 
                                       scdp_fechamodifico = NOW(),
                                       scdp_objeto = '".$this->getObjeto()."',
-                                      scdp_consecutivo = ".$this->getConsecutivo()."
+                                      scdp_consecutivo = ".$this->getConsecutivo().",
+                                      scdp_resolucion='".$this->getResolucion()."',
+                                      scdp_fecharesolucion='".$this->getFechaResolucion()."',
+                                      scdp_codigoresolucion=$codigoresolucion
                                 WHERE scdp_codigo = ".$this->getCodigo().";";
                       
         $this->cnxion->ejecutar($updte_solicitud_cdp);
+        
 
         $datos_etapa = $this->getArrayDatos();
 

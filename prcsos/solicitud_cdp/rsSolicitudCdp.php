@@ -552,7 +552,8 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         $sql_form_solicitud_cdp="SELECT scdp_codigo, scdp_fecha, 
                                         scdp_numero, scdp_accion, 
-                                        scdp_estado, scdp_proceso, scdp_objeto, scdp_consecutivo
+                                        scdp_estado, scdp_proceso, scdp_objeto, 
+                                        scdp_consecutivo, scdp_codigoresolucion
                                    FROM cdp.solicitud_cdp
                                   WHERE scdp_codigo = $codigo_solicitud;";
 
@@ -1042,13 +1043,158 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return array($descr_etp, $poa_recurso);
     }
 
+    public function nombre_resolucion($resolucion){
+        $sql_nombre_resolucion = "SELECT per_nombre,per_primerapellido,per_segundoapellido, per_codigo
+                                    FROM usco.resolucion_persona, principal.persona
+                                   WHERE per_codigo= rep_persona
+                                     AND rep_resolucion = '$resolucion';";
+
+        
+        $query_nombre_resolucion = $this->cnxion->ejecutar($sql_nombre_resolucion);
+
+        $dta_nombre_resolucion = $this->cnxion->obtener_filas($query_nombre_resolucion);
+
+        $per_codigo = $dta_nombre_resolucion['per_codigo'];
+        
+        return $per_codigo;
+    }
+
+
+    public function list_ordenadores($codigo_poai){
+
+        $sql_list_ordenadores = "SELECT per_nombre,per_primerapellido,per_segundoapellido,res_codigo,res_codigonivel,per_codigo
+                                   FROM usco.responsable
+                             INNER JOIN usco.vinculacion ON vin_oficina = res_codigooficina
+                            INNER JOIN  principal.persona ON vin_persona = per_codigo
+                                  WHERE res_codigonivel = $codigo_poai
+                                    AND vin_cargo = res_codigocargo
+                                    AND res_tiporesponsable = 2
+                                    AND vin_estado = 1
+                                    AND res_estado = 1;";
+
+        $query_list_ordenadores = $this->cnxion->ejecutar($sql_list_ordenadores);
+
+        while($data_list_ordenadores=$this->cnxion->obtener_filas($query_list_ordenadores)){
+            $datalist_ordenadores[] = $data_list_ordenadores;
+        }
+        return $datalist_ordenadores;
+    }
+
+    public function resolucion($codigo_poai,$codigo_responsable,$codigo_persona){        
+
+        $sql_resolucion = "SELECT res_codigo, res_codigooficina, res_codigocargo 
+                                    FROM usco.responsable
+                                   WHERE res_codigo IN(SELECT ror_ordenador 
+                                                         FROM usco.responsable, usco.vinculacion, usco.registro_ordenador,principal.persona
+                                                        WHERE ror_ordenador = $codigo_responsable
+                                                         AND  vin_cargo = res_codigocargo
+                                                          AND vin_oficina = res_codigooficina
+                                                          AND res_nivel = 3
+                                                          AND res_tiporesponsable = 2
+                                                          AND res_codigonivel = $codigo_poai
+                                                          AND vin_persona = $codigo_persona
+                                                          AND vin_estado = 1);";
+    
+
+        $resultado_resolucion = $this->cnxion->ejecutar($sql_resolucion);
+
+        $data_resolucion= $this->cnxion->obtener_filas($resultado_resolucion);
+
+        $numero_filas= $this->cnxion->numero_filas($resultado_resolucion);
+
+        if($numero_filas == 0){
+            $res_codigooficina= 0;
+            $res_codigocargo = 0;
+        }
+        else{
+            $res_codigooficina= $data_resolucion['res_codigooficina'];
+            $res_codigocargo = $data_resolucion['res_codigocargo'];
+        }
+        
+       
+
+        $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 
+                                           per_nombre, per_primerapellido, per_segundoapellido
+                                      FROM usco.vinculacion
+                                INNER JOIN principal.persona ON vin_persona = per_codigo
+                                INNER JOIN usco.resolucion_persona ON per_codigo = rep_persona
+                                     WHERE vin_cargo = $res_codigocargo
+                                       AND vin_oficina = $res_codigooficina
+                                       AND rep_estado = 1;";
+
+        $resultado_resolucionOrdenador = $this->cnxion->ejecutar($sql_resolucionOrdenador);
+
+        $data_resolucionOrdenador= $this->cnxion->obtener_filas($resultado_resolucionOrdenador);
+
+        $rep_fecharesolucion= $data_resolucionOrdenador['rep_fecharesolucion'];
+        $rep_resolucion= $data_resolucionOrdenador['rep_resolucion'];
+     
+
+        return array($rep_resolucion,$rep_fecharesolucion);
+ 
+    }
+
+    
+    
+
+    public function jsonOrdenadores($codigo_poai){
+        $list_ordenadores = $this->list_ordenadores($codigo_poai);
+        if($list_ordenadores){
+            foreach ($list_ordenadores as $dta_ordenadores) {
+                $res_codigo = $dta_ordenadores['res_codigo'];
+                $res_codigonivel = $dta_ordenadores['res_codigonivel'];
+                $per_nombre = $dta_ordenadores['per_nombre'];
+                $per_primerapellido = $dta_ordenadores['per_primerapellido'];
+                $per_segundoapellido = $dta_ordenadores['per_segundoapellido'];
+                $per_codigo = $dta_ordenadores['per_codigo'];
+                $nombre_ordenadores = $per_nombre." ".$per_primerapellido." ".$per_segundoapellido;
+                
+                
+                list($rep_resolucion,$rep_fecharesolucion) = $this->resolucion($res_codigonivel,$res_codigo,$per_codigo);
+                $rsOrdenadores[] = array('res_codigo'=> $res_codigo,
+                                        'rep_resolucion'=> $rep_resolucion,
+                                        'rep_fecharesolucion' => $rep_fecharesolucion,
+                                        'nombre_ordenadores' => $nombre_ordenadores,
+                                        'per_codigo'=> $per_codigo
+                                    );
+
+            }
+            $datOrdenadores = $rsOrdenadores;
+        }
+        else{
+            $datOrdenadores = array();
+        }
+        return $datOrdenadores;
+    }
+
+    public function datosResolucion($codigo_resolucion){        
+
+        $sql_datosResolucion = "SELECT rep_codigo, rep_persona, 
+                                       rep_resolucion, rep_fecharesolucion,
+                                       rep_estado
+                                  FROM usco.resolucion_persona
+                                 WHERE rep_codigo = $codigo_resolucion;";
+    
+
+        $resultado_datosResolucion = $this->cnxion->ejecutar($sql_datosResolucion);
+
+        $data_datosResolucion= $this->cnxion->obtener_filas($resultado_datosResolucion);
+
+        $rep_resolucion = $data_datosResolucion['rep_resolucion'];
+        $rep_fecharesolucion = $data_datosResolucion['rep_fecharesolucion'];
+        $rep_persona = $data_datosResolucion['rep_persona'];
+
+        return array($rep_resolucion,$rep_fecharesolucion, $rep_persona);
+ 
+    }
+
     public function resolucionPersona($codigo_poai){        
 
         $sql_resolucionPersona = "SELECT res_codigo, res_codigooficina, res_codigocargo 
                                     FROM usco.responsable
                                    WHERE res_codigo IN(SELECT ror_ordenador 
                                                          FROM usco.responsable, usco.vinculacion, usco.registro_ordenador
-                                                        WHERE res_codigo = ror_registro
+                                                        WHERE ror_registro = res_codigo
                                                          AND  vin_cargo = res_codigocargo
                                                           AND vin_oficina = res_codigooficina
                                                           AND res_nivel = 3
