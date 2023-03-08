@@ -86,12 +86,10 @@
 
 		public function list_cdp(){
 
-			$sql_clasificadores="SELECT K_NUMDOC, F_MOVIMI, F_CANCEL,
-										N_OBJECT, K_NUMDOC_CIA, F_VIGENCIA,
+			$sql_clasificadores="SELECT K_NUMDOC, F_MOVIMI, N_OBJECT, 
+										K_NUMDOC_CIA, F_VIGENCIA,
 										V_MONTO
-
-								   FROM PS070MRUBRO
-								  WHERE K_RUBRO LIKE '24%'";
+								   FROM PS227MGCERTIFI";
 
 			$resulatdo_clasificadores=$this->cnxionoci->ejecutaroci($sql_clasificadores);
 
@@ -101,27 +99,33 @@
 			return $dataclasificadores;
 		}
 		
-		/*public function jsonCsfcdores(){
-			$list_cldfcadores = $this->clasificadores();
-			if($list_cldfcadores){
-				foreach ($list_cldfcadores as $dta_clsfcdores) {
-					$cla_codigo = $dta_clsfcdores['K_RUBRO'];
-					$cla_nombre = $dta_clsfcdores['N_RUBRO'];
-					$cla_numero = $dta_clsfcdores['K_RUBRO'];
+		public function jsonnCDP(){
+			$listCdp = $this->list_cdp();
+			if($listCdp){
+				foreach ($listCdp as $dta_cdp) {
+					$numero_certificado = $dta_cdp['K_NUMDOC'];
+					$fecha_movimiento = $dta_cdp['F_MOVIMI'];
+					$objeto_cdp = $dta_cdp['N_OBJECT'];
+					$numero_contrato = $dta_cdp['K_NUMDOC_CIA'];
+					$fecha_vigencia = $dta_cdp['F_VIGENCIA'];
+					$valor_cdp = $dta_cdp['V_MONTO'];
 	
-					$rsClsfcdres[] = array('cla_codigo'=> $cla_codigo, 
-										   'cla_nombre'=> $cla_nombre, 
-										   'cla_numero'=> $cla_numero
-										);
+					$rsCdpp[] = array('numero_certificado'=> $numero_certificado, 
+									  'fecha_movimiento'=> date('d/m/Y',strtotime($fecha_movimiento)), 
+									  'objeto_cdp'=> $objeto_cdp,
+								      'numero_contrato'=> $numero_contrato,
+								 	  'fecha_vigencia'=> date('d/m/Y',strtotime($fecha_vigencia)),
+									  'valor_cdp'=> "$".number_format($valor_cdp,0,'','.')
+									);
 	
 				}
-				$datClasificadores = json_encode(array("data"=>$rsClsfcdres));
+				$dattCDP = json_encode(array("data"=>$rsCdpp));
 			}
 			else{
-				$datClasificadores = json_encode(array("data"=>""));
+				$dattCDP = json_encode(array("data"=>""));
 			}
-			return $datClasificadores;
-		}*/
+			return $dattCDP;
+		}
 
 
 		public function list_rp(){
