@@ -336,6 +336,11 @@ class MYPDF extends TCPDF {
 
     }
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> sergio
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, 'Letter', true, 'UTF-8', false);
 
 ///////////////////////////////////
@@ -438,8 +443,13 @@ $html.='
         
         <tr nobr="true">
            
+<<<<<<< HEAD
+            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; "><br>EXPEDIDO POR:</td>
+            <td style="width: 200px; height: 10px; font-size:70%; text-align:left; "><br>JEFE DE PRESUPUESTO</td>
+=======
             <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">EXPEDIDO POR:</td>
             <td style="width: 200px; height: 10px; font-size:70%; text-align:left; ">JEFE DE PRESUPUESTO</td>
+>>>>>>> sergio
         </tr>
       
     </table>
@@ -456,8 +466,17 @@ $html.='
     </table>
 ';
 
-
 if($numExecedente==1){
+<<<<<<< HEAD
+    $excedente_si = "X";
+    $excedente_no = "";
+}
+else{
+    $excedente_si = "";
+    $excedente_no = "X";
+}
+
+=======
     $checkexcedentesi = "X";
     $checkexcedenteno = "";
 }
@@ -465,6 +484,7 @@ else{
     $checkexcedentesi = "";
     $checkexcedenteno = "X";
 }
+>>>>>>> sergio
 $html.='
     <table nobr="true" style="padding-left: 5px;" cellpadding="2">
         
@@ -472,11 +492,19 @@ $html.='
             <td style="width: 337px; height: 20px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
+<<<<<<< HEAD
+            <td style="width: 200px; height: 40px; font-size:70%; text-align:left;"><br>EXCEDENTES DE FACULTAD:</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_si.'</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
+            <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$excedente_no.'</td>
+=======
             <td style="width: 200px; height: 40px; font-size:70%; text-align:left;">EXCEDENTES DE FACULTAD:</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center; padding: 2px">SI</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$checkexcedentesi.'</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black;  height: 2px; width: 30px; font-size:70%; text-align:center">NO</td>
             <td style="border-collapse: collapse;margin:0px;border:1px solid black; height: 2px; width: 30px; font-size:70%; text-align:center">'.$checkexcedenteno.'</td>
+>>>>>>> sergio
         
         </tr>
 
