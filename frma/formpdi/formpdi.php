@@ -257,7 +257,7 @@
                             <div class="form-group p-3 equipo">
                                 <div style="float: left; margin-bottom: 1px;">
                                     <strong class="font-weight-bold" for="textEquipo">Equipo</strong> 
-                                    <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo()"></i>
+                                    <!--<i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo()"></i>-->
                                 </div>
                                 
                                 
@@ -403,7 +403,7 @@
 
 
 
-    function agregarEquipo(){
+    /*function agregarEquipo(){
         
     
         $('#frmModal').modal({
@@ -422,7 +422,7 @@
                     }
             });
     
-    };
+    };*/
     
 </script>
 
