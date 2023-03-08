@@ -123,7 +123,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
 
 
         $sql_fuentes_vigencia_accion="SELECT DISTINCT poav_fuentefinanciacion AS fuente_financiacion, 
-                                             poav_vigencia AS vigencia_recurso, poav_indicador AS codigo_indicador
+                                             poav_vigencia AS vigencia_recurso, poav_indicador AS cdigo_indicador
                                         FROM planaccion.poai_veinte_veintidos, planaccion.fuente_financiacion
                                        WHERE poav_fuentefinanciacion = ffi_codigo
                                          AND poav_estado = 1
@@ -134,7 +134,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                          
                                        UNION
                                       SELECT DISTINCT sff_fuente AS fuente_financiacion, 
-                                             sff_vigencia AS vigencia_recurso, poav_indicador AS codigo_indicador
+                                             sff_vigencia AS vigencia_recurso, poav_indicador AS cdigo_indicador
                                         FROM planaccion.poai_veinte_veintidos, planaccion.adicion_poai, 
                                              planaccion.saldos_fuente_financiacion, planaccion.fuente_financiacion
                                        WHERE poav_codigo = apoai_poai
@@ -148,7 +148,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                          $condicion_dos
                                        UNION 
                                       SELECT DISTINCT poav_fuentefinanciacion AS fuente_financiacion, 
-                                             poav_vigencia AS vigencia_recurso, tpo_indicador AS codigo_indicador
+                                             poav_vigencia AS vigencia_recurso, tpo_indicador AS cdigo_indicador
                                         FROM planaccion.poai_veinte_veintidos
                                        INNER JOIN planaccion.traslados_poai ON tpo_poai = tpo_codigorecuerso
                                        WHERE poav_codigo = tpo_poai
@@ -158,7 +158,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                          $condicion_uno
                                        UNION 	
                                       SELECT DISTINCT sff_fuente AS fuente_financiacion, 
-                                             sff_vigencia AS vigencia_recurso, tpo_indicador AS codigo_indicador
+                                             sff_vigencia AS vigencia_recurso, tpo_indicador AS cdigo_indicador
                                         FROM planaccion.adicion_poai
                                        INNER JOIN planaccion.saldos_fuente_financiacion ON apoai_saldo = sff_codigo
                                        INNER JOIN planaccion.traslados_poai ON apoai_codigo = tpo_codigorecuerso
@@ -167,8 +167,8 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                          AND poav_vigencia = $vigencia_actividad
                                          AND tpo_indicador IN($condicion_tres)
                                          $condicion_dos
-                                       GROUP BY fuente_financiacion, vigencia_recurso, codigo_indicador
-	                                   ORDER BY vigencia_recurso, fuente_financiacion, codigo_indicador;";       
+                                       GROUP BY fuente_financiacion, vigencia_recurso, cdigo_indicador
+	                                   ORDER BY vigencia_recurso, fuente_financiacion, cdigo_indicador;";       
 
         $query_fuentes_vigencia_accion=$this->cnxion->ejecutar($sql_fuentes_vigencia_accion);
 
@@ -297,6 +297,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
             foreach ($fuentes_vigencia_accion as $dat_fuentes_vigencia) {
                 $fuente_financiacion = $dat_fuentes_vigencia['fuente_financiacion'];
                 $vigencia_recurso = $dat_fuentes_vigencia['vigencia_recurso'];
+                $cdigo_indicador = $dat_fuentes_vigencia['cdigo_indicador'];
 
                 $recursos_disponibles = $this->recursos_disponibles($codigo_accion, $codigo_indicador, $vigencia_actividad, $fuente_financiacion, $vigencia_recurso, $codigo_asignacion,$codigo_poai);
 
@@ -306,7 +307,8 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                     $array_fuentes_asignacion[] = array('codigo_fuente'=> $fuente_financiacion,
                                                         'vigencia_recurso'=> $vigencia_recurso,
                                                         'nombre_fuente'=> $nombre_fuente,
-                                                        'recurso_disponible'=> $recursos_disponibles
+                                                        'recurso_disponible'=> $recursos_disponibles,
+                                                        'cdigo_indicador'=> $cdigo_indicador
                                                     );
                 }
             }

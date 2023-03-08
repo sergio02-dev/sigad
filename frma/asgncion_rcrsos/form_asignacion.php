@@ -82,10 +82,11 @@
                             $nombre_fuente = $dta_fntes_fnnccion['nombre_fuente'];
                             $vigencia_recurso = $dta_fntes_fnnccion['vigencia_recurso'];
                             $recurso_disponible = $dta_fntes_fnnccion['recurso_disponible'];
+                            $cdigo_indicador = $dta_fntes_fnnccion['cdigo_indicador'];
 
                             $descrp = $vigencia_recurso." ".$nombre_fuente." $".number_format($recurso_disponible,0,'','.');
                         
-                            if($codigo_fuente == $asre_fuente && $vigencia_recurso ==  $asre_vigenciarecurso){
+                            if($codigo_fuente == $asre_fuente && $vigencia_recurso ==  $asre_vigenciarecurso && $cdigo_indicador == $asre_indicador){
                                 $selected_accion = "selected";
                                 $rcrso_disponible = $recurso_disponible;
                             }
