@@ -438,13 +438,8 @@ $html.='
         
         <tr nobr="true">
            
-<<<<<<< HEAD
             <td style="width: 150px; height: 10px; font-size:70%; text-align:left; "><br>EXPEDIDO POR:</td>
             <td style="width: 200px; height: 10px; font-size:70%; text-align:left; "><br>JEFE DE PRESUPUESTO</td>
-=======
-            <td style="width: 150px; height: 10px; font-size:70%; text-align:left; ">EXPEDIDO POR:</td>
-            <td style="width: 200px; height: 10px; font-size:70%; text-align:left; ">JEFE DE PRESUPUESTO</td>
->>>>>>> sergio
         </tr>
       
     </table>

@@ -43,16 +43,16 @@
                 }
             },
             ajax: {
-                url: 'jareas',
+                url: 'jsoncdp',
                 type: 'POST'
             },
             columns: [
-                { data: 'are_nombre', title: 'Numero'},
-                { data: 'estado', title: 'Estado'},
-                { data: 'are_nombre', title: 'Nombre'},
-                { data: 'estado', title: 'Estado'},
-                { data: 'are_nombre', title: 'Nombre'},
-                { data: 'estado', title: 'Estado'},
+                { data: 'numero_certificado', title: 'Numero'},
+                { data: 'fecha_movimiento', title: 'Estado'},
+                { data: 'objeto_cdp', title: 'Nombre'},
+                { data: 'numero_contrato', title: 'Estado'},
+                { data: 'fecha_vigencia', title: 'Nombre'},
+                { data: 'valor_cdp', title: 'Estado'},
                 
 
             ],
@@ -125,40 +125,7 @@
         });
     });
 
-    function agregar(){
-
-        $('#frmModal').modal({
-            keyboard: true
-        });
-        $.ajax({
-            url:"formareas",
-            type:"POST",
-            data:"",
-            async:true,
-
-            success: function(message){
-                $(".modal-content").empty().append(message);
-            }
-        });
-    }
-
-    function editarAreas(codigo_areas){
-        var codigo_areas = codigo_areas;
-        //alert(codigo_dependencia);
-        $('#frmModal').modal({
-            keyboard: true
-        });
-        $.ajax({
-            url:"formareas",
-            type:"POST",
-            data:"codigo_areas="+codigo_areas,
-            async:true,
-
-            success: function(message){
-                $(".modal-content").empty().append(message);
-            }
-        });
-    }
+    
 
 
 
