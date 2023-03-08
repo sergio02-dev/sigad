@@ -42,7 +42,7 @@
 
                     <div class="col-sm-12" id="dataCdp">
                         <?php 
-                            include('grlla/data/cdp/cdp.php');
+                            include('grlla/data/consultarrp/consultarrp.php');
                         ?>
                     </div>
 						
