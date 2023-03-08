@@ -89,7 +89,8 @@
 			$sql_cdp="SELECT K_NUMDOC, F_MOVIMI, N_OBJECT, 
 							 K_NUMDOC_CIA, F_VIGENC,
 							 V_MONTO
-						FROM PS227MGCERTIFI";
+						FROM PS227MGCERTIFI
+					   WHERE CONVERT(nvarchar,F_VIGENC,15) LIKE '2023-%'";
 
 			$resultado_cdp=$this->cnxionoci->ejecutaroci($sql_cdp);
 
