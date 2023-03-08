@@ -47,12 +47,12 @@
                 type: 'POST'
             },
             columns: [
-                { data: 'numero_certificado', title: 'Numero'},
-                { data: 'fecha_movimiento', title: 'Estado'},
-                { data: 'objeto_cdp', title: 'Nombre'},
-                { data: 'numero_contrato', title: 'Estado'},
-                { data: 'fecha_vigencia', title: 'Nombre'},
-                { data: 'valor_cdp', title: 'Estado'},
+                { data: 'numero_certificado', title: 'No. Certificado'},
+                { data: 'fecha_movimiento', title: 'Fecha Movimiento'},
+                { data: 'objeto_cdp', title: 'Objeto'},
+                { data: 'numero_contrato', title: 'No. Contrato'},
+                { data: 'fecha_vigencia', title: 'Fecha Vigencia'},
+                { data: 'valor_cdp', title: 'Valor'},
                 
 
             ],
