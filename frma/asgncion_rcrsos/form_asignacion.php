@@ -40,6 +40,7 @@
         }
 
         $vigencia_actividad = $asre_vigenciapoai;
+        $codigo_indicador = $asre_indicador;
     }
     else{
         $titulo_formulario ="REGISTRAR ASIGNACIÓN";
@@ -82,10 +83,11 @@
                             $nombre_fuente = $dta_fntes_fnnccion['nombre_fuente'];
                             $vigencia_recurso = $dta_fntes_fnnccion['vigencia_recurso'];
                             $recurso_disponible = $dta_fntes_fnnccion['recurso_disponible'];
+                            $cdigo_indicador = $dta_fntes_fnnccion['cdigo_indicador'];
 
                             $descrp = $vigencia_recurso." ".$nombre_fuente." $".number_format($recurso_disponible,0,'','.');
                         
-                            if($codigo_fuente == $asre_fuente && $vigencia_recurso ==  $asre_vigenciarecurso){
+                            if($codigo_fuente == $asre_fuente && $vigencia_recurso ==  $asre_vigenciarecurso && $cdigo_indicador == $asre_indicador){
                                 $selected_accion = "selected";
                                 $rcrso_disponible = $recurso_disponible;
                             }
@@ -94,7 +96,7 @@
                             }
                     
                 ?>
-                    <option value="<?php echo  $codigo_fuente; ?>" data-saldo="<?php echo number_format($recurso_disponible,0,'','.'); ?>" data-vigencia_recurso="<?php echo $vigencia_recurso; ?>" data-rcrso_disponible="<?php echo $recurso_disponible; ?>" <?php echo $selected_accion; ?>><?php echo substr($descrp,0,105)."..."; ?></option>
+                    <option value="<?php echo  $codigo_fuente; ?>" data-saldo="<?php echo number_format($recurso_disponible,0,'','.'); ?>" data-vigencia_recurso="<?php echo $vigencia_recurso; ?>" data-rcrso_disponible="<?php echo $recurso_disponible; ?>" data-cdigo_indicador="<?php echo $cdigo_indicador; ?>" <?php echo $selected_accion; ?>><?php echo substr($descrp,0,105)."..."; ?></option>
                 <?php
                         }
                     }
@@ -169,11 +171,15 @@
     $('#selFuente').change(function(){
         var vigencia_recurso = $(this).find(':selected').data('vigencia_recurso');
         var rcrso_disponible = $(this).find(':selected').data('rcrso_disponible');
+        var cdigo_indicador = $(this).find(':selected').data('cdigo_indicador');
         var saldo = $(this).find(':selected').data('saldo');
+
+        alert('codigo indicador '+cdigo_indicador);
 
         $('#vigencia_recurso').val(vigencia_recurso);
         $('#rcrso_disponible').val(rcrso_disponible);
         $('#txtResurso').val(saldo);
+        $('#codigo_indicador').val(cdigo_indicador);
     });
     
     
