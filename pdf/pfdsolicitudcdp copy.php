@@ -20,7 +20,9 @@ $codigo_cdp = $_REQUEST['codigo_cdp'];
 class MYPDF extends TCPDF {
     
 	public function Header(){
-
+       // Logo
+    
+      // $style2 = array('width' => 0.3, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
        $image_logousco = 'plantilla/img/logo2.png';
        $this->setTextColor(0, 0, 0);
        $this->SetDrawColor(0, 0, 0);
@@ -28,7 +30,16 @@ class MYPDF extends TCPDF {
        
        
        $this->SetFillColor(255, 255, 127);
-          
+      
+
+       /*$fchaa = date('Y-m-d');
+
+       $year_numm = substr($fchaa,0,4);
+       $mes_numm = substr($fchaa,5,2);
+       $dia_numm = substr($fchaa,8,2);*/
+
+      // $fchh = "Fecha: ".$dia_numm."/".$mes_numm."/".$year_numm;
+    
        $codigo = 'CODIGO';
        $titulo_universidad = 'UNIVERSIDAD SURCOLOMBIANA';
        $titulo_cartera = 'GESTIÓN FINANCIERA Y DE RECURSOS FÍSICOS';
@@ -150,6 +161,14 @@ class MYPDF extends TCPDF {
         La versión vigente y controlada de este documento, solo podrá ser consultada a través del sitio web Institucional  www.usco.edu.co, link Sistema Gestión de Calidad. La copia o impresión diferente a la publicada, será considerada como documento no controlado y su uso indebido no es de responsabilidad de la Universidad Surcolombiana.</span></hr>';
         $this->writeHTML($this->html, false, false, true, false, '');
 
+
+       
+        // Page number
+        //$this->Line(2, 288, 200, 288, $style2);
+        
+        //$this->MultiCell(40, 10, $txt, 1, 'C', 0, 0, '', true, 0, false, true, 10, 'M');
+       // $this->Cell(0, 0, $txt , 0, false, 'C', 0, 1, 0, false, 'T', 'M');	
+       // $this->Cell(0, 0, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 
 }
