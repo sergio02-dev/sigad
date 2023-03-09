@@ -1,6 +1,6 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set("display_errors", 1);
+	/*error_reporting(E_ALL);
+	ini_set("display_errors", 1);*/
 	
     require 'cnxnoci/cnfgoci_db.php';
     require 'cnxnoci/cnfoci_class.php';
@@ -86,17 +86,20 @@
 
 		public function list_cdp(){
 
-			$sql_clasificadores="SELECT K_NUMDOC, F_MOVIMI, N_OBJECT, 
-										K_NUMDOC_CIA, F_VIGENCIA,
-										V_MONTO
-								   FROM PS227MGCERTIFI";
+			$sql_cdp="SELECT K_NUMDOC, F_MOVIMI, N_OBJECT, 
+							 K_NUMDOC_CIA, F_VIGENC,
+							 V_MONTO, EXTRACT(YEAR FROM TO_DATE(F_MOVIMI, 'DD-MON-RRRR')) ANIO 
+						FROM PS227MGCERTIFI
+						WHERE EXTRACT(YEAR FROM TO_DATE(F_MOVIMI, 'DD-MON-RRRR')) >= 2022
+						ORDER BY ANIO DESC";
+						//FETCH FIRST 2000 ROWS ONLY";
 
-			$resulatdo_clasificadores=$this->cnxionoci->ejecutaroci($sql_clasificadores);
+			$resultado_cdp=$this->cnxionoci->ejecutaroci($sql_cdp);
 
-			while($data_clasificadores =$this->cnxionoci->obtener_filasoci($resulatdo_clasificadores)){
-				$dataclasificadores[]=$data_clasificadores;
+			while($data_cdp =$this->cnxionoci->obtener_filasoci($resultado_cdp)){
+				$datacdp[]=$data_cdp;
 			}
-			return $dataclasificadores;
+			return $datacdp;
 		}
 		
 		public function jsonnCDP(){
@@ -107,15 +110,17 @@
 					$fecha_movimiento = $dta_cdp['F_MOVIMI'];
 					$objeto_cdp = $dta_cdp['N_OBJECT'];
 					$numero_contrato = $dta_cdp['K_NUMDOC_CIA'];
-					$fecha_vigencia = $dta_cdp['F_VIGENCIA'];
+					$fecha_vigencia = $dta_cdp['F_VIGENC'];
 					$valor_cdp = $dta_cdp['V_MONTO'];
+					$FECHA = $dta_cdp['ANIO'];
 	
 					$rsCdpp[] = array('numero_certificado'=> $numero_certificado, 
 									  'fecha_movimiento'=> date('d/m/Y',strtotime($fecha_movimiento)), 
 									  'objeto_cdp'=> $objeto_cdp,
 								      'numero_contrato'=> $numero_contrato,
 								 	  'fecha_vigencia'=> date('d/m/Y',strtotime($fecha_vigencia)),
-									  'valor_cdp'=> "$".number_format($valor_cdp,0,'','.')
+									  'valor_cdp'=> "$".number_format($valor_cdp,0,'','.'),
+									  'fecha'=> $FECHA
 									);
 	
 				}
