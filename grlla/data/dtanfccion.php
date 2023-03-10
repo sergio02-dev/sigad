@@ -275,7 +275,7 @@
                                                 
                                             ?>
                                               <!-- <i class="fas fa-plus-circle" style="color: #BB0900;"  title="Agregar Plan Compras" onclick="addPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>');"></i> -->
-                                            <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $nombre_sede; ?>');"></i>
+                                            <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $acp_codigo; ?>');"></i>
                                             <?php 
                                                 }
                                             }
@@ -444,21 +444,21 @@
         });
     }
 
-    function listPlanCompra(codigo_poai, codigo_accion, nom_sede){
-        var codigo_poai = codigo_poai;
+    function listPlanCompra(codigo_etapa, codigo_accion, codigo_actividad){
+        var codigo_etapa = codigo_etapa;
         var codigo_accion= codigo_accion;
-        var nom_sede = nom_sede;
+        var codigo_actividad = codigo_actividad;
 
-        $('#frmModalEtapaEditar'+codigo_poai).modal({
+        $('#frmModalEtapaEditar'+codigo_etapa).modal({
             keyboard: true
         });
         $.ajax({
             url:"listplancompras",
             type:"POST",
-            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&nom_sede='+nom_sede,                                            
+            data:"codigo_etapa="+codigo_etapa+'&codigo_accion='+codigo_accion+'&codigo_actividad='+codigo_actividad,                                            
             async:true,
             success: function(message){
-                $(".modal-contentEtapaEditar"+codigo_poai).empty().append(message);
+                $(".modal-contentEtapaEditar"+codigo_etapa).empty().append(message);
             }
         });
     }
