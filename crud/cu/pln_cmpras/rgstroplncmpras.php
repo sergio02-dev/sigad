@@ -10,15 +10,15 @@
     $txtDescripcion = str_replace("'","&apos;",$_REQUEST['txtDescripcion']);
     $txtCantidad = str_replace(',','.',$_REQUEST['txtCantidad']);
     $txtValorUnitario = str_replace('.','',$_REQUEST['txtValorUnitario']);
-    $codigo_poai = $_REQUEST['codigo_poai'];
+    $codigo_etapa = $_REQUEST['codigo_etapa'];
     $estado = $_REQUEST['chkestado'];
-    $nom_sede = $_REQUEST['nom_sede'];
+    $codigo_actividad = $_REQUEST['codigo_actividad'];
     $plancompras = $_REQUEST['plancompras'];
 
     $registroplancompras = new RgstroPlanCompras();
 
-    $registroplancompras->setCodigoEtapa($codigo_poai);
-    $registroplancompras->setSede($nom_sede);
+    $registroplancompras->setCodigoEtapa($codigo_etapa);
+    $registroplancompras->setSede($codigo_actividad);
     $registroplancompras->setDescripcion($txtDescripcion);
     $registroplancompras->setCantidad($txtCantidad);
     $registroplancompras->setValorUnitario($txtValorUnitario);

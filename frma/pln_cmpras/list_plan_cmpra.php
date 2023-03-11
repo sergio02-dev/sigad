@@ -3,20 +3,21 @@
  * Juan sebastian Romero y
  * Sergio Sánchez Salazar
  */
-   $codigo_poai = $_REQUEST['codigo_poai'];
-   $codigo_accion = $_REQUEST['codigo_accion'];   
-  
+   $codigo_etapa = $_REQUEST['codigo_etapa'];
+   $codigo_accion = $_REQUEST['codigo_accion'];  
+   $codigo_actividad = $_REQUEST['codigo_actividad'];   
+    
    
    include('crud/rs/pln_cmpras/pln_cmpras.php');
 
-   $datos_etapa = $objPlanCompras->datos_etapa($codigo_poai);
+   $datos_etapa = $objPlanCompras->datos_etapa($codigo_etapa);
 
-   $codigo_sede = $objPlanCompras->etapas_actividad_sede($codigo_poai);
-
-   $list_plan_cmpras = $objPlanCompras->list_plan_cmpras($codigo_accion, $codigo_sede);
+  // $codigo_sede = $objPlanCompras->etapas_actividad_sede($codigo_etapa);
+    
+   $list_plan_cmpras = $objPlanCompras->list_plan_cmpras($codigo_accion, $codigo_actividad);
    
     $url_guardar="modificarplancompras";
-    $codigo_formulario = $codigo_poai;
+    $codigo_formulario = $codigo_etapa;
     $tarea = "";
     $checkedA="checked";
     $checkedI="";
@@ -91,7 +92,7 @@
                                 $nombre_area = $objPlanCompras->nombre_area($pdi_area);
                                 $nombre_descripcionEquipo = $objPlanCompras->nombre_descripcionEquipo($pdi_equipodescripcion);
                                 $valor = $pdi_cantidad * $pdi_valorunitario;
-                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo,$codigo_poai);
+                                $check_arreglo = $objPlanCompras->check_arreglo($pdi_codigo,$codigo_etapa);
                     ?>
                     <tr>   
                         <td> 
@@ -179,7 +180,7 @@
         <input type="hidden" name="num_datos" id="num_datos" value="<?php echo $num_datos; ?>">
         <input type="hidden" name="codigo_formulario" id="codigo_formulario" value="<?php echo $codigo_formulario; ?>">
         <input type="hidden" name="codigo_accion" id="codigo_accion" value="<?php echo $codigo_accion; ?>">
-        <input type="hidden" name="codigo_poai" id="codigo_poai" value="<?php echo $codigo_poai; ?>">
+        <input type="hidden" name="codigo_etapa" id="codigo_etapa" value="<?php echo $codigo_etapa; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-danger" onclick="validar_plancompras();"><i class="far fa-save"></i> Guardar</button>

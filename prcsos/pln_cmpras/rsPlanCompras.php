@@ -94,31 +94,37 @@
 
             return $sed_nombre;
         }
+       
 
-        public function etapas_actividad_sede($codigo_etapa){
+        public function validar_sedeindicador($codigo_actividad){
+            $sql_validar_sedeindicador = "SELECT acp_sedeindicador
+                                            FROM planaccion.actividad_poai
+                                            WHERE acp_codigo = $codigo_actividad";
+            $resultado_validar_sedeindicador=$this->cnxion->ejecutar($sql_validar_sedeindicador);
 
-            $sql_etapas_actividad_sede="SELECT poa_codigo, sed_codigo, sed_nombre
-                                          FROM planaccion.poai
-                                    INNER JOIN planaccion.actividad_poai ON planaccion.poai.acp_codigo = planaccion.actividad_poai.acp_codigo
-                                    INNER JOIN plandesarrollo.indicador ON acp_sedeindicador = ind_codigo
-                                    INNER JOIN principal.sedes ON ind_sede = sed_codigo  
-                                    WHERE poa_codigo = $codigo_etapa";
-
-            $resultado_etapas_actividad_sede=$this->cnxion->ejecutar($sql_etapas_actividad_sede);
-
-            $data_etapas_actividad_sede= $this->cnxion->obtener_filas($resultado_etapas_actividad_sede);
+            $data_validar_sedeindicador= $this->cnxion->obtener_filas($resultado_validar_sedeindicador);
             
-            $sed_codigo = $data_etapas_actividad_sede['sed_codigo'];
+            $acp_sedeindicador = $data_validar_sedeindicador['acp_sedeindicador'];
 
-            return $sed_codigo;
-
+            return $acp_sedeindicador;
         }
-
         
+        public function list_plan_cmpras($codigo_accion, $codigo_actividad){
 
-        public function list_plan_cmpras($codigo_plan_cmpra, $codigo_sede){
+            $codigo_indicador = $this->validar_sedeindicador($codigo_actividad);
 
-            
+            if($codigo_indicador > 0){
+                $codigo_sede = "SELECT ind_sede
+                                  FROM plandesarrollo.indicador
+                                 WHERE ind_codigo = $codigo_indicador";
+            }
+            else{
+                $codigo_sede = "SELECT ind_sede
+                                  FROM planaccion.actividad_indicador,plandesarrollo.indicador
+                                 WHERE ain_indicador = ind_codigo 
+                                  AND  ain_actividad = $codigo_actividad";
+            }
+
 
             if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
                 $condicion="";
@@ -132,9 +138,10 @@
             
 
             $sql_list_plan_cmpras="SELECT pdi_codigo,pdi_sede, pdi_dependencia, pdi_area,pdi_plantafisica,
-                                          pdi_equipodescripcion, pdi_valorunitario, pdi_cantidad                                     FROM usco.formulariopdi
-                                    WHERE pdi_accion = $codigo_plan_cmpra
-                                      AND pdi_sede = $codigo_sede
+                                          pdi_equipodescripcion, pdi_valorunitario, pdi_cantidad                                     
+                                    FROM usco.formulariopdi
+                                    WHERE pdi_accion = $codigo_accion
+                                      AND pdi_sede IN($codigo_sede)
                                       $condicion
                                      ORDER BY pdi_equipodescripcion ASC;";
 
