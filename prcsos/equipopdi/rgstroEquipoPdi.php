@@ -57,8 +57,9 @@ class RgstroEquipoPdi extends EquipoPdi {
                                                                                ".$this->getPersonaSistema().", 
                                                                                 0);";
         $this->cnxion->ejecutar($sql_insertCaracteristicas);
-
+        echo $sql_insertCaracteristicas;
         return $sql_insertEquipo;
+        
 
     }
 }

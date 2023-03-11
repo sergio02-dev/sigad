@@ -6,8 +6,10 @@
     $list_equipo = $objFormpdi->list_equipo($codigo_sublinea);
 ?>
 
-
-<label for="selEquipo" class="font-weight-bold"> Equipo</label> 
+<div style="float: left; margin-bottom: 1px;">
+        <label for="textEquipo" class="font-weight-bold"> Equipo</label>
+        <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo()"></i>
+</div>
 <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
     <option value="0" data-codigo_equipo="0">Seleccione el equipo</option>
      <?php
@@ -55,5 +57,27 @@
     });
 
     
+    
+
+    function agregarEquipo(){
+        
+    
+        $('#frmModal').modal({
+            keyboard: true
+        });
+        
+            $.ajax({
+                    url:"agregarequipo",
+                    type:"POST",
+                    data:"",
+                    async:true,
+
+                    success: function(message){
+                        $(".modal-content").empty().append(message);
+                        
+                    }
+            });
+    
+    };
    
 </script>

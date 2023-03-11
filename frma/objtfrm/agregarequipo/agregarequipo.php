@@ -10,9 +10,13 @@
 
         $task = "REGISTRAR EQUIPO";
     
+        $url_guardar="registroequipo";  
+        $capa_direccion = "#dtaFormpdi";
+        $url_direccion = "dtaformpdi";
+    
     
 ?>
-<form id="areasfrm" role="form">
+<form id="equiposfrm" role="form">
     <div class="modal-header fondo-titulo">
         <h4 class="modal-title"><strong><?php echo $task; ?></strong></h4>
 
@@ -81,7 +85,7 @@
                 <div class="col-sm-5">
                         <div class="form-group p-3">
                             <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
-                            <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" required>
+                            <input type="text" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer puntos_miles_etapa" data-rule-required="true" aria-describedby="textHelp" required>
                                     
                         </div>
                 </div>
@@ -92,16 +96,17 @@
     <div class="modal-footer">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
-        <input type="hidden" name="codigo_areas" id="codigo_areas" value="<?php echo $codigo_areas; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-danger" onclick="validar_areas();"><i class="far fa-save"></i> Guardar</button>
+        <button type="submit" class="btn btn-danger" onclick="validar_equipos();"><i class="far fa-save"></i> Guardar</button>
     </div>
 </form>
 
 <script src="js/jquery.validate.min.js"></script>
 
-<script src="vjs/areas/vldar_areas.js"></script>
+<script src="vjs/agregarequipo/vldar_equipos.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     
@@ -130,5 +135,24 @@
             });
         }
     });
+
+    $(".puntos_miles_etapa").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "").replace(/([0-9])([0-9]{0})$/, '$1').replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                //return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            });
+        }
+    });
+
+    function numberWithCommas(formatoNumero) {
+        return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+ 
+
+    
 </script>
 

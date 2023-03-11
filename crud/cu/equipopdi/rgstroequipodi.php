@@ -7,17 +7,19 @@
 
     $personaSistema = $_SESSION['idusuario'];
     $selSublineaEquipo= $_REQUEST['selSublineaEquipo'];
-    $selEquipo = $_REQUEST['selEquipo'];
-    $selCaracteristicas = $_REQUEST['selCaracteristicas'];
-    $selValorUnitario = $_REQUEST['selValorUnitario'];
+    $txtEquipo = $_REQUEST['txtEquipo'];
+    $txtCaracteristicas = $_REQUEST['txtCaracteristicas'];
+    $selValorUnitario= str_replace('.','',$_REQUEST['selValorUnitario']);
     
 
     $registroequipopdi = new RgstroEquipoPdi();
 
+    
+
     $registroequipopdi ->setPersonaSistema($personaSistema);
     $registroequipopdi ->setcodigoSublinea($selSublineaEquipo);
-    $registroequipopdi ->setEquipoNombre($selEquipo);
-    $registroequipopdi ->setCaracteristicaNombre($selCaracteristicas);
+    $registroequipopdi ->setEquipoNombre($txtEquipo);
+    $registroequipopdi ->setCaracteristicaNombre($txtCaracteristicas);
     $registroequipopdi ->setValorunitario($selValorUnitario);
 
 
