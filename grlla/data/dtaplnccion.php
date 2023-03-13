@@ -208,8 +208,9 @@
 		else{
 			window.location.href = 'reporteexcelpoai?codigo_plandesarrollo='+codigo_plandesarrollo+'&vigencia='+vigencia;	
 		}
-		
 	}
+
+	
 
 	function rprte_pln_accion(codigo_planaccion){
 		var codigo_planaccion = codigo_planaccion;
