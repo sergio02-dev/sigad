@@ -173,7 +173,7 @@ Class RsConsultarPdi extends ConsultarPDI{
     public function list_plan_compras_pdi(){
 
         
-        $sql_list_plan_compras_pdi = "SELECT pdi_sede, pdi_dependencia, pdi_area,
+        $sql_list_plan_compras_pdi = "SELECT pdi_codigo,pdi_sede, pdi_dependencia, pdi_area,
                                              pdi_accion,pdi_plantafisica,
                                              pdi_linea, pdi_sublinea,
                                              pdi_equipo, pdi_equipodescripcion,
@@ -198,6 +198,7 @@ Class RsConsultarPdi extends ConsultarPDI{
             
             if($list_plan_compras_pdi){
                 foreach ($list_plan_compras_pdi as $dat_consultarpdi) {
+                    $pdi_codigo = $dat_consultarpdi['pdi_codigo'];
                     $pdi_sede = $dat_consultarpdi['pdi_sede'];
                     $pdi_vicerretoria = $dat_consultarpdi['pdi_vicerrectoria'];
                     $pdi_facultad = $dat_consultarpdi['pdi_facultad'];
@@ -232,7 +233,8 @@ Class RsConsultarPdi extends ConsultarPDI{
                 
 
         
-                    $rsConsultarpdi[] = array('sed_nombre'=> $nombre_sede, 
+                    $rsConsultarpdi[] = array('pdi_codigo'=> $pdi_codigo,
+                                                'sed_nombre'=> $nombre_sede, 
                                                 'vic_nombre'=> $nombre_vicerrectoria,
                                                 'fac_nombre' => $nombre_facultad,
                                                 'ofi_nombre'=> $nombre_dependencia,

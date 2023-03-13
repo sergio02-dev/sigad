@@ -28,7 +28,7 @@
     <?php
         }
     ?>
-    </select>
+</select>
 <span class="help-block" id="error"></span>
 
 <script>

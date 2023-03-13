@@ -20,6 +20,7 @@ Class PlandeComprasPDI{
     private $cantidad;
     private $valorunitario;
 	private $personaSistema;
+	private $estado;
 	
     
 
@@ -28,6 +29,13 @@ Class PlandeComprasPDI{
     } 
     public function setPersonaSistema($personaSistema){
         $this->personaSistema=$personaSistema;
+    }
+
+	public function getEstado(){
+        return $this->estado;
+    } 
+    public function setEstado($estado){
+        $this->estado=$estado;
     }
 
 

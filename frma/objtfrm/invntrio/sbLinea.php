@@ -13,14 +13,8 @@
             $slin_codigo=$data_sublinea['slin_codigo'];
             $slin_nombre=$data_sublinea['slin_nombre'];
 
-        if($per_tipoidentificacion==$slin_codigo){
-            $select_sublinea="selected";
-        }
-        else{
-            $select_sublinea="";
-        }
     ?>
-        <option value="<?php echo  $slin_codigo; ?>"data-codigo_sublinea="<?php echo $slin_codigo; ?>"<?php echo $select_sublinea; ?>><?php echo $slin_nombre; ?></option>
+        <option value="<?php echo  $slin_codigo; ?>"data-codigo_sublinea="<?php echo $slin_codigo; ?>"><?php echo $slin_nombre; ?></option>
     <?php
         }
     ?>

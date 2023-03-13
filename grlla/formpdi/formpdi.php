@@ -41,7 +41,7 @@
 					<div class="row">
 						<div class="col-sm-12">&nbsp;</div>
 					</div>
-					<div class="col-sm-12" id="formulariopdi">
+					<div class="col-sm-12" id="dtaFormulariopdi">
 						<?php include('frma/formpdi/formpdi.php'); ?>
 							
 					</div>

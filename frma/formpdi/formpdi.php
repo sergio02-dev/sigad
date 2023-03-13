@@ -54,7 +54,7 @@
     }
 
     $capa_direccion = "#dtaFormpdi";
-    $url_direccion = "dtaformpdi";
+    $url_direccion = "dtaformdi";
 
 
 ?>

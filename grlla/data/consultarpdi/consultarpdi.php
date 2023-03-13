@@ -78,11 +78,19 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 { data: 'pdi_valorunitario', title: 'Valor unitario'},
                 { data: 'estado', title: 'Estado'},
                 {
+                    data: null,
+                    render: function (data, type, full, meta){
+                        return '<div class="d-inline-block">  <a href ="mdfcarplancompraspdi?'+full["pdi_codigo"]+'"  title="Editar plan compras"><i class="fas fa-edit fa-lg color_icono"> </i></a> </div> ';
+                    },
+                    title: 'Editar'
+                },
+                {
                     "className":      'details-control',
                     "orderable":      false,
                     "data":           null,
                     "defaultContent": ''
-                }
+                },
+            	
              
             ],
             //dom:            "Bfrtip",
@@ -100,10 +108,11 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 { "width": "10%", "targets": 1 },
                 { "width": "10%", "targets": 2 },
                 { "width": "14%", "targets": 3 },
-                { "width": "32%", "targets": 4 },
-                { "width": "4%", "targets": 5 },
+                { "width": "28%", "targets": 4 },
+                { "width": "10%", "targets": 5 },
                 { "width": "10%", "targets":6 },
-                { "width": "10%", "targets": 7 },
+                { "width": "4%", "targets": 7 },
+                { "width": "4%", "targets": 8},
                 
                
                 
@@ -195,15 +204,15 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
 	});
     });
 
-    function agregar(){
-
+    function editarPlanCompras(codigo_pdi){
+        var codigo_pdi = codigo_pdi;
         $('#frmModal').modal({
             keyboard: true
         });
         $.ajax({
-            url:"formconsultarpdi",
+            url:"mdfcarplancompraspdi",
             type:"POST",
-            data:"",
+            data:"codigo_pdi="+codigo_pdi,
             async:true,
 
             success: function(message){
@@ -212,23 +221,7 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
         });
     }
 
-    function editarDependencia(codigo_consultarpdi){
-        var codigo_consultarpdi = codigo_consultarpdi;
-        //alert(codigo_dependencia);
-        $('#frmModal').modal({
-            keyboard: true
-        });
-        $.ajax({
-            url:"formconsultarpdi",
-            type:"POST",
-            data:"codigo_consultarpdi="+codigo_consultarpdi,
-            async:true,
-
-            success: function(message){
-                $(".modal-content").empty().append(message);
-            }
-        });
-    }
+  
 
 
 
