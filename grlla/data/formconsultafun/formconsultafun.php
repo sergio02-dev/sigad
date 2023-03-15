@@ -54,6 +54,13 @@
                 { data: 'fun_valorunitario', title: 'Valor Unitario'},
                 { data: 'estado', title: 'Estado'},
                 {
+                    data: null,
+                    render: function (data, type, full, meta){
+                        return '<div class="d-inline-block">  <a href ="mdfcarplancomprasfun?'+full["fun_codigo"]+'"  title="Editar plan compras"><i class="fas fa-edit fa-lg color_icono"> </i></a> </div> ';
+                    },
+                    title: 'Editar'
+                },
+                {
                     
                     "className":      'details-control',
                     "orderable":      false,

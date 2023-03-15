@@ -15,6 +15,15 @@
         private $cantidad;
         private $valorunitario;
         private $personaSistema;
+        private $estado;
+
+
+        public function getEstado(){
+                return $this->estado;
+        } 
+        public function setEstado($estado){
+                $this->estado=$estado;
+        }
    
         
         public function getPersonaSistema(){
