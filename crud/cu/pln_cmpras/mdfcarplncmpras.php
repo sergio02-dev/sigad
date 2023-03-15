@@ -8,7 +8,7 @@
     $personaSistema = $_SESSION['idusuario'];
     $plancompras = $_REQUEST['plancompras'];
     $codigoPlanCompras = $_REQUEST['codigoPlanCompras'];
-    $pco_etapa = $_REQUEST['codigo_poai'];
+    $pco_etapa = $_REQUEST['codigo_etapa'];
     
     
     $modificarplancompras = new MdfcarPlancmpras();

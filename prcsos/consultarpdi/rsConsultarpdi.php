@@ -188,7 +188,27 @@ Class RsConsultarPdi extends ConsultarPDI{
         }
         return $datalist_plan_compras_pdi;
     }
+    public function validar_botoneditar_plancompras($codigo_plancompras){
+        $sql_validar_botoneditar_plancompras= "SELECT COUNT(*) AS boton
+                                                FROM usco.plancompras_accion
+                                                WHERE pca_plancompras =$codigo_plancompras
+                                                AND pca_estado = 1;";
 
+        $query_validar_botoneditar_plancompras=$this->cnxion->ejecutar($sql_validar_botoneditar_plancompras);
+
+        $data_validar_botoneditar_plancompras=$this->cnxion->obtener_filas($query_validar_botoneditar_plancompras);
+
+        $boton = $data_validar_botoneditar_plancompras['boton'];
+
+        if($boton > 0){
+            $display = "none";
+        }
+        else{
+            $display = "block";
+        }
+
+        return $display;
+    }
 
 
 
@@ -224,6 +244,8 @@ Class RsConsultarPdi extends ConsultarPDI{
                     $nombre_sublinea = $this->nombre_sublinea($pdi_sublinea);
                     $nombre_descripcionEquipo = $this->nombre_descripcionEquipo($pdi_equipodescripcion);
                     $nombre_vicerrectoria = $this->nombre_vicerrectoria($pdi_vicerretoria);
+                    $boton= $this->validar_botoneditar_plancompras($pdi_codigo);
+
                     if($pdi_estado == 1){
                         $estado = "Activo";
                     }
@@ -248,7 +270,7 @@ Class RsConsultarPdi extends ConsultarPDI{
                                                 'pdi_valorunitario'=> $pdi_valorunitario,
                                                 'pdi_cantidad'=> $pdi_cantidad,
                                                 'estado'=> $estado,
-                                                
+                                                'boton'=> $boton,
                                             );
         
                 }
