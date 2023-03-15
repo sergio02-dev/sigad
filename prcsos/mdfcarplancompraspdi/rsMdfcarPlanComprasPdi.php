@@ -223,9 +223,8 @@ Class RsMdfcarPlanComprasPdi extends PlandeComprasPDI{
 
     public function list_caracteristicas($codigo_equipo){
 
-        $sql_list_caracteristicas = "SELECT equi_codigo, equi_sublinea, equi_nombre,
-                                            deq_descripcion, deq_valor, deq_codigo,
-                                            deq_valor
+
+        $sql_list_caracteristicas = "SELECT deq_descripcion, deq_valor, deq_codigo
                                         FROM inventario.equipo
                                         INNER JOIN inventario.descripcion_equipo ON deq_equipo = equi_codigo
                                         WHERE deq_estado = 1

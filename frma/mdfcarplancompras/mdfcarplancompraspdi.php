@@ -57,8 +57,6 @@
         
     }
 
-    $capa_direccion = "#dtaConsultarpdi";
-    $url_direccion = "dtaconsultarpdi";
 
 
 ?>
@@ -454,10 +452,11 @@
                             <?php
 
                                 $list_caracteristicas = $objMdfcarPlanComprasPdi->list_caracteristicas($pdi_equipo);
+                                
                                 foreach ($list_caracteristicas as $data_caracteristicas) {
                                     $deq_codigo=$data_caracteristicas['deq_codigo'];
                                     $deq_descripcion=$data_caracteristicas['deq_descripcion'];
-                                    $deq_valor = $data_caracteristicas["deq_valor"];
+                                    $deq_valor = $data_caracteristicas['deq_valor'];
 
                                     if($pdi_equipodescripcion==$deq_codigo){
                                         $select_descripcion="selected";
@@ -504,9 +503,12 @@
                 </div>
         </div>
     </div>
+    <?php if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+
+    ?>
     <div class="row">  
             <div class="col-sm-12">
-                <div class="form-group">
+                <div class="form-group p-3">
                     <label for="txtEstado" class="font-weight-bold">Estado *</label>
                     <div class="radio tipo1">
                         <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> required/>
@@ -518,6 +520,9 @@
                 </div>
             </div>
     </div>
+    <?php 
+        } 
+    ?>
   
     <div class="row">
             <div class="col-sm-12">&nbsp;</div>

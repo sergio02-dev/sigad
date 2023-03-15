@@ -275,7 +275,7 @@
                                                 
                                             ?>
                                               <!-- <i class="fas fa-plus-circle" style="color: #BB0900;"  title="Agregar Plan Compras" onclick="addPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>');"></i> -->
-                                            <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $acp_codigo; ?>');"></i>
+                                            <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $codigo_Actividad; ?>');"></i>
                                             <?php 
                                                 }
                                             }

@@ -93,35 +93,20 @@ function validar_formpdi(){
 		},
 		submitHandler: function(form){
 			var url_proceso=$('#url').val(); 
-            var capa_direccion = $('#capa_direccion').val();
-            var url_direccion = $('#url_direccion').val();
 			
 			$.ajax({
                 type: "POST",
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
-					$(capa_direccion).load(url_direccion);
-					plancomprasPDIform.reset();
-						$('#selSede').selectpicker('val', '0');
-						$('#selTipoVicerrectoria').selectpicker('val', '0');
-						$('#selTipoFacultad').selectpicker('val', '0');
-						$('#selDependencia').selectpicker('val', '0');
-						$('#selArea').selectpicker('val', '0');
-						$('#selLineaEquipo').selectpicker('val', '0');
-						$('#selSublineaEquipo').selectpicker('val', '0');
-						$('#selEquipo').selectpicker('val', '0');
-						$('#selCaracteristicas').selectpicker('val', '0');
-						$('#selProyecto').selectpicker('val', '0');			
-						$('#selAccion').selectpicker('val', '0');	
+					window.location.href = "consultarpdi" ;	
 					
-					
-						
 					swal({
 						title: "Registro Exitoso",
 						text: "",
 						icon: "success",
 						button: "OK",
+					
 			
 					  });
 					  $('#productos').fadeOut('300');

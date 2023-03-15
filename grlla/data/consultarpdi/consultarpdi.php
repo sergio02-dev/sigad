@@ -80,7 +80,7 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 {
                     data: null,
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block">  <a href ="mdfcarplancompraspdi?'+full["pdi_codigo"]+'"  title="Editar plan compras"><i class="fas fa-edit fa-lg color_icono"> </i></a> </div> ';
+                        return '<div class="d-inline-block">  <a href ="mdfcarplancompraspdi?'+full["pdi_codigo"]+'" style="display:'+full["boton"]+'"  title="Editar plan compras"><i class="fas fa-edit fa-lg color_icono"> </i></a> </div> ';
                     },
                     title: 'Editar'
                 },

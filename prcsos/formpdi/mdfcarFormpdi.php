@@ -28,7 +28,8 @@ class MdfcarFormpdi extends PlandeComprasPDI {
                                 pdi_fechacreo=NOW(), 
                                 pdi_fechamodifico=NOW(), 
                                 pdi_personacreo=".$this->getPersonaSistema().", 
-                                pdi_personamodifico=".$this->getPersonaSistema()."  
+                                pdi_personamodifico=".$this->getPersonaSistema().",
+                                pdi_estado = ".$this->getEstado()."
                             WHERE pdi_codigo = ".$this->getCodigo().";";
         
         
