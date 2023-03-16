@@ -62,10 +62,10 @@ function validar_equipos(){
 					$('.modal-backdrop').remove();
 					$(capa_direccion).load(url_direccion);
 
-                    	
+                    var equipo = data;
 					swal({
 						title: "Registro Exitoso",
-						text: "",
+						text: "Equipo: "+equipo,
 						icon: "success",
 						button: "OK",
 			

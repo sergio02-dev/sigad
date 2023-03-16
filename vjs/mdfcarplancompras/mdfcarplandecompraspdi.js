@@ -99,19 +99,26 @@ function validar_formpdi(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
-					window.location.href = "consultarpdi" ;	
-					
+
 					swal({
-						title: "Registro Exitoso",
+						title: "Modificacion Exitosa",
 						text: "",
 						icon: "success",
-						button: "OK",
+						button: "OK"
+						
+					});
+					setTimeout(function() {
+						window.location.href = "consultarpdi";
+					}, 2000),
 					
-			
-					  });
-					  $('#productos').fadeOut('300');
-					  $('#plantafisicara').fadeInt('300');
-					  $('#plantafisicara').fadeOut('300');
+						
+
+					$('#productos').fadeOut('300');
+					$('#plantafisicara').fadeInt('300');
+					$('#plantafisicara').fadeOut('300');
+					
+				
+					
                 }
             });
 			
