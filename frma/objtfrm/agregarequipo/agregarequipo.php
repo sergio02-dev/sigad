@@ -8,11 +8,13 @@
 
     $list_linea = $objFormpdi->list_linea();
 
-        $task = "REGISTRAR EQUIPO";
-    
-        $url_guardar="registroequipo";  
-        $capa_direccion = "#dtaFormpdi";
-        $url_direccion = "dtaformpdi";
+    $codigo_plan_compras = $_REQUEST['codigo_plan_compras'];
+
+    $task = "REGISTRAR EQUIPO";
+
+    $url_guardar="registroequipo";  
+    $capa_direccion = "#mdfcarproductos";
+    $url_direccion = "mdfcarproductos?recarga=1&codigo_plan_compras=".$codigo_plan_compras;
     
     
 ?>

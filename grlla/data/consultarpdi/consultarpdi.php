@@ -72,7 +72,7 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 { data: 'sed_nombre', title: 'Sede'},
                 { data: 'ofi_nombre', title: 'Dependencia'},
                 { data: 'acc_nombre', title: 'Accion'},
-                { data: 'equi_nombre', title: 'Equipo'},
+                { data: 'equi_nombre', title: 'Insumos'},
                 { data: 'deq_descripcion', title: 'Descripcion'},
                 { data: 'pdi_cantidad', title: 'Cantidad'},
                 { data: 'pdi_valorunitario', title: 'Valor unitario'},

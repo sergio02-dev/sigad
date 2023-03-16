@@ -175,7 +175,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 bg-light text-dark border pt-2">
+    <div class="col-sm-12 bg-light text-dark border pt-2" >
         <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
     </div>
     <div class= "border"> 
@@ -264,6 +264,7 @@
                     </div>
             </div>
         </div>
+    
         <div class="m-0 row justify-content-center">
             <button type="submit" name="guardar" id="guardar" class="btn btn-danger"  style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
         </div>
