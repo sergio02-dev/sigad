@@ -281,49 +281,49 @@
    
 
 
-    <?php 
+        <?php 
 
-     $codigo_session = $_SESSION['idusuario'];
-     if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
-    
-    ?>
-    <div class="row">  
-            <div class="col-sm-12">
-                <div class="form-group p-3">
-                    <label for="txtEstado" class="font-weight-bold">Estado *</label>
-                    <div class="radio tipo1">
-                        <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> required/>
-                        <label for="ractivo"><span></span> Activo</label>
+        $codigo_session = $_SESSION['idusuario'];
+        if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+        
+        ?>
+        <div class="row">  
+                <div class="col-sm-12">
+                    <div class="form-group p-3">
+                        <label for="txtEstado" class="font-weight-bold">Estado *</label>
+                        <div class="radio tipo1">
+                            <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> required/>
+                            <label for="ractivo"><span></span> Activo</label>
 
-                        <input type="radio"   id="rinactivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> required />
-                        <label for="rinactivo"><span></span> Inactivo</label>
+                            <input type="radio"   id="rinactivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> required />
+                            <label for="rinactivo"><span></span> Inactivo</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-    </div>
-    <?php 
-        }
-    ?>
-    <div class="row">
-            <div class="col-sm-12">&nbsp;</div>
-    </div>
-    <div class="m-0 row justify-content-center">
-        <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
-    
-    </div>
-    <div class="row">
-            <div class="col-sm-12">&nbsp;</div>
+        </div>
+        <?php 
+            }
+        ?>
+        <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+        </div>
+        <div class="m-0 row justify-content-center">
+            <button type="submit" class="btn btn-danger" style="width:120px; height:50px ;" onclick="validar_formfun();"><i class="far fa-save"></i>&nbsp;<strong> Guardar</strong></button>
+        
+        </div>
+        <div class="row">
+                <div class="col-sm-12">&nbsp;</div>
+        </div>
+
     </div>
 
-</div>
-
-<!-- ******************** FIN FORMULARIO ************************* -->
+    <!-- ******************** FIN FORMULARIO ************************* -->
     <div class="modal-footer ">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
         <input type="hidden" name="codigoPlanComprasFun" id="codigoPlanComprasFun" value="<?php echo $codigoPlanComprasFun; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
-       
+    
     </div>  
 </form> 
 
@@ -354,26 +354,6 @@
         });
     });
         
-    /*$('#selLineaEquipo').change(function(){
-        var codigo_linea = $(this).find(':selected').data('codigo_linea');
-       
-        if(codigo_linea==0){
-
-        }
-        else{
-            $.ajax({
-                url:"sublinea",
-                type:"POST",
-                data:"codigo_linea="+codigo_linea,
-                async:true,
-
-                success: function(message){
-                    $(".subLinea").empty().append(message);
-                    $("")
-                }
-            });
-        }
-    });*/
     $('#selProyecto').change(function(){
         var codigo_proyecto = $(this).find(':selected').data('codigo_proyecto');
        
@@ -395,43 +375,5 @@
         }
     });
 
-    function numberWithCommas(formatoNumero) {
-        return formatoNumero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    $('.sma').change(function(){
-        var undades = $('#selCantidad').val();
-        var str = $('#selValorUnitario').val();
-        var valor_unidades = 0;
-
-        valor_unidades = str.toString().replace(/\./g,'');
-        
-        var total = undades * valor_unidades;
-
-        $('#selValorTotal').val(numberWithCommas(total));
-    });
-
-
-
-    /*function agregarEquipo(){
-        
-    
-        $('#frmModal').modal({
-            keyboard: true
-        });
-        
-            $.ajax({
-                    url:"agregarequipo",
-                    type:"POST",
-                    data:"",
-                    async:true,
-
-                    success: function(message){
-                        $(".modal-content").empty().append(message);
-                        
-                    }
-            });
-    
-    };*/
     
 </script>

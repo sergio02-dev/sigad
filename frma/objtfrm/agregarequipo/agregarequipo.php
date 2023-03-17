@@ -9,12 +9,26 @@
     $list_linea = $objFormpdi->list_linea();
 
     $codigo_plan_compras = $_REQUEST['codigo_plan_compras'];
+    $productos_pdi = $_REQUEST['productos_pdi'];
+  
 
     $task = "REGISTRAR EQUIPO";
 
-    $url_guardar="registroequipo";  
+    $url_guardar="registroequipo";
+
+    if($productos_pdi==1){
+
+        $capa_direccion = "#mdfcarproductospdi";
+        $url_direccion = "mdfcarproductospdi?recarga=1&codigo_plan_compras=".$codigo_plan_compras;
+        
+    }
+
     $capa_direccion = "#mdfcarproductos";
     $url_direccion = "mdfcarproductos?recarga=1&codigo_plan_compras=".$codigo_plan_compras;
+
+    
+   
+    
     
     
 ?>
@@ -36,7 +50,7 @@
                     
                 <div class="form-group p-3">
                     <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
-                    <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true"required>
+                    <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer  selectpickerlineaequipo" data-rule-required="true"required>
                             <option value="0" data-codigo_linea="0">Seleccione la linea</option>
                             <?php
                                 foreach ($list_linea as $data_listlinea) {
@@ -56,9 +70,9 @@
         </div>
         <div class="row ">
             <div class="col-sm-12">
-                    <div class="form-group p-3 subLinea">
+                    <div class="form-group p-3 subLineagregarequipo">
                         <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
+                        <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpickersublineaequipo" data-rule-required="true" required>
                             <option value="0" >Seleccione la sublinea</option>
                         </select>
                         <span class="help-block" id="error"></span>
@@ -104,18 +118,22 @@
     </div>
 </form>
 
-<script src="js/jquery.validate.min.js"></script>
-
 <script src="vjs/agregarequipo/vldar_equipos.js"></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     
-    $('.selectpicker').selectpicker({
+  
+    $('.selectpickerlineaequipo').selectpicker({
         liveSearch: true,
         maxOptions: 1
     });
+    $('.selectpickersublineaequipo').selectpicker({
+        liveSearch: true,
+        maxOptions: 1
+    });
+
 
     $('#selLineaEquipo').change(function(){
         var codigo_linea = $(this).find(':selected').data('codigo_linea');
@@ -125,14 +143,14 @@
         }
         else{
             $.ajax({
-                url:"sublinea",
+                url:"sublineagreagar",
                 type:"POST",
                 data:"codigo_linea="+codigo_linea,
                 async:true,
 
                 success: function(message){
-                    $(".subLinea").empty().append(message);
-                    $("")
+                    $(".subLineagregarequipo").empty().append(message);
+                   
                 }
             });
         }
