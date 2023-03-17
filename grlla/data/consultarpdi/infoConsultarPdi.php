@@ -1,10 +1,10 @@
 <?php
 
     $sed_nombre = $_REQUEST['sed_nombre'];
-    $vic_nombre = $_REQUEST ['vic_nombre'];
+    $ent_nombre = $_REQUEST ['ent_nombre'];
     $fac_nombre = $_REQUEST ['fac_nombre'];
     $ofi_nombre = $_REQUEST ['ofi_nombre'];
-    $area_nombre = $_REQUEST ['area_nombre'];
+    $are_nombre = $_REQUEST ['are_nombre'];
     $acc_nombre = $_REQUEST['acc_nombre'];
     $pdi_plantafisica = $_REQUEST['pdi_plantafisica'];
     $lin_nombre = $_REQUEST['lin_nombre'];
@@ -13,22 +13,54 @@
     $deq_descripcion = $_REQUEST['deq_descripcion'];
     $pdi_cantidad = $_REQUEST['pdi_cantidad'];
     $pdi_valorunitario = $_REQUEST['pdi_valorunitario'];
-    $valor_total = $pdi_cantidad * $pdi_valorunitario
+    $personaSistema = $_SESSION['idusuario'];
+    $estado = $_REQUEST['estado'];
+    
+    if($pdi_valorunitario==0){
+        $valor_total = 0;
+    }
+    else{
+        $valor_total = $pdi_cantidad * $pdi_valorunitario;
+    }
+
+    if($pdi_plantafisica == ""){
+        $pdi_plantafisica = 'NA';
+    }
+    else{
+        $pdi_plantafisica = $pdi_plantafisica;
+    }
+
+   
+
     
 ?>
+   <!-- **********************          Inicio Modal Forma    *********************************** -->
+   <div class="modal fade" tabindex="-1" id="frmModal<?php echo $acp_codigo; ?>" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content<?php echo $acp_codigo; ?>">
+                    Cargando...
+                </div>
+            </div>
+        </div>
+        <!-- **********************          Fin Modal Forma       *********************************** -->
 
+        <!-- **********************          Inicio Modal Forma    *********************************** -->
+        <div class="modal fade" tabindex="-1" id="frmModalEtapa<?php echo $acp_codigo; ?>" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-contentEtapa<?php echo $acp_codigo; ?>">
+                    Cargando...
+                </div>
+            </div>
+        </div>
+        <!-- **********************          Fin Modal Forma       *********************************** -->
 
-
- 
-  
-    <!-- **********************  Inicio Modal Forma    *********************************** -->
     <table>
         <tr>
             <th ><strong>Sede:</strong> <?php echo $sed_nombre; ?> </th>
-            <th><strong>Vicerrectoria:</strong> <?php echo $vic_nombre; ?> </th>
+            <th><strong>Vicerrectoria:</strong> <?php echo $ent_nombre; ?> </th>
             <th><strong>Facultad:</strong> <?php echo $fac_nombre; ?> </th>
             <th colspan="2"><strong>Dependencia:</strong> <?php echo $ofi_nombre; ?> </th>
-            <th><strong>Area:</strong> <?php echo $area_nombre; ?> </th>
+            <th><strong>Area:</strong> <?php echo $are_nombre; ?> </th>
            
         </tr>
         <tr>
@@ -78,5 +110,5 @@
             </td>
         </tr>
     </table> <br>   
-     <!-- **********************          Fin Modal Forma       *********************************** -->
+   
 

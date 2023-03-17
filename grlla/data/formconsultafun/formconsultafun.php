@@ -49,7 +49,7 @@
             columns: [
                 { data: 'sed_nombre', title: 'Sede'},               
                 { data: 'ofi_nombre', title: 'Depedencia'},
-                { data: 'equi_nombre', title: 'Insumos'},
+                { data: 'equi_nombre', title: 'Elementos'},
                 { data: 'fun_cantidad', title: 'Cantidad'},
                 { data: 'fun_valorunitario', title: 'Valor Unitario'},
                 { data: 'estado', title: 'Estado'},
