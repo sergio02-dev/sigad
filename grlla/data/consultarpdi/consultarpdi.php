@@ -72,11 +72,10 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 { data: 'sed_nombre', title: 'Sede'},
                 { data: 'ofi_nombre', title: 'Dependencia'},
                 { data: 'acc_nombre', title: 'Accion'},
-                { data: 'equi_nombre', title: 'Insumos'},
+                { data: 'equi_nombre', title: 'Elementos'},
                 { data: 'deq_descripcion', title: 'Descripcion'},
                 { data: 'pdi_cantidad', title: 'Cantidad'},
                 { data: 'pdi_valorunitario', title: 'Valor unitario'},
-                { data: 'estado', title: 'Estado'},
                 {
                     data: null,
                     render: function (data, type, full, meta){
@@ -100,7 +99,7 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
             paging:         false,
             buttons:        [ 'colvis' ],
             fixedColumns:   {
-                leftColumns: 7
+                leftColumns: 9
             },
             "order": [[0, 'asc']],
             "columnDefs": [
@@ -111,8 +110,8 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
                 { "width": "28%", "targets": 4 },
                 { "width": "10%", "targets": 5 },
                 { "width": "10%", "targets":6 },
-                { "width": "4%", "targets": 7 },
-                { "width": "4%", "targets": 8},
+                { "width": "8%", "targets": 7 },
+               
                 
                
                 
@@ -126,11 +125,12 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
 
        	/////Inicio Mas primera columna
 		function format(codigo_data) {
+            var pdi_codigo = codigo_data.pdi_codigo;
 			var sed_nombre =  codigo_data.sed_nombre;
-            var vic_nombre = codigo_data.vic_nombre;
+            var ent_nombre = codigo_data.ent_nombre;
             var fac_nombre = codigo_data.fac_nombre;
             var ofi_nombre = codigo_data.ofi_nombre;
-            var area_nombre = codigo_data.area_nombre;
+            var are_nombre = codigo_data.are_nombre;
             var acc_nombre = codigo_data.acc_nombre;
             var pdi_plantafisica = codigo_data.pdi_plantafisica;
             var lin_nombre = codigo_data.lin_nombre;
@@ -140,11 +140,12 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
             var pdi_cantidad = codigo_data.pdi_cantidad;
             var pdi_valorunitario = codigo_data.pdi_valorunitario;
 			var dataenviar = {
+                                "pdi_codigo": pdi_codigo,
 								"sed_nombre": sed_nombre,
-                                "vic_nombre": vic_nombre,
+                                "ent_nombre": ent_nombre,
                                 "fac_nombre": fac_nombre,
                                 "ofi_nombre": ofi_nombre,
-                                "area_nombre": area_nombre,
+                                "are_nombre": are_nombre,
                                 "acc_nombre": acc_nombre,
                                 "pdi_plantafisica": pdi_plantafisica,
                                 "lin_nombre": lin_nombre,
@@ -162,11 +163,11 @@ $codigo_proyecto=$_REQUEST['codigo_proyecto'];
 				async:true,
 
 				success: function(message){
-					$("#registroActividad"+sed_nombre).empty().append(message);
+					$("#registroActividad"+pdi_codigo).empty().append(message);
 				}
 			});
 
-			return '<div id="registroActividad'+sed_nombre+'"></div>';
+			return '<div id="registroActividad'+pdi_codigo+'"></div>';
 		}
 		// Fin Mas primera columna
 

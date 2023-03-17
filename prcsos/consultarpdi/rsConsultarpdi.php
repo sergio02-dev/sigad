@@ -20,6 +20,13 @@ Class RsConsultarPdi extends ConsultarPDI{
         
         $sed_nombre = $data_nombre_sede['sed_nombre'];
 
+        if($sed_nombre==""){
+            $sed_nombre= 'NA';
+        }
+        else{
+            $sed_nombre = $sed_nombre;
+        }
+
         return $sed_nombre;
     }
 
@@ -33,9 +40,16 @@ Class RsConsultarPdi extends ConsultarPDI{
 
         $data_nombre_vicerrectoria= $this->cnxion->obtener_filas($resultado_nombre_vicerrectoria);
         
-        $vic_nombre = $data_nombre_vicerrectoria['ent_nombre'];
+        $ent_nombre = $data_nombre_vicerrectoria['ent_nombre'];
 
-        return $vic_nombre;
+        if($ent_nombre==""){
+            $ent_nombre= 'NA';
+        }
+        else{
+            $ent_nombre = $ent_nombre;
+        }
+
+        return $ent_nombre;
     }
 
     public function nombre_facultad($codigo_facultad){
@@ -50,6 +64,13 @@ Class RsConsultarPdi extends ConsultarPDI{
         
         $fac_nombre = $data_nombre_facultad['ent_nombre'];
 
+        if($fac_nombre==""){
+            $fac_nombre= 'NA';
+        }
+        else{
+            $fac_nombre = $fac_nombre;
+        }
+
         return $fac_nombre;
     }
 
@@ -63,9 +84,16 @@ Class RsConsultarPdi extends ConsultarPDI{
 
         $data_nombre_area= $this->cnxion->obtener_filas($resultado_nombre_area);
         
-        $area_nombre = $data_nombre_area['are_nombre'];
+        $are_nombre = $data_nombre_area['are_nombre'];
 
-        return $area_nombre;
+        if($are_nombre==""){
+            $are_nombre= 'NA';
+        }
+        else{
+            $are_nombre = $are_nombre;
+        }
+
+        return $are_nombre;
     }
 
 
@@ -82,6 +110,15 @@ Class RsConsultarPdi extends ConsultarPDI{
         $data_nombre_dependencia= $this->cnxion->obtener_filas($resultado_nombre_dependencia);
         
         $ofi_nombre = $data_nombre_dependencia['ofi_nombre'];
+
+        
+        if($ofi_nombre == ""){
+            $ofi_nombre = 'NA';
+        }
+        else{
+            $ofi_nombre = $ofi_nombre;
+        }
+        
 
         return $ofi_nombre;
     }
@@ -100,6 +137,8 @@ Class RsConsultarPdi extends ConsultarPDI{
         $acc_numero = $data_nombre_accion['acc_numero'];
 
         $acc_nombre = $acc_referencia.'.'.$acc_numero;
+
+
         return $acc_nombre;
     }
 
@@ -116,6 +155,14 @@ Class RsConsultarPdi extends ConsultarPDI{
         
         $equi_nombre = $data_nombre_equipo['equi_nombre'];
 
+        
+        if($equi_nombre == ""){
+            $equi_nombre = 'NA';
+        }
+        else{
+            $equi_nombre = $equi_nombre;
+        }
+
         return $equi_nombre;
     }
 
@@ -130,6 +177,15 @@ Class RsConsultarPdi extends ConsultarPDI{
         $data_nombre_linea= $this->cnxion->obtener_filas($resultado_nombre_linea);
         
         $lin_nombre = $data_nombre_linea['lin_nombre'];
+
+        
+
+        if($lin_nombre == ""){
+            $lin_nombre = 'NA';
+        }
+        else{
+            $lin_nombre = $lin_nombre;
+        }
 
         return $lin_nombre;
     }
@@ -146,6 +202,14 @@ Class RsConsultarPdi extends ConsultarPDI{
         
         $slin_nombre = $data_nombre_sublinea['slin_nombre'];
 
+        if($slin_nombre == ""){
+            $slin_nombre = 'NA';
+        }
+        else{
+            $slin_nombre = $slin_nombre;
+        }
+
+       
         return $slin_nombre;
     }
 
@@ -162,7 +226,19 @@ Class RsConsultarPdi extends ConsultarPDI{
         
         $deq_descripcion= $data_nombre_descripcionEquipo['deq_descripcion'];
 
+
+        if($deq_descripcion == ""){
+            $deq_descripcion = 'NA';
+        }
+        else{
+            $deq_descripcion = $deq_descripcion;
+        }
+
         return $deq_descripcion;
+
+        
+
+
     }
 
 
@@ -188,6 +264,7 @@ Class RsConsultarPdi extends ConsultarPDI{
         }
         return $datalist_plan_compras_pdi;
     }
+
     public function validar_botoneditar_plancompras($codigo_plancompras){
         $sql_validar_botoneditar_plancompras= "SELECT COUNT(*) AS boton
                                                 FROM usco.plancompras_accion
@@ -257,10 +334,10 @@ Class RsConsultarPdi extends ConsultarPDI{
         
                     $rsConsultarpdi[] = array('pdi_codigo'=> $pdi_codigo,
                                                 'sed_nombre'=> $nombre_sede, 
-                                                'vic_nombre'=> $nombre_vicerrectoria,
+                                                'ent_nombre'=> $nombre_vicerrectoria,
                                                 'fac_nombre' => $nombre_facultad,
                                                 'ofi_nombre'=> $nombre_dependencia,
-                                                'area_nombre' => $nombre_area,
+                                                'are_nombre' => $nombre_area,
                                                 'acc_nombre'=> $nombre_accion,
                                                 'pdi_plantafisica' => $pdi_plantafisica,
                                                 'lin_nombre'=>$nombre_linea,
