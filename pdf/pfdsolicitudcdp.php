@@ -1,9 +1,5 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
-use Mpdf\Tag\Center;
 
 set_time_limit(1800000000);
 require_once('lbr/tcpdf_hefo/config/lang/eng.php');
