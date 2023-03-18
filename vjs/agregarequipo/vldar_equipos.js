@@ -72,7 +72,10 @@ function validar_equipos(){
 					  });
                 }
             });
-			
+			setTimeout(function() {
+				location.reload();
+			  }, 2000);
+
             return false; 
 		
 		}

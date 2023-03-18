@@ -9,6 +9,7 @@
     $visibilidad=$_SESSION['visibilidadBotones']; 
     //$codigo_pdi = $_REQUEST['codigo_pdi'];
     $codigoPlanComprasPdi=$iduno;
+    echo"codigo_plancomoras-->".$codigoPlanComprasPdi;
     
 
     $list_linea = $objMdfcarPlanComprasPdi->list_linea();

@@ -5,11 +5,10 @@
     if($recargar){
         
         
-        include('crud/rs/mdfcarplancompraspdi/Rsmdfcarplancompraspdi.php');
-       
+        include('crud/rs/formpdi/formpdi.php');
 
         if($_REQUEST['codigo_plan_compras']){
-            $form_plancompraspdi = $objMdfcarPlanComprasPdi->form_plancompraspdi($_REQUEST['codigo_plan_compras']);
+            $form_plancompraspdi = $objFormpdi->form_plancompraspdi($_REQUEST['codigo_plan_compras']);
          
             foreach ($form_plancompraspdi as $dat_plancompraspdi) {
                 $pdi_codigo = $dat_plancompraspdi['pdi_codigo'];
@@ -22,25 +21,24 @@
                 $pdi_estado= $dat_plancompraspdi['pdi_estado'];
                 $total = $dat_plancompraspdi['total'];
             }
-            $list_linea = $objMdfcarPlanComprasPdi->list_linea();
-            $list_sublinea = $objMdfcarPlanComprasPdi->list_sublinea($pdi_linea);
-            $list_equipo = $objMdfcarPlanComprasPdi->list_equipo($pdi_sublinea);
-            $list_caracteristicas = $objMdfcarPlanComprasPdi->list_caracteristicas($pdi_equipo);  
+            $list_linea = $objFormpdi->list_linea();
+            $list_sublinea = $objFormpdi->list_sublinea($pdi_linea);
+            $list_equipo = $objFormpdi->list_equipo($pdi_sublinea);
+            $list_caracteristicas = $objFormpdi->list_caracteristicas($pdi_equipo);  
         }
         else{
-            $list_linea = $objMdfcarPlanComprasPdi->list_linea();
+            $list_linea = $objFormpdi->list_linea();
         }   
     }
     else{
         if($_REQUEST['codigo_plan_compras']){
-            $list_linea = $objMdfcarPlanComprasPdi->list_linea();
-           
+            $list_linea = $objFormpdi->list_linea();
+            $list_sublinea = $objFormpdi->list_sublinea($pdi_linea);
+            $list_equipo = $objFormpdi->list_equipo($pdi_sublinea);
+            $list_caracteristicas = $objFormpdi->list_caracteristicas($pdi_equipo);
         }
         else{
-            $list_linea = $objMdfcarPlanComprasPdi->list_linea();
-            $list_sublinea = $objMdfcarPlanComprasPdi->list_sublinea($pdi_linea);
-            $list_equipo = $objMdfcarPlanComprasPdi->list_equipo($pdi_sublinea);
-            $list_caracteristicas = $objMdfcarPlanComprasPdi->list_caracteristicas($pdi_equipo);
+            $list_linea = $objFormpdi->list_linea();
          
 
         }    

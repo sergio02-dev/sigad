@@ -17,6 +17,7 @@
     include('crud/rs/formpdi/formpdi.php');
     $visibilidad=$_SESSION['visibilidadBotones']; 
     $codigo_formpdi = $_REQUEST['codigo_formpdi'];
+    $codigoPlanComprasPdi=$iduno;
 
     $list_linea = $objFormpdi->list_linea();
     $list_sedes = $objFormpdi->list_sedes();
@@ -24,34 +25,12 @@
     $cantidad = 0;
     $valor_uni = 0;
 
-    if($codigo_dependencia){
-        $url_guardar="modificardependencia";
-        $task = "MODIFICAR DEPENDENCIA";
-
-        $form_dependencia = $objDependencias->form_dependencia($codigo_dependencia);
-
-        foreach ($form_dependencia as $dat_dpndncias) {
-            $ofi_codigo = $dat_dpndncias['ofi_codigo'];
-            $ofi_nombre = $dat_dpndncias['ofi_nombre'];
-            $ofi_estado = $dat_dpndncias['ofi_estado'];
-        }
-        
-        if($ofi_estado == 1){
-            $checkedA = "checked";
-            $checkedI = "";
-        }
-        else{
-            $checkedA = "";
-            $checkedI = "checked";
-        }
-        
-    }
-    else{
+   
         $url_guardar="rgstroformulariopdi";
         $task = "REGISTRAR PLAN COMPRAS PDI";
         $checkedA = "checked";
         $checkedI = "";
-    }
+    
 
     $capa_direccion = "#dtaFormpdi";
     $url_direccion = "dtaformdi";
@@ -213,103 +192,18 @@
     </div>
 
   
+    
     <div class= "border" > 
-        <div class =" productos" name="productos" id="productos" style="display:none;" >
-            <div class="col-sm-12 bg-light text-dark border pt-2 ">
-                     <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
-            </div> 
-            <div class="row ">
-                     
-                <div class="col-sm-6" >
-                        
-                    <div class="form-group p-3">
-                        <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
-                        <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                                <option value="0" data-codigo_linea="0">Seleccione la linea</option>
-                                <?php
-                                    foreach ($list_linea as $data_listlinea) {
-                                        $lin_codigo=$data_listlinea['lin_codigo'];
-                                        $lin_nombre=$data_listlinea['lin_nombre'];
-
-                                
-                                ?>
-                                    <option value="<?php echo  $lin_codigo; ?>" data-codigo_linea="<?php echo $lin_codigo; ?>"><?php echo $lin_nombre; ?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
-                            <span class="help-block" id="error"></span>    
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                        <div class="form-group p-3 subLinea">
-                            <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                            <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                                <option value="0" >Seleccione la sublinea</option>
-                            </select>
-                            <span class="help-block" id="error"></span>
-                        </div>
-                </div>
-                
-            </div>
-            <div class ="row">
-                <div class="col-sm-10">
-                            <div class="form-group p-3 equipo">
-                                <div style="float: left; margin-bottom: 1px;">
-                                    <strong class="font-weight-bold" for="textEquipo">Equipo</strong> 
-                                    <i class="fas fa-plus-circle color_icono" title="Agregar Equipo" style="display:<?php echo $visibilidad; ?>; float: right; margin: 0 10px;" onclick="agregarEquipo()"></i>
-                                </div>
-                                
-                                
-                                <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                                    <option value="0">Seleccione...</option>
-                                </select>
-                                <span class="help-block" id="error"></span>
-                            </div>
-                </div>
-               
-
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group p-3 caracteristicas">
-                        <label for="selCaracteristicas" class="font-weight-bold">Caracteristicas</label>
-                        <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
-                            <option value="0">Seleccione...</option>
-                        </select>
-                        <span class="help-block" id="error"></span>       
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 caracteristicasNombre"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5">
-                        <div class="form-group p-3">
-                            <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
-                            <input type="number" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer" data-rule-required="true" aria-describedby="textHelp" value="<?php echo $valor_uni;?> " disabled>
-                                    
-                        </div>
-                </div>
-                <div class="col-sm-3">
-                        <div class="form-group p-3" >
-                            <label for="selCantidad" class="font-weight-bold">Cantidad</label>
-                            <input type="number" name="selCantidad" id="selCantidad" class="form-control caja_texto_sizer sma" data-rule-required="true" required aria-describedby="textHelp" value="<?php echo $cantidad;?>">
-                            <span class="help-block" id="error"></span>
-                        </div>
-                </div>
-                <div class="col-sm-4">
-                        <div class="form-group p-3">
-                            <label for="selValorTotal" class="font-weight-bold">Valor Total</label>
-                            <input type="text" name="selValorTotal" id="selValorTotal" class="form-control caja_texto_sizer" data-rule-required="false" aria-describedby="textHelp" readonly>
-                            <span class="help-block" id="error"></span>
-                        </div>
+        <div class =" productos" name="productos" id="productos" style="display:none">
+                <div class="col-sm-12 bg-light text-dark border pt-2 ">
+                        <label for="productos" class="font-weight-bold ">PRODUCTOS</label>
+                </div> 
+                <div id="productospdi">
+                    <?php 
+                        include('frma/formpdi/productospdi.php'); 
+                    ?>  
                 </div>
         </div>
-    </div>
         <div class="row">
                 <div class="col-sm-12">&nbsp;</div>
         </div>
@@ -320,17 +214,19 @@
         <div class="row">
                 <div class="col-sm-12">&nbsp;</div>
         </div>
-</div>
+    </div>
 
 <!-- ******************** FIN FORMULARIO ************************* -->
     <div class="modal-footer ">
         <input type="hidden" name="capa_direccion" id="capa_direccion" value="<?php echo $capa_direccion; ?>">
         <input type="hidden" name="url_direccion" id="url_direccion" value="<?php echo $url_direccion; ?>">
-        <input type="hidden" name="codigo_dependencia" id="codigo_dependencia" value="<?php echo $codigo_formpdi; ?>">
         <input type="hidden" name="url" id="url" value="<?php echo $url_guardar; ?>">
-         
-        <input type="hidden" id="valor_unitario" name="valor_unitario" value="">
-        
+        <input type="hidden" name="codigoPlanComprasPdi" id="codigoPlanComprasPdi" value="<?php echo $codigoPlanComprasPdi; ?>">
+        <input type="hidden" id="valor_unitario" name="valor_unitario" value=""> 
+     
+       
+     
+      
     </div>  
 </form> 
                             
@@ -425,18 +321,3 @@
     };
     
 </script>
-
-
-    
-   
-    
-    
-
-
-
-
-    
-   
-    
-    
-

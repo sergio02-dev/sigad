@@ -70,7 +70,6 @@ function validar_formfun(){
                 data: $(form).serialize(),
                 success: function (data, status) {
 					
-					window.location.href="consultafun";
 					
 					
 						
@@ -81,6 +80,11 @@ function validar_formfun(){
 						button: "OK",
 			
 					  });
+					setTimeout(function() {
+						window.location.href = "consultafun";
+					}, 2000);
+
+
                 }
             });
 			
