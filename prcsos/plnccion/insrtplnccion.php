@@ -51,7 +51,7 @@ class PlnAccon extends PlanAccion{
     public function insertPlanAccion(){
       $codigoccion=$this->getCodigoActividad();
       $numeroAccion=$this->numero($codigoccion);
-      //echo "------>".$numeroAccion;
+      
       if($numeroAccion){
         $numero_Accion=$numeroAccion+1;
       }

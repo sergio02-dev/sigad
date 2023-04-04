@@ -298,7 +298,6 @@
                                 AND acp_accion=$accion_code 
                                 $condicionVer
                                 ORDER BY acp_fechacreo ASC";
-                                //2019121620230056952
 
             $resultado_actividadPoai=$this->cnxion->ejecutar($sql_actividadPoai);
 
@@ -312,13 +311,14 @@
 
         // 22-02-2023
         public function sedeIndicador($actividad_code){
-            $sql_sede_indicador = "SELECT  ain_indicador,ain_unidad,ain_actividad, sed_nombre
-                                                FROM planaccion.actividad_indicador
-
-                                INNER JOIN plandesarrollo.indicador ON ain_indicador =ind_codigo 
-                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                               WHERE ain_actividad = $actividad_code
-                                               AND ain_estado = 1";
+            $sql_sede_indicador = "SELECT ain_indicador, ain_unidad,
+                                          ain_actividad, sed_nombre,
+                                          ind_unidadmedida
+                                     FROM planaccion.actividad_indicador
+                                    INNER JOIN plandesarrollo.indicador ON ain_indicador =ind_codigo 
+                                    INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                    WHERE ain_actividad = $actividad_code
+                                      AND ain_estado = 1";
 
             $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
 
@@ -677,8 +677,8 @@
             $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida, ind_sede,
                                         sed_nombre
                                    FROM plandesarrollo.indicador
-                             INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                             INNER JOIN planaccion.actividad_poai ON ind_codigo = acp_sedeindicador
+                                  INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                  INNER JOIN planaccion.actividad_poai ON ind_codigo = acp_sedeindicador
                                   WHERE ind_codigo = $codigo_indicador";
 
             $resultado_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
@@ -686,8 +686,9 @@
             $data_sede_indicador = $this->cnxion->obtener_filas($resultado_sede_indicador);
 
             $sed_nombre = $data_sede_indicador['sed_nombre'];
+            $ind_unidadmedida = $data_sede_indicador['ind_unidadmedida'];
 
-            return $sed_nombre;
+            return array($sed_nombre, $ind_unidadmedida);
         }
 
 

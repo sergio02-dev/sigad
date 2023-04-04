@@ -52,7 +52,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
         return $valor_traslado;
     }
 
-    public function recrso_asignado($codigo_fuente, $codigo_accion, $codigo_indicador, $vigencia_recurso, $vigencia_actividad, $codigo_asignacion){
+    public function recrso_asignado($codigo_fuente, $codigo_accion, $codigo_indicador, $vigencia_recurso, $vigencia_actividad, $codigo_asignacion, $codigo_actividad){
         if($codigo_asignacion){
             $condicion_asignacion = "AND asre_codigo NOT IN($codigo_asignacion)";
         }
@@ -60,13 +60,24 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
             $condicion_asignacion = "";
         }
 
+        if($codigo_indicador == 0 ){
+            $condicion_indicadores = "SELECT ain_indicador
+                                        FROM planaccion.actividad_indicador
+                                       WHERE ain_estado = 1
+                                         AND ain_actividad = $codigo_actividad";
+        }
+        else{
+            $condicion_indicadores = $codigo_indicador;
+        }
+
+
         $sql_recurso_asignado="SELECT SUM(asre_recurso) AS recurso_asigno
                                  FROM planaccion.asignacion_recuersos_etapa
                                 WHERE asre_estado = 1 
                                   AND asre_vigenciapoai = $vigencia_actividad
                                   AND asre_fuente = $codigo_fuente
                                   AND asre_accion = $codigo_accion
-                                  AND asre_indicador = $codigo_indicador
+                                  AND asre_indicador IN($condicion_indicadores)
                                   AND asre_vigenciarecurso = $vigencia_recurso
                                   $condicion_asignacion;";
 
@@ -87,7 +98,9 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
 
     public function fuentes_vigencia_accion($codigo_accion, $codigo_indicador, $vigencia_actividad, $codigo_actividad){
         $codigo_session = $_SESSION['idusuario'];
-        if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
+        $condicion_uno="";
+        $condicion_dos="";
+        /*if($_SESSION['idusuario']==1 || $_SESSION['idusuario']==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
             
             $condicion_uno="";
             $condicion_dos="";
@@ -109,7 +122,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
                                                                 AND vin_oficina = off_oficina
                                                                 AND off_estado = 1
                                                                 AND vin_estado = 1)";
-        }
+        }*/
 
         if($codigo_indicador == 0 ){
             $condicion_tres = "SELECT ain_indicador
@@ -258,7 +271,7 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
 
                 $sub_total = $sub_total + $sub_recursos;
             }
-            $recrso_asignado = $this->recrso_asignado($codigo_fuente, $codigo_accion, $codigo_indicador, $codigo_vigencia, $vigencia_actividad, $codigo_asignacion);
+            $recrso_asignado = $this->recrso_asignado($codigo_fuente, $codigo_accion, $codigo_indicador, $codigo_vigencia, $vigencia_actividad, $codigo_asignacion, $codigo_actividad);
 
             $recurso_disponible = $sub_total - $recrso_asignado;
         }
@@ -283,23 +296,24 @@ class RsAsignacionRcrsos extends AsignacionRecursoss{
         return $ffi_nombre;
     }
 
-    public function list_fuente_disponibilidad($codigo_poai, $codigo_accion, $codigo_indicador, $codigo_asignacion){
+    public function list_fuente_disponibilidad($codigo_poai, $codigo_accion, $codigo_indicador, $codigo_asignacion, $codigo_actividad){
         $codigo_poai = $codigo_poai;
         $codigo_accion = $codigo_accion;
         $codigo_indicador = $codigo_indicador;
         $codigo_asignacion = $codigo_asignacion;
+        $codigo_actividad = $codigo_actividad;
         $vigencia_actividad = $this->vigencia_actividad($codigo_poai);
 
         $array_fuentes_asignacion = array();
 
-        $fuentes_vigencia_accion = $this->fuentes_vigencia_accion($codigo_accion, $codigo_indicador, $vigencia_actividad, $codigo_poai);
+        $fuentes_vigencia_accion = $this->fuentes_vigencia_accion($codigo_accion, $codigo_indicador, $vigencia_actividad, $codigo_actividad);
         if($fuentes_vigencia_accion){
             foreach ($fuentes_vigencia_accion as $dat_fuentes_vigencia) {
                 $fuente_financiacion = $dat_fuentes_vigencia['fuente_financiacion'];
                 $vigencia_recurso = $dat_fuentes_vigencia['vigencia_recurso'];
                 $cdigo_indicador = $dat_fuentes_vigencia['cdigo_indicador'];
 
-                $recursos_disponibles = $this->recursos_disponibles($codigo_accion, $codigo_indicador, $vigencia_actividad, $fuente_financiacion, $vigencia_recurso, $codigo_asignacion,$codigo_poai);
+                $recursos_disponibles = $this->recursos_disponibles($codigo_accion, $codigo_indicador, $vigencia_actividad, $fuente_financiacion, $vigencia_recurso, $codigo_asignacion,$codigo_actividad);
 
                 $nombre_fuente = $this->nombre_fuente($fuente_financiacion);
 

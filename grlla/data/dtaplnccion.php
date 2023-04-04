@@ -44,7 +44,7 @@
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_rcrso_poai_etpa('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Recursos Poai Etapa</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_asgnacion_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Asignacion de Recursos Plan Acci&oacute;n</strong></a></span>
 		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="rprte_pln_accion('<?php echo $codigo_planaccion; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Plan Acci&oacute;n</strong></a></span>
-		<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcelReponsable();"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Responsable Acci&oacute;n</strong></a></span>
+		<!--<span class="glyphicon glyphicon-search"><a style="color:#FFFFFF; " class="btn btn-danger btn-sm" onclick="generarExcelReponsable();"><i class="fas fa-file-excel"></i>&nbsp;<strong>Excel Responsable Acci&oacute;n</strong></a></span>-->
 	
 	</div>
 	<div class="col-sm-3" style=" display:none">

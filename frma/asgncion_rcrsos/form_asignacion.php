@@ -5,11 +5,12 @@
     $codigo_accion = $_REQUEST['codigo_accion'];
     $codigo_indicador = $_REQUEST['codigo_indicador'];
     $codigo_asignacion = $_REQUEST['codigo_asignacion'];
+    $codigo_actividad = $_REQUEST['codigo_actividad'];
     
     $vigencia_actividad = $objAsignacionRecursos->vigencia_actividad($codigo_poai);
 
 
-    $list_fuente_disponibilidad = $objAsignacionRecursos->list_fuente_disponibilidad($codigo_poai, $codigo_accion, $codigo_indicador, $codigo_asignacion);
+    $list_fuente_disponibilidad = $objAsignacionRecursos->list_fuente_disponibilidad($codigo_poai, $codigo_accion, $codigo_indicador, $codigo_asignacion, $codigo_actividad);
     
 
     if($codigo_asignacion){
@@ -173,8 +174,6 @@
         var rcrso_disponible = $(this).find(':selected').data('rcrso_disponible');
         var cdigo_indicador = $(this).find(':selected').data('cdigo_indicador');
         var saldo = $(this).find(':selected').data('saldo');
-
-        alert('codigo indicador '+cdigo_indicador);
 
         $('#vigencia_recurso').val(vigencia_recurso);
         $('#rcrso_disponible').val(rcrso_disponible);
