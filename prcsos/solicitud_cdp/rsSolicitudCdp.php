@@ -263,6 +263,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $dataetapas_actividad;
     }
+
     public function ultimo_plan(){
 
         $sql_ultimo_plan="SELECT pde_codigo, pde_nombre 
@@ -278,6 +279,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
 
         return $pde_codigo;
     }
+
     public function list_solicitudes(){
 
         $ultimo_plan = $this->ultimo_plan();
@@ -298,7 +300,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $datalist_solicitudes;
     }
    
-
     public function fuentes_solctud($codigo_solicitud){
 
         $sql_fuentes_solctud="SELECT aso_codigo, aso_solicitud, 
@@ -511,21 +512,25 @@ Class RsSolicitudCdp extends SolicitudCdp{
                 }
                 $ceros = '';
 
-                    if($scdp_consecutivo <10){
-                        $ceros = '0000';
-                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-                    }else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
-                        $ceros = '000';
-                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-                    }else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
-                        $ceros = '00';
-                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-                    }else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
-                        $ceros = '0';
-                        $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
-                    }else{
-                        $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
-                    }
+                if($scdp_consecutivo <10){
+                    $ceros = '0000';
+                    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                }
+                else if ($scdp_consecutivo > 9 && $scdp_consecutivo <100){
+                    $ceros = '000';
+                    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                }
+                else if( $scdp_consecutivo >99 && $scdp_consecutivo <1000){
+                    $ceros = '00';
+                    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                }
+                else if( $scdp_consecutivo >999 && $scdp_consecutivo <10000){
+                    $ceros = '0';
+                    $numero_solicitudCDP = $scdp_numero.'-'.$ceros.$scdp_consecutivo;
+                }
+                else{
+                    $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
+                }
 
     
                 $rsRslciones[] = array('scdp_codigo'=> $scdp_codigo, 
@@ -946,10 +951,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
         }
         return $dataclasificador_etapa_solicitud;
     }
-
- 
-
-
+    
     public function list_cldfcadores(){
 
         $sql_list_cldfcadores = "SELECT cla_codigo, cla_nombre, cla_numero, cla_estado
@@ -1244,11 +1246,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
  
     }
 
-
-
-    
     public function numeroConsecutivo(){
-       
 
         $sql_numeroConsecutivo="SELECT scdp_consecutivo 
                         FROM cdp.solicitud_cdp

@@ -42,7 +42,7 @@ class MdfcarRspnsble extends Responsable{
                              WHERE res_codigo = ".$this->getCodigo().";";
 
         $this->cnxion->ejecutar($updte_responsable);
-        echo "tipo responsable".$this->getTipoResponsable();
+        
         if($this->getTipoResponsable() == 1){
             if($this->responsable_ordenador()){
                 $inser_registro_ordenador="UPDATE usco.registro_ordenador
