@@ -474,6 +474,45 @@ Class RsSolicitudCdp extends SolicitudCdp{
         return $cdp_codigo;
     }
 
+    public function validar_autorizacion($codigo_solicitud){
+
+        $sql_validar_autorizacion = "SELECT COUNT(*) AS aprobaciones
+                                       FROM cdp.aprovacion_solicitud
+                                      WHERE asol_solicitud = $codigo_solicitud;";
+
+        $query_validar_autorizacion = $this->cnxion->ejecutar($sql_validar_autorizacion);
+
+        $data_validar_autorizacion = $this->cnxion->obtener_filas($query_validar_autorizacion);
+
+        $aprobaciones = $data_validar_autorizacion['aprobaciones'];
+
+        return $aprobaciones;
+    }
+
+    public function validar_aprobacion($codigo_solicitud){
+
+        $sql_validar_aprobacion = "SELECT COUNT(*) AS aprbcion_ordndor
+                                       FROM cdp.aprovacion_solicitud
+                                      INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud 
+                                      WHERE asol_clasificacion = 4
+                                        AND ascl_aprovacion = 1
+                                        AND asol_solicitud = $codigo_solicitud;";
+
+        $query_validar_aprobacion = $this->cnxion->ejecutar($sql_validar_aprobacion);
+
+        $data_validar_aprobacion = $this->cnxion->obtener_filas($query_validar_aprobacion);
+
+        $aprbcion_ordndor = $data_validar_aprobacion['aprbcion_ordndor'];
+
+        if($aprbcion_ordndor > 0){
+            $ver_solicitud = "block";
+        }
+        else{
+            $ver_solicitud = "none";
+        }
+        return $ver_solicitud;
+    }
+
     public function datListSolicitudes(){
         
         $rs_solicitudes = $this->list_solicitudes();
@@ -507,7 +546,6 @@ Class RsSolicitudCdp extends SolicitudCdp{
                         $ffi_nombre = $dta_fuents_solctud['ffi_nombre'];
 
                         $fntes = $fntes.$asre_vigenciarecurso." ".str_replace('INV -','', $ffi_nombre)." <br>";
-
                     }
                 }
                 $ceros = '';
@@ -532,7 +570,10 @@ Class RsSolicitudCdp extends SolicitudCdp{
                     $numero_solicitudCDP = $scdp_numero.'-'.$scdp_consecutivo;
                 }
 
-    
+                $validar_autorizacion = $this->validar_autorizacion($scdp_codigo);
+
+                $validar_aprobacion = $this->validar_aprobacion($scdp_codigo);
+
                 $rsRslciones[] = array('scdp_codigo'=> $scdp_codigo, 
                                        'scdp_fecha'=> $scdp_fecha, 
                                        'scdp_numero'=> $numero_solicitudCDP,
@@ -541,7 +582,9 @@ Class RsSolicitudCdp extends SolicitudCdp{
                                        'valor_cdp'=> "$ ".number_format($suma_valor_solicitud,0,'','.'),
                                        'nombre_fuente'=> $fntes,
                                        'scdp_proceso'=> $scdp_proceso,
-                                       'codigo_cdp'=> $codigo_cdp
+                                       'codigo_cdp'=> $codigo_cdp,
+                                       'validar_autorizacion'=> $validar_autorizacion,
+                                       'validar_aprobacion'=> $validar_aprobacion
                                     );
     
             }
