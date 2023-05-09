@@ -160,6 +160,23 @@ Class RsFormpdi extends PlandeComprasPDI{
         return $pca_plantafisica;
     }
 
+    public function form_plancompraspdi($codigo_pdi){
+        
+        $sql_form_plancompraspdi = "SELECT pdi_codigo, pdi_sede, 
+                                        pdi_vicerrectoria, pdi_facultad, pdi_dependencia, 
+                                        pdi_area, pdi_accion, pdi_plantafisica, pdi_linea, 
+                                        pdi_sublinea, pdi_equipo, pdi_equipodescripcion, 
+                                        pdi_valorunitario, pdi_cantidad, pdi_estado,
+                                        pdi_valorunitario * pdi_cantidad AS total
+                                        FROM usco.formulariopdi
+                                        WHERE pdi_codigo = $codigo_pdi;";
+
+    $resultado_form_plancompraspdi = $this->cnxion->ejecutar($sql_form_plancompraspdi);
+
+    ($data_form_plancompraspdi = $this->cnxion->obtener_filas($resultado_form_plancompraspdi));
+    $dataform_plancompraspdi[] = $data_form_plancompraspdi;
+    return $dataform_plancompraspdi;
+    }
   
    
 

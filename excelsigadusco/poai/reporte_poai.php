@@ -128,7 +128,6 @@ $numero_ingresos=1;
 
 $objPHPExcel->getActiveSheet()->setTitle('Reporte Poai');
 
-
 $sheet = $objPHPExcel->getActiveSheet();
 $sheet->getPageMargins()->setTop(0.6);
 $sheet->getPageMargins()->setBottom(0.6);
@@ -608,10 +607,10 @@ if($lista_poai){
             $num_registro++;
         }
     }
-
-    
-
 }
+//Fin listado 
+$num_registro = $num_registro + 2;
+
 
 //inicio foreach
 

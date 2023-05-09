@@ -82,7 +82,7 @@
             </div>
             <!-- **********************          Fin Modal Forma       *********************************** -->
 
-            <table style="padding-left:50px;">
+            <table class="table">
                 <tr>
                     <th><strong>Referencia:</strong> <?php echo $referenciaActividad; ?> </th>
                     <th><strong>Vigencia:</strong> <?php echo $acp_vigencia; ?> </th>
@@ -97,49 +97,49 @@
                     </th>
                 </tr>
                 <?php 
-                        $sedeIndicador = $objPlanAccion->sedeIndicador($acp_codigo);
-                        if($sedeIndicador){
-                            foreach($sedeIndicador as $data_sedeIndicador){
-                                $ain_indicador = $data_sedeIndicador['ain_indicador'];
-                                $ain_unidad = $data_sedeIndicador['ain_unidad'];
-                                $ain_actividad = $data_sedeIndicador['ain_actividad'];
-                                $sed_nombre = $data_sedeIndicador['sed_nombre'];
-                                
-                                
-                    
-                    ?>
-                        <tr>
+                    $sedeIndicador = $objPlanAccion->sedeIndicador($acp_codigo);
+                    if($sedeIndicador){
+                        foreach($sedeIndicador as $data_sedeIndicador){
+                            $ain_indicador = $data_sedeIndicador['ain_indicador'];
+                            $ain_unidad = $data_sedeIndicador['ain_unidad'];
+                            $ain_actividad = $data_sedeIndicador['ain_actividad'];
+                            $sed_nombre = $data_sedeIndicador['sed_nombre'];
+                            $ind_unidadmedida = $data_sedeIndicador['ind_unidadmedida'];
                             
-                            <td colspan="2">
-                           
-                                <strong>Sede:</strong><br>
-                                <?php echo $sed_nombre; ?>
-                            </td>
-                            <td>
-                                <strong>Unidad: </strong><br>
-                                <?php echo $ain_unidad; ?>
-                            </td>
-                          
-                        </tr>
-                        <?php 
+                ?>
+                    <tr>
+                        
+                        <td colspan="2">
+                        
+                            <strong>Sede:</strong><br>
+                            <?php echo $sed_nombre." - ".$ind_unidadmedida; ?>
+                        </td>
+                        <td>
+                            <strong>Unidad: </strong><br>
+                            <?php echo $ain_unidad; ?>
+                        </td>
+                        
+                    </tr>
+                <?php 
                             
                         }
-                    }else{
-                        ?>
-                        <tr>
-                            
+                    }
+                    else{
+                ?>
+                    <tr>
                         <td colspan="2">
-                        <?php $sede_nombre = $objPlanAccion->sede_indicador($acp_sedeindicador); ?>
+                            <?php 
+                                list($sede_nombre, $unidad_medida) = $objPlanAccion->sede_indicador($acp_sedeindicador); 
+                            ?>
                             <strong>Sede:</strong><br>
-                            <?php echo $sede_nombre; ?>
+                            <?php echo $sede_nombre." - ".$unidad_medida; ?>
                         </td>
                         <td>
                             <strong>Unidad: </strong><br>
                             <?php echo $acp_unidad; ?>
                         </td>
-                      
                     </tr> 
-                    <?php   
+                <?php   
                     }
                 ?>
                 <tr>
@@ -157,13 +157,12 @@
                 <tr>
                     <td colspan="3">
                         <?php $suma=$objPlanAccion->suma($acp_codigo);?>
-                         <strong><div style="display: <?php echo $visibilidad; ?>">Agregar Etapa <i class="fas fa-plus-circle" style="color: #BB0900;" title="Registrar Etapa"  onclick="agregarPoai('<?php echo $acp_codigo; ?>','<?php echo $referenciaActividad; ?>', '<?php echo $acc_codigo; ?>', '<?php echo $suma; ?>');"></i> </div></strong>
-                       
-                     </td> 
+                        <strong><div style="display: <?php echo $visibilidad; ?>">Agregar Etapa <i class="fas fa-plus-circle" style="color: #BB0900;" title="Registrar Etapa"  onclick="agregarPoai('<?php echo $acp_codigo; ?>','<?php echo $referenciaActividad; ?>', '<?php echo $acc_codigo; ?>', '<?php echo $suma; ?>');"></i> </div></strong>
+                    </td> 
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <table id="etapaActividad<?php echo $acp_codigo; ?>">
+                        <table id="etapaActividad<?php echo $acp_codigo; ?>" class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -173,9 +172,9 @@
                                     <th>Vigencia</th>
                                     <th>Peso de la Etapa %</th>
                                     <th>Avance Inicial de la Etapa %</th>
-                                    <th>Codigo Presupuestal</th>
+                                    <!--<th>Codigo Presupuestal</th>
                                     <th>DANE</th>
-                                    <th>Descripción Codigo Presupuestal</th>
+                                    <th>Descripción Codigo Presupuestal</th>-->
                                     <th>::</th>
                                 </tr>
                             </thead>
@@ -248,7 +247,7 @@
                                             <?php
                                                 if($poa_recurso > 0){
                                             ?>
-                                            <i class="fas fa-balance-scale-left" style="color: #BB0900;"  title="Recursos" onclick="addAsignacion('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>','<?php echo $acp_sedeindicador; ?>','<?php echo $referenciaAccion; ?>');"></i>
+                                            <i class="fas fa-balance-scale-left" style="color: #BB0900;"  title="Recursos" onclick="addAsignacion('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>','<?php echo $acp_sedeindicador; ?>','<?php echo $referenciaAccion; ?>', '<?php echo $acp_codigo; ?>');"></i>
                                             <?php 
                                                 }
                                                 echo  "$".number_format($poa_recurso, 0, ',', '.'); 
@@ -257,30 +256,21 @@
                                         <td><?php echo $poa_vigencia; ?></td>
                                         <td><?php echo $poa_logro; ?></td>
                                         <td><?php echo $poa_logroejecutado.'=>'. number_format($avance_esperado, 2, ",", ".").'%'; ?></td>
-                                        <td><?php echo $poa_codigoclasificadorpresupuestal; ?></td>
+                                        <!--<td><?php echo $poa_codigoclasificadorpresupuestal; ?></td>
                                         <td><?php echo $poa_dane; ?></td>
-                                        <td><?php echo $poa_descripcionclasificador; ?></td>
+                                        <td><?php echo $poa_descripcionclasificador; ?></td>-->
                                         <td>
                                             <div style="display: <?php echo $visibilidad; ?>"><i  class="fas fa-edit" style="color: #BB0900;" title="Editar Etapa" onclick="editarEtapa('<?php echo $poa_codigo; ?>','<?php echo $poa_referencia; ?>','<?php echo $acp_codigo; ?>', '<?php echo $acc_codigo; ?>');"></i></div>
-                                           
-                                          
-                                            <?php
-                                            
-                                            
-                                            if($poa_recurso > 0){
-
-                                                $plan_accion_compras = $objPlanAccion->plan_accion_compras($accion_code);
-                                                if($plan_accion_compras > 0){
-
-                                                
+                                            <?php                                          
+                                                if($poa_recurso > 0){
+                                                    $plan_accion_compras = $objPlanAccion->plan_accion_compras($accion_code);
+                                                    if($plan_accion_compras > 0){
                                             ?>
-                                              <!-- <i class="fas fa-plus-circle" style="color: #BB0900;"  title="Agregar Plan Compras" onclick="addPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $accion_code; ?>');"></i> -->
                                             <i class="fas fa-list" style="color: #BB0900;"  title="Lista Plan Compras" onclick="listPlanCompra('<?php echo $poa_codigo; ?>', '<?php echo $acc_codigo; ?>','<?php echo $codigo_Actividad; ?>');"></i>
                                             <?php 
+                                                    }
                                                 }
-                                            }
                                             ?>
-                                    
                                         </td>
                                     </tr>
                                 <?php
@@ -295,7 +285,6 @@
                                 <?php
                                     }
                                 ?>
-                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -313,18 +302,16 @@
                                     <th colspan="5">
                                         <?php
                                             $rs_avanceEsperado=$objPlanAccion->avanceEsperado($acp_codigo);
-
-
                                             if($rs_avanceEsperado){
                                                 
-                                            foreach ($rs_avanceEsperado as $dataAvanceEsperado) {
-                                                $poa_logro=$dataAvanceEsperado['poa_logro'];
-                                                $poa_logroejecutado=$dataAvanceEsperado['poa_logroejecutado'];
+                                                foreach ($rs_avanceEsperado as $dataAvanceEsperado) {
+                                                    $poa_logro=$dataAvanceEsperado['poa_logro'];
+                                                    $poa_logroejecutado=$dataAvanceEsperado['poa_logroejecutado'];
 
-                                                $avance_esperadoTotal=($poa_logro*$poa_logroejecutado)/100;
+                                                    $avance_esperadoTotal=($poa_logro*$poa_logroejecutado)/100;
 
-                                                $totalAvance=$totalAvance+$avance_esperadoTotal;
-                                            }
+                                                    $totalAvance=$totalAvance+$avance_esperadoTotal;
+                                                }
                                                 echo number_format($totalAvance, 2, ",", ".").'%';
                                             }
                                             else{
@@ -333,17 +320,11 @@
                                         ?>
                                     </th>
                                 <tr>
-
                             </tfoot>
                         </table>
                     </td>
                 </tr>
-
             </table> <br>
-            <script>
-                
-                
-            </script>
 <?php 
         }
     }
@@ -351,7 +332,7 @@
         echo "<strong>No hay Actividades Registradas </strong>";
     }
 ?>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
 <script type="text/javascript">
 
     function editarActiviad(codigo_actividad,referenciaAccion, codigo_accion){
@@ -381,7 +362,6 @@
        
        
         if(sumaEtapa==100){
-            
             swal({
                     title: "El peso de las etapas ya esta en 100%",
                     text: "",
@@ -463,11 +443,12 @@
         });
     }
 
-    function addAsignacion(codigo_poai, codigo_accion, codigo_indicador, referencia_etapa){
+    function addAsignacion(codigo_poai, codigo_accion, codigo_indicador, referencia_etapa, codigo_actividad){
         var codigo_poai = codigo_poai;
         var codigo_accion = codigo_accion;
         var codigo_indicador = codigo_indicador;
         var referencia_etapa = referencia_etapa;
+        var codigo_actividad = codigo_actividad;
 
         $('#frmModalEtapaEditar'+codigo_poai).modal({
             keyboard: true
@@ -475,7 +456,7 @@
         $.ajax({
             url:"asignacionrecursos",
             type:"POST",
-            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador+'&referencia_etapa='+referencia_etapa,                                            
+            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador+'&referencia_etapa='+referencia_etapa+'&codigo_actividad='+codigo_actividad,                                            
             async:true,
             success: function(message){
                 $(".modal-contentEtapaEditar"+codigo_poai).empty().append(message);

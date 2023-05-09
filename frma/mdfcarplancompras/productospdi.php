@@ -10,7 +10,7 @@
 
         if($_REQUEST['codigo_plan_compras']){
             $form_plancompraspdi = $objMdfcarPlanComprasPdi->form_plancompraspdi($_REQUEST['codigo_plan_compras']);
-    
+         
             foreach ($form_plancompraspdi as $dat_plancompraspdi) {
                 $pdi_codigo = $dat_plancompraspdi['pdi_codigo'];
                 $pdi_linea = $dat_plancompraspdi['pdi_linea'];
@@ -34,13 +34,16 @@
     else{
         if($_REQUEST['codigo_plan_compras']){
             $list_linea = $objMdfcarPlanComprasPdi->list_linea();
+           
         }
         else{
             $list_linea = $objMdfcarPlanComprasPdi->list_linea();
             $list_sublinea = $objMdfcarPlanComprasPdi->list_sublinea($pdi_linea);
             $list_equipo = $objMdfcarPlanComprasPdi->list_equipo($pdi_sublinea);
             $list_caracteristicas = $objMdfcarPlanComprasPdi->list_caracteristicas($pdi_equipo);
-        }  
+         
+
+        }    
     }
 ?>
 
@@ -260,7 +263,6 @@
 
     function agregarEquipo(codigo_plan_compras, productos_pdi){
         var codigo_plan_compras = codigo_plan_compras;
-        var productos_pdi = 1;
         $('#frmModal').modal({
             keyboard: true
         });

@@ -4,6 +4,7 @@
     $codigo_poai = $_REQUEST['codigo_poai'];
     $codigo_accion = $_REQUEST['codigo_accion'];   
     $codigo_indicador = $_REQUEST['codigo_indicador'];
+    $codigo_actividad = $_REQUEST['codigo_actividad'];
 
     $datos_etapa = $objAsignacionRecursos->datos_etapa($codigo_poai);
 
@@ -92,7 +93,7 @@
                         <td><?php echo "$".number_format($asre_recurso,0,'','.'); ?></td>
                         <td><?php echo $estado; ?></td>
                         <td>
-                            <i class="fas fa-edit" style="color: #BB0900;"  title="Editar Etapa" onclick="modRecurso('<?php echo $codigo_poai; ?>', '<?php echo $codigo_accion; ?>', '<?php echo $codigo_indicador; ?>','<?php echo $asre_codigo;?>');"></i>
+                            <i class="fas fa-edit" style="color: #BB0900;"  title="Editar Etapa" onclick="modRecurso('<?php echo $codigo_poai; ?>', '<?php echo $codigo_accion; ?>', '<?php echo $codigo_indicador; ?>','<?php echo $asre_codigo;?>', '<?php echo $codigo_actividad; ?>');"></i>
 
                         </td>
                     </tr>
@@ -121,7 +122,7 @@
         </table> 
     </div>
     <div class="col-md-5">
-        <i class="fas fa-plus-circle fa-lg" style="color: #BB0900;"  title="Asignar Recursos" onclick="addRecurso('<?php echo $codigo_poai; ?>', '<?php echo $codigo_accion; ?>', '<?php echo $codigo_indicador; ?>');"></i>
+        <i class="fas fa-plus-circle fa-lg" style="color: #BB0900;"  title="Asignar Recursos" onclick="addRecurso('<?php echo $codigo_poai; ?>', '<?php echo $codigo_accion; ?>', '<?php echo $codigo_indicador; ?>','<?php echo $codigo_actividad; ?>');"></i>
         <div class="row">
             <div class="col-md-12 formulario_recursos">
                 
@@ -131,16 +132,16 @@
 </div>
 
 <script type="text/javascript">
-    function addRecurso(codigo_poai, codigo_accion, codigo_indicador){
+    function addRecurso(codigo_poai, codigo_accion, codigo_indicador, codigo_actividad){
         var codigo_poai = codigo_poai;
         var codigo_accion = codigo_accion;
         var codigo_indicador = codigo_indicador;
+        var codigo_actividad = codigo_actividad;
 
-        //alert('Aca ');
         $.ajax({
             url:"formasignacionrecursos",
             type:"POST",
-            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador,                                            
+            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador+'&codigo_actividad='+codigo_actividad,                                            
             async:true,
             success: function(message){
                 $(".formulario_recursos").empty().append(message);
@@ -148,17 +149,17 @@
         });
     }
 
-    function modRecurso(codigo_poai, codigo_accion, codigo_indicador, codigo_asignacion){
+    function modRecurso(codigo_poai, codigo_accion, codigo_indicador, codigo_asignacion, codigo_actividad){
         var codigo_poai = codigo_poai;
         var codigo_accion = codigo_accion;
         var codigo_indicador = codigo_indicador;
         var codigo_asignacion = codigo_asignacion;
+        var codigo_actividad = codigo_actividad;
 
-        //alert('Aca ');
         $.ajax({
             url:"formasignacionrecursos",
             type:"POST",
-            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador+'&codigo_asignacion='+codigo_asignacion,                                            
+            data:"codigo_poai="+codigo_poai+'&codigo_accion='+codigo_accion+'&codigo_indicador='+codigo_indicador+'&codigo_asignacion='+codigo_asignacion+'&codigo_actividad='+codigo_actividad,                                            
             async:true,
             success: function(message){
                 $(".formulario_recursos").empty().append(message);

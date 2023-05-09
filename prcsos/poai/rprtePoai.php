@@ -2,7 +2,7 @@
 Class rprtePoai{
    
   public function __construct(){
-      $this->cnxion = Dtbs::getInstance();
+    $this->cnxion = Dtbs::getInstance();
   } 
 
   public function list_subsistema($codigo_plan){
@@ -446,6 +446,36 @@ Class rprtePoai{
     return $valor_subsistema_fuente;
   }
 
+  public function traslados_plan($codigo_plan){
+
+    $sql_traslados_plan="SELECT tpo_codigo, tpo_poai, tpo_accion, 
+                                tpo_codigorecuerso, tpo_valor, 
+                                tpo_acuerdo, tpo_sede, 
+                                tpo_indicador, tpo_estado, 
+                                acc_referencia, acc_numero,
+                                acc_descripcion
+                           FROM planaccion.traslados_poai
+                          INNER JOIN plandesarrollo.accion ON tpo_accion = acc_codigo
+                          INNER JOIN plandesarrollo.proyecto ON acc_proyecto = pro_codigo
+                          INNER JOIN plandesarrollo.subsistema ON plandesarrollo.proyecto.sub_codigo = plandesarrollo.subsistema.sub_codigo
+                          WHERE pde_codigo = $codigo_plan";
+
+    $query_traslados_plan=$this->cnxion->ejecutar($sql_traslados_plan);
+
+    while($data_traslados_plan= $this->cnxion->obtener_filas($query_traslados_plan)){
+      $datatraslados_plan[] = $data_traslados_plan;
+    }
+    return $datatraslados_plan;
+  }
+
+  public function lista_traslados_plan($codigo_plan){
+    $traslados_plan = $this->traslados_plan($codigo_plan);
+    if($traslados_plan){
+      foreach ($traslados_plan as $key => $value) {
+        # code...
+      }
+    }
+  }
 
 
 

@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 
 set_time_limit(1800000000);
@@ -7,9 +10,7 @@ require_once('lbr/tcpdf_hefo/tcpdf.php');
 
 $cnxion = Dtbs::getInstance();
 
-
 $codigo_cdp = $_REQUEST['codigo_cdp'];
-
 
 //////////////Yuliana 
 
@@ -151,14 +152,20 @@ class MYPDF extends TCPDF {
 }
     $sql_poai="SELECT poa_referencia, poa_numero , esc_valor, esc_clasificador, esc_dane, esc_deq
                  FROM cdp.etapa_solicitud_clasificador
-           INNER JOIN planaccion.poai ON esc_etapa = poa_codigo
+                INNER JOIN planaccion.poai ON esc_etapa = poa_codigo
                 WHERE esc_solicitud = $codigo_cdp
-             ORDER BY poa_referencia,poa_numero;";
+                  AND esc_codigo IN(SELECT ascl_etapasolicitudclasificador
+                                      FROM cdp.aprovacion_solicitud
+                                INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud 
+                                     WHERE asol_clasificacion = 4
+                                       AND ascl_aprovacion = 1
+                                       AND asol_solicitud = $codigo_cdp)
+               ORDER BY poa_referencia,poa_numero;";
 
     $resultado_poai=$cnxion->ejecutar($sql_poai);
 
     while ($data_poai = $cnxion->obtener_filas($resultado_poai)){
-    $datapoai[] = $data_poai;
+        $datapoai[] = $data_poai;
     }
     
 
@@ -177,9 +184,15 @@ class MYPDF extends TCPDF {
 
     $data_resolucionPersona=$cnxion->obtener_filas($query_resolucionPersona);                          
 
-    $sql_suma_valor_solicitud="SELECT SUM(aso_valor) AS valor_cdp
-                                 FROM cdp.asignacion_solicitud
-                                WHERE aso_solicitud = $codigo_cdp;";
+    $sql_suma_valor_solicitud="SELECT SUM(esc_valor) AS valor_cdp
+                                 FROM cdp.etapa_solicitud_clasificador
+                                WHERE esc_solicitud = $codigo_cdp
+                                  AND esc_codigo IN(SELECT DISTINCT ascl_etapasolicitudclasificador 
+                                                      FROM cdp.aprovacion_solicitud
+                                                     INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud
+                                                     WHERE asol_clasificacion = 4
+                                                       AND ascl_aprovacion = 1
+                                                       AND asol_solicitud = $codigo_cdp);";
 
 
     $query_suma_valor_solicitud=$cnxion->ejecutar($sql_suma_valor_solicitud);
@@ -205,9 +218,15 @@ class MYPDF extends TCPDF {
 
 
 
-        $sql_ultimocaracteres= "SELECT  esc_clasificador
-                                    FROM cdp.etapa_solicitud_clasificador
-                                    WHERE esc_solicitud = $codigo_cdp;";
+    $sql_ultimocaracteres= "SELECT  esc_clasificador
+                               FROM cdp.etapa_solicitud_clasificador
+                              WHERE esc_solicitud = $codigo_cdp
+                                AND esc_codigo IN(SELECT DISTINCT ascl_etapasolicitudclasificador 
+                                                   FROM cdp.aprovacion_solicitud
+                                                  INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud
+                                                  WHERE asol_clasificacion = 4
+                                                    AND ascl_aprovacion = 1
+                                                    AND asol_solicitud = $codigo_cdp);";
 
     $query_ultimocaracteres=$cnxion->ejecutar($sql_ultimocaracteres);
     $data_ultimocaracteres = $cnxion->obtener_filas($query_ultimocaracteres);
@@ -231,9 +250,15 @@ class MYPDF extends TCPDF {
 
 
 
-    $sql_excedenteFacultad = "SELECT  esc_clasificador
+    $sql_excedenteFacultad = "SELECT esc_clasificador
                                 FROM cdp.etapa_solicitud_clasificador
-                                WHERE esc_solicitud = $codigo_cdp;";
+                               WHERE esc_solicitud = $codigo_cdp
+                                 AND esc_codigo IN(SELECT DISTINCT ascl_etapasolicitudclasificador 
+                                                     FROM cdp.aprovacion_solicitud
+                                                    INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud
+                                                    WHERE asol_clasificacion = 4
+                                                      AND ascl_aprovacion = 1
+                                                      AND asol_solicitud = $codigo_cdp);;";
 
     $query_excedenteFacultad=$cnxion->ejecutar($sql_excedenteFacultad);
 
@@ -432,46 +457,48 @@ $html.='
     </table>
 ';
 
-$lista_poai = $datapoai;
-  $num_registro=25;
-  $id_registro=1;
-  if($lista_poai){
-    foreach ($lista_poai as $data_lista_etapa) {
-      $poa_referencia = $data_lista_etapa['poa_referencia'];
-      $poa_numero = $data_lista_etapa['poa_numero'];
-      $esc_valor = $data_lista_etapa['esc_valor'];
-      $esc_clasificador = $data_lista_etapa['esc_clasificador'];
-      $esc_dane = $data_lista_etapa['esc_dane'];
-      
-    
 
-      $fuente = $pde_fuentes_financiacionCDP;
-      
-      $poa_etapa = $poa_referencia." ".$poa_numero;
+$html.='<table nobr="true" style="padding-left: 5px; " cellpadding="2">';
+
+$lista_poai = $datapoai;
+$num_registro=25;
+$id_registro=1;
+    if($lista_poai){
+        foreach ($lista_poai as $data_lista_etapa) {
+        $poa_referencia = $data_lista_etapa['poa_referencia'];
+        $poa_numero = $data_lista_etapa['poa_numero'];
+        $esc_valor = $data_lista_etapa['esc_valor'];
+        $esc_clasificador = $data_lista_etapa['esc_clasificador'];
+        $esc_dane = $data_lista_etapa['esc_dane'];
+        
+        
+
+        $fuente = $pde_fuentes_financiacionCDP;
+        
+        $poa_etapa = $poa_referencia." ".$poa_numero;
 
 $html.='
-       
-    <table nobr="true" style="padding-left: 5px; " cellpadding="2">
-
-        <tr nobr="true">
-            <th style="width: 160px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "></th>
-            <th style="width: 80px; height: 10px; font-size:60%; text-align:center;padding-top: 5px "> '."$".number_format($esc_valor,0,'','.').'</th>
+        <tr>
+            <th style="width: 160px; font-size:60%; text-align:center;padding-top: 5px "></th>
+            <th style="width: 80px; font-size:60%; text-align:center;padding-top: 5px "> '."$".number_format($esc_valor,0,'','.').'</th>
             <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$esc_clasificador.'</th>
             <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'. $esc_dane.'</th>
-            <th style="width: 150px; height: 10px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente.'</th>
+            <th style="width: 150px; font-size:60%; text-align:center;padding-top: 5px ">'.$fuente.'</th>
             <th style="width: 80px;  font-size:60%; text-align:center;padding-top: 5px ">'.$poa_etapa.'</th>
            
         </tr>
-    </table>
+    
 ';
- }
+    }
 }
+$html.='</table>';
+
 
 $html.='
-    <table nobr="true" style="padding-left: 5px;" >
+    <table style="padding-left: 5px;" >
         
         <tr nobr="true">
-            <td style="width: 337px; height: 100px; font-size:70%; text-align:center;"><strong></strong></td>
+            <td style="width: 337px; height: 5px; font-size:70%; text-align:center;"><strong></strong></td>
         </tr>
         <tr nobr="true">
             <td style="width: 200px; height: 2px; font-size:70%; text-align:left;"><strong>OTROS CONCEPTOS:</strong></td>

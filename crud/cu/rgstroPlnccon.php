@@ -16,9 +16,9 @@
   $vigenciaActividad=$_REQUEST['vigenciaActividad'];
   $estado=$_REQUEST['chkestado'];
   $txtDescripcionClasificador = $_REQUEST['txtDescripcionClasificador'];
-  $codigoClasificador = $_REQUEST['codigoClasificador'];
-  $txtDane=$_REQUEST['txtDane'];
-  $checkedPlanCompras = $_REQUEST['checkedPlanCompras'];
+  $codigoClasificador = '';
+  $txtDane='';
+  $checkedPlanCompras = '';
 
   if($checkedPlanCompras){
     $planCompras = $checkedPlanCompras;

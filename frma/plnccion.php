@@ -86,7 +86,6 @@
         <p class="font-weight-bold">* Campos obligatorios &nbsp;&nbsp;&nbsp; <a href="<?php echo $enlace; ?>help/planAccion.pdf" title='Ayuda' alt='Ayuda' target='_blank' style="text-decoration: none;">  <strong style="color:#BC0D04; ">Ayuda</strong> <i class="fas fa-question fa-lg" style="color: #BC0D04;"></i> </a> </p>
         <!-- ******************** INICIO FORMULARIO ************************* -->
 
-        
         <div class="row">
             <div class="col-md-12">
                 <p style="font-size: 113%;"><strong>Actividad <?php echo $referenciaActividad."</strong> <br>".$descripcionActividad; ?></p>
@@ -97,7 +96,6 @@
         <div class="row">
             <div class="col-sm-12">&nbsp;</div>
         </div>
-
 
         <div class="row">
             <div class="col-md-12">
@@ -113,7 +111,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="recursoAccion" class="font-weight-bold">Recursos *</label>
-                    <input type="number" class="form-control caja_texto_sizer recursodisponible" id="recursoAccion" name="recursoAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_recurso;?>" required>
+                    <input type="number" class="form-control caja_texto_sizer" id="recursoAccion" name="recursoAccion" aria-describedby="textHelp" data-rule-required="true" value="<?php echo $poa_recurso;?>" required>
                     <span class="help-block" style="color:#a70e06; font-size: 14 px; font-family: Arial, Helvetica, sans-serif; font-weight: bold" id="error_etapa"></span>
                 </div>
             </div>
@@ -158,8 +156,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                        
+            <div class="col-md-4">  
                 <div class="form-group">
                     <label for="textNumeroVeces" class="font-weight-bold">Estado *</label>
                     <div class="radio tipo1">
@@ -174,115 +171,8 @@
                     <span class="help-block" id="error"></span>
 
                 </div>
-            </div>
-
-         
-
-            
-            
-        </div>
-
-        <h6><strong>CLASIFICADOR PRESUPUESTAL</strong></h6><hr>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="codigoClasificador" class="font-weight-bold">Codigo </label>
-                    <input type="number" class="form-control caja_texto_sizer" id="codigoClasificador" name="codigoClasificador" maxlength="35" aria-describedby="textHelp" data-rule-required="false" value="<?php echo $poa_codigoclasificadorpresupuestal; ?>" >
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="txtDescripcionClasificador" class="font-weight-bold">Descripción</label>
-                    <textarea class="form-control caja_texto_sizer" name="txtDescripcionClasificador" id="txtDescripcionClasificador" aria-describedby="textHelp" data-rule-required="false"><?php echo $poa_descripcionclasificador; ?></textarea>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>  
-        </div>
-        <!--<div class="row">
-            <div class="col-md-11 rcrsos" style="display:<?php echo $recursoss; ?>">
-                <div class="form-group">
-                    <label for="selFuenteFinanciacion" class="font-weight-bold"> Fuente Financiación*</label>
-                    <select name="selFuenteFinanciacion" id="selFuenteFinanciacion" class="form-control caja_texto_sizer fuente_clasificador selectpickerfuente" data-rule-required="true" >
-                        <option value="0" data-fuente="0">Seleccione...</option>;
-
-                        <?php
-                        foreach($fuentes_inversion as $dta_fuents_inversion){
-                            $ffi_codigo = $dta_fuents_inversion['ffi_codigo'];
-                            $ffi_nombre = $dta_fuents_inversion['ffi_nombre'];
-                            $ffi_referencialinix = $dta_fuents_inversion['ffi_referencialinix'];
-                            $ffi_codigolinix = $dta_fuents_inversion['ffi_codigolinix'];
-
-                            if($ffi_codigo == $poa_fuente){
-                                $select_fuente  = "selected";
-                            }
-                            else{
-                                $select_fuente = "";
-                            }
-                        ?>
-                           
-                            <option value="<?php echo $ffi_codigo; ?>" data-fuente="<?php echo $ffi_referencialinix; ?>" <?php echo $select_fuente; ?>><?php echo $ffi_nombre; ?></option>;
-                        <?php
-                        }
-                        ?>
-                    </select>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-11 rcrsos" style="display:<?php echo $recursoss; ?>">
-                <div class="form-group clasificador_codigo">
-                    <label for="codigoClasificador" class="font-weight-bold"> Codigo Clasificador Presupuestal *</label>
-                    <select name="codigoClasificador" id="codigoClasificador" class="form-control caja_texto_sizer selectpickerclasificador" data-rule-required="true" required>
-                        
-                        <?php
-                        if($codigo_poai){
-                        ?>
-                            <option value="0" >Seleccione...</option>
-                        <?php
-                            $ref_fuente = $objPlanAccion->ref_fuente($poa_fuente);
-                            $codigos_presupuestales = $objPlanAccion->codigos_presupuestales($ref_fuente);
-                            foreach($codigos_presupuestales as $dta_codgos_presupuestales){
-                                $ccp_codigo = $dta_codgos_presupuestales['ccp_codigo'];
-                                $ccp_code = $dta_codgos_presupuestales['ccp_code'];
-                                $ccp_descripcion = $dta_codgos_presupuestales['ccp_descripcion'];
-                                $ccp_fuente = $dta_codgos_presupuestales['ccp_fuente'];
-
-                                if($ccp_codigo == $poa_codigoclasificadorpresupuestal){
-                                    $select_codigo = "selected";
-                                }
-                                else{
-                                    $select_codigo = "";
-                                }
-                            ?>
-                               <option value="<?php echo $ccp_codigo; ?>" <?php echo $select_codigo; ?>><?php echo $ccp_code." - ".substr($ccp_descripcion,0,60); ?> ...</option>;
-                            <?php
-                            }
-                        }
-                        else{
-                        ?>
-                            <option value="0">Seleccione una Fuente de Financiación</option>;
-                        <?php
-                        }
-                        
-                        ?>
-                    </select>
-                    <span class="help-block" id="error"></span>
-                </div>
-            </div>-->
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="txtDane" class="font-weight-bold">DANE </label>
-                    <input type="text" class="form-control caja_texto_sizer" id="txtDane" name="txtDane" maxlength="34" aria-describedby="textHelp" data-rule-required="false" value="<?php echo $poa_dane; ?>" >
-                    <span class="help-block" id="error"></span>
-                </div>
             </div>           
-        </div>
-
-        
+        </div>      
 
     <!-- ******************** FIN FORMULARIO ************************* -->
 
@@ -307,18 +197,6 @@
 <script src="vjs/registroPlanAccion.js"></script>
 
 <script type="text/javascript">
-
-
-    $('.recursodisponible').change(function(){
-        /*var rcso = $('#recursoAccion').val();
-
-        if(rcso>0){
-            $('.rcrsos').fadeIn(1);
-        }
-        else{
-            $('.rcrsos').fadeOut(1);
-        }*/
-    });
 
     $('.fuente_clasificador').change(function(){
         var fuente = $(this).find(':selected').data('fuente');

@@ -3,7 +3,6 @@
 
 
     $recargar = $_REQUEST['recarga'];
-    $productosfun = 2;
     if($recargar){
         
         include('crud/rs/mdfcarplancomprasfun/Rsmdfcarplancomprasfun.php');
@@ -27,12 +26,11 @@
             $list_sublinea = $objMdfcarPlanComprasFun->list_sublinea($fun_linea);
             $list_equipo = $objMdfcarPlanComprasFun->list_equipo($fun_sublinea);
             $list_caracteristicas = $objMdfcarPlanComprasFun->list_caracteristicas($fun_equipo);
-            echo "HOLA REFRESQUE";
+            
            
         }
         else{
-            
-            
+            $list_linea = $objMdfcarPlanComprasFun->list_linea(); 
         }
         
     }
@@ -41,16 +39,12 @@
             $list_linea = $objMdfcarPlanComprasFun->list_linea();
         }
         else{
-            $list_linea = $objMdfcarPlanComprasFun->list_linea();
+            $list_linea = $objMdfcarPlanComprasFun->list_linea(); 
             $list_sublinea = $objMdfcarPlanComprasFun->list_sublinea($fun_linea);
             $list_equipo = $objMdfcarPlanComprasFun->list_equipo($fun_sublinea);
             $list_caracteristicas = $objMdfcarPlanComprasFun->list_caracteristicas($fun_equipo);
-        }
-       
+        }  
     }
-
-   
-   
 
 ?>
 
@@ -59,9 +53,10 @@
    <div class="col-sm-6" >
         <div class="form-group p-3">
             <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
-            <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpickerlinea" data-rule-required="true" required>
+            <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                     <option value="0" data-codigo_linea="0">Seleccione la linea</option>
                     <?php
+                     if($list_linea){
                         foreach ($list_linea as $data_listlinea) {
                             $lin_codigo=$data_listlinea['lin_codigo'];
                             $lin_nombre=$data_listlinea['lin_nombre'];
@@ -77,6 +72,12 @@
                         <option value="<?php echo $lin_codigo; ?>"<?php echo $select_linea; ?> data-codigo_linea="<?php echo $lin_codigo ?>"><?php echo $lin_nombre; ?></option>
                     <?php
                         }
+                    }
+                    else{
+                        ?>
+                        <strong>No hay Linea</strong>
+                    <?php
+                    }
                     ?>
                 </select>
                 <span class="help-block" id="error"></span>    
@@ -85,7 +86,7 @@
     <div class="col-sm-6">
             <div class="form-group p-3 subLinea">
                 <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
-                <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpickersublinea" data-rule-required="true" required>
+                <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                     <option value="0" data-codigo_sublinea="0">Seleccione...</option>
                     <?php
                         if($list_sublinea){
@@ -122,7 +123,7 @@
                     </div>
                     
                     
-                    <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpickerequipo" data-rule-required="true" required>
+                    <select name="selEquipo" id="selEquipo" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                         <option value="0" data-codigo_equipo="0">Seleccione el equipo</option>
                         <?php
                             
@@ -153,7 +154,7 @@
     <div class="col-sm-12">
         <div class="form-group p-3 caracteristicas">
             <label for="selCaracteristicas" class="font-weight-bold">Caracteristicas</label>
-            <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpickercaracteristicas" data-rule-required="true" required>
+            <select name="selCaracteristicas" id="selCaracteristicas" class="form-control caja_texto_sizer selectpicker" data-rule-required="true" required>
                 <option value="0"  data-codigo_caracteristicas="0">Seleccione la caracteristica</option>
                 <?php
 
@@ -212,19 +213,7 @@
 
 <script>
     
-    $('.selectpickerlinea').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
-    });
-    $('.selectpickersublinea').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
-    });
-    $('.selectpickerequipo').selectpicker({
-        liveSearch: true,
-        maxOptions: 1
-    });
-    $('.selectpickercaracteristicas').selectpicker({
+    $('.selectpicker').selectpicker({
         liveSearch: true,
         maxOptions: 1
     });
@@ -234,7 +223,7 @@
         
         $('#selLineaEquipo').change(function(){
             var codigo_linea = $(this).find(':selected').data('codigo_linea');
-            alert('CODIGO LINEA-->'+codigo_linea);
+          
             if(codigo_linea==0){
 
             }

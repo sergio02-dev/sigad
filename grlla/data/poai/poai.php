@@ -18,7 +18,6 @@
 	<div class="col-sm-6">
 		<br>
 		&nbsp;<span class="d-inline-block" tabindex="0"  title="Registrar POAI"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="agregar('<?php echo $codigo_plandesarrollo; ?>');"><i class="fas fa-plus"></i>&nbsp;<strong>REGISTRAR POAI</strong></button></span>
-		<!--&nbsp;<span class="d-inline-block" tabindex="0"  title="Registrar POAI"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="trasladar('<?php echo $codigo_plandesarrollo; ?>');"><i class="fas fa-file-export"></i>&nbsp;<strong>TRASLADAR POAI</strong></button></span>-->
 		&nbsp;<span class="d-inline-block" tabindex="0"  title="Reporte POAI"><button type="button" style="display: <?php echo $visibilidad; ?>" class="btn btn-danger btn-sm" onclick="generarExcel('<?php echo $codigo_plandesarrollo; ?>');"><i class="fas fa-file-excel"></i>&nbsp;<strong>REPORTE POAI</strong></button></span>
 	</div>
 	<div class="col-sm-4">
@@ -42,7 +41,6 @@
 	</div>
 	
 </div>
-
 
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 	<!-- Large modal -->
@@ -143,7 +141,6 @@
 				{ "width": "2%", "targets": 10 },
             ],
 		});
-
 
 		function formatNumber(num) {
 			return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -284,7 +281,6 @@
 		});
 	}
 	
-
 	function generarExcel(codigo_plandesarrollo){
         var codigo_plandesarrollo = codigo_plandesarrollo;
 		var datos = $('#selVigencia').val();
@@ -300,10 +296,7 @@
 				window.location.href = 'excelreportepoaiacuerdo?codigo_plan='+codigo_plandesarrollo+'&vigencia='+vigencia+'&acuerdo='+acuerdo;        
 			}
 		}
-        
     }
-
 </script>
-
 
 <!-- *********************     Fin DataTable     *************************************** *-->

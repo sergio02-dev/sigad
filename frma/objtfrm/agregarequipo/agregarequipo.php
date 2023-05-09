@@ -46,9 +46,9 @@
         
         <div class="row ">
             
-            <div class="col-sm-12" >
+            <div class="col-sm-11" >
                     
-                <div class="form-group p-3">
+                <div class="form-group pl-3">
                     <label for="selLineaEquipo" class="font-weight-bold">Linea de equipo</label>
                     <select name="selLineaEquipo" id="selLineaEquipo" class="form-control caja_texto_sizer  selectpickerlineaequipo" data-rule-required="true"required>
                             <option value="0" data-codigo_linea="0">Seleccione la linea</option>
@@ -69,8 +69,8 @@
             </div>
         </div>
         <div class="row ">
-            <div class="col-sm-12">
-                    <div class="form-group p-3 subLineagregarequipo">
+            <div class="col-sm-11">
+                    <div class="form-group pl-3 subLineagregarequipo">
                         <label for="textSublineaEquipo" class="font-weight-bold"> Sublinea de equipo</label>
                         <select name="selSublineaEquipo" id="selSublineaEquipo" class="form-control caja_texto_sizer selectpickersublineaequipo" data-rule-required="true" required>
                             <option value="0" >Seleccione la sublinea</option>
@@ -80,8 +80,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group p-3 ">
+            <div class="col-sm-11">
+                <div class="form-group pl-3 ">
                     <label for="txtNombre" class="font-weight-bold">Equipo</label>
                     <input type="text" class="form-control caja_texto_sizer" id="txtEquipo" name="txtEquipo" aria-describedby="textHelp" data-rule-required="true"  required>
                     <span class="help-block" id="error"></span>
@@ -89,8 +89,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group p-3 ">
+            <div class="col-sm-11">
+                <div class="form-group pl-3 ">
                     <label for="txtNombre" class="font-weight-bold">Caracteristicas</label>
                     <input type="text" class="form-control caja_texto_sizer" id="txtCaracteristicas" name="txtCaracteristicas" aria-describedby="textHelp" data-rule-required="true"  required>
                     <span class="help-block" id="error"></span>
@@ -99,7 +99,7 @@
         </div>
         <div class="row">
                 <div class="col-sm-5">
-                        <div class="form-group p-3">
+                        <div class="form-group pl-3">
                             <label for="selValorUnitario" class="font-weight-bold">Valor Unitario</label>
                             <input type="text" name="selValorUnitario" id="selValorUnitario" class="form-control caja_texto_sizer puntos_miles_etapa" data-rule-required="true" aria-describedby="textHelp" required>
                                     

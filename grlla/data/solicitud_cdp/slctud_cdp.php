@@ -2,8 +2,6 @@
     $visibilidad=$_SESSION['visibilidadBotones'];  
 
 ?>
-
-
 <!-- **********************          Inicio Modal Forma    *********************************** -->
 <div class="modal fade" tabindex="-1" id="frmModal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -61,12 +59,12 @@
                     {
                     data: null, 
                     render: function (data, type, full, meta){
-                        if(full["scdp_proceso"] == 2){
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-file-pdf  fa-lg" title="Reporte solicitud cdp"  style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
+                        if(full["validar_autorizacion"] == 0){
+                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-file-pdf  fa-lg" title="Reporte solicitud cdp"  style="display: '+full["validar_aprobacion"]+'; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
 
                         }
                         else{
-                            return '<div class="d-inline-block"><i class="fas fa-pencil-alt fa-lg color_icono" title="Editar Solicitud" style="display:<?php echo $visibilidad; ?>;" onclick="editar(\''+full["scdp_codigo"]+'\');"></i></div> &nbsp;&nbsp;<div class="d-inline-block"><i class="fas fa-file-pdf  fa-lg" title="Reporte solicitud  cdp"   style="display:<?php echo $visibilidad; ?>; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
+                            return '<div class="d-inline-block"><i class="fas fa-file-pdf  fa-lg" title="Reporte solicitud  cdp" style="display: '+full["validar_aprobacion"]+'; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
                         }
                     }
                 },
