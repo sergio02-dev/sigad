@@ -18,6 +18,7 @@
             $per_identificacion=$data_personaFrm['per_identificacion'];
             $per_estado=$data_personaFrm['per_estado'];
             $per_genero=$data_personaFrm['per_genero'];
+            $per_correo = $data_personaFrm['per_correo'];
            // $per_entidad=$data_personaFrm['per_entidad'];
         }
 
@@ -61,94 +62,99 @@
     </div>
     <div class="modal-body">
         <!-- ******************** INICIO FORMULARIO ************************* -->
-    
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textIdentificacion" class="font-weight-bold">Identificaci&oacute;n *</label>
-                <input type="number" class="form-control caja_texto_sizer" id="textIdentificacion" name="textIdentificacion" aria-describedby="textHelp" value="<?php echo $per_identificacion; ?>" data-rule-required="true" required>
-                <span class="help-block" id="error"></span>
+        
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textIdentificacion" class="font-weight-bold">Identificaci&oacute;n *</label>
+                    <input type="number" class="form-control caja_texto_sizer" id="textIdentificacion" name="textIdentificacion" aria-describedby="textHelp" value="<?php echo $per_identificacion; ?>" data-rule-required="true" required>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="selTipoIdentificacion" class="font-weight-bold"> Tipo Identificaci&oacute;n *</label>
-                <select name="selTipoIdentificacion" id="selTipoIdentificacion" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                    <option value="0">Seleccione...</option>
-                    <?php
-                        foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
-                            $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
-                            $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="selTipoIdentificacion" class="font-weight-bold"> Tipo Identificaci&oacute;n *</label>
+                    <select name="selTipoIdentificacion" id="selTipoIdentificacion" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                        <?php
+                            foreach ($rs_tipoIdentificacion as $data_tipoIdentificacion) {
+                                $tid_codigo=$data_tipoIdentificacion['tid_codigo'];
+                                $tid_nombre=$data_tipoIdentificacion['tid_nombre'];
 
-                        if($per_tipoidentificacion==$tid_codigo){
-                            $select_tipoIdentificacion="selected";
-                        }
-                        else{
-                            $select_tipoIdentificacion="";
-                        }
-                    ?>
-                        <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
-                    <?php
-                        }
-                    ?>
-                </select>
-                <span class="help-block" id="error"></span>
+                            if($per_tipoidentificacion==$tid_codigo){
+                                $select_tipoIdentificacion="selected";
+                            }
+                            else{
+                                $select_tipoIdentificacion="";
+                            }
+                        ?>
+                            <option value="<?php echo  $tid_codigo; ?>"  <?php echo $select_tipoIdentificacion; ?>><?php echo $tid_nombre; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textNombres" class="font-weight-bold">Nombres *</label>
+                    <input type="text" class="form-control caja_texto_sizer" id="textNombres" name="textNombres" aria-describedby="textHelp" value="<?php echo $per_nombre; ?>" data-rule-required="true" required>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textNombres" class="font-weight-bold">Nombres *</label>
-                <input type="text" class="form-control caja_texto_sizer" id="textNombres" name="textNombres" aria-describedby="textHelp" value="<?php echo $per_nombre; ?>" data-rule-required="true" required>
-                <span class="help-block" id="error"></span>
+            
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textPrimerApellido" class="font-weight-bold">Primer Apellido *</label>
+                    <input type="text" class="form-control caja_texto_sizer" id="textPrimerApellido" name="textPrimerApellido" value="<?php echo $per_primerapellido; ?>" data-rule-required="true" required>
+                    <span class="help-block" id="error"></span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textSegundoApellido" class="font-weight-bold">Segundo Apellido</label>
+                    <input type="text" class="form-control caja_texto_sizer" id="textSegundoApellido" name="textSegundoApellido" value="<?php echo $per_segundoapellido; ?>">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="txtEmail" class="font-weight-bold">Correo *</label>
+                    <input type="email" class="form-control caja_texto_sizer" id="txtEmail" name="txtEmail" value="<?php echo $per_correo; ?>">
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textPrimerApellido" class="font-weight-bold">Primer Apellido *</label>
-                <input type="text" class="form-control caja_texto_sizer" id="textPrimerApellido" name="textPrimerApellido" value="<?php echo $per_primerapellido; ?>" data-rule-required="true" required>
-                <span class="help-block" id="error"></span>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textSegundoApellido" class="font-weight-bold">Segundo Apellido</label>
-                <input type="text" class="form-control caja_texto_sizer" id="textSegundoApellido" name="textSegundoApellido" value="<?php echo $per_segundoapellido; ?>">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="selEntidad" class="font-weight-bold"> Vicerrectoria </label>
-                <select name="selEntidad" id="selEntidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
-                    <option value="0">Seleccione...</option>
-                    <?php
-                        foreach ($rs_entidades as $data_entidad) {
-                            $ent_codigo=$data_entidad['ent_codigo'];
-                            $ent_nombre=$data_entidad['ent_nombre'];
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="selEntidad" class="font-weight-bold"> Vicerrectoria </label>
+                    <select name="selEntidad" id="selEntidad" class="form-control caja_texto_sizer" data-rule-required="true" required>
+                        <option value="0">Seleccione...</option>
+                        <?php
+                            foreach ($rs_entidades as $data_entidad) {
+                                $ent_codigo=$data_entidad['ent_codigo'];
+                                $ent_nombre=$data_entidad['ent_nombre'];
 
-                        if($per_entidad==$ent_codigo){
-                            $select_entidadpersona="selected";
-                        }
-                        else{
-                            $select_entidadpersona="";
-                        }
-                    ?>
-                        <option value="<?php echo $ent_codigo; ?>"  <?php echo $select_entidadpersona; ?>><?php echo $ent_nombre; ?></option>
-                    <?php
-                        }
-                    ?>
-                </select>
-                <span class="help-block" id="error"></span>
+                            if($per_entidad==$ent_codigo){
+                                $select_entidadpersona="selected";
+                            }
+                            else{
+                                $select_entidadpersona="";
+                            }
+                        ?>
+                            <option value="<?php echo $ent_codigo; ?>"  <?php echo $select_entidadpersona; ?>><?php echo $ent_nombre; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <span class="help-block" id="error"></span>
+                </div>
             </div>
-        </div>        
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="selFacultad" class="font-weight-bold"> Facultad </label>
                     <select name="selFacultad" id="selFacultad" class="form-control caja_texto_sizer" data-rule-required="true" required>
@@ -172,44 +178,36 @@
                     </select>
                     <span class="help-block" id="error"></span>
                 </div>
-            </div>        
+            </div>      
         </div>
-    
 
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textNumeroVeces" class="font-weight-bold">Genero *</label>
-                <div class="radio tipo1">
-                    <input type="radio"   id="rhombre" name="chkgenero"  aria-describedby="textHelp" data-rule-required="true" value="H" <?php echo $checkedH; ?> <?php echo $sololectura; ?> required/>
-                    <label for="rhombre"><span></span> Masculino</label>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textNumeroVeces" class="font-weight-bold">Genero *</label>
+                    <div class="radio tipo1">
+                        <input type="radio"   id="rhombre" name="chkgenero"  aria-describedby="textHelp" data-rule-required="true" value="H" <?php echo $checkedH; ?> <?php echo $sololectura; ?> required/>
+                        <label for="rhombre"><span></span> Masculino &nbsp;&nbsp;</label>
 
-                    <input type="radio"   id="rMujer" name="chkgenero"  aria-describedby="textHelp" data-rule-required="true" value="M" <?php echo $checkedM; ?> <?php echo $sololectura; ?> required />
-                    <label for="rMujer"><span></span> Femenino</label>
+                        <input type="radio"   id="rMujer" name="chkgenero"  aria-describedby="textHelp" data-rule-required="true" value="M" <?php echo $checkedM; ?> <?php echo $sololectura; ?> required />
+                        <label for="rMujer"><span></span> Femenino</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="textNumeroVeces" class="font-weight-bold">Estado *</label>
+                    <div class="radio tipo1">
+                        <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> <?php echo $sololectura; ?> required/>
+                        <label for="ractivo"><span></span> Activo&nbsp;&nbsp;&nbsp;</label>
+
+                        <input type="radio"   id="rinactivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> <?php echo $sololectura; ?> required />
+                        <label for="rinactivo"><span></span> Inactivo</label>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="textNumeroVeces" class="font-weight-bold">Estado *</label>
-                <div class="radio tipo1">
-                    <input type="radio"   id="ractivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="1" <?php echo $checkedA; ?> <?php echo $sololectura; ?> required/>
-                    <label for="ractivo"><span></span> Activo</label>
-
-                    <input type="radio"   id="rinactivo" name="chkestado"  aria-describedby="textHelp" data-rule-required="true" value="0" <?php echo $checkedI; ?> <?php echo $sololectura; ?> required />
-                    <label for="rinactivo"><span></span> Inactivo</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-   
-    
-    
-
-
-    <!-- ******************** FIN FORMULARIO ************************* -->
+        <!-- ******************** FIN FORMULARIO ************************* -->
 
     </div>
     <div class="modal-footer">

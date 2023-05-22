@@ -1,6 +1,6 @@
 <?php
     include('crud/rs/autrzcion_tcnca/autrzcion_tcnca.php');
-    include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
+    //include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
 
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
 
@@ -114,8 +114,8 @@
                                             $esc_valor = $dta_clsfcdres['esc_valor'];
                                             $esc_dane = $dta_clsfcdres['esc_dane'];
 
-                                            list($nombre, $numero) = $objConsultaLinix->nmbre_clsfcdor($esc_clasificador);
-                                            //list($nombre, $numero) = $objAutorizacionTecnica->nmbre_clsfcdor($esc_clasificador);
+                                            //list($nombre, $numero) = $objConsultaLinix->nmbre_clsfcdor($esc_clasificador);
+                                            list($nombre, $numero) = $objAutorizacionTecnica->nmbre_clsfcdor($esc_clasificador);
                                             
                         ?>
                         <tr>

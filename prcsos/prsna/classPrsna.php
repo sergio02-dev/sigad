@@ -1,7 +1,5 @@
 <?php
-
     class Persona {
-
         private $cnxion;
         private $codigoPersona;
         private $nombrePersona;
@@ -14,11 +12,9 @@
         private $personaSistema;
         private $entidadPersona;
         private $facultadPersona;
-        
-
+        private $correo;
 
         function Persona(){}
-
         
         public function getCodigoPersona(){
             return $this->codigoPersona;
@@ -97,9 +93,11 @@
             $this->facultadPersona=$facultadPersona;
         }
 
-
+        public function getCorreo(){
+            return $this->correo;
+        }
+        public function setCorreo($correo){
+            $this->correo=$correo;
+        }
     }
-
-
-
 ?>

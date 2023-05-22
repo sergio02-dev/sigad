@@ -113,7 +113,6 @@
                     $genero='';
                 }
                 
-
                 $rsPersona[] = array('per_codigo'=> $per_codigo,
                                    'per_nombre'=> $per_nombre,
                                    'per_primerapellido'=> $per_primerapellido,
@@ -126,10 +125,8 @@
                                    );
 
             }
-
-                $datPersonaJson=json_encode(array("data"=>$rsPersona));
-                return $datPersonaJson;
-
+            $datPersonaJson=json_encode(array("data"=>$rsPersona));
+            return $datPersonaJson;
         }
 
         public function dataIdentificacion(){
@@ -147,8 +144,9 @@
 
         public function personaForm(){
 
-            $sql_personaForm="SELECT per_codigo, per_nombre, per_primerapellido, per_segundoapellido,  
-                                     per_genero, per_tipoidentificacion, per_identificacion, per_estado
+            $sql_personaForm="SELECT per_codigo, per_nombre, per_primerapellido, 
+                                     per_segundoapellido, per_genero, per_tipoidentificacion, 
+                                     per_identificacion, per_estado, per_correo
                                 FROM principal.persona
                                WHERE per_codigo=".$this->getCodigoPersona().";";
 
@@ -282,10 +280,6 @@
             }
             return $datalist_vinculacion_persona;
         }
-
-        
-
-
     }
 
 

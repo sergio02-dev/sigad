@@ -2,7 +2,7 @@
 
     function tildes($palabra){
         $no_admitidas = array("á","é","í","ó","ú");
-        $admitidas = array("Á", "É", "Í;", "Ó", "Ú");
+        $admitidas = array("Á", "É", "Í", "Ó", "Ú");
         $texto = str_replace($no_admitidas, $admitidas ,$palabra);
         return $texto;
     }

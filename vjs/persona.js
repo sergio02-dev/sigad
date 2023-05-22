@@ -3,7 +3,6 @@
  * validación formulario persona 
  * TDI AMC
  * */
-
 function validar_formpersona(){
 
 	$("#personaform").validate({
@@ -34,6 +33,9 @@ function validar_formpersona(){
 			},
 			selFacultad:{
 				selectFacultad: true,
+			},
+			txtEmail:{
+				required: true,
 			}
 		},
 
@@ -63,21 +65,22 @@ function validar_formpersona(){
 			},
 			chkestado:{
 				required: "Seleccione el Estado",
+			},
+			txtEmail:{
+				required: "Debe Ingresar el correo",
 			}
-
 		},
 		errorPlacement : function(error, element) {
-				$(element).closest('.form-group').find('.help-block').html(error.html());
+			$(element).closest('.form-group').find('.help-block').html(error.html());
 		},
 		highlight : function(element) {
-				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		},
 		unhighlight: function(element, errorClass, validClass) {
-				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-				$(element).closest('.form-group').find('.help-block').html('');
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			$(element).closest('.form-group').find('.help-block').html('');
 		},
 		submitHandler: function(form){
-			
 			var url_proceso = $('#url_proceso').val();
             
 			$.ajax({
@@ -85,15 +88,11 @@ function validar_formpersona(){
                 url: url_proceso,
                 data: $(form).serialize(),
                 success: function (data, status) {
-                    // ajax done
-                    // do whatever & close the modal
 					$('#frmModal').modal('hide');
-					
 					$("#persona").load("datapersona");
                 }
             });		
             return false; 
-			
 		}
 	});
 

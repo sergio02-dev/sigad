@@ -7,7 +7,7 @@
     $codigo_accion = $_REQUEST['codigo_accion'];
 
     $activity_list = $objSolicitudCdp->actividades_accion($codigo_accion);
-   list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
+    list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
     //echo "CODIGO ACCION ->>".$codigo_accion
     
 

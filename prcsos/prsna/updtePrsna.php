@@ -16,10 +16,15 @@ class UpdtePrsna extends Persona{
     public function updatePersona(){
 
         $update_persona="UPDATE principal.persona
-                            SET per_nombre='".$this->getNombrePersona()."', per_primerapellido='".$this->getPrimerApellidoPersona()."', per_segundoapellido='".$this->getSegundoApellidoPersona()."', 
+                            SET per_nombre='".$this->getNombrePersona()."', 
+                                per_primerapellido='".$this->getPrimerApellidoPersona()."', 
+                                per_segundoapellido='".$this->getSegundoApellidoPersona()."', 
                                 per_personamodifico='".$this->getPersonaSistema()."', per_fechamodifico=NOW(), 
-                                per_genero='".$this->getGeneroPersona()."', per_tipoidentificacion=".$this->getTipoIdentificacionPersona().", per_identificacion='".$this->getIdentificacionPersona()."', 
-                                per_estado='".$this->getEstadoPersona()."'
+                                per_genero='".$this->getGeneroPersona()."', 
+                                per_tipoidentificacion=".$this->getTipoIdentificacionPersona().", 
+                                per_identificacion='".$this->getIdentificacionPersona()."', 
+                                per_estado='".$this->getEstadoPersona()."',
+                                per_correo='".$this->getCorreo()."'
                         WHERE per_codigo=".$this->getCodigoPersona().";";
 
         $this->cnxion->ejecutar($update_persona);
@@ -32,10 +37,14 @@ class UpdtePrsna extends Persona{
         $this->cnxion->ejecutar($update_entidad_persona);
 
         $insert_entidad_persona="INSERT INTO principal.entidad_persona(
-                                             epe_codigo, epe_persona, epe_estado, epe_personacreo, epe_personamodifico, 
-                                             epe_fechacreo, epe_fechamodifico, epe_entidad, epe_facultad)
-                                     VALUES (".$this->codigoEntidad.", ".$this->getCodigoPersona().", '1', ".$this->getPersonaSistema().", ".$this->getPersonaSistema().", 
-                                             NOW(), NOW(), ".$this->getEntidadPersona().", ".$this->getFacultadPersona().");";
+                                             epe_codigo, epe_persona, epe_estado, 
+                                             epe_personacreo, epe_personamodifico, 
+                                             epe_fechacreo, epe_fechamodifico, 
+                                             epe_entidad, epe_facultad)
+                                     VALUES (".$this->codigoEntidad.", ".$this->getCodigoPersona().", '1', 
+                                             ".$this->getPersonaSistema().", ".$this->getPersonaSistema().", 
+                                             NOW(), NOW(), 
+                                             ".$this->getEntidadPersona().", ".$this->getFacultadPersona().");";
 
         $this->cnxion->ejecutar($insert_entidad_persona);
 

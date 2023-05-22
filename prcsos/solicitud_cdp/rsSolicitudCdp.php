@@ -193,11 +193,7 @@ Class RsSolicitudCdp extends SolicitudCdp{
             $condicionVer="";
         }
         else{
-            $condicionVer="AND planaccion.actividad_poai.acp_codigo IN(SELECT DISTINCT acp_codigo
-                                                                            FROM planaccion.actividad_poai, usco.vinculacion
-                                                                        WHERE  acp_oficina = vin_oficina
-                                                                        AND acp_cargo = vin_cargo 
-                                                                        AND vin_persona = ".$_SESSION['idusuario']." )";
+            $condicionVer="";
         }
 
         $sql_list_actividades="SELECT acp_codigo, acp_descripcion, acp_accion, 
