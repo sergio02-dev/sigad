@@ -8,15 +8,15 @@
 
     $personaSistema = $_SESSION['idusuario'];
 
-    $textNombres=$_REQUEST['textNombres'];
-    $textPrimerApellido=$_REQUEST['textPrimerApellido'];
-    $textSegundoApellido=$_REQUEST['textSegundoApellido'];
-    $selTipoIdentificacion=$_REQUEST['selTipoIdentificacion'];
-    $textIdentificacion=$_REQUEST['textIdentificacion'];
-    $selEntidad=$_REQUEST['selEntidad'];
-    $selFacultad=$_REQUEST['selFacultad'];
-    $chkgenero=$_REQUEST['chkgenero'];
-    $chkestado=$_REQUEST['chkestado'];
+    $textNombres = $_REQUEST['textNombres'];
+    $textPrimerApellido = $_REQUEST['textPrimerApellido'];
+    $textSegundoApellido = $_REQUEST['textSegundoApellido'];
+    $selTipoIdentificacion = $_REQUEST['selTipoIdentificacion'];
+    $textIdentificacion = $_REQUEST['textIdentificacion'];
+    $selEntidad = $_REQUEST['selEntidad'];
+    $selFacultad = $_REQUEST['selFacultad'];
+    $chkgenero = $_REQUEST['chkgenero'];
+    $chkestado = $_REQUEST['chkestado'];
     $txtEmail = $_REQUEST['txtEmail'];
 
     $registroPersona= new RgstroPrsna();

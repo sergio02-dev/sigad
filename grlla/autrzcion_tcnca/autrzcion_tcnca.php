@@ -28,7 +28,7 @@
 				    <!--..........................................FIN MENU..................................................-->
 				</div>
 				<div class="col-sm-9 container-principal" >
-					<div class="col-sm-12 modal-header capa_titulo"><h3><strong>AUTORIZACI&Oacute;N T&Eacute;CNICA SOLICITUD DE CDP</strong></h3></div>
+					<div class="col-sm-12 modal-header capa_titulo"><h3><strong>AUTORIZACI&Oacute;N T&Eacute;CNICA SOLICITUD DE CDP </strong></h3></div>
 
 					<div class="col-sm-12">&nbsp;</div>
 

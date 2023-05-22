@@ -298,6 +298,30 @@ class RsAutrzcionFnncra extends AutorizacionFinanciera{
         return $datAutorizaciones;
     }
 
+    public function numero_financiera(){
+        
+        $rs_solicitudes = $this->list_solicitudes();
+        $num_financiera = 0;
+        if($rs_solicitudes){
+            foreach ($rs_solicitudes as $dta_solicitud) {
+                $scdp_codigo = $dta_solicitud['scdp_codigo'];
+                $scdp_accion = $dta_solicitud['scdp_accion'];
+
+                $autorizacion_responsable_accion = $this->autorizacion_responsable_accion($scdp_codigo);
+                if($autorizacion_responsable_accion > 0){
+                    $validar_aprovacion_solicitud = $this->validar_aprovacion_solicitud($scdp_codigo);
+                    if($validar_aprovacion_solicitud > 0){
+                        $autorizacion_financiera = $this->autorizacion_financiera($scdp_codigo);
+                        if($autorizacion_financiera == 0){
+                            $num_financiera++;
+                        }
+                    }
+                }
+            }
+        }
+        return $num_financiera;
+    }
+
     public function datos_solicitud($codigo_solicitud){
 
         $sql_datos_solicitud="SELECT scdp_codigo, scdp_fecha, scdp_numero, 

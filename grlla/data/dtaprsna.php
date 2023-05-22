@@ -36,24 +36,22 @@
                 type: 'POST'
             },
             columns: [
-                
-                { data: 'per_tipoidentificacion', title: 'Tipo Identificación'},
-                { data: 'per_identificacion', title: 'Identificación'},
-                { data: 'nombre_cmpltoprsna', title: 'Nombre'},								
-                {
-                    data: null, 
-                    render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" style="display:<?php echo $visibilidad; ?>;" title="Editar Persona" onclick="editar(\''+full["per_codigo"]+'\');"></i> </div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-users-cog fa-lg color_icono" title="Perfil Persona" style="display:<?php echo $visibilidad; ?>;" onclick="perfiles(\''+full["per_codigo"]+'\');"></i> </div> &nbsp;&nbsp;<!--<div class="d-inline-block"> <i class="fab fa-bandcamp fa-lg color_icono" title="Asignar Acciones" onclick="acciones_cargo(\''+full["per_codigo"]+'\');"></i></div> -->&nbsp;&nbsp;<div class="d-inline-block"> <i class="fas fa-briefcase fa-lg color_icono" style="display:<?php echo $visibilidad; ?>;" title="Vinculación" onclick="prcso_vinculacion(\''+full["per_codigo"]+'\');"></i></div>';
-                    }
-                },
                 {
 					"className":      'details-control',
 					"orderable":      false,
 					"data":           null,
 					"defaultContent": ''
 				},
-
-
+                { data: 'per_tipoidentificacion', title: 'Tipo Identificación'},
+                { data: 'per_identificacion', title: 'Identificación'},
+                { data: 'nombre_cmpltoprsna', title: 'Nombre'},	
+                { data: 'per_correo', title: 'Correo'},								
+                {
+                    data: null, 
+                    render: function (data, type, full, meta){
+                        return '<div class="d-inline-block"> <i class="fas fa-edit fa-lg color_icono" style="display:<?php echo $visibilidad; ?>;" title="Editar Persona" onclick="editar(\''+full["per_codigo"]+'\');"></i> </div> &nbsp;&nbsp; <div class="d-inline-block"><i class="fas fa-users-cog fa-lg color_icono" title="Perfil Persona" style="display:<?php echo $visibilidad; ?>;" onclick="perfiles(\''+full["per_codigo"]+'\');"></i> </div> &nbsp;&nbsp;<!--<div class="d-inline-block"> <i class="fab fa-bandcamp fa-lg color_icono" title="Asignar Acciones" onclick="acciones_cargo(\''+full["per_codigo"]+'\');"></i></div> -->&nbsp;&nbsp;<div class="d-inline-block"> <i class="fas fa-briefcase fa-lg color_icono" style="display:<?php echo $visibilidad; ?>;" title="Vinculación" onclick="prcso_vinculacion(\''+full["per_codigo"]+'\');"></i></div>';
+                    }
+                }
             ],
             //dom:            "Bfrtip",
             scrollY:        "600px",
@@ -64,13 +62,14 @@
             fixedColumns:   {
                 leftColumns: 2
             },
-            "order": [[1, 'asc']],
+            "order": [[3, 'asc']],
             "columnDefs": [
-              { "width": "20%", "targets": 0 },
-              { "width": "20%", "targets": 1 },
-              { "width": "45%", "targets": 2 },
-              { "width": "10%", "targets": 3 },
-              { "width": "5%", "targets": 4}
+                { "width": "5%", "targets": 0 },
+                { "width": "15%", "targets": 1 },
+                { "width": "10%", "targets": 2 },
+                { "width": "33%", "targets": 3 },
+                { "width": "27%", "targets": 4 },
+                { "width": "10%", "targets": 5 },              
             ],
         });
 

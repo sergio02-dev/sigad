@@ -326,6 +326,35 @@ class RsAutrzcionRspnsbleAccion extends AutorizacionResponsableAccion{
         return $datAutorizaciones;
     }
 
+    public function numero_res_accion(){
+        
+        $rs_solicitudes = $this->list_solicitudes();
+        $numero_pendientes = 0;
+        if($rs_solicitudes){
+            foreach ($rs_solicitudes as $dta_solicitud) {
+                $scdp_codigo = $dta_solicitud['scdp_codigo'];
+                $scdp_accion = $dta_solicitud['scdp_accion'];
+
+                $necesita_autorizacion_tecnica = $this->necesita_autorizacion_tecnica($scdp_accion);
+
+                if($necesita_autorizacion_tecnica > 0){
+                    $autorzacion_tecnica = $this->autorzacion_tecnica($scdp_codigo);
+                    if($autorzacion_tecnica > 0){
+                        $validar_aprovacion_solicitud = $this->validar_aprovacion_solicitud($scdp_codigo);
+                        
+                        if($validar_aprovacion_solicitud > 0){
+                            $autorizacion_responsable_accion = $this->autorizacion_responsable_accion($scdp_codigo);
+                            if($autorizacion_responsable_accion == 0){
+                                $numero_pendientes++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $numero_pendientes;
+    }
+
     public function datos_solicitud($codigo_solicitud){
 
         $sql_datos_solicitud="SELECT scdp_codigo, scdp_fecha, scdp_numero, 

@@ -227,6 +227,22 @@ class RsAutrzcionTcnca extends AutorizacionTecnica{
         return $datResolucion;
     }
 
+    public function numero_tecnicas(){
+        $rs_solicitudes = $this->list_solicitudes();
+        $numero_pendientes = 0;
+        if($rs_solicitudes){
+            foreach ($rs_solicitudes as $dta_solicitud) {
+                $scdp_codigo = $dta_solicitud['scdp_codigo'];
+                
+                $autorizacion_tecnica = $this->autorizacion_tecnica($scdp_codigo);
+                if($autorizacion_tecnica == 0){
+                    $numero_pendientes++;
+                }
+            }
+        } 
+        return $numero_pendientes;
+    }
+
     public function datos_solicitud($codigo_solicitud){
 
         $sql_datos_solicitud="SELECT scdp_codigo, scdp_fecha, scdp_numero, 

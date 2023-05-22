@@ -1,5 +1,5 @@
 <?php
-    include('crud/rs/autrzcion_rspnsble_accion/jautrzcion_rspnsble_accion.php');
+    include('crud/rs/autrzcion_rspnsble_accion/autrzcion_rspnsble_accion.php');
     //include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
 
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];

@@ -11,9 +11,11 @@
 
         public function selectPersona(){
 
-            $sql_persona=" SELECT per_codigo, per_tipoidentificacion, per_identificacion, per_nombre,
-                              per_primerapellido, per_segundoapellido,  per_genero,  per_estado
-                        FROM principal.persona;";
+            $sql_persona=" SELECT per_codigo, per_tipoidentificacion, 
+                                  per_identificacion, per_nombre,
+                                  per_primerapellido, per_segundoapellido, 
+                                  per_genero,  per_estado, per_correo
+                             FROM principal.persona;";
 
             $query_perosna=$this->cnxion->ejecutar($sql_persona);
             while($data_persona=$this->cnxion->obtener_filas($query_perosna)){
@@ -85,14 +87,14 @@
             $rs_persona=$this->selectPersona();
 
             foreach ($rs_persona as $dataPersona) {
-
-                $per_codigo=$dataPersona['per_codigo'];
-                $per_nombre=$dataPersona['per_nombre'];
-                $per_primerapellido=$dataPersona['per_primerapellido'];
-                $per_segundoapellido=$dataPersona['per_segundoapellido'];
-                $per_genero=$dataPersona['per_genero'];
-                $per_tipoidentificacion=$dataPersona['per_tipoidentificacion'];
-                $per_identificacion=$dataPersona['per_identificacion'];
+                $per_codigo = $dataPersona['per_codigo'];
+                $per_nombre = $dataPersona['per_nombre'];
+                $per_primerapellido =$dataPersona['per_primerapellido'];
+                $per_segundoapellido = $dataPersona['per_segundoapellido'];
+                $per_genero = $dataPersona['per_genero'];
+                $per_tipoidentificacion = $dataPersona['per_tipoidentificacion'];
+                $per_identificacion = $dataPersona['per_identificacion'];
+                $per_correo = $dataPersona['per_correo'];
 
                 $nombre_cmpltoprsna=$per_nombre.' '.$per_primerapellido.' '.$per_segundoapellido;
 
@@ -113,19 +115,20 @@
                     $genero='';
                 }
                 
-                $rsPersona[] = array('per_codigo'=> $per_codigo,
-                                   'per_nombre'=> $per_nombre,
-                                   'per_primerapellido'=> $per_primerapellido,
-                                   'per_segundoapellido'=> $per_segundoapellido,
-                                   'per_genero'=> $per_genero,
-                                   'per_tipoidentificacion'=> $tipoIdentificacion,
-                                   'per_identificacion'=> $per_identificacion,
-                                   'genero'=> $genero,
-                                   'nombre_cmpltoprsna'=> $nombre_cmpltoprsna
-                                   );
+                $rsPrsona[] = array('per_codigo'=> $per_codigo,
+                                    'per_nombre'=> $per_nombre,
+                                    'per_primerapellido'=> $per_primerapellido,
+                                    'per_segundoapellido'=> $per_segundoapellido,
+                                    'per_genero'=> $per_genero,
+                                    'per_tipoidentificacion'=> $tipoIdentificacion,
+                                    'per_identificacion'=> $per_identificacion,
+                                    'genero'=> $genero,
+                                    'nombre_cmpltoprsna'=> $nombre_cmpltoprsna,
+                                    'per_correo'=> $per_correo
+                                );
 
             }
-            $datPersonaJson=json_encode(array("data"=>$rsPersona));
+            $datPersonaJson=json_encode(array("data"=>$rsPrsona));
             return $datPersonaJson;
         }
 

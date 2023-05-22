@@ -296,6 +296,29 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
         return $datAutorizaciones;
     }
 
+    public function numero_ordernador(){
+        $rs_solicitudes = $this->list_solicitudes();
+        $num_ordenador = 0;
+        if($rs_solicitudes){
+            foreach ($rs_solicitudes as $dta_solicitud) {
+                $scdp_codigo = $dta_solicitud['scdp_codigo'];
+                $scdp_accion = $dta_solicitud['scdp_accion'];
+
+                $autorizacion_financiera = $this->autorizacion_financiera($scdp_codigo);
+                if($autorizacion_financiera>0){
+                    $validar_aprovacion_solicitud = $this->validar_aprovacion_solicitud($scdp_codigo);
+                    if($validar_aprovacion_solicitud > 0){
+                        $autorizacion_ordenador_gasto = $this->autorizacion_ordenador_gasto($scdp_codigo);
+                        if($autorizacion_ordenador_gasto == 0){
+                            $num_ordenador++;
+                        } 
+                    }
+                }
+            }
+        }
+        return $num_ordenador;
+    }
+
     public function datos_solicitud($codigo_solicitud){
 
         $sql_datos_solicitud="SELECT scdp_codigo, scdp_fecha, scdp_numero, 
