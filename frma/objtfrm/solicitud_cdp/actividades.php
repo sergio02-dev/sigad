@@ -1,15 +1,11 @@
 <?php
-
-
-
     include('crud/rs/solicitud_cdp/solicitud_cdp.php');
 
     $codigo_accion = $_REQUEST['codigo_accion'];
 
     $activity_list = $objSolicitudCdp->actividades_accion($codigo_accion);
     list($resolucionPersona,$resolucionFecha) = $objSolicitudCdp->resolucionPersona($codigo_accion);
-    //echo "CODIGO ACCION ->>".$codigo_accion
-    
+   
 
     $codigo_session = $_SESSION['idusuario'];
     if ($codigo_session == 1 || $codigo_session==201604281729001 || $_SESSION['perfil']==3 || $_SESSION['perfil']==1){
@@ -31,7 +27,7 @@
                                     $rep_fecharesolucion = $dat_ordenadores['rep_fecharesolucion'];
                                     $nombre_ordenadores = $dat_ordenadores['nombre_ordenadores'];
                         ?>
-                            <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?>" data-codigo_fecharesolucion="<?php echo $rep_fecharesolucion?>" data-codigo_resolucion="<?php echo $rep_resolucion;?>"><?php echo $nombre_ordenadores?></option>              
+                            <option value="<?php echo  $res_codigo; ?>" data-codigo_ordenador="<?php echo  $res_codigo; ?>" data-codigo_fecharesolucion="<?php echo $rep_fecharesolucion;?>" data-codigo_resolucion="<?php echo $rep_resolucion;?>"><?php echo $nombre_ordenadores; ?></option>              
                             
                         <?php
                             }  

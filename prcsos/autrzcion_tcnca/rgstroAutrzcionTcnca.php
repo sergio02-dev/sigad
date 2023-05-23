@@ -11,6 +11,29 @@
             $this->codigo_autorizaciontecnica = date('YmdHis').rand(99,999);
         }
 
+        public function list_autorizadores_registro($codigo_accion){
+
+            $sql_list_autorizadores_registro="SELECT DISTINCT res_nivel, vin_persona, vin_codigo, 
+                                                     per_nombre, per_correo, per_primerapellido
+                                                FROM usco.responsable,usco.vinculacion, principal.persona 
+                                               WHERE res_codigocargo = vin_cargo
+                                                 AND res_codigooficina = vin_oficina
+                                                 AND vin_persona = per_codigo
+                                                 AND vin_estado = 1
+                                                 AND res_estado = 1
+                                                 AND res_nivel = 3
+                                                 AND res_tiporesponsable = 3
+                                                 AND res_clasificacion = 3
+                                                 AND res_codigonivel = $codigo_accion";
+    
+            $query_list_autorizadores_registro=$this->cnxion->ejecutar($sql_list_autorizadores_registro);
+    
+            while($data_list_autorizadores_registro=$this->cnxion->obtener_filas($query_list_autorizadores_registro)){
+                $datalist_autorizadores_registro[]=$data_list_autorizadores_registro;
+            }
+            return $datalist_autorizadores_registro;
+        }
+
         public function codigo_autorizacion_clasificador(){
 
             $sql_codigo_autorizacion_clasificador="SELECT MAX(ascl_codigo) AS cdgo

@@ -103,8 +103,9 @@
     $registrosolicitudcdp->setObjeto($txtObjetoCDP);
     $registrosolicitudcdp->setConsecutivo($txtnumero);
 
+    $numero_solicitud = $registrosolicitudcdp->insertSolicitud();
+    include('ntfcar_tcnca_slctud.php');
 
-
-    echo $registrosolicitudcdp->insertSolicitud();
+    echo $numero_solicitud;
     
 ?>

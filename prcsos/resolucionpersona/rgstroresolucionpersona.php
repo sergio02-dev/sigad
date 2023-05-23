@@ -25,7 +25,7 @@ class RgstroResolucionPersona extends ResolucionPersona {
                                                             rep_fechamodifico)
                                                     VALUES (".$this->codigo_resolucion_persona.",
                                                             ".$this->getPersona().",
-                                                            ".$this->getCodigoResolucion().",
+                                                            '".$this->getCodigoResolucion()."',
                                                             '".$this->getFecha()."',
                                                             ".$this->getEstado().",
                                                             ".$this->getPersonaSistema().",

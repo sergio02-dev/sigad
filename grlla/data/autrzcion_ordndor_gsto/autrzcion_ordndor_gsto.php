@@ -57,7 +57,12 @@
                 {
                     data: null, 
                     render: function (data, type, full, meta){
-                        return '<div class="d-inline-block"><i class="fas fa-check fa-lg color_icono" title="Autorización Financiera" style="display:<?php echo $visibilidad; ?>;" onclick="autorizacion(\''+full["scdp_codigo"]+'\');"></i></div>';
+                        if(full["ver_aprobar"] == 1){
+                            return '<div class="d-inline-block"><i class="fas fa-check fa-lg color_icono" title="Autorización Financiera" style="display:<?php echo $visibilidad; ?>;" onclick="autorizacion(\''+full["scdp_codigo"]+'\');"></i></div>';
+                        }
+                        else{
+                            return '<div class="d-inline-block"><i class="fas fa-file-pdf  fa-lg" title="Reporte solicitud  cdp" style="display: '+full["validar_aprobacion"]+'; color:#B92109;" onclick="rprte_solicitudcdp(\''+full["scdp_codigo"]+'\');"></i></div>';
+                        }
                     }
                 },
                 /*{
@@ -142,6 +147,11 @@
                 $(".modal-content").empty().append(message);
             }
         });
+    }
+
+	function rprte_solicitudcdp(codigo_cdp){
+        var codigo_cdp = codigo_cdp
+        window.open('pdfsolicitudcdp?codigo_cdp='+codigo_cdp); 
     }
 
 </script>

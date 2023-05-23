@@ -9,15 +9,8 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-$necesita_autorizacion_tecnica = $registrosolicitudcdp->necesita_autorizacion_tecnica($selAccion);
-if($necesita_autorizacion_tecnica > 0){
-    $list_personas_autorizacion = $registrosolicitudcdp->list_autorizadores_tecnicos($selAccion);
-    $tipo = "Tecnica";
-}
-else{
-    $list_personas_autorizacion = $registrosolicitudcdp->list_autorizadores_registro($selAccion);
-    $tipo = "del Responsable del registro";
-}
+$list_personas_autorizacion = $registroautorizacionresponsableaccion->list_autorizacion_financiera($codigo_accion);
+$tipo = "Financiera";
 
 if($list_personas_autorizacion){
     foreach ($list_personas_autorizacion as $dta_info) {

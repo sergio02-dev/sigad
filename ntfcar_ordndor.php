@@ -9,15 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-$necesita_autorizacion_tecnica = $registrosolicitudcdp->necesita_autorizacion_tecnica($selAccion);
-if($necesita_autorizacion_tecnica > 0){
-    $list_personas_autorizacion = $registrosolicitudcdp->list_autorizadores_tecnicos($selAccion);
-    $tipo = "Tecnica";
-}
-else{
-    $list_personas_autorizacion = $registrosolicitudcdp->list_autorizadores_registro($selAccion);
-    $tipo = "del Responsable del registro";
-}
+$list_personas_autorizacion = $registroautorizacionordenadorgasto->list_autorizacion_ordenador($codigo_accion);
 
 if($list_personas_autorizacion){
     foreach ($list_personas_autorizacion as $dta_info) {
@@ -43,7 +35,7 @@ if($list_personas_autorizacion){
             $mail->addReplyTo($per_correo, $nombre_usuario);
             $mail->addAddress($per_correo, $nombre_usuario);
             
-            $mensaje = "Tiene una nueva solicitud pendiente de aprobación ".$tipo." ".$numero_solicitud;
+            $mensaje = "Tiene una nueva solicitud pendiente de aprobación del ordenador ".$numero_solicitud;
             
             $mensaje_enviar = $mensaje;
             

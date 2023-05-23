@@ -27,6 +27,7 @@ class RsAutrzcionTcnca extends AutorizacionTecnica{
 
         return $pde_codigo;
     }
+    
     public function list_solicitudes(){
 
         $ultimo_plan = $this->ultimo_plan();

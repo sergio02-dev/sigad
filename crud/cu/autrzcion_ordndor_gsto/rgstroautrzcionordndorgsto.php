@@ -4,11 +4,13 @@
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
     $actvddes = $_REQUEST['codigo_actividad'];
     $personaSistema = $_SESSION['idusuario'];
+    $numero_solicitud = $_REQUEST['numero_solicitud'];
+    $codigo_accion = $_REQUEST['scdp_accion'];
 
     $array_datos = array();
 
     $numero_actividades = count($actvddes);
-
+    $num_validar = 0;
     for ($dtos_autrzacion=0; $dtos_autrzacion < $numero_actividades; $dtos_autrzacion++) { 
         $codigo_actividad = $actvddes[$dtos_autrzacion];
         $etapas = $_REQUEST['codigo_etapa'.$codigo_actividad];
@@ -28,6 +30,7 @@
 
                     if($dto_aprovacion){
                         $codigo_aprobacion = 1;
+                        $v++;
                     }
                     else{
                         $codigo_aprobacion = 0;

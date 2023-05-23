@@ -266,11 +266,21 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
                                                     'descripcion_accion'=> $descripcion_accion,
                                                     'valor_cdp'=> "$ ".number_format($suma_valor_solicitud,0,'','.'),
                                                     'nombre_fuente'=> $fntes,
-                                                    'scdp_proceso'=> $scdp_proceso
+                                                    'scdp_proceso'=> $scdp_proceso,
+                                                    'ver_aprobar' => 1,
                                                 );
                         }
                         else{
-                            
+                            $rsAutrzcion[] = array('scdp_codigo'=> $scdp_codigo, 
+                                                    'scdp_fecha'=> $scdp_fecha, 
+                                                    'scdp_numero'=> $numero_solicitudCDP,
+                                                    'scdp_accion' => $scdp_accion,
+                                                    'descripcion_accion'=> $descripcion_accion,
+                                                    'valor_cdp'=> "$ ".number_format($suma_valor_solicitud,0,'','.'),
+                                                    'nombre_fuente'=> $fntes,
+                                                    'scdp_proceso'=> $scdp_proceso,
+                                                    'ver_aprobar' => 0,
+                                                );
                         }
                         
                     }

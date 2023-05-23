@@ -411,7 +411,6 @@ class RgstroSolicitudCdp extends SolicitudCdp{
         return array($rep_resolucion,$rep_fecharesolucion);
  
     }
-
     
     /*public function numeroConsecutivo($codigo_solicitudcdp){
        
@@ -453,9 +452,6 @@ class RgstroSolicitudCdp extends SolicitudCdp{
     }
 */
     
-
-
-
     public function insertSolicitud(){
         $this->scdp_numero = date('Y');
 
@@ -648,5 +644,71 @@ class RgstroSolicitudCdp extends SolicitudCdp{
     
         return $numero_solicitudCDP;
     }
+
+    public function necesita_autorizacion_tecnica($codigo_accion){
+
+        $sql_necesita_autorizacion_tecnica="SELECT COUNT(*) AS need_authorization
+                                              FROM usco.responsable
+                                             WHERE res_estado = 1
+                                               AND res_nivel = 3
+                                               AND res_tiporesponsable = 3
+                                               AND res_clasificacion = 1
+                                               AND res_codigonivel = $codigo_accion";
+
+        $query_necesita_autorizacion_tecnica=$this->cnxion->ejecutar($sql_necesita_autorizacion_tecnica);
+
+        $data_necesita_autorizacion_tecnica=$this->cnxion->obtener_filas($query_necesita_autorizacion_tecnica);
+
+        $need_authorization = $data_necesita_autorizacion_tecnica['need_authorization'];
+
+        return $need_authorization;
+    }
+
+    public function list_autorizadores_tecnicos($codigo_accion){
+
+        $sql_list_autorizadores_tecnicos="SELECT DISTINCT res_nivel, vin_persona, vin_codigo, 
+                                                 per_nombre, per_correo, per_primerapellido
+                                            FROM usco.responsable,usco.vinculacion, principal.persona 
+                                           WHERE res_codigocargo = vin_cargo
+                                             AND res_codigooficina = vin_oficina
+                                             AND vin_persona = per_codigo
+                                             AND vin_estado = 1
+                                             AND res_estado = 1
+                                             AND res_nivel = 3
+                                             AND res_tiporesponsable = 3
+                                             AND res_clasificacion = 1
+                                             AND res_codigonivel = $codigo_accion";
+
+        $query_list_autorizadores_tecnicos=$this->cnxion->ejecutar($sql_list_autorizadores_tecnicos);
+
+        while($data_list_autorizadores_tecnicos=$this->cnxion->obtener_filas($query_list_autorizadores_tecnicos)){
+            $datalist_autorizadores_tecnicos[]=$data_list_autorizadores_tecnicos;
+        }
+        return $datalist_autorizadores_tecnicos;
+    }
+
+    public function list_autorizadores_registro($codigo_accion){
+
+        $sql_list_autorizadores_registro="SELECT DISTINCT res_nivel, vin_persona, vin_codigo, 
+                                                 per_nombre, per_correo, per_primerapellido
+                                            FROM usco.responsable,usco.vinculacion, principal.persona 
+                                           WHERE res_codigocargo = vin_cargo
+                                             AND res_codigooficina = vin_oficina
+                                             AND vin_persona = per_codigo
+                                             AND vin_estado = 1
+                                             AND res_estado = 1
+                                             AND res_nivel = 3
+                                             AND res_tiporesponsable = 3
+                                             AND res_clasificacion = 3
+                                             AND res_codigonivel = $codigo_accion";
+
+        $query_list_autorizadores_registro=$this->cnxion->ejecutar($sql_list_autorizadores_registro);
+
+        while($data_list_autorizadores_registro=$this->cnxion->obtener_filas($query_list_autorizadores_registro)){
+            $datalist_autorizadores_registro[]=$data_list_autorizadores_registro;
+        }
+        return $datalist_autorizadores_registro;
+    }
+
 }
 ?>

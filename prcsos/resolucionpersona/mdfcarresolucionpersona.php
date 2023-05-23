@@ -13,7 +13,7 @@ class MdfcarResolucionPersona  extends ResolucionPersona{
         
         $sql_updateResolucionPersona="UPDATE usco.resolucion_persona
                                          SET rep_persona=".$this->getPersona().",      
-                                             rep_resolucion=".$this->getCodigoResolucion().", 
+                                             rep_resolucion='".$this->getCodigoResolucion()."', 
                                              rep_fecharesolucion='".$this->getFecha()."', 
                                              rep_estado=".$this->getEstado().", 
                                              rep_personamodifico=".$this->getPersonaSistema().",  

@@ -1,6 +1,6 @@
 <?php
     include('crud/rs/autrzcion_rspnsble_accion/autrzcion_rspnsble_accion.php');
-    //include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
+    include('crud/rs/solicitud_cdp/jclsfcdoreslinix.php'); 
 
     $codigo_solicitud = $_REQUEST['codigo_solicitud'];
 
@@ -48,6 +48,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        <input type="hidden" name="scdp_accion" id="scdp_accion" value="<?php echo $scdp_accion; ?>">
+        <input type="hidden" name="numero_solicitud" id="numero_solicitud" value="<?php echo $numero_solicitudCDP; ?>">
     </div>
     <div class="modal-body">
         <div class="row">
@@ -114,8 +116,8 @@
                                             $esc_valor = $dta_clsfcdres['esc_valor'];
                                             $esc_dane = $dta_clsfcdres['esc_dane'];
 
-                                            //list($nombre, $numero) = $objConsultaLinix->nmbre_clsfcdor($esc_clasificador);
-                                            list($nombre, $numero) = $objAutorizacionResponsableAccion->nmbre_clsfcdor($esc_clasificador);
+                                            list($nombre, $numero) = $objConsultaLinix->nmbre_clsfcdor($esc_clasificador);
+                                            //list($nombre, $numero) = $objAutorizacionResponsableAccion->nmbre_clsfcdor($esc_clasificador);
                                             
                         ?>
                         <tr>

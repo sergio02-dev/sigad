@@ -32,6 +32,29 @@
             return $cdigo;
         }
         
+        public function list_autorizacion_financiera($codigo_accion){
+
+            $sql_list_autorizacion_financiera="SELECT DISTINCT res_nivel, vin_persona, vin_codigo, 
+                                                     per_nombre, per_correo, per_primerapellido
+                                                FROM usco.responsable,usco.vinculacion, principal.persona 
+                                               WHERE res_codigocargo = vin_cargo
+                                                 AND res_codigooficina = vin_oficina
+                                                 AND vin_persona = per_codigo
+                                                 AND vin_estado = 1
+                                                 AND res_estado = 1
+                                                 AND res_nivel = 3
+                                                 AND res_tiporesponsable = 3
+                                                 AND res_clasificacion = 2
+                                                 AND res_codigonivel = $codigo_accion";
+    
+            $query_list_autorizacion_financiera=$this->cnxion->ejecutar($sql_list_autorizacion_financiera);
+    
+            while($data_list_autorizacion_financiera=$this->cnxion->obtener_filas($query_list_autorizacion_financiera)){
+                $datalist_autorizacion_financiera[]=$data_list_autorizacion_financiera;
+            }
+            return $datalist_autorizacion_financiera;
+        }
+
         public function insert_autorizacion_rspnsble_accion(){
             
             $sql_insert_autorizacion_rspnsble_accion="INSERT INTO cdp.aprovacion_solicitud(
