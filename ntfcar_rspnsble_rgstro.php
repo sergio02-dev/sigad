@@ -30,17 +30,15 @@ if($list_personas_autorizacion){
             $mail->Host = 'ssl://smtp.gmail.com';
             $mail->Port = 465;
             $mail->SMTPAuth = true;
-            $mail->Username = 'karenpalacio331@gmail.com';
-            $mail->Password = 'jxizlujienzifylt';
-            $mail->setFrom('karenpalacio331@gmail.com', 'NOTIFICACIONES SIGAD');
+            $mail->Username = 'sigad@usco.edu.co';
+            $mail->Password = 'S1g4dUsc0.,';
+            $mail->setFrom('sigad@usco.edu.co', 'NOTIFICACIONES SIGAD');
             $mail->addReplyTo($per_correo, $nombre_usuario);
             $mail->addAddress($per_correo, $nombre_usuario);
             
             $mensaje = "Tiene una nueva solicitud pendiente de aprobación ".$tipo." ".$numero_solicitud;
             
             $mensaje_enviar = $mensaje;
-            
-            //jxizlujienzifylt ----- mi correo
             
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'NOTIFICACIÓN SIGAD';
