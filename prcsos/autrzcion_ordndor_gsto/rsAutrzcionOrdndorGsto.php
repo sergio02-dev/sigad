@@ -202,6 +202,27 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
         return $valor_cdp;
     }
 
+    public function suma_valorsolicitud($codigo_solicitud){
+
+        $sql_suma_valor_solicitud="SELECT SUM(esc_valor) AS valor_cdp
+                                     FROM cdp.etapa_solicitud_clasificador
+                                    WHERE esc_solicitud = $codigo_solicitud
+                                      AND esc_codigo IN(SELECT DISTINCT ascl_etapasolicitudclasificador 
+                                                          FROM cdp.aprovacion_solicitud
+                                                         INNER JOIN cdp.aprovacion_solicitud_clasificador ON asol_codigo = ascl_aprovacionsolicitud
+                                                         WHERE asol_clasificacion = 4
+                                                           AND ascl_aprovacion = 1
+                                                           AND asol_solicitud = $codigo_solicitud);";
+
+        $query_suma_valor_solicitud=$this->cnxion->ejecutar($sql_suma_valor_solicitud);
+
+        $data_suma_valor_solicitud=$this->cnxion->obtener_filas($query_suma_valor_solicitud);
+
+        $valor_cdp = $data_suma_valor_solicitud['valor_cdp'];
+
+        return $valor_cdp;
+    }
+
     public function datListSolicitudes(){
         $rs_solicitudes = $this->list_solicitudes();
         $rsAutrzcion = array();
@@ -214,7 +235,7 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
                 $scdp_consecutivo = $dta_solicitud['scdp_consecutivo'];
                 $scdp_proceso = $dta_solicitud['scdp_proceso'];
 
-                $suma_valor_solicitud = $this->suma_valor_solicitud($scdp_codigo);
+               
 
                 $descripcion_accion = $this->descripcion_accion($scdp_accion);
 
@@ -259,6 +280,7 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
                     if($validar_aprovacion_solicitud > 0){
                         $autorizacion_ordenador_gasto = $this->autorizacion_ordenador_gasto($scdp_codigo);
                         if($autorizacion_ordenador_gasto == 0){
+                            $suma_valor_solicitud = $this->suma_valor_solicitud($scdp_codigo);
                             $rsAutrzcion[] = array('scdp_codigo'=> $scdp_codigo, 
                                                     'scdp_fecha'=> $scdp_fecha, 
                                                     'scdp_numero'=> $numero_solicitudCDP,
@@ -271,6 +293,8 @@ class RsAutrzcionOrdndorGsto extends AutorizacionOrdenadorGasto{
                                                 );
                         }
                         else{
+                            $suma_valor_solicitud = $this->suma_valorsolicitud($scdp_codigo);
+                            
                             $rsAutrzcion[] = array('scdp_codigo'=> $scdp_codigo, 
                                                     'scdp_fecha'=> $scdp_fecha, 
                                                     'scdp_numero'=> $numero_solicitudCDP,

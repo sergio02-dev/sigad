@@ -37,14 +37,14 @@ class Dtbs{
       if (!(self::$_instance instanceof self)){
          self::$_instance=new self();
       }
-         return self::$_instance;
+      return self::$_instance;
    }
 
    /*Realiza la conexión a la base de datos. */
    private function conectar(){
       $this->link_cnxn=pg_connect("host=".$this->servidor." port=5432 password=".$this->password." user=".$this->usuario." dbname=".$this->base_datos." ");
 		if(!$this->link_cnxn){
-					echo "No se puede establecer la conexión con Base de datos";
+			echo "No se puede establecer la conexión con Base de datos";
 		}
    }
 

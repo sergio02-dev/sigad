@@ -1276,8 +1276,8 @@ Class RsSolicitudCdp extends SolicitudCdp{
             $res_codigocargo = 0;
         }
         else{
-            $res_codigooficina= $data_resolucionPersona['res_codigooficina'];
-            $res_codigocargo = $data_resolucionPersona['res_codigocargo'];
+            $res_codigooficina= $data_vinculacion['res_codigooficina'];
+            $res_codigocargo = $data_vinculacion['res_codigocargo'];
         }
 
         $sql_resolucionOrdenador = "SELECT rep_fecharesolucion, rep_resolucion, 

@@ -181,117 +181,6 @@
             return $dataactividadPoai;
         }
 
-        public function sede_indicar($codigo_indicador){
-    
-            $sql_sede_indicar="SELECT ind_codigo, ind_sede, sed_nombre
-                                 FROM plandesarrollo.indicador
-                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                WHERE ind_codigo = $codigo_indicador;";
-    
-            $resultado_sede_indicar=$this->cnxion->ejecutar($sql_sede_indicar);
-    
-            $data_sede_indicar = $this->cnxion->obtener_filas($resultado_sede_indicar);
-    
-            $sed_nombre = $data_sede_indicar['sed_nombre'];
-    
-            return $sed_nombre;
-        }
-
-        public function list_sdes_indcdor($codigo_actividad){
-
-            $sql_list_sdes_indcdor="SELECT DISTINCT ind_sede, sed_nombre
-                                      FROM planaccion.actividad_indicador
-                                     INNER JOIN plandesarrollo.indicador ON ain_indicador = ind_codigo
-                                     INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                     WHERE ain_estado = 1
-                                       AND ain_actividad = $codigo_actividad;";
-    
-            $resultado_list_sdes_indcdor=$this->cnxion->ejecutar($sql_list_sdes_indcdor);
-    
-            while ($data_list_sdes_indcdor = $this->cnxion->obtener_filas($resultado_list_sdes_indcdor)){
-                $datalist_sdes_indcdor[] = $data_list_sdes_indcdor;
-            }
-            return $datalist_sdes_indcdor;
-        }
-
-        public function indcdor_actvdad_sede($codigo_actividad, $codigo_sede){
-
-            $sql_indcdor_actvdad_sede="SELECT ain_indicador, ind_sede, sed_nombre
-                                         FROM planaccion.actividad_indicador
-                                        INNER JOIN plandesarrollo.indicador ON ain_indicador = ind_codigo
-                                        INNER JOIN principal.sedes ON ind_sede = sed_codigo
-                                        WHERE ain_estado = 1
-                                          AND ain_actividad = $codigo_actividad
-                                          AND ind_sede = $codigo_sede;";
-    
-            $resultado_indcdor_actvdad_sede=$this->cnxion->ejecutar($sql_indcdor_actvdad_sede);
-    
-            $numo_dta = 1;
-            $codigos_indcdres = '';
-            $contdor = $this->cnxion->numero_filas($resultado_indcdor_actvdad_sede);
-            if($contdor > 0){
-                while ($data_indcdor_actvdad_sede = $this->cnxion->obtener_filas($resultado_indcdor_actvdad_sede)){
-                    $codgos_indcdres = $data_indcdor_actvdad_sede['ain_indicador'];
-
-                    if($numo_dta == $contdor){
-                        $coma = "";
-                    }
-                    else{
-                        $coma = ",";
-                    }
-                    $codigos_indcdres = $codigos_indcdres.$codgos_indcdres.$coma;
-
-                    $numo_dta++;
-                }
-            }
-            return $codigos_indcdres;
-        }
-
-        public function list_actvdad($codigo_accion, $vigencia){
-            $arrayActvdades = array();
-            $lst_ativities = $this->actividadPoai($codigo_accion, $vigencia);
-            if($lst_ativities){
-                foreach ($lst_ativities as $dat_ativity) {
-                    $acp_codigo = $dat_ativity['acp_codigo'];
-                    $acp_referencia = $dat_ativity['acp_referencia'];
-                    $acp_numero = $dat_ativity['acp_numero'];
-                    $acp_descripcion = $dat_ativity['acp_descripcion'];
-                    $acp_sedeindicador = $dat_ativity['acp_sedeindicador'];
-
-                    $desc_actividad = $acp_referencia.".".$acp_numero." ".$acp_descripcion;
-
-                    if($acp_sedeindicador > 0){
-                        $nombre_sede = $this->sede_indicar($acp_sedeindicador);
-
-                        $arrayActvdades[] = array('codigo_actividad'=> $acp_codigo,
-                                                  'descripcion'=> $desc_actividad,
-                                                  'nombre_sede'=> $nombre_sede,
-                                                  'codigo_indicador'=> $acp_sedeindicador
-                                                );
-                    }
-                    else{
-                        $lta_sdes = $this->list_sdes_indcdor($acp_codigo);
-                        if($lta_sdes){
-                            foreach ($lta_sdes as $dat_seds_indic) {
-                                $ind_sede = $dat_seds_indic['ind_sede'];
-                                $sed_nombre = $dat_seds_indic['sed_nombre'];
-
-                                $codigo_indicador = $this->indcdor_actvdad_sede($acp_codigo, $ind_sede);
-
-                                $arrayActvdades[] = array('codigo_actividad'=> $acp_codigo,
-                                                          'descripcion'=> $desc_actividad,
-                                                          'nombre_sede'=> $sed_nombre,
-                                                          'codigo_indicador'=> $codigo_indicador
-                                                        );
-
-                            }
-                        }
-                    }
-                }
-            }
-            return $arrayActvdades;
-        }
-
         public function etapas($codigo_actividad){
 
             $sql_etapas="SELECT poa_codigo, poa_referencia, 
@@ -308,7 +197,21 @@
             return $dataetapas;
         }
 
-        
+        public function sede_indicar($codigo_indicador){
+    
+            $sql_sede_indicar="SELECT ind_codigo, ind_sede, sed_nombre
+                                 FROM plandesarrollo.indicador
+                                INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                                WHERE ind_codigo = $codigo_indicador;";
+    
+            $resultado_sede_indicar=$this->cnxion->ejecutar($sql_sede_indicar);
+    
+            $data_sede_indicar = $this->cnxion->obtener_filas($resultado_sede_indicar);
+    
+            $sed_nombre = $data_sede_indicar['sed_nombre'];
+    
+            return $sed_nombre;
+        }
 
         public function fuentes_vigencia_accion($codigo_accion, $vigencia_actividad){
 
@@ -551,23 +454,6 @@
             }
             return $valor_asignado_accion;
         }
-
-        public function num_actvddes($codigo_accion){
-
-            $sql_num_actvddes="SELECT COUNT(*) AS num_data
-                                 FROM planaccion.actividad_poai
-                                WHERE acp_estado = '1'
-                                  AND acp_accion = $codigo_accion;";
-    
-            $query_num_actvddes=$this->cnxion->ejecutar($sql_num_actvddes);
-    
-            $data_num_actvddes=$this->cnxion->obtener_filas($query_num_actvddes);
-    
-            $num_data = $data_num_actvddes['num_data'];
-    
-            return $num_data;
-        }
-
 
         
     }

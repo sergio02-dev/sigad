@@ -213,207 +213,205 @@ if($Subsistemas){//If Subsistema
                         $acc_responsable = $dat_acciones['acc_responsable'];
                         $acc_proyecto = $dat_acciones['acc_proyecto'];
 
-                        $objPHPExcel->setActiveSheetIndex($numero_registro)
-                        ->setCellValueExplicit('A'.$num, '' ,PHPExcel_Cell_DataType::TYPE_STRING)
-                        ->setCellValue('B'.$num, '');
+                        $num_actvddes = $reportepoaietapa->num_actvddes($acc_codigo);
+                        if($num_actvddes > 0){
 
-                        /************* NOMBRES DE LAS FUENTES DE FINANCIACIÓN *************/
-                        $numeroletasaumenta = 67;
-                        $numeroletrauno = 67;
-                        $numeroletrados = 64;
+                            $objPHPExcel->setActiveSheetIndex($numero_registro)
+                            ->setCellValueExplicit('A'.$num, '' ,PHPExcel_Cell_DataType::TYPE_STRING)
+                            ->setCellValue('B'.$num, '');
 
-                        $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
-                        if($list_fuente_financiacion){
-                            foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
-                                $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
-                                $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
-                                $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
-                                $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
+                            /************* NOMBRES DE LAS FUENTES DE FINANCIACIÓN *************/
+                            $numeroletasaumenta = 67;
+                            $numeroletrauno = 67;
+                            $numeroletrados = 64;
 
-                                if($numeroletasaumenta>90){//si es mayor a 90 
-                                    if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
-                                        $numeroletrauno=65;
-                                        $numeroletrados++;
-                                    }
-                                    else{//Si no que siga aumentando
-                                        $numeroletrauno++;
-                                    }//cierre else
-                                    $letra=chr($numeroletrados).''.chr($numeroletrauno);
-                                }//fin si primera condicion
-                                else{//Sino Primera condicion
-                                    $letra=chr($numeroletasaumenta);
-                                    $numeroletrauno++;
-                                }
+                            $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
+                            if($list_fuente_financiacion){
+                                foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
+                                    $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
+                                    $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
+                                    $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
+                                    $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
 
-                                $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                ->setCellValue($letra.$num, str_replace('INV -','',$nombre_fuente)." ".$vigencia_recurso);
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($styleFuenteLetra);
-                                
-                                $numeroletasaumenta++;
-                            }
-                        }
-
-                        $num++;
-
-                        $objPHPExcel->setActiveSheetIndex($numero_registro)
-                        ->setCellValue('A'.$num, '')
-                        ->setCellValue('B'.$num, 'POAI');
-
-                        $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num)->applyFromArray($styleFuenteLetra);
-
-                        /************* RECURSOS DE LAS FUENTES DE FINANCIACIÓN *************/
-                        $numeroletasaumenta = 67;
-                        $numeroletrauno = 67;
-                        $numeroletrados = 64;
-
-                        $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
-                        if($list_fuente_financiacion){
-                            foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
-                                $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
-                                $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
-                                $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
-                                $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
-
-                                if($numeroletasaumenta>90){//si es mayor a 90 
-                                    if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
-                                        $numeroletrauno=65;
-                                        $numeroletrados++;
-                                    }
-                                    else{//Si no que siga aumentando
-                                        $numeroletrauno++;
-                                    }//cierre else
-                                    $letra=chr($numeroletrados).''.chr($numeroletrauno);
-                                }//fin si primera condicion
-                                else{//Sino Primera condicion
-                                    $letra=chr($numeroletasaumenta);
-                                    $numeroletrauno++;
-                                }
-
-                                $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                ->setCellValue($letra.$num, $recurso_disponible);
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
-
-                                $numeroletasaumenta++;
-                            }
-                        }
-
-                        $num++;
-                        
-                        $actividadPoai = $reportepoaietapa->actividadPoai($acc_codigo, $vigencia);
-                        if($actividadPoai){
-                            foreach ($actividadPoai as $dat_actvdad) {
-                                $acp_codigo = $dat_actvdad['acp_codigo'];
-                                $acp_referencia = $dat_actvdad['acp_referencia'];
-                                $acp_numero = $dat_actvdad['acp_numero'];
-                                $acp_descripcion = $dat_actvdad['acp_descripcion'];
-                                $acp_sedeindicador = $dat_actvdad['acp_sedeindicador'];
-
-                                $sede_indicar = $reportepoaietapa->sede_indicar($acp_sedeindicador);
-
-                                $desc_actividad = $acp_referencia.".".$acp_numero." ".$acp_descripcion;
-
-                                $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                ->setCellValue('A'.$num, $desc_actividad);
-
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".$num)->applyFromArray($colorHoja);
-
-                                $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                ->setCellValue('B'.$num, $sede_indicar);
-
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num)->applyFromArray($colorHoja);
-
-
-                                /************* RECURSOS DE LAS FUENTES DE FINANCIACIÓN *************/
-                                $numeroletasaumenta = 67;
-                                $numeroletrauno = 67;
-                                $numeroletrados = 64;
-
-                                $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
-                                if($list_fuente_financiacion){
-                                    foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
-                                        $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
-                                        $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
-                                        $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
-
-                                        if($numeroletasaumenta>90){//si es mayor a 90 
-                                            if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
-                                                $numeroletrauno=65;
-                                                $numeroletrados++;
-                                            }
-                                            else{//Si no que siga aumentando
-                                                $numeroletrauno++;
-                                            }//cierre else
-                                            $letra=chr($numeroletrados).''.chr($numeroletrauno);
-                                        }//fin si primera condicion
-                                        else{//Sino Primera condicion
-                                            $letra=chr($numeroletasaumenta);
-                                            $numeroletrauno++;
+                                    if($numeroletasaumenta>90){//si es mayor a 90 
+                                        if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                                            $numeroletrauno=65;
+                                            $numeroletrados++;
                                         }
-
-                                        $valor_asignado_actividad = $reportepoaietapa->valor_asignado_actividad($acp_codigo, $codigo_fuente, $vigencia, $vigencia_recurso);
-
-                                        $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                        ->setCellValue($letra.$num, $valor_asignado_actividad);
-                                        $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
-                                        $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
-
-                                        $numeroletasaumenta++;
-                                    }
-                                }
-
-                                $num++;
-                            }
-                        }
-
-                        /********************************** TOTALES *********************************/
-                        $objPHPExcel->setActiveSheetIndex($numero_registro)
-                        ->setCellValue('A'.$num, '')
-                        ->setCellValue('B'.$num, '');
-
-                        $numeroletasaumenta = 67;
-                        $numeroletrauno = 67;
-                        $numeroletrados = 64;
-
-                        $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
-                        if($list_fuente_financiacion){
-                            foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
-                                $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
-                                $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
-                                $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
-                                $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
-
-                                if($numeroletasaumenta>90){//si es mayor a 90 
-                                    if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
-                                        $numeroletrauno=65;
-                                        $numeroletrados++;
-                                    }
-                                    else{//Si no que siga aumentando
+                                        else{//Si no que siga aumentando
+                                            $numeroletrauno++;
+                                        }//cierre else
+                                        $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                                    }//fin si primera condicion
+                                    else{//Sino Primera condicion
+                                        $letra=chr($numeroletasaumenta);
                                         $numeroletrauno++;
-                                    }//cierre else
-                                    $letra=chr($numeroletrados).''.chr($numeroletrauno);
-                                }//fin si primera condicion
-                                else{//Sino Primera condicion
-                                    $letra=chr($numeroletasaumenta);
-                                    $numeroletrauno++;
+                                    }
+
+                                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                    ->setCellValue($letra.$num, str_replace('INV -','',$nombre_fuente)." ".$vigencia_recurso);
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($styleFuenteLetra);
+                                    
+                                    $numeroletasaumenta++;
                                 }
-
-                                $valor_asignado_accion = $reportepoaietapa->valor_asignado_accion($acc_codigo, $codigo_fuente, $vigencia, $vigencia_recurso);
-
-                                $disponible = $recurso_disponible - $valor_asignado_accion;
-
-                                $objPHPExcel->setActiveSheetIndex($numero_registro)
-                                ->setCellValue($letra.$num, $disponible);
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
-                                $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
-
-                                $numeroletasaumenta++;
                             }
-                        }
 
-                        $num++;
-                        $num++;
-                        
+                            $num++;
+
+                            $objPHPExcel->setActiveSheetIndex($numero_registro)
+                            ->setCellValue('A'.$num, '')
+                            ->setCellValue('B'.$num, 'POAI');
+
+                            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num)->applyFromArray($styleFuenteLetra);
+
+                            /************* RECURSOS DE LAS FUENTES DE FINANCIACIÓN *************/
+                            $numeroletasaumenta = 67;
+                            $numeroletrauno = 67;
+                            $numeroletrados = 64;
+
+                            $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
+                            if($list_fuente_financiacion){
+                                foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
+                                    $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
+                                    $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
+                                    $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
+                                    $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
+
+                                    if($numeroletasaumenta>90){//si es mayor a 90 
+                                        if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                                            $numeroletrauno=65;
+                                            $numeroletrados++;
+                                        }
+                                        else{//Si no que siga aumentando
+                                            $numeroletrauno++;
+                                        }//cierre else
+                                        $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                                    }//fin si primera condicion
+                                    else{//Sino Primera condicion
+                                        $letra=chr($numeroletasaumenta);
+                                        $numeroletrauno++;
+                                    }
+
+                                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                    ->setCellValue($letra.$num, $recurso_disponible);
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                                    $numeroletasaumenta++;
+                                }
+                            }
+
+                            $num++;
+                            
+                            $actividadPoai = $reportepoaietapa->list_actvdad($acc_codigo, $vigencia);
+                            if($actividadPoai){
+                                foreach ($actividadPoai as $dat_actvdad) {
+                                    $acp_codigo = $dat_actvdad['codigo_actividad'];
+                                    $desc_actividad = $dat_actvdad['descripcion'];
+                                    $nombre_sede = $dat_actvdad['nombre_sede'];
+                                    $codigo_indicador = $dat_actvdad['codigo_indicador'];
+
+                                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                    ->setCellValue('A'.$num, $desc_actividad);
+
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".$num)->applyFromArray($colorHoja);
+
+                                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                    ->setCellValue('B'.$num, $nombre_sede);
+
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num)->applyFromArray($colorHoja);
+
+
+                                    /************* RECURSOS DE LAS FUENTES DE FINANCIACIÓN *************/
+                                    $numeroletasaumenta = 67;
+                                    $numeroletrauno = 67;
+                                    $numeroletrados = 64;
+
+                                    $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
+                                    if($list_fuente_financiacion){
+                                        foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
+                                            $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
+                                            $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
+                                            $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
+
+                                            if($numeroletasaumenta>90){//si es mayor a 90 
+                                                if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                                                    $numeroletrauno=65;
+                                                    $numeroletrados++;
+                                                }
+                                                else{//Si no que siga aumentando
+                                                    $numeroletrauno++;
+                                                }//cierre else
+                                                $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                                            }//fin si primera condicion
+                                            else{//Sino Primera condicion
+                                                $letra=chr($numeroletasaumenta);
+                                                $numeroletrauno++;
+                                            }
+
+                                            $valor_asignado_actividad = $reportepoaietapa->valor_asignado_actividad($acp_codigo, $codigo_fuente, $vigencia, $vigencia_recurso);
+
+                                            $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                            ->setCellValue($letra.$num, $valor_asignado_actividad);
+                                            $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
+                                            $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                                            $numeroletasaumenta++;
+                                        }
+                                    }
+
+                                    $num++;
+                                }
+                            }
+
+                            /********************************** TOTALES *********************************/
+                            $objPHPExcel->setActiveSheetIndex($numero_registro)
+                            ->setCellValue('A'.$num, '')
+                            ->setCellValue('B'.$num, '');
+
+                            $numeroletasaumenta = 67;
+                            $numeroletrauno = 67;
+                            $numeroletrados = 64;
+
+                            $list_fuente_financiacion = $reportepoaietapa->list_fuente_disponibilidad($acc_codigo, $vigencia);
+                            if($list_fuente_financiacion){
+                                foreach ($list_fuente_financiacion as $dta_lsta_fuente_financiacion) {
+                                    $codigo_fuente = $dta_lsta_fuente_financiacion['codigo_fuente'];
+                                    $vigencia_recurso = $dta_lsta_fuente_financiacion['vigencia_recurso'];
+                                    $nombre_fuente = $dta_lsta_fuente_financiacion['nombre_fuente'];
+                                    $recurso_disponible = $dta_lsta_fuente_financiacion['recurso_disponible'];
+
+                                    if($numeroletasaumenta>90){//si es mayor a 90 
+                                        if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                                            $numeroletrauno=65;
+                                            $numeroletrados++;
+                                        }
+                                        else{//Si no que siga aumentando
+                                            $numeroletrauno++;
+                                        }//cierre else
+                                        $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                                    }//fin si primera condicion
+                                    else{//Sino Primera condicion
+                                        $letra=chr($numeroletasaumenta);
+                                        $numeroletrauno++;
+                                    }
+
+                                    $valor_asignado_accion = $reportepoaietapa->valor_asignado_accion($acc_codigo, $codigo_fuente, $vigencia, $vigencia_recurso);
+
+                                    $disponible = $recurso_disponible - $valor_asignado_accion;
+
+                                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                                    ->setCellValue($letra.$num, $disponible);
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($datos_dinero);
+                                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                                    $numeroletasaumenta++;
+                                }
+                            }
+
+                            $num++;
+                            $num++;
+                        }
                     }
                 }
                 
