@@ -11,7 +11,8 @@
                                   sub_referencia, sub_ref, UPPER(pde_niveluno) as nivel_uno
                             FROM plandesarrollo.subsistema
                             INNER JOIN plandesarrollo.plan_desarrollo ON plandesarrollo.plan_desarrollo.pde_codigo = plandesarrollo.subsistema.pde_codigo
-                            WHERE plandesarrollo.plan_desarrollo.pde_codigo = $codigo_plan;";
+                            WHERE plandesarrollo.plan_desarrollo.pde_codigo = $codigo_plan
+                            ORDER BY sub_nombre ASC;";
 
       $query_list_subsistema=$this->cnxion->ejecutar($sql_list_subsistema);
 
