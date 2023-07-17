@@ -100,8 +100,8 @@
             </div>
             <div class="col-sm-5" >
                 <div class="form-group capa_acuerdo" style="display: <?php echo $capa_acuerdo; ?>" >
-                    <label for="selAcuerdo" class="font-weight-bold">Acuerdo *</label>
-                    <select name="selAcuerdo" id="selAcuerdo"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required <?php echo $disabled; ?> >
+                    <label for="selAcuerdo" class="font-weight-bold">Acuerdo </label>
+                    <select name="selAcuerdo" id="selAcuerdo"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true"  <?php echo $disabled; ?> >
                     <option value="0"> Seleccione ...</option>
                         <?php
                             foreach ($list_acuerdos as $dta_list_acuerdos) {

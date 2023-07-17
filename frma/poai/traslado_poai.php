@@ -140,7 +140,7 @@
                     <?php
                         if($codigo_traslado){
                     ?>
-                    <label for="selAcuerdo" class="font-weight-bold">Acuerdo *</label>
+                    <label for="selAcuerdo" class="font-weight-bold">Acto Administrativo *</label>
                     <select name="selAcuerdo" id="selAcuerdo"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
                     <option value="0" data-tipo_fuente="0"> Seleccione ...</option>
                         <?php
@@ -409,7 +409,6 @@
                 async:true,
 
                 success: function(message){
-                    alert('paso por acá');
                     $(".selectActoAdministrativo").empty().append(message);
                 }
             });
