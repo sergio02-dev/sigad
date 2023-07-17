@@ -103,7 +103,7 @@ function validar_traslados(){
         $("#error_valor").fadeOut('300');
     }
 
-    if(saldo > maximo_recursos){
+    if(parseFloat(saldo) > parseFloat(maximo_recursos)){
         $("#error_valor").fadeIn('300');
         $("#error_valor").html('El valor no puede ser mayor al disponible');
         document.getElementById("txtSaldo").focus();

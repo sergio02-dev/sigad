@@ -473,5 +473,160 @@ Class rprtePoaiActos{
     return $valor_subsistema_fuente;
   }
 
+  public function accion_descripcion($codigo_accion){
+
+    $sql_accion_descripcion="SELECT acc_codigo, acc_referencia, 
+                                    acc_descripcion, acc_numero
+                               FROM plandesarrollo.accion
+                              WHERE acc_codigo = $codigo_accion;";
+
+    $query_accion_descripcion=$this->cnxion->ejecutar($sql_accion_descripcion);
+
+    $data_accion_descripcion=$this->cnxion->obtener_filas($query_accion_descripcion);
+
+    $acc_referencia = $data_accion_descripcion['acc_referencia'];
+    $acc_numero = $data_accion_descripcion['acc_numero'];
+    $acc_descripcion = $data_accion_descripcion['acc_descripcion'];
+
+    $desc = $acc_referencia.".".$acc_numero." ".$acc_descripcion;
+
+    return $desc;
+  }
+
+  public function sede_indicador($codigo_indicador){
+
+    $sql_sede_indicador="SELECT ind_codigo, ind_unidadmedida,  
+                                ind_sede, sed_nombre
+                           FROM plandesarrollo.indicador
+                          INNER JOIN principal.sedes ON ind_sede = sed_codigo
+                          WHERE ind_codigo = $codigo_indicador;";
+
+    $query_sede_indicador=$this->cnxion->ejecutar($sql_sede_indicador);
+
+    $data_sede_indicador=$this->cnxion->obtener_filas($query_sede_indicador);
+
+    $ind_unidadmedida = $data_sede_indicador['ind_unidadmedida'];
+    $sed_nombre = $data_sede_indicador['sed_nombre'];
+
+    return array($sed_nombre, $ind_unidadmedida);
+  }
+
+  public function nombre_fuente($codigo_fuente){
+
+    $sql_nombre_fuente="SELECT ffi_codigo, ffi_nombre, ffi_descripcion
+                          FROM planaccion.fuente_financiacion
+                         WHERE ffi_codigo = $codigo_fuente;";
+
+    $query_nombre_fuente=$this->cnxion->ejecutar($sql_nombre_fuente);
+
+    $data_nombre_fuente=$this->cnxion->obtener_filas($query_nombre_fuente);
+
+    $ffi_nombre = $data_nombre_fuente['ffi_nombre'];
+
+    return  str_replace('INV -','',$ffi_nombre);
+  }
+
+  public function trslddo_de($codigo_recurso){
+
+    $sql_trslddo_de="SELECT poav_codigo AS codigo_recurso, 
+                            poav_recurso AS valor_recurso, 
+                            poav_vigencia AS codigo_vigencia, 
+                            poav_fuentefinanciacion AS codigo_fuente, 
+                            poav_indicador AS codigo_indicador,
+                            poav_accion AS codigo_accion, 
+                            poav_vigencia AS vigencia_poai
+                       FROM planaccion.poai_veinte_veintidos
+                      WHERE poav_codigo = $codigo_recurso 
+                    UNION   
+                    SELECT apoai_codigo AS codigo_recurso, 
+                            apoai_valor AS valor_recurso,
+                            sff_vigencia AS codigo_vigencia, 
+                            sff_fuente AS codigo_fuente,
+                            poav_indicador AS codigo_indicador,
+                            poav_accion AS codigo_accion,
+                            poav_vigencia AS vigencia_poai
+                      FROM planaccion.poai_veinte_veintidos
+                    INNER JOIN planaccion.adicion_poai ON poav_codigo = apoai_poai
+                    INNER JOIN planaccion.saldos_fuente_financiacion ON apoai_saldo = sff_codigo
+                    WHERE apoai_estado = 1
+                      AND apoai_codigo = $codigo_recurso;";
+
+    $query_trslddo_de=$this->cnxion->ejecutar($sql_trslddo_de);
+
+    while($data_trslddo_de=$this->cnxion->obtener_filas($query_trslddo_de)){
+      $datatrslddo_de[]=$data_trslddo_de;
+    }
+    return $datatrslddo_de;
+  }
+
+  public function traslados_plan($codigo_plan, $codigo_acuerdo){
+
+    $sql_traslados_plan="SELECT tpo_codigo, tpo_poai, tpo_accion, 
+                                tpo_codigorecuerso, tpo_valor, 
+                                tpo_acuerdo, tpo_sede, 
+                                tpo_indicador, tpo_estado, 
+                                acc_referencia, acc_numero,
+                                acc_descripcion
+                          FROM planaccion.traslados_poai
+                          INNER JOIN plandesarrollo.accion ON tpo_accion = acc_codigo
+                          INNER JOIN plandesarrollo.proyecto ON acc_proyecto = pro_codigo
+                          INNER JOIN plandesarrollo.subsistema ON plandesarrollo.proyecto.sub_codigo = plandesarrollo.subsistema.sub_codigo
+                          WHERE tpo_estado = 1
+                            AND pde_codigo = $codigo_plan
+                            AND tpo_acuerdo = $codigo_acuerdo";
+
+    $query_traslados_plan=$this->cnxion->ejecutar($sql_traslados_plan);
+
+    while($data_traslados_plan= $this->cnxion->obtener_filas($query_traslados_plan)){
+      $datatraslados_plan[] = $data_traslados_plan;
+    }
+    return $datatraslados_plan;
+  }
+  
+  public function lista_traslados_plan($codigo_plan, $codigo_acuerdo){
+    $array_datos = array();
+    $list_trsldos = $this->traslados_plan($codigo_plan, $codigo_acuerdo);
+    if($list_trsldos){
+      foreach ($list_trsldos as $dat_trsldos) {
+        $tpo_codigo = $dat_trsldos['tpo_codigo'];
+        $tpo_poai = $dat_trsldos['tpo_poai'];
+        $tpo_codigorecuerso = $dat_trsldos['tpo_codigorecuerso'];
+        $tpo_valor = $dat_trsldos['tpo_valor'];
+        $tpo_indicador = $dat_trsldos['tpo_indicador'];
+        $tpo_accion = $dat_trsldos['tpo_accion'];
+
+        $accion_a = $this->accion_descripcion($tpo_accion);
+        list($sede_a, $indicador_a) = $this->sede_indicador($tpo_indicador);
+
+        $list_traslddo_de = $this->trslddo_de($tpo_codigorecuerso);
+        if($list_traslddo_de){
+          foreach ($list_traslddo_de as $dat_trsladdo_de) {
+            $codigo_recurso = $dat_trsladdo_de['codigo_recurso'];
+            $valor_recurso = $dat_trsladdo_de['valor_recurso'];
+            $codigo_vigencia = $dat_trsladdo_de['codigo_vigencia'];
+            $codigo_fuente = $dat_trsladdo_de['codigo_fuente'];
+            $codigo_indicador = $dat_trsladdo_de['codigo_indicador'];
+            $codigo_accion = $dat_trsladdo_de['codigo_accion'];
+
+            $accion_de = $this->accion_descripcion($codigo_accion);
+            list($sede_de, $indicador_de) = $this->sede_indicador($codigo_indicador);   
+            $nmbre_fuente = $this->nombre_fuente($codigo_fuente);
+          }
+
+          $array_datos[] = array('accion_a'=> $accion_a,
+                                 'sede_a'=> $sede_a,
+                                 'indicador_a'=> $indicador_a,
+                                 'accion_de'=> $accion_de,
+                                 'sede_de'=> $sede_de,
+                                 'indicador_de'=> $indicador_de." ".$codigo_vigencia,
+                                 'nombre_fuente'=> $nmbre_fuente,
+                                 'valor'=> $tpo_valor
+                                );
+        }
+      }
+    }
+    return $array_datos;
+  }
+
 }
 ?>

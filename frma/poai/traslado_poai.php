@@ -11,6 +11,7 @@
     $codigo_plan = $_REQUEST['codigo_plan'];
     $codigo_poai = $_REQUEST['codigo_poai'];
 
+
     $list_acciones_plan = $objPoai->list_acciones_plan($codigo_plan);
 
     $list_sede = $objPoai->list_sede();
@@ -35,6 +36,16 @@
             $tpo_estado = $dat_frma_traslado['tpo_estado'];
         }
 
+        $codigo_poai_proyecto = $objPoai->codigo_poai_proyecto($tpo_poai);
+        $proyecto_accion = $objPoai->proyecto_accion($tpo_accion);
+
+        if($codigo_poai_proyecto == $proyecto_accion){
+            $list_acto_admin = $objPoai->resolucion_data();
+        }
+        else{
+            $list_acto_admin = $objPoai->acuerdo_data();
+        }
+
         if($tpo_estado == 1){
             $checkedA = "checked";
             $checkedI = "";
@@ -55,11 +66,7 @@
         $checkedI = "";
         $maximo_recursos = 0;
         $rcrsos_trasladar = $objPoai->rcrsos_trasladar($codigo_poai, 0);
-
-
     }
-
-    
 
     $capa_direccion = ".capa_poai";
     $url_direccion = "dtapoai?codigo_plandesarrollo=".$codigo_plan;
@@ -88,7 +95,7 @@
                 <div class="form-group">
                     <label for="selAccion" class="font-weight-bold">Acción *</label>
                     <select name="selAccion" id="selAccion"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
-                        <option value="0"> Seleccione ...</option>
+                        <option value="0" data-codigo_poai="<?php echo  $codigo_poai; ?>" data-accion="0"> Seleccione ...</option>
                         <?php
                             if($list_acciones_plan){
                                 foreach ($list_acciones_plan as $dat_acciones) {
@@ -109,7 +116,7 @@
                                     }
                             
                         ?>
-                            <option value="<?php echo  $acc_codigo; ?>" <?php echo $selected_accion; ?>><?php echo substr($descrpcion,0,100)."..."; ?></option>
+                            <option value="<?php echo  $acc_codigo; ?>" <?php echo $selected_accion; ?> data-codigo_poai="<?php echo  $codigo_poai; ?>" data-accion="<?php echo  $acc_codigo; ?>" ><?php echo substr($descrpcion,0,100)."..."; ?></option>
                         <?php
                                 }
                             }
@@ -129,14 +136,17 @@
 
         <div class="row">
             <div class="col-sm-11">
-                <div class="form-group">
+                <div class="form-group selectActoAdministrativo">
+                    <?php
+                        if($codigo_traslado){
+                    ?>
                     <label for="selAcuerdo" class="font-weight-bold">Acuerdo *</label>
                     <select name="selAcuerdo" id="selAcuerdo"  class="form-control caja_texto_sizer selectpicker" data-size="8" data-rule-required="true" required>
                     <option value="0" data-tipo_fuente="0"> Seleccione ...</option>
                         <?php
-                            $list_acuerdo = $objPoai->list_acuerdo();
-                            if($list_acuerdo){
-                                foreach ($list_acuerdo as $dat_acuerdo) {
+                            
+                            if($list_acto_admin){
+                                foreach ($list_acto_admin as $dat_acuerdo) {
                                     $aad_codigo = $dat_acuerdo['aad_codigo'];
                                     $add_nombre = $dat_acuerdo['add_nombre'];
 
@@ -167,8 +177,14 @@
                             }
                         ?>
                     </select>
-                    <span class="help-block" id="error"></span>
                     <div class="alert alert-danger alerta-forcliente" id="error_acuerdo" role="alert"></div>
+                    <?php
+                        }
+                        else{
+                    
+                        }
+                    ?>
+                    
 
                 </div>
             </div>
@@ -370,6 +386,7 @@
     $('#selAccion').change(function(){
         var codigo_accion = $(this).find(':selected').data('accion');
         var codigo_sede = $('#selSede').val();
+        var codigo_poai = $(this).find(':selected').data('codigo_poai');
 
         if(codigo_accion> 0 && codigo_sede > 0 ){
             $.ajax({
@@ -382,7 +399,20 @@
                     $(".indc").empty().append(message);
                 }
             });
+        }
 
+        if(codigo_accion > 0){
+            $.ajax({
+                url:"actosadministrativostraslados",
+                type:"POST",
+                data:"codigo_accion="+codigo_accion+'&codigo_poai='+codigo_poai,
+                async:true,
+
+                success: function(message){
+                    alert('paso por acá');
+                    $(".selectActoAdministrativo").empty().append(message);
+                }
+            });
         }
     });
 

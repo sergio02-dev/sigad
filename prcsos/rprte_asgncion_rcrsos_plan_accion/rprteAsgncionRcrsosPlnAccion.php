@@ -317,7 +317,7 @@ Class RsRprteAsgncionRcrsoPlanAccion{
         $sql_recurso_asignado = "SELECT asre_codigo, asre_recurso
                                    FROM planaccion.asignacion_recuersos_etapa
                                   WHERE asre_estado = 1
-                                    AND asre_etapa = $codigo_etapa
+                                    AND asre_etapa IN($codigo_etapa)
                                     AND asre_fuente = $codigo_fuente
                                     AND asre_vigenciarecurso = $vigencia_recurso;";
 

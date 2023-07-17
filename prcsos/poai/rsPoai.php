@@ -910,6 +910,67 @@ Class RsPOAI extends POAI{
         return $dataform_traslado;
     }
     
+    public function codigo_poai_proyecto($codigo_poai){
 
+        $sql_codigo_poai_proyecto="SELECT poav_codigo, acc_proyecto
+                                     FROM planaccion.poai_veinte_veintidos
+                                    INNER JOIN plandesarrollo.accion ON acc_codigo = poav_accion
+                                    WHERE poav_codigo = $codigo_poai;";
+
+        $query_codigo_poai_proyecto=$this->cnxion->ejecutar($sql_codigo_poai_proyecto);
+
+        $data_codigo_poai_proyecto=$this->cnxion->obtener_filas($query_codigo_poai_proyecto);
+
+        $acc_proyecto = $data_codigo_poai_proyecto['acc_proyecto'];
+
+        return $acc_proyecto;
+    }
+
+    public function proyecto_accion($codigo_accion){
+
+        $sql_proyecto_accion="SELECT acc_codigo, acc_referencia, acc_proyecto
+                                FROM plandesarrollo.accion
+                               WHERE acc_codigo = $codigo_accion;";
+
+        $query_proyecto_accion=$this->cnxion->ejecutar($sql_proyecto_accion);
+
+        $data_proyecto_accion=$this->cnxion->obtener_filas($query_proyecto_accion);
+
+        $acc_proyecto = $data_proyecto_accion['acc_proyecto'];
+
+        return $acc_proyecto;
+    }
+
+    public function acuerdo_data(){
+
+        $sql_acuerdo_data="SELECT aad_codigo, add_nombre, add_tipoactoadmin, 
+                                  add_urlactoadmin, add_vigencia
+                             FROM plandesarrollo.acto_administrativo
+                            WHERE add_tipoactoadmin = 1
+                            ORDER BY add_vigencia, add_nombre ASC;";
+
+        $query_acuerdo_data=$this->cnxion->ejecutar($sql_acuerdo_data);
+
+        while($data_acuerdo_data=$this->cnxion->obtener_filas($query_acuerdo_data)){
+            $dataacuerdo_data[]=$data_acuerdo_data;
+        }
+        return $dataacuerdo_data;
+    }
+
+    public function resolucion_data(){
+
+        $sql_resolucion_data="SELECT aad_codigo, add_nombre, add_tipoactoadmin, 
+                                     add_urlactoadmin, add_vigencia
+                                FROM plandesarrollo.acto_administrativo
+                               WHERE add_tipoactoadmin = 2
+                               ORDER BY add_vigencia, add_nombre ASC;";
+
+        $query_resolucion_data=$this->cnxion->ejecutar($sql_resolucion_data);
+
+        while($data_resolucion_data=$this->cnxion->obtener_filas($query_resolucion_data)){
+            $dataresolucion_data[]=$data_resolucion_data;
+        }
+        return $dataresolucion_data;
+    }
 }
 ?>

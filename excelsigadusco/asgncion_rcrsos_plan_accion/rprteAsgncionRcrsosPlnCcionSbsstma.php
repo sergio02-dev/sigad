@@ -222,7 +222,6 @@ if($Subsistemas){//If Subsistema
     $sub_referencia=$data_subsistema['sub_referencia'];
     $sub_ref=$data_subsistema['sub_ref'];
 
-
     $referenciaSubsistema=$sub_referencia.$sub_ref;
 
     $nombreHoja=$sub_referencia.$sub_ref;
@@ -237,7 +236,6 @@ if($Subsistemas){//If Subsistema
       
       $objPHPExcel->getActiveSheet()->setTitle($nombreHoja);
     }
-
 
     $sheet = $objPHPExcel->getActiveSheet($numero_registro);
     $sheet->getPageMargins()->setTop(0.6);
@@ -367,6 +365,8 @@ if($Subsistemas){//If Subsistema
                 $actividadDescripcionPoai=$acp_referencia.'.'.$acp_numero.' '.strtolower(tldes_minuscula($acp_descripcion));
 
                 $totalAvance=0;
+
+                $total_por_asignar = 0;
                 
                 //Encabezado Actividad
                 $objPHPExcel->setActiveSheetIndex($numero_registro)
@@ -476,7 +476,6 @@ if($Subsistemas){//If Subsistema
                   $numeroletasaumenta++;
                 }
                             
-
                 $num++;
 
                 //Encabezado Cuerpo
@@ -539,6 +538,9 @@ if($Subsistemas){//If Subsistema
                 $etapas=$objtReportePlanAccion->etapas($acp_codigo);
                 if($etapas){
                   $peso_estapa = 0;
+                  $cdgos_etpas = '';
+                  $numero_etpas = count($etapas);
+                  $contador_etpas = 1;
                   foreach ($etapas as $data_etapas) {
                     $poa_codigo=$data_etapas['poa_codigo'];
                     $poa_referencia=$data_etapas['poa_referencia'];
@@ -565,6 +567,15 @@ if($Subsistemas){//If Subsistema
 
                     $asignado_etapa = 0;
 
+                    if($numero_etpas == $contador_etpas){
+                      $coma = '';
+                    }
+                    else{
+                      $coma = ',';
+                    }
+
+                    $cdgos_etpas = $cdgos_etpas.$poa_codigo.$coma;
+
                     $objPHPExcel->setActiveSheetIndex($numero_registro)
                     ->setCellValue('G'.$num, $etapa_descripcion)
                     ->setCellValue('H'.$num, $poa_vigencia)
@@ -572,7 +583,6 @@ if($Subsistemas){//If Subsistema
                     ->setCellValue('J'.$num, $poa_logro)
                     ->setCellValue('K'.$num, $avanceInicial);
                     
-
                     $objPHPExcel->getActiveSheet($numero_registro)->getStyle('G'.$num)->applyFromArray($texto_left);
                     $objPHPExcel->getActiveSheet($numero_registro)->getStyle('H'.$num)->applyFromArray($texto_center);
                     $objPHPExcel->getActiveSheet($numero_registro)->getStyle('I'.$num)->applyFromArray($texto_center);
@@ -592,11 +602,11 @@ if($Subsistemas){//If Subsistema
 
                         if($numeroletasaumenta>90){//si es mayor a 90 
                           if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
-                              $numeroletrauno=65;
-                              $numeroletrados++;
+                            $numeroletrauno=65;
+                            $numeroletrados++;
                           }
                           else{//Si no que siga aumentando
-                              $numeroletrauno++;
+                            $numeroletrauno++;
                           }//cierre else
                           $letra=chr($numeroletrados).''.chr($numeroletrauno);
                           //echo "qui <br>";
@@ -659,6 +669,8 @@ if($Subsistemas){//If Subsistema
 
                       $por_asignar = $poa_recurso - $asignado_etapa;
 
+                      $total_por_asignar = $total_por_asignar + $por_asignar;
+
                       $objPHPExcel->setActiveSheetIndex($numero_registro)
                       ->setCellValue($letra.$num, $por_asignar);
                       $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($texto_center);
@@ -667,6 +679,7 @@ if($Subsistemas){//If Subsistema
                       $numeroletasaumenta++;
                     }
                     
+                    $contador_etpas++;
                     $num++;
                   }
                   $sumaRecurso = $objtReportePlanAccion->sumaRecursoEtapas($acp_codigo);
@@ -701,8 +714,95 @@ if($Subsistemas){//If Subsistema
                   $objPHPExcel->getActiveSheet($numero_registro)->getStyle('J'.$num)->applyFromArray($texto_center);
                   $objPHPExcel->getActiveSheet($numero_registro)->getStyle('K'.$num)->applyFromArray($texto_center);
 
+                  ///************************* TOTAL X FUENTES  ************************
+                  $lst_fntes_accion = $objRprte->fuentes_asignadas_accion($acp_codigo);
+                  if($lst_fntes_accion){
+                    $numeroletasaumenta = 76;
+                    $numeroletrauno = 76;
+                    $numeroletrados = 64;
+                    $total_asignado_completo = 0;
+                    foreach ($lst_fntes_accion as $datt_fntes) {
+                      $asre_fuente = $dta_lsta_fuente_financiacion['asre_fuente'];
+                      $asre_vigenciarecurso = $dta_lsta_fuente_financiacion['asre_vigenciarecurso'];
+                      $ffi_nombre = $dta_lsta_fuente_financiacion['ffi_nombre'];
+
+                      if($numeroletasaumenta>90){//si es mayor a 90 
+                        if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                          $numeroletrauno=65;
+                          $numeroletrados++;
+                        }
+                        else{//Si no que siga aumentando
+                          $numeroletrauno++;
+                        }//cierre else
+                        $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                        //echo "qui <br>";
+                      }//fin si primera condicion
+                      else{//Sino Primera condicion
+                        $letra=chr($numeroletasaumenta);
+                        $numeroletrauno++;
+                      }
+
+                      $total_asignado_fuente = $objRprte->recurso_asignado($cdgos_etpas, $asre_fuente, $asre_vigenciarecurso);
+
+                      $total_asignado_completo = $total_asignado_completo + $total_asignado_fuente;
+
+                      $objPHPExcel->setActiveSheetIndex($numero_registro)
+                      ->setCellValue($letra.$num, $total_asignado_fuente);
+                      $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($texto_center);
+                      $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                      $numeroletasaumenta++;
+                    }
+            
+                    //Total
+                    if($numeroletasaumenta>90){//si es mayor a 90 
+                      if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                        $numeroletrauno=65;
+                        $numeroletrados++;
+                      }
+                      else{//Si no que siga aumentando
+                        $numeroletrauno++;
+                      }//cierre else
+                      $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                      //echo "qui <br>";
+                    }//fin si primera condicion
+                    else{//Sino Primera condicion
+                      $letra=chr($numeroletasaumenta);
+                      $numeroletrauno++;
+                    }
+
+                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                    ->setCellValue($letra.$num, $total_asignado_completo);
+                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($texto_center);
+                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                    $numeroletasaumenta++;
+                    //Por Asignar
+                    if($numeroletasaumenta>90){//si es mayor a 90 
+                      if($numeroletrauno==91  || $numeroletasaumenta == 117 || $numeroletasaumenta == 143){//si es == 91 
+                        $numeroletrauno=65;
+                        $numeroletrados++;
+                      }
+                      else{//Si no que siga aumentando
+                        $numeroletrauno++;
+                      }//cierre else
+                      $letra=chr($numeroletrados).''.chr($numeroletrauno);
+                      //echo "qui <br>";
+                    }//fin si primera condicion
+                    else{//Sino Primera condicion
+                      $letra=chr($numeroletasaumenta);
+                      $numeroletrauno++;
+                    }
+
+                    $objPHPExcel->setActiveSheetIndex($numero_registro)
+                    ->setCellValue($letra.$num, $total_por_asignar);
+                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->applyFromArray($texto_center);
+                    $objPHPExcel->getActiveSheet($numero_registro)->getStyle($letra.$num)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+
+                    $numeroletasaumenta++;
+                  }
+
                   $num++;
-                  
                 }
                 else{
                   $sheet->mergeCells("B".($num).":K".($num));

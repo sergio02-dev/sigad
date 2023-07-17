@@ -588,6 +588,87 @@ if($lista_poai){
         }
     }
 
+    /////LIST TRASLADOS 
+    $num_registro = $num_registro + 2;
+    $sheet->mergeCells("A".$num_registro.":H".$num_registro);
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('A'.$num_registro, 'TRASLADOS');
+
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".($num_registro).":H".($num_registro))->applyFromArray($styleFuenteLetra);
+
+    $num_registro++;
+
+    $sheet->mergeCells("A".$num_registro.":E".$num_registro);
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('A'.$num_registro, 'DE');
+
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".($num_registro).":E".($num_registro))->applyFromArray($styleFuenteLetra);
+
+    $sheet->mergeCells("F".$num_registro.":H".$num_registro);
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('F'.$num_registro, 'a');
+
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("F".($num_registro).":H".($num_registro))->applyFromArray($styleFuenteLetra);
+
+    $num_registro++;
+
+    $objPHPExcel->setActiveSheetIndex($numero_registro)
+    ->setCellValue('A'.$num_registro, 'ACCIÓN')
+    ->setCellValue('B'.$num_registro, 'SEDE')
+    ->setCellValue('C'.$num_registro, 'INDICADOR')
+    ->setCellValue('D'.$num_registro, 'FUENTE DE FINANCIACIÓN')
+    ->setCellValue('E'.$num_registro, 'VALOR')
+    ->setCellValue('F'.$num_registro, 'ACCIÓN')
+    ->setCellValue('G'.$num_registro, 'SEDE')
+    ->setCellValue('H'.$num_registro, 'INDICADOR');
+
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("C".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("D".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("E".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("F".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("G".$num_registro)->applyFromArray($styleFuenteLetra);
+    $objPHPExcel->getActiveSheet($numero_registro)->getStyle("H".$num_registro)->applyFromArray($styleFuenteLetra);
+
+    $num_registro++;
+
+    $list_trsldos_plan = $objReportePoaiActs->lista_traslados_plan($codigo_plan, $acuerdo);
+    if($list_trsldos_plan){
+        foreach ($list_trsldos_plan as $dat_trsldos_plan) {
+            $accion_a = $dat_trsldos_plan['accion_a'];
+            $sede_a = $dat_trsldos_plan['sede_a'];
+            $indicador_a = $dat_trsldos_plan['indicador_a'];
+            $accion_de = $dat_trsldos_plan['accion_de'];
+            $sede_de = $dat_trsldos_plan['sede_de'];
+            $indicador_de = $dat_trsldos_plan['indicador_de'];
+            $nombre_fuente = $dat_trsldos_plan['nombre_fuente'];
+            $valor = $dat_trsldos_plan['valor'];
+
+            $objPHPExcel->setActiveSheetIndex($numero_registro)
+            ->setCellValue('A'.$num_registro, $accion_de)
+            ->setCellValue('B'.$num_registro, $sede_de)
+            ->setCellValue('C'.$num_registro, $indicador_de)
+            ->setCellValue('D'.$num_registro, $nombre_fuente)
+            ->setCellValue('E'.$num_registro, $valor)
+            ->setCellValue('F'.$num_registro, $accion_a)
+            ->setCellValue('G'.$num_registro, $sede_a)
+            ->setCellValue('H'.$num_registro, $indicador_a);
+
+
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("A".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("B".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("C".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("D".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("E".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("E".$num_registro)->getNumberFormat()->setFormatCode('_("$"* #,##0_);_("$"* \(#,##0\);_("$"* "-"??_);_(@_)');
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("F".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("G".$num_registro)->applyFromArray($datos_dinero);
+            $objPHPExcel->getActiveSheet($numero_registro)->getStyle("H".$num_registro)->applyFromArray($datos_dinero);
+            
+            $num_registro++;
+        }
+    }
 }
 
 //inicio foreach
